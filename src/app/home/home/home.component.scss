@@ -1,5 +1,7 @@
 .card {
   &__cover {
-    background-image: center/cover;
+    background: center/cover;
+    padding-bottom: 52.5%;
+    box-sizing: border-box;
   }
 }
