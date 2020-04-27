@@ -2,8 +2,7 @@
 
 <mat-sidenav-container>
   <mat-sidenav mode="side" [opened]="isOpened$ | async"
-    >Sidenav content
-    <p>ここにカードのリストなどを表示します</p>
+    ><app-drawer></app-drawer>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
