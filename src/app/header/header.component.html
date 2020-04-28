@@ -1,28 +1,31 @@
-<header class="header">
-  <div class="header__left">
-    <button class="mat-nav" (click)="toggle()" mat-icon-button>
-      <mat-icon>menu</mat-icon>
-    </button>
-    <a routerLink="/" class="logo">
-      <h1 class="">電子決済ポータルサイト（仮）</h1>
-    </a>
-  </div>
-  <form class="search">
-    <input
-      class="search__input"
-      type="text"
-      placeholder="検索"
-      autocomplete="off"
-      [formControl]="search"
-    />
-    <button class="search__button">
-      <mat-icon>search</mat-icon>
-    </button>
-  </form>
-  <nav class="nav">
-    <ul class="nav__list">
-      <li class="nav__item"><a href="">ログイン</a></li>
-      <li class="nav__item"><a href="">追加</a></li>
-    </ul>
-  </nav>
-</header>
+<mat-toolbar class="header">
+  <mat-toolbar-row>
+    <div class="header__left">
+      <button class="menu" (click)="toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <a routerLink="/" class="logo">
+        <h1 class="">電子決済ポータルサイト（仮）</h1>
+      </a>
+    </div>
+    <form class="search">
+      <input
+        class="search__input"
+        type="text"
+        placeholder="検索"
+        autocomplete="off"
+        [formControl]="search"
+      />
+      <button class="search__button">
+        <mat-icon>search</mat-icon>
+      </button>
+    </form>
+
+    <div class="btns">
+      <button class="btns__item" mat-flat-button color="primary">追加</button>
+      <button class="btns__item" mat-flat-button color="primary">
+        ログイン
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

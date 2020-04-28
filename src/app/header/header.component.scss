@@ -7,7 +7,6 @@
     display: flex;
     align-items: center;
     font-size: 8px;
-    padding-left: 24px;
   }
 }
 
@@ -37,7 +36,7 @@
   }
 }
 
-.mat-nav {
+.menu {
   margin-right: 16px;
   cursor: pointer;
   background: transparent;
@@ -48,13 +47,10 @@
   text-decoration: none;
 }
 
-.nav {
-  &__list {
-    list-style: none;
-    display: flex;
-    margin: 0;
-  }
+.btns {
+  display: flex;
+  justify-content: space-between;
   &__item {
-    padding: 16px;
+    margin-left: 16px;
   }
 }
