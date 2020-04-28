@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DrawerComponent } from './drawer/drawer.component';
 import { MatListModule } from '@angular/material/list';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

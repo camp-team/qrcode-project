@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawerService } from '../services/drawer.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,8 @@ import { DrawerService } from '../services/drawer.service';
 })
 export class HeaderComponent implements OnInit {
   constructor(private drawerService: DrawerService) {}
+
+  search = new FormControl('');
 
   ngOnInit(): void {}
 
