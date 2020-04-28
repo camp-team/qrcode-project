@@ -11,6 +11,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { DrawerComponent } from './drawer/drawer.component';
 import { MatListModule } from '@angular/material/list';
 import { SharedModule } from './shared/shared.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
     MatSidenavModule,
     MatListModule,
     SharedModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
