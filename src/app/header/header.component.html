@@ -7,10 +7,19 @@
       <h1 class="">電子決済ポータルサイト（仮）</h1>
     </a>
   </div>
-  <input class="header__input" type="text" />
-  <button class="header__button">
-    <mat-icon>search</mat-icon>
-  </button>
+  <form class="search">
+    <input
+      class="search__input"
+      type="text"
+      placeholder="検索"
+      autocomplete="off
+    "
+      [formControl]="search"
+    />
+    <button class="search__button">
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
   <nav class="nav">
     <ul class="nav__list">
       <li class="nav__item"><a href="">ログイン</a></li>
