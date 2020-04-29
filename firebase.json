@@ -10,7 +10,7 @@
     ]
   },
   "hosting": {
-    "public": "public",
+    "public": "dist/qr-comparison",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
