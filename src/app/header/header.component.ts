@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawerService } from '../services/drawer.service';
 import { FormControl } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,10 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private drawerService: DrawerService) {}
+  constructor(
+    private drawerService: DrawerService,
+    private authservice: AuthService
+  ) {}
 
   search = new FormControl('');
 
@@ -16,5 +20,9 @@ export class HeaderComponent implements OnInit {
 
   toggle() {
     this.drawerService.toggle();
+  }
+
+  login() {
+    this.authservice.login();
   }
 }
