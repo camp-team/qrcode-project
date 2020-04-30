@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "paybook-51ac6"
+  },
+  "targets": {
+    "paybook-51ac6": {
+      "hosting": {
+        "qr-comparison": [
+          "paybook-51ac6"
+        ]
+      }
+    }
   }
 }
