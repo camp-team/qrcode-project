@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   search = new FormControl('');
+  user$ = this.authservice.afUser$;
 
   ngOnInit(): void {}
 
@@ -24,5 +25,9 @@ export class HeaderComponent implements OnInit {
 
   login() {
     this.authservice.login();
+  }
+
+  logout() {
+    this.authservice.logout();
   }
 }

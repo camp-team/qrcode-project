@@ -21,4 +21,12 @@ export class AuthService {
       });
     });
   }
+
+  logout() {
+    this.afAuth.signOut().then(() => {
+      this.snackBar.open('ログアウトしました', null, {
+        duration: 2000,
+      });
+    });
+  }
 }

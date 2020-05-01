@@ -20,8 +20,18 @@
         <mat-icon>search</mat-icon>
       </button>
     </form>
-    <div class="btns">
+
+    <div *ngIf="user$ | async as user; else default" class="btns">
       <button class="btns__item" mat-flat-button color="primary">追加</button>
+      <button class="btns__icon" mat-mini-fab [matMenuTriggerFor]="avatar">
+        <img [src]="user.photoURL" alt="" />
+      </button>
+      <mat-menu #avatar="matMenu">
+        <button mat-menu-item (click)="logout()">ログアウト</button>
+        <button mat-menu-item>Help</button>
+      </mat-menu>
+    </div>
+    <ng-template #default>
       <button
         class="btns__item"
         mat-flat-button
@@ -30,6 +40,6 @@
       >
         ログイン
       </button>
-    </div>
+    </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>
