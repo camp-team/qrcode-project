@@ -5,7 +5,7 @@
         <mat-icon>menu</mat-icon>
       </button>
       <a routerLink="/" class="logo">
-        <h1 class="">電子決済ポータルサイト（仮）</h1>
+        <h1 class="">PAYpick</h1>
       </a>
     </div>
     <form class="search">
@@ -23,12 +23,30 @@
 
     <div *ngIf="user$ | async as user; else default" class="btns">
       <button class="btns__item" mat-flat-button color="primary">追加</button>
-      <button class="btns__icon" mat-mini-fab [matMenuTriggerFor]="avatar">
-        <img [src]="user.photoURL" alt="" />
-      </button>
+      <button
+        class="btns__icon"
+        mat-mini-fab
+        [matMenuTriggerFor]="avatar"
+        [style.background-image]="'url(' + user.photoURL + ')'"
+      ></button>
       <mat-menu #avatar="matMenu">
-        <button mat-menu-item (click)="logout()">ログアウト</button>
-        <button mat-menu-item>Help</button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>ログアウト</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>設定</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>help</mat-icon>
+          <span>使い方</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>attach_money</mat-icon>
+          <span>広告を剥がす</span>
+        </button>
       </mat-menu>
     </div>
     <ng-template #default>
