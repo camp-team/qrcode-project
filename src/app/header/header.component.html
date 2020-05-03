@@ -5,7 +5,7 @@
         <mat-icon>menu</mat-icon>
       </button>
       <a routerLink="/" class="logo">
-        <h1 class="">電子決済ポータルサイト（仮）</h1>
+        <h1 class="">PAYpick</h1>
       </a>
     </div>
     <form class="search">
@@ -30,8 +30,19 @@
         [style.background-image]="'url(' + user.photoURL + ')'"
       ></button>
       <mat-menu #avatar="matMenu">
-        <button mat-menu-item (click)="logout()">ログアウト</button>
-        <button mat-menu-item>Help</button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>ログアウト</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>設定</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>help</mat-icon>
+          <span>使い方</span>
+        </button>
       </mat-menu>
     </div>
     <ng-template #default>
