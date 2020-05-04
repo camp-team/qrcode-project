@@ -22,7 +22,20 @@
     </form>
 
     <div *ngIf="user$ | async as user; else default" class="btns">
-      <button class="btns__item" mat-flat-button color="primary">追加</button>
+      <button
+        class="btns__item"
+        mat-flat-button
+        color="primary"
+        [mat-menu-trigger-for]="addition"
+      >
+        追加
+      </button>
+      <mat-menu #addition="matMenu">
+        <button routerLink="/create/qr-code" mat-menu-item>QRcode</button>
+        <button mat-menu-item>クレジットカード</button>
+        <button mat-menu-item>交通系電子マネー</button>
+        <button mat-menu-item>ポイントカード</button>
+      </mat-menu>
       <button
         class="btns__icon"
         mat-mini-fab
