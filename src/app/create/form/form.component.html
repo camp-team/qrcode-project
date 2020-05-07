@@ -1,3 +1,5 @@
+<h1>カードを作成する</h1>
+
 <form [formGroup]="form" (ngSubmit)="getResult()">
   <div class="common">
     <mat-form-field class="common__content" appearance="fill">
@@ -52,6 +54,7 @@
       <mat-label>お店のイメージ画像</mat-label>
       <input matInput formControlName="storeImage" />
     </mat-form-field>
+    <p>QRcodeにしかない作成機能</p>
     <button mat-raised-button color="primary">追加する</button>
   </div>
 </form>
