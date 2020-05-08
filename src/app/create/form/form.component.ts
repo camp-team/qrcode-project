@@ -13,15 +13,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  // form = this.fb.group({
-  //   name: ['', [Validators.required, Validators.maxLength(20)]],
-  //   image: ['', Validators.required],
-  //   point: ['', Validators.maxLength(5)],
-  //   addPoint: [''],
-  //   storeName: [''],
-  //   storeImage: [''],
-  // });
-
   form: FormGroup;
   type;
   customForm = {
@@ -29,6 +20,8 @@ export class FormComponent implements OnInit {
       charge: [''],
       autoCharge: [''],
       availableCredit: [''],
+      pushMoney: [''],
+      pullMoney: [''],
     },
   };
 
@@ -55,6 +48,7 @@ export class FormComponent implements OnInit {
       image: ['', Validators.required],
       point: ['', Validators.maxLength(5)],
       addPoint: [''],
+      expiration: [''],
       storeName: [''],
       storeImage: [''],
       ...this.customForm[type],

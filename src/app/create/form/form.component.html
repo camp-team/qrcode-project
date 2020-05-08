@@ -47,6 +47,10 @@
       ></textarea>
     </mat-form-field>
     <mat-form-field class="common__content" appearance="fill">
+      <mat-label>残高やポイントの有効期限</mat-label>
+      <textarea matInput formControlName="expiration"></textarea>
+    </mat-form-field>
+    <mat-form-field class="common__content" appearance="fill">
       <mat-label>使えるお店の名前</mat-label>
       <input matInput formControlName="storeName" />
     </mat-form-field>
@@ -54,7 +58,32 @@
       <mat-label>お店のイメージ画像</mat-label>
       <input matInput formControlName="storeImage" />
     </mat-form-field>
-    <p>QRcodeにしかない作成機能</p>
+    <h2>QRcodeにしかない作成機能</h2>
+    <ng-container [ngSwitch]="type">
+      <ng-container *ngSwitchCase="'qrCode'">
+        <mat-form-field class="common__content" appearance="fill">
+          <mat-label>チャージ方法</mat-label>
+          <textarea matInput formControlName="charge"></textarea>
+        </mat-form-field>
+        <mat-form-field class="common__content" appearance="fill">
+          <mat-label>オートチャージ</mat-label>
+          <input matInput formControlName="autoCharge" />
+        </mat-form-field>
+        <mat-form-field class="common__content" appearance="fill">
+          <mat-label>利用可能なクレジットカード</mat-label>
+          <textarea matInput formControlName="availableCredit"></textarea>
+        </mat-form-field>
+        <mat-form-field class="common__content" appearance="fill">
+          <mat-label>個人間送金</mat-label>
+          <input matInput formControlName="pushMoney" />
+        </mat-form-field>
+        <mat-form-field class="common__content" appearance="fill">
+          <mat-label>出金</mat-label>
+          <input matInput formControlName="pullMoney" />
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngSwitchDefault>output2</ng-container>
+    </ng-container>
     <button mat-raised-button color="primary">追加する</button>
   </div>
 </form>
