@@ -25,6 +25,22 @@ export class FormComponent implements OnInit {
     },
   };
 
+  chargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
+  simplePatterns = ['可能', '不可能'];
+  creditPatterns = [
+    'VISA',
+    'MasterCard',
+    'JCB',
+    'American Express',
+    'Diners Club',
+    'Yahoo! Japanカード',
+    'Visa LINE Payクレジットカード',
+    '楽天カード',
+    'dカード',
+    'auPAYカード',
+    'なし',
+  ];
+
   get nameControl() {
     return this.form.get('name') as FormControl;
   }

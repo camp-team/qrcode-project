@@ -6,6 +6,21 @@
   }
 }
 
+.qr-code {
+  background-color: rgba(0, 0, 0, 0.04);
+  padding: 0 16px 24px 16px;
+  &__label {
+    display: block;
+    padding-bottom: 8px;
+  }
+  &__radio-button {
+    margin-right: 16px;
+  }
+  &__checkbox {
+    margin-right: 16px;
+  }
+}
+
 h1 {
   text-align: center;
   border-bottom: 1px solid black;

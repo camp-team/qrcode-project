@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [QrCodeComponent, FormComponent],
@@ -18,6 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
+    MatRadioModule,
   ],
 })
 export class CreateModule {}
