@@ -100,17 +100,37 @@
           </mat-radio-group>
         </div>
 
-        <div class="qr-code">
+        <div formGroupName="availableCredit" class="qr-code">
           <mat-label class="qr-code__label"
             >利用可能なクレジットカード</mat-label
           >
           <mat-checkbox
-            *ngFor="let creditPattern of creditPatterns"
-            formControlName="availableCredit"
-            [value]="creditPattern"
+            formControlName="visa"
             class="qr-code__checkbox"
+            value="VISA"
             required
-            >{{ creditPattern }}</mat-checkbox
+            >VISA</mat-checkbox
+          >
+          <mat-checkbox
+            formControlName="masterCard"
+            class="qr-code__checkbox"
+            value="MasterCard"
+            required
+            >MasterCard</mat-checkbox
+          >
+          <mat-checkbox
+            formControlName="jcb"
+            class="qr-code__checkbox"
+            value="JCB"
+            required
+            >JCB</mat-checkbox
+          >
+          <mat-checkbox
+            formControlName="yahoo"
+            class="qr-code__checkbox"
+            value="Yahoo! Japanカード"
+            required
+            >Yahoo! Japanカード</mat-checkbox
           >
         </div>
         <div class="qr-code">
