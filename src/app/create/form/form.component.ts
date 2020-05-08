@@ -17,16 +17,16 @@ export class FormComponent implements OnInit {
   type;
   customForm = {
     qrCode: {
-      charge: [''],
-      autoCharge: [''],
+      charge: ['', Validators.required],
+      autoCharge: ['', Validators.required],
       availableCredit: this.fb.group({
         visa: [false],
         masterCard: [false],
         jcb: [false],
         yahoo: [false],
       }),
-      pushMoney: [''],
-      pullMoney: [''],
+      pushMoney: ['', Validators.required],
+      pullMoney: ['', Validators.required],
     },
   };
 
@@ -56,7 +56,7 @@ export class FormComponent implements OnInit {
       image: ['', Validators.required],
       point: ['', Validators.maxLength(5)],
       addPoint: [''],
-      expiration: [''],
+      expiration: ['', Validators.required],
       storeName: [''],
       storeImage: [''],
       ...this.customForm[type],
