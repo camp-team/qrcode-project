@@ -38,6 +38,7 @@
         placeholder="数字を入力してください"
         autocomplete="off"
         formControlName="point"
+        required
       />
       <span matSuffix>%</span>
     </mat-form-field>
@@ -100,39 +101,16 @@
           </mat-radio-group>
         </div>
 
-        <div formGroupName="availableCredit" class="qr-code">
-          <mat-label class="qr-code__label"
-            >利用可能なクレジットカード</mat-label
-          >
-          <mat-checkbox
-            formControlName="visa"
-            class="qr-code__checkbox"
-            value="VISA"
+        <mat-form-field class="common__content" appearance="fill">
+          <mat-label>利用可能なクレジットカード</mat-label>
+          <textarea
+            matInput
+            autocomplete="off"
+            formControlName="expiration"
             required
-            >VISA</mat-checkbox
-          >
-          <mat-checkbox
-            formControlName="masterCard"
-            class="qr-code__checkbox"
-            value="MasterCard"
-            required
-            >MasterCard</mat-checkbox
-          >
-          <mat-checkbox
-            formControlName="jcb"
-            class="qr-code__checkbox"
-            value="JCB"
-            required
-            >JCB</mat-checkbox
-          >
-          <mat-checkbox
-            formControlName="yahoo"
-            class="qr-code__checkbox"
-            value="Yahoo! Japanカード"
-            required
-            >Yahoo! Japanカード</mat-checkbox
-          >
-        </div>
+          ></textarea>
+        </mat-form-field>
+
         <div class="qr-code">
           <mat-label class="qr-code__label">個人間送金</mat-label>
           <mat-radio-group

@@ -19,12 +19,7 @@ export class FormComponent implements OnInit {
     qrCode: {
       charge: ['', Validators.required],
       autoCharge: ['', Validators.required],
-      availableCredit: this.fb.group({
-        visa: [false],
-        masterCard: [false],
-        jcb: [false],
-        yahoo: [false],
-      }),
+      availableCredit: ['', Validators.required],
       pushMoney: ['', Validators.required],
       pullMoney: ['', Validators.required],
     },
