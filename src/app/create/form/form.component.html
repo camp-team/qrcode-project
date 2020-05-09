@@ -1,3 +1,5 @@
+<h1>カードを作成する</h1>
+
 <form [formGroup]="form" (ngSubmit)="getResult()">
   <div class="common">
     <mat-form-field class="common__content" appearance="fill">
@@ -5,6 +7,7 @@
       <input
         matInput
         placeholder="サービス名を入力してください（20文字以内）"
+        autocomplete="off"
         formControlName="name"
         required
       />
@@ -20,6 +23,7 @@
       <input
         matInput
         placeholder="画像のURLを貼ってください"
+        autocomplete="off"
         formControlName="image"
         required
       />
@@ -32,7 +36,9 @@
       <input
         matInput
         placeholder="数字を入力してください"
+        autocomplete="off"
         formControlName="point"
+        required
       />
       <span matSuffix>%</span>
     </mat-form-field>
@@ -41,17 +47,103 @@
       <textarea
         matInput
         placeholder="追加情報などを入力してください"
+        autocomplete="off"
         formControlName="addPoint"
       ></textarea>
     </mat-form-field>
     <mat-form-field class="common__content" appearance="fill">
+      <mat-label>残高やポイントの有効期限</mat-label>
+      <textarea
+        matInput
+        autocomplete="off"
+        formControlName="expiration"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field class="common__content" appearance="fill">
       <mat-label>使えるお店の名前</mat-label>
-      <input matInput formControlName="storeName" />
+      <input matInput autocomplete="off" formControlName="storeName" required />
     </mat-form-field>
     <mat-form-field class="common__content" appearance="fill">
       <mat-label>お店のイメージ画像</mat-label>
-      <input matInput formControlName="storeImage" />
+      <input
+        matInput
+        autocomplete="off"
+        formControlName="storeImage"
+        required
+      />
     </mat-form-field>
+    <h2>QRcodeにしかない作成機能</h2>
+    <ng-container [ngSwitch]="type">
+      <ng-container *ngSwitchCase="'qrCode'">
+        <mat-form-field class="common__content" appearance="fill">
+          <mat-label>チャージ方法</mat-label>
+          <textarea
+            matInput
+            autocomplete="off"
+            formControlName="charge"
+            required
+          ></textarea>
+        </mat-form-field>
+
+        <div class="qr-code">
+          <mat-label class="qr-code__label">オートチャージ</mat-label>
+          <mat-radio-group
+            formControlName="autoCharge"
+            class="qr-code__radio-group"
+          >
+            <mat-radio-button
+              *ngFor="let chargePattern of chargePatterns"
+              [value]="chargePattern"
+              class="qr-code__radio-button"
+              required
+              >{{ chargePattern }}</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+
+        <mat-form-field class="common__content" appearance="fill">
+          <mat-label>利用可能なクレジットカード</mat-label>
+          <textarea
+            matInput
+            autocomplete="off"
+            formControlName="expiration"
+            required
+          ></textarea>
+        </mat-form-field>
+
+        <div class="qr-code">
+          <mat-label class="qr-code__label">個人間送金</mat-label>
+          <mat-radio-group
+            formControlName="pushMoney"
+            class="qr-code__radio-group"
+          >
+            <mat-radio-button
+              *ngFor="let simplePattern of simplePatterns"
+              [value]="simplePattern"
+              class="qr-code__radio-button"
+              required
+              >{{ simplePattern }}</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+        <div class="qr-code">
+          <mat-label class="qr-code__label">出金</mat-label>
+          <mat-radio-group
+            formControlName="pullMoney"
+            class="qr-code__radio-group"
+          >
+            <mat-radio-button
+              *ngFor="let simplePattern of simplePatterns"
+              [value]="simplePattern"
+              class="qr-code__radio-button"
+              required
+              >{{ simplePattern }}</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchDefault>output2</ng-container>
+    </ng-container>
     <button mat-raised-button color="primary">追加する</button>
   </div>
 </form>

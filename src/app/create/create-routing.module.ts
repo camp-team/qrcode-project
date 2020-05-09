@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { QrCodeComponent } from './qr-code/qr-code.component';
+import { FormComponent } from './form/form.component';
 
 const routes: Routes = [
   {
-    path: 'qr-code',
-    component: QrCodeComponent,
+    path: 'form',
+    component: FormComponent,
   },
 ];
 

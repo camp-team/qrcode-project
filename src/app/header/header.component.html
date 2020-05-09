@@ -31,7 +31,13 @@
         追加
       </button>
       <mat-menu #addition="matMenu">
-        <button routerLink="/create/qr-code" mat-menu-item>QRcode</button>
+        <button
+          [routerLink]="['/create/form']"
+          [queryParams]="{ type: 'qrCode' }"
+          mat-menu-item
+        >
+          QRcode
+        </button>
         <button mat-menu-item>クレジットカード</button>
         <button mat-menu-item>交通系電子マネー</button>
         <button mat-menu-item>ポイントカード</button>
