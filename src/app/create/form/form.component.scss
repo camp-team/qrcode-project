@@ -8,15 +8,13 @@
 
 .qr-code {
   background-color: rgba(0, 0, 0, 0.04);
-  padding: 0 16px 24px 16px;
+  margin-bottom: 24px;
+  padding: 12px;
   &__label {
     display: block;
     padding-bottom: 8px;
   }
   &__radio-button {
-    margin-right: 16px;
-  }
-  &__checkbox {
     margin-right: 16px;
   }
 }
