@@ -6,6 +6,8 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { CardService } from 'src/app/services/card.service';
+import { CodeCard } from 'src/app/interfaces/code-card';
 
 @Component({
   selector: 'app-form',
@@ -36,7 +38,11 @@ export class FormComponent implements OnInit {
     return this.form.get('image') as FormControl;
   }
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private cardService: CardService
+  ) {
     this.route.queryParamMap.subscribe((map) => {
       this.type = map.get('type');
       this.buildForm(this.type);
@@ -58,7 +64,20 @@ export class FormComponent implements OnInit {
     });
   }
 
-  getResult() {
-    console.log(this.form.value);
+  submit() {
+    const formData = this.form.value;
+    this.cardService.createCodeCard({
+      name: formData.name,
+      iamge: formData.image,
+      point: formData.point,
+      addPoint: formData.addPoint,
+      expiration: formData.expiration,
+      storeName: formData.storeName,
+      storeImage: formData.storeImage,
+      charge: formData.charge,
+      autoCharge: formData.autoCharge,
+      pushMoney: formData.pushMoney,
+      pullMoney: formData.pullMoney,
+    });
   }
 }
