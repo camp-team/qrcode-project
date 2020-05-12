@@ -144,7 +144,7 @@
       </ng-container>
       <ng-container *ngSwitchDefault>output2</ng-container>
     </ng-container>
-    <button [disabled]="form.invalid" mat-raised-button color="primary">
+    <button [disabled]="form.pristine" mat-raised-button color="primary">
       追加する
     </button>
   </div>
