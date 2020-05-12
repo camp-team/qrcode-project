@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -15,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
+    MatCardModule,
   ],
 })
 export class SharedModule {}
