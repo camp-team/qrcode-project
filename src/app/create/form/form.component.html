@@ -1,6 +1,6 @@
 <h1>カードを作成する</h1>
 
-<form [formGroup]="form" (ngSubmit)="getResult()">
+<form [formGroup]="form" (ngSubmit)="submit()">
   <div class="common">
     <mat-form-field class="common__content" appearance="fill">
       <mat-label>サービス名</mat-label>
@@ -144,6 +144,8 @@
       </ng-container>
       <ng-container *ngSwitchDefault>output2</ng-container>
     </ng-container>
-    <button mat-raised-button color="primary">追加する</button>
+    <button [disabled]="form.pristine" mat-raised-button color="primary">
+      追加する
+    </button>
   </div>
 </form>
