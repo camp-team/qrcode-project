@@ -1,12 +1,6 @@
-export interface CodeCard {
-  cardId: string;
-  name: string;
-  iamge: string;
-  point: number;
-  addPoint: string;
-  expiration: string;
-  storeName: string;
-  storeImage: string;
+import { Card } from './card';
+
+export interface CodeCard extends Card {
   charge: string;
   autoCharge: string;
   pushMoney: string;
