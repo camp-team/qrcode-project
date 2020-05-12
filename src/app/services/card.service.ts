@@ -10,8 +10,9 @@ export class CardService {
 
   createCodeCard(codeCard: Omit<CodeCard, 'cardId'>): Promise<void> {
     const cardId = this.db.createId();
+    console.log(codeCard);
     return this.db
-      .doc(`cordCards/${cardId}`)
+      .doc(`codeCards/${cardId}`)
       .set({
         cardId,
         ...codeCard,
