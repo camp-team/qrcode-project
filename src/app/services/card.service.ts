@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CodeCard } from '../interfaces/code-card';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +21,9 @@ export class CardService {
       .then(() => {
         console.log('データの追加に成功しました！');
       });
+  }
+
+  getCodeCards(): Observable<CodeCard[]> {
+    return this.db.collection<CodeCard>(`codeCards`).valueChanges();
   }
 }

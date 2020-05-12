@@ -7,7 +7,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 img {
@@ -20,4 +20,15 @@ img {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   padding: 24px;
   text-align: center;
+}
+
+.card {
+  &__trigger {
+    cursor: pointer;
+  }
+  &__cover {
+    background: center/cover;
+    padding-bottom: 52.5%;
+    box-sizing: border-box;
+  }
 }
