@@ -18,7 +18,7 @@ export class CardService {
         ...codeCard,
       })
       .then(() => {
-        console.log('書き込み成功〜！！！');
+        console.log('データの追加に成功しました！');
       });
   }
 }
