@@ -26,4 +26,8 @@ export class CardService {
   getCodeCards(): Observable<CodeCard[]> {
     return this.db.collection<CodeCard>(`codeCards`).valueChanges();
   }
+
+  getCodeCard(cardId: string): Observable<CodeCard> {
+    return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
+  }
 }

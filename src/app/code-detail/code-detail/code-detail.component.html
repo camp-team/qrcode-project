@@ -1,0 +1,17 @@
+<div *ngIf="codeCard$ | async as codeCard; else blank">
+  <div class="container">
+    <div class="card">
+      <figure
+        class="card__cover"
+        [style.background-image]="'url(' + codeCard.iamge + ')'"
+      ></figure>
+      <h1>{{ codeCard.name }}</h1>
+      <h2>チャージ方法</h2>
+      <p>{{ codeCard.charge }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #blank>
+  カードの詳細ページが見つかりませんでした。
+</ng-template>
