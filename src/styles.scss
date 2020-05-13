@@ -10,6 +10,12 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
+.container {
+  margin: 0 auto;
+  padding: 0 16px;
+  max-width: 1280px;
+}
+
 img {
   max-width: 100%;
 }
