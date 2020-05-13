@@ -24,7 +24,10 @@ img {
 
 .card {
   &__trigger {
+    display: block;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
   }
   &__cover {
     background: center/cover;
