@@ -41,3 +41,26 @@ img {
     box-sizing: border-box;
   }
 }
+
+.detail {
+  margin: 0 40px;
+  white-space: pre-wrap;
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__store-icon {
+    font-size: 40px;
+  }
+}
+
+.store {
+  &__title {
+    text-align: center;
+  }
+  &__cover {
+    width: 160px;
+    height: 160px;
+  }
+}
