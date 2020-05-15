@@ -76,6 +76,7 @@ export class FormComponent implements OnInit {
       storeImage: formData.storeImage,
       charge: formData.charge,
       autoCharge: formData.autoCharge,
+      availableCredit: formData.availableCredit,
       pushMoney: formData.pushMoney,
       pullMoney: formData.pullMoney,
     });

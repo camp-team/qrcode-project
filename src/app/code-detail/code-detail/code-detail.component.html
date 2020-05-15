@@ -1,0 +1,51 @@
+<div *ngIf="codeCard$ | async as codeCard; else blank">
+  <div class="container">
+    <div class="card">
+      <figure
+        class="card__cover"
+        [style.background-image]="'url(' + codeCard.iamge + ')'"
+      ></figure>
+    </div>
+    <div class="detail">
+      <div class="detail__title">
+        <h1 class="detail__logo">{{ codeCard.name }}</h1>
+        <a
+          routerLink="/code-detail/{{ codeCard.cardId }}"
+          fragment="store"
+          class="detail__store-link"
+          mat-icon-button
+        >
+          <mat-icon class="detail__store-icon">store</mat-icon>
+        </a>
+      </div>
+      <h2>チャージ方法</h2>
+      <p class="detail__charge">{{ codeCard.charge }}</p>
+      <h2>オートチャージ</h2>
+      <p>{{ codeCard.autoCharge }}</p>
+      <h2>ポイント</h2>
+      <p>{{ codeCard.point }}%</p>
+      <P>{{ codeCard.addPoint }}</P>
+      <h2>個人間送金</h2>
+      <p>{{ codeCard.pushMoney }}</p>
+      <h2>出金</h2>
+      <p>{{ codeCard.pullMoney }}</p>
+    </div>
+    <div class="store" id="store">
+      <h2 class="store__title">使えるお店</h2>
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="実店舗">
+          <div class="store__cover">
+            <img [src]="codeCard.storeImage" alt="セブンイレブンの画像" />
+          </div>
+          <p>{{ codeCard.storeName }}</p>
+        </mat-tab>
+        <mat-tab label="オンライン"> Content 2 </mat-tab>
+        <mat-tab label="請求書"> Content 3 </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
+
+<ng-template #blank>
+  カードの詳細ページが見つかりませんでした。
+</ng-template>

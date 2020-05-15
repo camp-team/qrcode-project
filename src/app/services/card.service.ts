@@ -11,7 +11,6 @@ export class CardService {
 
   createCodeCard(codeCard: Omit<CodeCard, 'cardId'>): Promise<void> {
     const cardId = this.db.createId();
-    console.log(codeCard);
     return this.db
       .doc(`codeCards/${cardId}`)
       .set({
@@ -25,5 +24,9 @@ export class CardService {
 
   getCodeCards(): Observable<CodeCard[]> {
     return this.db.collection<CodeCard>(`codeCards`).valueChanges();
+  }
+
+  getCodeCard(cardId: string): Observable<CodeCard> {
+    return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
   }
 }
