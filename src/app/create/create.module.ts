@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [FormComponent],
@@ -19,6 +21,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatInputModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatChipsModule,
+    MatAutocompleteModule,
   ],
 })
 export class CreateModule {}

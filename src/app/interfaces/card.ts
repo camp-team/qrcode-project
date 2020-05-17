@@ -5,6 +5,5 @@ export interface Card {
   point: number;
   addPoint: string;
   expiration: string;
-  storeName: string;
-  storeImage: string;
+  storeIds: string[];
 }

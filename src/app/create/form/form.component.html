@@ -59,19 +59,38 @@
         formControlName="expiration"
       ></textarea>
     </mat-form-field>
-    <mat-form-field class="common__content" appearance="fill">
-      <mat-label>使えるお店の名前</mat-label>
-      <input matInput autocomplete="off" formControlName="storeName" required />
+    <h2>お店選択</h2>
+    <mat-form-field class="example-chip-list">
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip
+          *ngFor="let store of selectedStores"
+          [removable]="true"
+          (removed)="remove(store)"
+        >
+          {{ store.name }}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="New fruit..."
+          #storeInput
+          formControlName="storeIds"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+        />
+      </mat-chip-list>
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="selected($event)"
+      >
+        <mat-option
+          *ngFor="let store of filterdStores$ | async"
+          [value]="store"
+        >
+          {{ store.name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
-    <mat-form-field class="common__content" appearance="fill">
-      <mat-label>お店のイメージ画像</mat-label>
-      <input
-        matInput
-        autocomplete="off"
-        formControlName="storeImage"
-        required
-      />
-    </mat-form-field>
+
     <h2>QRcodeにしかない作成機能</h2>
     <ng-container [ngSwitch]="type">
       <ng-container *ngSwitchCase="'qrCode'">

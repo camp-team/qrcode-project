@@ -34,11 +34,9 @@
       <h2 class="store__title">使えるお店</h2>
       <mat-tab-group mat-align-tabs="center">
         <mat-tab label="実店舗">
-          <div class="store__cover">
-            <img [src]="codeCard.storeImage" alt="セブンイレブンの画像" />
-          </div>
-          <div *ngFor="let store of stores" class="store__cover">
-            <img src="assets/images/{{ store.id }}.png" alt="" />
+          <div *ngFor="let store of codeCard.storeIds | idToStore">
+            <img src="assets/iamges/{{ store.id }}.png" alt="" />
+            <p>{{ store.name }}</p>
           </div>
         </mat-tab>
         <mat-tab label="オンライン">
