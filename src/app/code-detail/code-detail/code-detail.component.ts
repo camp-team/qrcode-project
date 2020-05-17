@@ -33,6 +33,7 @@ export class CodeDetailComponent implements OnInit {
   }
 
   stores = this.storeService.realStore;
+  onlineStores = this.storeService.onlineStore;
 
   ngOnInit(): void {}
 }

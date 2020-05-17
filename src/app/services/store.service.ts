@@ -28,7 +28,80 @@ export class StoreService {
     },
   ];
 
-  onlineStore;
+  onlineStore: Store[] = [
+    {
+      id: 'cokeon',
+      name: 'CokeOn',
+    },
+    {
+      id: 'didi',
+      name: 'DiDi',
+    },
+    {
+      id: 'ebooks',
+      name: 'ebookjapan',
+    },
+    {
+      id: 'gyaostore',
+      name: 'GYAO!ストア',
+    },
+    {
+      id: 'lohaco',
+      name: 'LOHACO',
+    },
+    {
+      id: 'okusuri02',
+      name: '通販できるみんなのお薬',
+    },
+    {
+      id: 'oyolife',
+      name: 'OYO LIFE',
+    },
+    {
+      id: 'paypay_freemarket',
+      name: 'PayPayフリマ',
+    },
+    {
+      id: 'paypay_mall',
+      name: 'PayPayモール',
+    },
+    {
+      id: 'paypaydome02',
+      name: 'PayPayドームツアー',
+    },
+    {
+      id: 'ubereats',
+      name: 'UberEATS',
+    },
+    {
+      id: 'winticket',
+      name: 'WINTICKET',
+    },
+    {
+      id: 'yahoo_game',
+      name: 'Yahoo!ゲーム',
+    },
+    {
+      id: 'yahoo_news',
+      name: 'Yahoo!ニュース',
+    },
+    {
+      id: 'yahoo_shopping',
+      name: 'Yahoo!ショッピング',
+    },
+    {
+      id: 'yahoo_travel',
+      name: 'Yahoo!トラベル',
+    },
+    {
+      id: 'yahoo_uranai',
+      name: 'Yahoo!占い',
+    },
+    {
+      id: 'yahuoku',
+      name: 'ヤフオク',
+    },
+  ];
 
   constructor() {}
 }
