@@ -38,6 +38,9 @@
             <img [src]="codeCard.storeImage" alt="セブンイレブンの画像" />
           </div>
           <p>{{ codeCard.storeName }}</p>
+          <div *ngFor="let store of stores" class="store__cover">
+            <img src="assets/images/{{ store.id }}.png" alt="" />
+          </div>
         </mat-tab>
         <mat-tab label="オンライン"> Content 2 </mat-tab>
         <mat-tab label="請求書"> Content 3 </mat-tab>
