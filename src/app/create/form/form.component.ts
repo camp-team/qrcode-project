@@ -58,8 +58,7 @@ export class FormComponent implements OnInit {
       point: ['', Validators.maxLength(5)],
       addPoint: [''],
       expiration: ['', Validators.required],
-      storeName: [''],
-      storeImage: [''],
+      storeIds: [''],
       ...this.customForm[type],
     });
   }
@@ -72,8 +71,7 @@ export class FormComponent implements OnInit {
       point: formData.point,
       addPoint: formData.addPoint,
       expiration: formData.expiration,
-      storeName: formData.storeName,
-      storeImage: formData.storeImage,
+      storeIds: formData.storeIds,
       charge: formData.charge,
       autoCharge: formData.autoCharge,
       availableCredit: formData.availableCredit,
