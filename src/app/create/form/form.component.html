@@ -61,6 +61,39 @@
       ></textarea>
     </mat-form-field>
 
+    <mat-form-field class="example-chip-list">
+      <mat-label>使えるお店</mat-label>
+      <mat-chip-list #chipList aria-label="Store selection">
+        <mat-chip
+          *ngFor="let store of stores"
+          [selectable]="true"
+          [removable]="true"
+          (removed)="remove(store)"
+        >
+          {{ store.name }}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="使えるお店を選択してください"
+          #storeInput
+          formControlName="storeIds"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+        />
+      </mat-chip-list>
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="selected($event)"
+      >
+        <mat-option
+          *ngFor="let store of filteredStores$ | async"
+          [value]="store"
+        >
+          {{ store.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
     <h2>QRcodeにしかない作成機能</h2>
     <ng-container [ngSwitch]="type">
       <ng-container *ngSwitchCase="'qrCode'">

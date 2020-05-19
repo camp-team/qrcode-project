@@ -32,7 +32,7 @@ export class CodeDetailComponent implements OnInit {
     console.log(zoff);
   }
 
-  stores = this.storeService.realStore;
+  stores = this.storeService.store;
   onlineStores = this.storeService.onlineStore;
   invoices = this.storeService.invoice;
 
