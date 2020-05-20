@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -8,6 +8,11 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CardService } from 'src/app/services/card.service';
 import { CodeCard } from 'src/app/interfaces/code-card';
+import { Store } from 'src/app/interfaces/store';
+import { StoreService } from 'src/app/services/store.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-form',
@@ -15,6 +20,10 @@ import { CodeCard } from 'src/app/interfaces/code-card';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+  stores = [];
+  allStores: Store[] = this.storeService.store;
+  filteredStores$: Observable<Store[]>;
+
   form: FormGroup;
   type;
   customForm = {
@@ -38,15 +47,28 @@ export class FormComponent implements OnInit {
     return this.form.get('image') as FormControl;
   }
 
+  get storeIdsControl() {
+    return this.form.get('storeIds') as FormControl;
+  }
+
+  @ViewChild('storeInput') private storeInput: ElementRef;
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private cardService: CardService
+    private cardService: CardService,
+    private storeService: StoreService
   ) {
     this.route.queryParamMap.subscribe((map) => {
       this.type = map.get('type');
       this.buildForm(this.type);
     });
+    this.filteredStores$ = this.storeIdsControl.valueChanges.pipe(
+      startWith(null),
+      map((store: string | null) => {
+        return store ? this._filter(store) : this.allStores.slice();
+      })
+    );
   }
 
   ngOnInit(): void {}
@@ -58,8 +80,7 @@ export class FormComponent implements OnInit {
       point: ['', Validators.maxLength(5)],
       addPoint: [''],
       expiration: ['', Validators.required],
-      storeName: [''],
-      storeImage: [''],
+      storeIds: [''],
       ...this.customForm[type],
     });
   }
@@ -72,13 +93,30 @@ export class FormComponent implements OnInit {
       point: formData.point,
       addPoint: formData.addPoint,
       expiration: formData.expiration,
-      storeName: formData.storeName,
-      storeImage: formData.storeImage,
+      storeIds: this.stores.map((store) => store.id),
       charge: formData.charge,
       autoCharge: formData.autoCharge,
       availableCredit: formData.availableCredit,
       pushMoney: formData.pushMoney,
       pullMoney: formData.pullMoney,
     });
+  }
+
+  private _filter(value: string): Store[] {
+    return this.allStores.filter((store) => store.name.indexOf(value) === 0);
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.stores.push(event.option.value);
+    this.storeInput.nativeElement.value = '';
+    this.storeIdsControl.setValue(null);
+  }
+
+  remove(store: string): void {
+    const index = this.stores.indexOf(store);
+
+    if (index >= 0) {
+      this.stores.splice(index, 1);
+    }
   }
 }

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { CodeCard } from 'src/app/interfaces/code-card';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-code-detail',
@@ -12,6 +13,7 @@ import { CodeCard } from 'src/app/interfaces/code-card';
 })
 export class CodeDetailComponent implements OnInit {
   cardId: string;
+
   codeCard$: Observable<CodeCard> = this.route.paramMap.pipe(
     switchMap((map) => {
       this.cardId = map.get('id');
@@ -21,7 +23,8 @@ export class CodeDetailComponent implements OnInit {
 
   constructor(
     private cardService: CardService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storeService: StoreService
   ) {}
 
   ngOnInit(): void {}
