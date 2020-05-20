@@ -31,227 +31,222 @@ export class StoreService {
       name: '669',
       type: 'real',
     },
-  ];
-
-  onlineStore: Store[] = [
     {
       id: 'cokeon',
       name: 'CokeOn',
-      type: '',
+      type: 'online',
     },
     {
       id: 'didi',
       name: 'DiDi',
-      type: '',
+      type: 'online',
     },
     {
       id: 'ebooks',
       name: 'ebookjapan',
-      type: '',
+      type: 'online',
     },
     {
       id: 'gyaostore',
       name: 'GYAO!ストア',
-      type: '',
+      type: 'online',
     },
     {
       id: 'lohaco',
       name: 'LOHACO',
-      type: '',
+      type: 'online',
     },
     {
       id: 'okusuri02',
       name: '通販できるみんなのお薬',
-      type: '',
+      type: 'online',
     },
     {
       id: 'oyolife',
       name: 'OYO LIFE',
-      type: '',
+      type: 'online',
     },
     {
       id: 'paypay_freemarket',
       name: 'PayPayフリマ',
-      type: '',
+      type: 'online',
     },
     {
       id: 'paypay_mall',
       name: 'PayPayモール',
-      type: '',
+      type: 'online',
     },
     {
       id: 'paypaydome02',
       name: 'PayPayドームツアー',
-      type: '',
+      type: 'online',
     },
     {
       id: 'ubereats',
       name: 'UberEATS',
-      type: '',
+      type: 'online',
     },
     {
       id: 'winticket',
       name: 'WINTICKET',
-      type: '',
+      type: 'online',
     },
     {
       id: 'yahoo_game',
       name: 'Yahoo!ゲーム',
-      type: '',
+      type: 'online',
     },
     {
       id: 'yahoo_news',
       name: 'Yahoo!ニュース',
-      type: '',
+      type: 'online',
     },
     {
       id: 'yahoo_shopping',
       name: 'Yahoo!ショッピング',
-      type: '',
+      type: 'online',
     },
     {
       id: 'yahoo_travel',
       name: 'Yahoo!トラベル',
-      type: '',
+      type: 'online',
     },
     {
       id: 'yahoo_uranai',
       name: 'Yahoo!占い',
-      type: '',
+      type: 'online',
     },
     {
       id: 'yahuoku',
       name: 'ヤフオク',
-      type: '',
+      type: 'online',
     },
-  ];
-
-  invoice: Store[] = [
     {
       id: 'tepco',
       name: '東京電力',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'belluna',
       name: 'ベルーナ',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'chojyunosato',
       name: '長寿の里',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'chugokudenryoku',
       name: '中国電力',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'egao',
       name: 'えがお',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'fancl',
       name: 'ファンケル',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'hiroshimagas',
       name: '広島ガス',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'hokkaidougas',
       name: '北海道ガス',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'kansaidenryoku',
       name: '関西電力',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'keiyogas',
       name: '京葉ガス',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'kenkoukazoku',
       name: '健康家族',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'kitakyusyushisuidou',
       name: '北九州市上下水道局',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'kumamotoshisuidou',
       name: '熊本市上下水道局',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'kyusyudenryoku',
       name: '九州電力',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'okayamashisuidou',
       name: '岡山市水道局',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'okinawadenryoku',
       name: '沖縄電力',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'osakagas',
       name: '大阪ガス',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'qsai',
       name: 'キューサイ',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'saitamashisuidou',
       name: 'さいたま市水道局',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'sakaishisuidou',
       name: '堺市上下水道局',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'sakuranomori',
       name: 'さくらの森',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'tokyogas',
       name: '東京ガス',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'tokyotosuidou',
       name: '東京都水道局',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'wakasaseikatsu',
       name: 'わかさ生活',
-      type: '',
+      type: 'invoice',
     },
     {
       id: 'yazuya',
       name: 'やずや',
-      type: '',
+      type: 'invoice',
     },
   ];
+
   constructor() {}
 }

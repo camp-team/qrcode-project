@@ -25,16 +25,7 @@ export class CodeDetailComponent implements OnInit {
     private cardService: CardService,
     private route: ActivatedRoute,
     private storeService: StoreService
-  ) {
-    const zoff = this.stores.filter((store) => {
-      return store.id === 'zoff';
-    });
-    console.log(zoff);
-  }
-
-  stores = this.storeService.store;
-  onlineStores = this.storeService.onlineStore;
-  invoices = this.storeService.invoice;
+  ) {}
 
   ngOnInit(): void {}
 }
