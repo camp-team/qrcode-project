@@ -19,9 +19,13 @@
         </a>
       </div>
       <h2>チャージ方法</h2>
-      <p class="detail__charge">{{ codeCard.charge }}</p>
+      <p *ngFor="let chargeWay of codeCard.charge" class="detail__charge">
+        {{ chargeWay }}
+      </p>
       <h2>オートチャージ</h2>
       <p>{{ codeCard.autoCharge }}</p>
+      <h2>利用できるクレジットカード</h2>
+      <p>{{ codeCard.availableCredit }}</p>
       <h2>ポイント</h2>
       <p>{{ codeCard.point }}%</p>
       <P>{{ codeCard.addPoint }}</P>

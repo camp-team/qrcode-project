@@ -13,6 +13,8 @@ import { StoreService } from 'src/app/services/store.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-form',
@@ -28,7 +30,7 @@ export class FormComponent implements OnInit {
   type;
   customForm = {
     qrCode: {
-      charge: ['', Validators.required],
+      charge: [''],
       autoCharge: ['', Validators.required],
       availableCredit: ['', Validators.required],
       pushMoney: ['', Validators.required],
@@ -36,7 +38,10 @@ export class FormComponent implements OnInit {
     },
   };
 
-  chargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
+  chargePatterns = ['銀行口座', 'セブン銀行ATM'];
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  autoChargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
   simplePatterns = ['可能', '不可能'];
 
   get nameControl() {
@@ -94,7 +99,7 @@ export class FormComponent implements OnInit {
       addPoint: formData.addPoint,
       expiration: formData.expiration,
       storeIds: this.stores.map((store) => store.id),
-      charge: formData.charge,
+      charge: this.chargePatterns,
       autoCharge: formData.autoCharge,
       availableCredit: formData.availableCredit,
       pushMoney: formData.pushMoney,
@@ -112,11 +117,34 @@ export class FormComponent implements OnInit {
     this.storeIdsControl.setValue(null);
   }
 
-  remove(store: string): void {
+  removeStore(store: string): void {
     const index = this.stores.indexOf(store);
 
     if (index >= 0) {
       this.stores.splice(index, 1);
+    }
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      this.chargePatterns.push(value.trim());
+    }
+
+    if (input) {
+      input.value = '';
+    }
+
+    // this.fruitCtrl.setValue(null);
+  }
+
+  remove(chargePattern: string): void {
+    const index = this.chargePatterns.indexOf(chargePattern);
+
+    if (index >= 0) {
+      this.chargePatterns.splice(index, 1);
     }
   }
 }

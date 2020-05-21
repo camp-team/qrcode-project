@@ -61,14 +61,14 @@
       ></textarea>
     </mat-form-field>
 
-    <mat-form-field class="example-chip-list">
+    <mat-form-field class="common__chip-list">
       <mat-label>使えるお店</mat-label>
       <mat-chip-list #chipList aria-label="Store selection">
         <mat-chip
           *ngFor="let store of stores"
           [selectable]="true"
           [removable]="true"
-          (removed)="remove(store)"
+          (removed)="removeStore(store)"
         >
           {{ store.name }}
           <mat-icon matChipRemove>cancel</mat-icon>
@@ -97,14 +97,26 @@
     <h2>QRcodeにしかない作成機能</h2>
     <ng-container [ngSwitch]="type">
       <ng-container *ngSwitchCase="'qrCode'">
-        <mat-form-field class="common__content" appearance="fill">
+        <mat-form-field class="common__chip-list">
           <mat-label>チャージ方法</mat-label>
-          <textarea
-            matInput
-            autocomplete="off"
-            formControlName="charge"
-            required
-          ></textarea>
+          <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip
+              *ngFor="let chargePattern of chargePatterns"
+              [removable]="true"
+              (removed)="remove(chargePattern)"
+            >
+              {{ chargePattern }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="チャージ方法を選択してください"
+              formControlName="charge"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="true"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-list>
         </mat-form-field>
 
         <div class="qr-code">
@@ -114,11 +126,11 @@
             class="qr-code__radio-group"
           >
             <mat-radio-button
-              *ngFor="let chargePattern of chargePatterns"
-              [value]="chargePattern"
+              *ngFor="let autoChargePattern of autoChargePatterns"
+              [value]="autoChargePattern"
               class="qr-code__radio-button"
               required
-              >{{ chargePattern }}</mat-radio-button
+              >{{ autoChargePattern }}</mat-radio-button
             >
           </mat-radio-group>
         </div>
