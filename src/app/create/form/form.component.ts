@@ -136,8 +136,6 @@ export class FormComponent implements OnInit {
     if (input) {
       input.value = '';
     }
-
-    // this.fruitCtrl.setValue(null);
   }
 
   remove(chargePattern: string): void {
