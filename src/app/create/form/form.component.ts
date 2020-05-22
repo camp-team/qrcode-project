@@ -10,11 +10,12 @@ import { CardService } from 'src/app/services/card.service';
 import { CodeCard } from 'src/app/interfaces/code-card';
 import { Store } from 'src/app/interfaces/store';
 import { StoreService } from 'src/app/services/store.service';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, startWith, switchMap, tap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { Card } from 'src/app/interfaces/card';
 
 @Component({
   selector: 'app-form',
@@ -28,6 +29,7 @@ export class FormComponent implements OnInit {
 
   form: FormGroup;
   type;
+  id;
   customForm = {
     qrCode: {
       charge: [''],
@@ -64,10 +66,25 @@ export class FormComponent implements OnInit {
     private cardService: CardService,
     private storeService: StoreService
   ) {
-    this.route.queryParamMap.subscribe((map) => {
-      this.type = map.get('type');
-      this.buildForm(this.type);
-    });
+    this.route.queryParamMap
+      .pipe(
+        tap((params) => {
+          this.type = params.get('type');
+          this.buildForm(this.type);
+        }),
+        switchMap((params) => {
+          this.id = params.get('id');
+          if (this.id) {
+            return this.cardService.getCodeCard(this.id);
+          } else {
+            return of(null);
+          }
+        })
+      )
+      .subscribe((card) => {
+        this.initForm(card);
+      });
+
     this.filteredStores$ = this.storeIdsControl.valueChanges.pipe(
       startWith(null),
       map((store: string | null) => {
@@ -77,6 +94,15 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  private initForm(card: CodeCard) {
+    this.chargePatterns = card.charge;
+    this.stores = card.storeIds;
+    this.form.patchValue({
+      ...card,
+      charge: null,
+    });
+  }
 
   buildForm(type) {
     this.form = this.fb.group({
@@ -94,7 +120,7 @@ export class FormComponent implements OnInit {
     const formData = this.form.value;
     this.cardService.createCodeCard({
       name: formData.name,
-      iamge: formData.image,
+      image: formData.image,
       point: formData.point,
       addPoint: formData.addPoint,
       expiration: formData.expiration,
@@ -143,6 +169,12 @@ export class FormComponent implements OnInit {
 
     if (index >= 0) {
       this.chargePatterns.splice(index, 1);
+    }
+
+    if (this.chargePatterns.length) {
+      this.form.get('charge').setErrors({
+        required: true,
+      });
     }
   }
 }
