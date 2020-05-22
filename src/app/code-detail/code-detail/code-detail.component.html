@@ -3,20 +3,30 @@
     <div class="card">
       <figure
         class="card__cover"
-        [style.background-image]="'url(' + codeCard.iamge + ')'"
+        [style.background-image]="'url(' + codeCard.image + ')'"
       ></figure>
     </div>
     <div class="detail">
       <div class="detail__title">
         <h1 class="detail__logo">{{ codeCard.name }}</h1>
-        <a
-          routerLink="/code-detail/{{ codeCard.cardId }}"
-          fragment="store"
-          class="detail__store-link"
-          mat-icon-button
-        >
-          <mat-icon class="detail__store-icon">store</mat-icon>
-        </a>
+        <div class="detail__btns">
+          <button
+            class="detail__btn"
+            [routerLink]="['/create/form']"
+            [queryParams]="{ id: codeCard.cardId, type: 'qrCode' }"
+            mat-icon-button
+          >
+            <mat-icon class="detail__icon">create</mat-icon>
+          </button>
+          <a
+            routerLink="/code-detail/{{ codeCard.cardId }}"
+            fragment="store"
+            class="detail__store-link"
+            mat-icon-button
+          >
+            <mat-icon class="detail__icon">store</mat-icon>
+          </a>
+        </div>
       </div>
       <h2>チャージ方法</h2>
       <p *ngFor="let chargeWay of codeCard.charge" class="detail__charge">
