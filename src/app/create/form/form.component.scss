@@ -1,3 +1,8 @@
+.heading {
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
 .common {
   padding: 16px;
   &__content {
@@ -22,7 +27,9 @@
   }
 }
 
-h1 {
+.form-btns {
   text-align: center;
-  border-bottom: 1px solid black;
+  &__btn {
+    text-align: center;
+  }
 }

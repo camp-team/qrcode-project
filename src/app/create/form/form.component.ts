@@ -28,8 +28,8 @@ export class FormComponent implements OnInit {
   filteredStores$: Observable<Store[]>;
 
   form: FormGroup;
-  type;
-  id;
+  type: string;
+  cardId: string;
   customForm = {
     qrCode: {
       charge: [''],
@@ -73,9 +73,9 @@ export class FormComponent implements OnInit {
           this.buildForm(this.type);
         }),
         switchMap((params) => {
-          this.id = params.get('id');
-          if (this.id) {
-            return this.cardService.getCodeCard(this.id);
+          this.cardId = params.get('id');
+          if (this.cardId) {
+            return this.cardService.getCodeCard(this.cardId);
           } else {
             return of(null);
           }
@@ -86,14 +86,16 @@ export class FormComponent implements OnInit {
       });
 
     this.filteredStores$ = this.storeIdsControl.valueChanges.pipe(
-      startWith(null),
+      startWith(''),
       map((store: string | null) => {
         return store ? this._filter(store) : this.allStores.slice();
       })
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.cardId);
+  }
 
   private initForm(card: CodeCard) {
     this.chargePatterns = card.charge;

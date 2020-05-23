@@ -1,4 +1,9 @@
-<h1>カードを作成する</h1>
+<ng-container *ngIf="cardId; else defaultHeading">
+  <h1 class="heading">カードを編集する</h1>
+</ng-container>
+<ng-template #defaultHeading>
+  <h1 class="heading">カードを作成する</h1>
+</ng-template>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
   <div class="common">
@@ -178,8 +183,28 @@
       </ng-container>
       <ng-container *ngSwitchDefault>output2</ng-container>
     </ng-container>
-    <button [disabled]="form.invalid" mat-raised-button color="primary">
-      追加する
-    </button>
+
+    <ng-container *ngIf="cardId; else defaultButton">
+      <div class="form-btns">
+        <button
+          [disabled]="form.invalid || form.pristine"
+          mat-raised-button
+          color="primary"
+        >
+          適用する
+        </button>
+        <p>or</p>
+        <button [disabled]="form.invalid" mat-raised-button color="warn">
+          削除する
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #defaultButton>
+      <div class="form-btns__btn">
+        <button [disabled]="form.invalid" mat-raised-button color="primary">
+          追加する
+        </button>
+      </div>
+    </ng-template>
   </div>
 </form>
