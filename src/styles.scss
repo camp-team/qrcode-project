@@ -50,8 +50,12 @@ img {
     align-items: center;
     justify-content: space-between;
   }
-  &__store-icon {
-    font-size: 40px;
+  &__btn {
+    margin-right: 40px;
+  }
+  &__store-link {
+    display: inline-block;
+    margin-left: 16px;
   }
 }
 

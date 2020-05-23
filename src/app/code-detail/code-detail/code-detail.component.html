@@ -18,14 +18,16 @@
           >
             <mat-icon class="detail__icon">create</mat-icon>
           </button>
-          <a
-            routerLink="/code-detail/{{ codeCard.cardId }}"
-            fragment="store"
-            class="detail__store-link"
-            mat-icon-button
-          >
-            <mat-icon class="detail__icon">store</mat-icon>
-          </a>
+          <div class="detail__store-link">
+            <a
+              routerLink="/code-detail/{{ codeCard.cardId }}"
+              fragment="store"
+              mat-button
+            >
+              <mat-icon class="detail__icon">store</mat-icon>
+              <span>ストアページ</span>
+            </a>
+          </div>
         </div>
       </div>
       <h2>チャージ方法</h2>
