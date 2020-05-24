@@ -190,11 +190,19 @@
           [disabled]="form.invalid || form.pristine"
           mat-raised-button
           color="primary"
+          type="button"
+          (click)="updateCard()"
         >
           適用する
         </button>
         <p>or</p>
-        <button [disabled]="form.invalid" mat-raised-button color="warn">
+        <button
+          [disabled]="form.invalid"
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="deleteCard()"
+        >
           削除する
         </button>
       </div>

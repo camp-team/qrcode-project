@@ -30,6 +30,7 @@ export class FormComponent implements OnInit {
   form: FormGroup;
   type: string;
   cardId: string;
+  codeCard: CodeCard;
   customForm = {
     qrCode: {
       charge: [''],
@@ -82,7 +83,11 @@ export class FormComponent implements OnInit {
         })
       )
       .subscribe((card) => {
-        this.initForm(card);
+        if (card != null) {
+          this.initForm(card);
+        } else {
+          return;
+        }
       });
 
     this.filteredStores$ = this.storeIdsControl.valueChanges.pipe(
@@ -93,9 +98,7 @@ export class FormComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-    console.log(this.cardId);
-  }
+  ngOnInit(): void {}
 
   private initForm(card: CodeCard) {
     this.chargePatterns = card.charge;
@@ -133,6 +136,28 @@ export class FormComponent implements OnInit {
       pushMoney: formData.pushMoney,
       pullMoney: formData.pullMoney,
     });
+  }
+
+  updateCard() {
+    const formData = this.form.value;
+    this.cardService.updateCodeCard({
+      name: formData.name,
+      image: formData.image,
+      point: formData.point,
+      addPoint: formData.addPoint,
+      expiration: formData.expiration,
+      storeIds: this.stores.map((store) => store.id),
+      charge: this.chargePatterns,
+      autoCharge: formData.autoCharge,
+      availableCredit: formData.availableCredit,
+      pushMoney: formData.pushMoney,
+      pullMoney: formData.pullMoney,
+      cardId: this.cardId,
+    });
+  }
+
+  deleteCard() {
+    this.cardService.deleteCodeCard(this.cardId);
   }
 
   private _filter(value: string): Store[] {
