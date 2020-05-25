@@ -85,6 +85,7 @@ export class FormComponent implements OnInit {
       .subscribe((card) => {
         if (card != null) {
           this.initForm(card);
+          console.log(this.stores);
         } else {
           return;
         }
@@ -140,13 +141,15 @@ export class FormComponent implements OnInit {
 
   updateCard() {
     const formData = this.form.value;
+    // console.log(this.chargePatterns);
+    // console.log(this.stores);
     this.cardService.updateCodeCard({
       name: formData.name,
       image: formData.image,
       point: formData.point,
       addPoint: formData.addPoint,
       expiration: formData.expiration,
-      storeIds: this.stores.map((store) => store.id),
+      storeIds: this.stores,
       charge: this.chargePatterns,
       autoCharge: formData.autoCharge,
       availableCredit: formData.availableCredit,

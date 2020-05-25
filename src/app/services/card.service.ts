@@ -31,10 +31,20 @@ export class CardService {
   }
 
   updateCodeCard(codeCard: CodeCard): Promise<void> {
-    return this.db.doc(`codeCards/${codeCard.cardId}`).update(codeCard);
+    return this.db
+      .doc(`codeCards/${codeCard.cardId}`)
+      .update(codeCard)
+      .then(() => {
+        console.log('データを編集しました');
+      });
   }
 
   deleteCodeCard(cardId: string): Promise<void> {
-    return this.db.doc(`codeCards/${cardId}`).delete();
+    return this.db
+      .doc(`codeCards/${cardId}`)
+      .delete()
+      .then(() => {
+        console.log('データを削除しました');
+      });
   }
 }
