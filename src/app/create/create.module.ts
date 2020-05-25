@@ -10,9 +10,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteCardDialogComponent } from './delete-card-dialog/delete-card-dialog.component';
 
 @NgModule({
-  declarations: [FormComponent],
+  declarations: [FormComponent, DeleteCardDialogComponent],
   imports: [
     CommonModule,
     CreateRoutingModule,
@@ -23,6 +25,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatRadioModule,
     MatChipsModule,
     MatAutocompleteModule,
+    MatDialogModule,
   ],
+  entryComponents: [DeleteCardDialogComponent],
 })
 export class CreateModule {}

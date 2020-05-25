@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
+import { Observable } from 'rxjs';
+import { CodeCard } from 'src/app/interfaces/code-card';
 
 @Component({
   selector: 'app-code-card',
@@ -7,7 +9,7 @@ import { CardService } from 'src/app/services/card.service';
   styleUrls: ['./code-card.component.scss'],
 })
 export class CodeCardComponent implements OnInit {
-  codeCards$ = this.cardService.getCodeCards();
+  codeCards$: Observable<CodeCard[]> = this.cardService.getCodeCards();
 
   constructor(private cardService: CardService) {}
 

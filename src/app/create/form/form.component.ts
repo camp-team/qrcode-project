@@ -16,6 +16,8 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Card } from 'src/app/interfaces/card';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
 
 @Component({
   selector: 'app-form',
@@ -65,7 +67,8 @@ export class FormComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private cardService: CardService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private dialog: MatDialog
   ) {
     this.route.queryParamMap
       .pipe(
@@ -161,6 +164,19 @@ export class FormComponent implements OnInit {
 
   deleteCard() {
     this.cardService.deleteCodeCard(this.cardId);
+  }
+
+  openDeleteCardDialog() {
+    this.dialog
+      .open(DeleteCardDialogComponent)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.deleteCard();
+        } else {
+          return;
+        }
+      });
   }
 
   private _filter(value: string): Store[] {

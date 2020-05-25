@@ -1,0 +1,14 @@
+<div class="delete-card">
+  <h1 mat-dialog-title>カードを削除します</h1>
+  <div mat-dialog-content>
+    <p>本当にこのカードを削除してよろしいですか？</p>
+  </div>
+  <div mat-dialog-actions>
+    <div class="delete-card__btns">
+      <button mat-button color="primary" mat-dialog-close>キャンセル</button>
+      <button mat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>
+        はい
+      </button>
+    </div>
+  </div>
+</div>
