@@ -12,6 +12,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteCardDialogComponent } from './delete-card-dialog/delete-card-dialog.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [FormComponent, DeleteCardDialogComponent],
@@ -26,6 +27,7 @@ import { DeleteCardDialogComponent } from './delete-card-dialog/delete-card-dial
     MatChipsModule,
     MatAutocompleteModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
   entryComponents: [DeleteCardDialogComponent],
 })

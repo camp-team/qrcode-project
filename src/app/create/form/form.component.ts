@@ -5,7 +5,7 @@ import {
   FormControl,
   FormGroup,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CardService } from 'src/app/services/card.service';
 import { CodeCard } from 'src/app/interfaces/code-card';
 import { Store } from 'src/app/interfaces/store';
@@ -18,6 +18,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { Card } from 'src/app/interfaces/card';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form',
@@ -68,7 +69,9 @@ export class FormComponent implements OnInit {
     private route: ActivatedRoute,
     private cardService: CardService,
     private storeService: StoreService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.route.queryParamMap
       .pipe(
@@ -86,9 +89,8 @@ export class FormComponent implements OnInit {
         })
       )
       .subscribe((card) => {
-        if (card != null) {
+        if (card) {
           this.initForm(card);
-          console.log(this.stores);
         } else {
           return;
         }
@@ -127,43 +129,55 @@ export class FormComponent implements OnInit {
 
   submit() {
     const formData = this.form.value;
-    this.cardService.createCodeCard({
-      name: formData.name,
-      image: formData.image,
-      point: formData.point,
-      addPoint: formData.addPoint,
-      expiration: formData.expiration,
-      storeIds: this.stores.map((store) => store.id),
-      charge: this.chargePatterns,
-      autoCharge: formData.autoCharge,
-      availableCredit: formData.availableCredit,
-      pushMoney: formData.pushMoney,
-      pullMoney: formData.pullMoney,
-    });
+    this.cardService
+      .createCodeCard({
+        name: formData.name,
+        image: formData.image,
+        point: formData.point,
+        addPoint: formData.addPoint,
+        expiration: formData.expiration,
+        storeIds: this.stores.map((store) => store.id),
+        charge: this.chargePatterns,
+        autoCharge: formData.autoCharge,
+        availableCredit: formData.availableCredit,
+        pushMoney: formData.pushMoney,
+        pullMoney: formData.pullMoney,
+      })
+      .then(() => {
+        this.router.navigateByUrl('/codeCard');
+        this.snackBar.open('カードを作成しました', null, {
+          duration: 2000,
+        });
+      });
   }
 
   updateCard() {
     const formData = this.form.value;
-    // console.log(this.chargePatterns);
-    // console.log(this.stores);
-    this.cardService.updateCodeCard({
-      name: formData.name,
-      image: formData.image,
-      point: formData.point,
-      addPoint: formData.addPoint,
-      expiration: formData.expiration,
-      storeIds: this.stores,
-      charge: this.chargePatterns,
-      autoCharge: formData.autoCharge,
-      availableCredit: formData.availableCredit,
-      pushMoney: formData.pushMoney,
-      pullMoney: formData.pullMoney,
-      cardId: this.cardId,
-    });
+    this.cardService
+      .updateCodeCard({
+        name: formData.name,
+        image: formData.image,
+        point: formData.point,
+        addPoint: formData.addPoint,
+        expiration: formData.expiration,
+        storeIds: this.stores,
+        charge: this.chargePatterns,
+        autoCharge: formData.autoCharge,
+        availableCredit: formData.availableCredit,
+        pushMoney: formData.pushMoney,
+        pullMoney: formData.pullMoney,
+        cardId: this.cardId,
+      })
+      .then(() => {
+        this.router.navigateByUrl(`/code-detail/${this.cardId}`);
+        this.snackBar.open('カードを編集しました', null, {
+          duration: 2000,
+        });
+      });
   }
 
   deleteCard() {
-    this.cardService.deleteCodeCard(this.cardId);
+    return this.cardService.deleteCodeCard(this.cardId);
   }
 
   openDeleteCardDialog() {
@@ -172,7 +186,12 @@ export class FormComponent implements OnInit {
       .afterClosed()
       .subscribe((result) => {
         if (result) {
-          this.deleteCard();
+          this.deleteCard().then(() => {
+            this.router.navigateByUrl('/code-card');
+            this.snackBar.open('カードを削除しました', null, {
+              duration: 2000,
+            });
+          });
         } else {
           return;
         }
