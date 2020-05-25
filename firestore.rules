@@ -12,7 +12,7 @@ service cloud.firestore {
     // your app will lose access to your Firestore database
     match /codeCards/{cardId} {
       allow read: if true;
-      allow write: if request.auth.uid != null;
+      allow write, update, delete: if request.auth.uid != null;
     }
   }
 }
