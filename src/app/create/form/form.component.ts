@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  HostListener,
+} from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -26,6 +32,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+  isComplete: boolean;
+
   stores = [];
   allStores: Store[] = this.storeService.store;
   filteredStores$: Observable<Store[]>;
@@ -110,6 +118,14 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (this.form.dirty) {
+      $event.preventDefault();
+      $event.returnValue = '作業中の内容が失われますがよろしいですか？';
+    }
+  }
+
   private initForm(card: CodeCard) {
     this.chargePatterns = card.charge;
     this.stores = card.storeIds;
@@ -148,6 +164,7 @@ export class FormComponent implements OnInit {
         pullMoney: formData.pullMoney,
       })
       .then(() => {
+        this.isComplete = true;
         this.router.navigateByUrl('/codeCard');
         this.snackBar.open('カードを作成しました', null, {
           duration: 2000,
@@ -173,6 +190,7 @@ export class FormComponent implements OnInit {
         cardId: this.cardId,
       })
       .then(() => {
+        this.isComplete = true;
         this.router.navigateByUrl(`/code-detail/${this.cardId}`);
         this.snackBar.open('カードを編集しました', null, {
           duration: 2000,
