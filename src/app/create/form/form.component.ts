@@ -58,6 +58,10 @@ export class FormComponent implements OnInit {
     return this.form.get('image') as FormControl;
   }
 
+  get pointControl() {
+    return this.form.get('point') as FormControl;
+  }
+
   get storeIdsControl() {
     return this.form.get('storeIds') as FormControl;
   }
