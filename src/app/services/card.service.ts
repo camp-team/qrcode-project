@@ -29,4 +29,22 @@ export class CardService {
   getCodeCard(cardId: string): Observable<CodeCard> {
     return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
   }
+
+  updateCodeCard(codeCard: CodeCard): Promise<void> {
+    return this.db
+      .doc(`codeCards/${codeCard.cardId}`)
+      .update(codeCard)
+      .then(() => {
+        console.log('データを編集しました');
+      });
+  }
+
+  deleteCodeCard(cardId: string): Promise<void> {
+    return this.db
+      .doc(`codeCards/${cardId}`)
+      .delete()
+      .then(() => {
+        console.log('データを削除しました');
+      });
+  }
 }

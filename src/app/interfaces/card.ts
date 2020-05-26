@@ -1,7 +1,7 @@
 export interface Card {
   cardId: string;
   name: string;
-  iamge: string;
+  image: string;
   point: number;
   addPoint: string;
   expiration: string;

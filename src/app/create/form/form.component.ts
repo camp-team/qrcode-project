@@ -5,16 +5,20 @@ import {
   FormControl,
   FormGroup,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CardService } from 'src/app/services/card.service';
 import { CodeCard } from 'src/app/interfaces/code-card';
 import { Store } from 'src/app/interfaces/store';
 import { StoreService } from 'src/app/services/store.service';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, startWith, switchMap, tap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { Card } from 'src/app/interfaces/card';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form',
@@ -27,7 +31,9 @@ export class FormComponent implements OnInit {
   filteredStores$: Observable<Store[]>;
 
   form: FormGroup;
-  type;
+  type: string;
+  cardId: string;
+  codeCard: CodeCard;
   customForm = {
     qrCode: {
       charge: [''],
@@ -52,6 +58,10 @@ export class FormComponent implements OnInit {
     return this.form.get('image') as FormControl;
   }
 
+  get pointControl() {
+    return this.form.get('point') as FormControl;
+  }
+
   get storeIdsControl() {
     return this.form.get('storeIds') as FormControl;
   }
@@ -62,14 +72,36 @@ export class FormComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private cardService: CardService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
-    this.route.queryParamMap.subscribe((map) => {
-      this.type = map.get('type');
-      this.buildForm(this.type);
-    });
+    this.route.queryParamMap
+      .pipe(
+        tap((params) => {
+          this.type = params.get('type');
+          this.buildForm(this.type);
+        }),
+        switchMap((params) => {
+          this.cardId = params.get('id');
+          if (this.cardId) {
+            return this.cardService.getCodeCard(this.cardId);
+          } else {
+            return of(null);
+          }
+        })
+      )
+      .subscribe((card) => {
+        if (card) {
+          this.initForm(card);
+        } else {
+          return;
+        }
+      });
+
     this.filteredStores$ = this.storeIdsControl.valueChanges.pipe(
-      startWith(null),
+      startWith(''),
       map((store: string | null) => {
         return store ? this._filter(store) : this.allStores.slice();
       })
@@ -77,6 +109,15 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  private initForm(card: CodeCard) {
+    this.chargePatterns = card.charge;
+    this.stores = card.storeIds;
+    this.form.patchValue({
+      ...card,
+      charge: null,
+    });
+  }
 
   buildForm(type) {
     this.form = this.fb.group({
@@ -92,19 +133,73 @@ export class FormComponent implements OnInit {
 
   submit() {
     const formData = this.form.value;
-    this.cardService.createCodeCard({
-      name: formData.name,
-      iamge: formData.image,
-      point: formData.point,
-      addPoint: formData.addPoint,
-      expiration: formData.expiration,
-      storeIds: this.stores.map((store) => store.id),
-      charge: this.chargePatterns,
-      autoCharge: formData.autoCharge,
-      availableCredit: formData.availableCredit,
-      pushMoney: formData.pushMoney,
-      pullMoney: formData.pullMoney,
-    });
+    this.cardService
+      .createCodeCard({
+        name: formData.name,
+        image: formData.image,
+        point: formData.point,
+        addPoint: formData.addPoint,
+        expiration: formData.expiration,
+        storeIds: this.stores.map((store) => store.id),
+        charge: this.chargePatterns,
+        autoCharge: formData.autoCharge,
+        availableCredit: formData.availableCredit,
+        pushMoney: formData.pushMoney,
+        pullMoney: formData.pullMoney,
+      })
+      .then(() => {
+        this.router.navigateByUrl('/codeCard');
+        this.snackBar.open('カードを作成しました', null, {
+          duration: 2000,
+        });
+      });
+  }
+
+  updateCard() {
+    const formData = this.form.value;
+    this.cardService
+      .updateCodeCard({
+        name: formData.name,
+        image: formData.image,
+        point: formData.point,
+        addPoint: formData.addPoint,
+        expiration: formData.expiration,
+        storeIds: this.stores,
+        charge: this.chargePatterns,
+        autoCharge: formData.autoCharge,
+        availableCredit: formData.availableCredit,
+        pushMoney: formData.pushMoney,
+        pullMoney: formData.pullMoney,
+        cardId: this.cardId,
+      })
+      .then(() => {
+        this.router.navigateByUrl(`/code-detail/${this.cardId}`);
+        this.snackBar.open('カードを編集しました', null, {
+          duration: 2000,
+        });
+      });
+  }
+
+  deleteCard() {
+    return this.cardService.deleteCodeCard(this.cardId);
+  }
+
+  openDeleteCardDialog() {
+    this.dialog
+      .open(DeleteCardDialogComponent)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.deleteCard().then(() => {
+            this.router.navigateByUrl('/code-card');
+            this.snackBar.open('カードを削除しました', null, {
+              duration: 2000,
+            });
+          });
+        } else {
+          return;
+        }
+      });
   }
 
   private _filter(value: string): Store[] {
@@ -143,6 +238,12 @@ export class FormComponent implements OnInit {
 
     if (index >= 0) {
       this.chargePatterns.splice(index, 1);
+    }
+
+    if (this.chargePatterns.length) {
+      this.form.get('charge').setErrors({
+        required: true,
+      });
     }
   }
 }

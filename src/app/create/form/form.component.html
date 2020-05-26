@@ -1,4 +1,9 @@
-<h1>カードを作成する</h1>
+<ng-container *ngIf="cardId; else defaultHeading">
+  <h1 class="heading">カードを編集する</h1>
+</ng-container>
+<ng-template #defaultHeading>
+  <h1 class="heading">カードを作成する</h1>
+</ng-template>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
   <div class="common">
@@ -41,24 +46,30 @@
         required
       />
       <span matSuffix>%</span>
+      <mat-error *ngIf="pointControl.hasError('required')"
+        >必須入力です</mat-error
+      >
     </mat-form-field>
-    <mat-form-field class="common__content" appearance="fill">
+    <mat-form-field
+      class="common__content"
+      hintLabel="(例) ○○カード利用時+1%"
+      appearance="fill"
+    >
       <mat-label>ポイント / 追加情報</mat-label>
       <textarea
         matInput
-        placeholder="追加情報などを入力してください"
+        placeholder="ポイントの追加情報がある場合は入力してください"
         autocomplete="off"
         formControlName="addPoint"
       ></textarea>
     </mat-form-field>
-    <mat-form-field class="common__content" appearance="fill">
+    <mat-form-field
+      class="common__content"
+      hintLabel="(例) 最終利用日から○○年間"
+      appearance="fill"
+    >
       <mat-label>残高やポイントの有効期限</mat-label>
-      <textarea
-        matInput
-        autocomplete="off"
-        formControlName="expiration"
-        required
-      ></textarea>
+      <textarea matInput formControlName="expiration" required></textarea>
     </mat-form-field>
 
     <mat-form-field class="common__chip-list">
@@ -178,8 +189,36 @@
       </ng-container>
       <ng-container *ngSwitchDefault>output2</ng-container>
     </ng-container>
-    <button [disabled]="form.invalid" mat-raised-button color="primary">
-      追加する
-    </button>
+
+    <ng-container *ngIf="cardId; else defaultButton">
+      <div class="form-btns">
+        <button
+          [disabled]="form.invalid || form.pristine"
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="updateCard()"
+        >
+          適用する
+        </button>
+        <p>or</p>
+        <button
+          [disabled]="form.invalid"
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="openDeleteCardDialog()"
+        >
+          削除する
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #defaultButton>
+      <div class="form-btns__btn">
+        <button [disabled]="form.invalid" mat-raised-button color="primary">
+          追加する
+        </button>
+      </div>
+    </ng-template>
   </div>
 </form>
