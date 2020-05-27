@@ -20,6 +20,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
     HeaderComponent,
     FooterComponent,
     DrawerComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
