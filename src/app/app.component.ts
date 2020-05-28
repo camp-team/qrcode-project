@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class AppComponent {
   isOpened$: Observable<boolean> = this.drawerService.isOpened$;
-  isMobile$: Observable<boolean> = of(false);
+  isMobile$: Observable<boolean>;
   title = 'qr-comparison';
 
   constructor(
