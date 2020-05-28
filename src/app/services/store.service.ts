@@ -32,6 +32,132 @@ export class StoreService {
       type: 'real',
     },
     {
+      id: 'abab',
+      name: 'ABAB',
+      type: 'real',
+    },
+    {
+      id: 'aichintai',
+      name: 'ai賃貸',
+      type: 'real',
+    },
+    {
+      id: 'aimegane',
+      name: 'アイメガネ',
+      type: 'real',
+    },
+    {
+      id: 'ains',
+      name: 'アインズ',
+      type: 'real',
+    },
+    {
+      id: 'ainzulpe',
+      name: 'アインズ＆トルペ',
+      type: 'real',
+    },
+    {
+      id: 'akachan',
+      name: 'アカチャンホンポ',
+      type: 'real',
+    },
+    {
+      id: 'akafudado',
+      name: '赤札堂',
+      type: 'real',
+    },
+    {
+      id: 'akamaruya',
+      name: 'アカマル屋',
+      type: 'real',
+    },
+    {
+      id: 'alohatable',
+      name: 'ALOHATABLE',
+      type: 'real',
+    },
+    {
+      id: 'alook',
+      name: 'ALOOK',
+      type: 'real',
+    },
+    {
+      id: 'anan',
+      name: '安安',
+      type: 'real',
+    },
+    {
+      id: 'animate',
+      name: 'animate',
+      type: 'real',
+    },
+    {
+      id: 'aoki',
+      name: 'クスリのアオキ',
+      type: 'real',
+    },
+    {
+      id: 'arisan',
+      name: 'アリさんマークの引越社',
+      type: 'real',
+    },
+    {
+      id: 'arthikkoshi',
+      name: 'アート引越センター',
+      type: 'real',
+    },
+    {
+      id: 'ash',
+      name: 'Ash',
+      type: 'real',
+    },
+    {
+      id: 'autobacs',
+      name: 'AUTOBACS',
+      type: 'real',
+    },
+    {
+      id: 'ayumibooks',
+      name: 'あゆみBOOKS',
+      type: 'real',
+    },
+    {
+      id: 'babydoll',
+      name: 'BABYDOLL',
+      type: 'real',
+    },
+    {
+      id: 'bamiyan',
+      name: 'バーミヤン',
+      type: 'real',
+    },
+    {
+      id: 'baribaridori',
+      name: 'バリバリ鶏',
+      type: 'real',
+    },
+    {
+      id: 'bbon',
+      name: 'B.B.ON',
+      type: 'real',
+    },
+    {
+      id: 'beishia',
+      name: 'ベイシア電機',
+      type: 'real',
+    },
+    {
+      id: 'beisia',
+      name: 'ベイシア',
+      type: 'real',
+    },
+    {
+      id: '',
+      name: '',
+      type: 'real',
+    },
+
+    {
       id: 'cokeon',
       name: 'CokeOn',
       type: 'online',

@@ -1,7 +1,9 @@
 <app-header></app-header>
 
 <mat-sidenav-container>
-  <mat-sidenav mode="side" [opened]="isOpened$ | async"
+  <mat-sidenav
+    [mode]="(isMobile$ | async) ? 'over' : 'side'"
+    [opened]="isOpened$ | async"
     ><app-drawer></app-drawer>
   </mat-sidenav>
   <mat-sidenav-content>
