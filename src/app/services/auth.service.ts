@@ -1,21 +1,36 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth, User } from 'firebase';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { UserData } from '@interfaces/user';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  afUser$: Observable<User> = this.afAuth.user;
+  user$: Observable<UserData> = this.afAuth.authState.pipe(
+    switchMap((afUser) => {
+      if (afUser) {
+        return this.db.doc<UserData>(`users/${afUser.uid}`).valueChanges();
+      } else {
+        return of(null);
+      }
+    })
+  );
 
-  constructor(private afAuth: AngularFireAuth, private snackBar: MatSnackBar) {
-    this.afUser$.subscribe((user) => console.log(user));
-  }
+  constructor(
+    private afAuth: AngularFireAuth,
+    private db: AngularFirestore,
+    private snackBar: MatSnackBar
+  ) {}
 
   login() {
-    this.afAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(() => {
+    const provider = new auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+    this.afAuth.signInWithPopup(provider).then(() => {
       this.snackBar.open('ログインしました🥳', null, {
         duration: 2000,
       });

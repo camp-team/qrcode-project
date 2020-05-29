@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DrawerService } from '../services/drawer.service';
 import { FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
+import { UserData } from '@interfaces/user';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +17,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   search = new FormControl('');
-  user$ = this.authservice.afUser$;
+  user$: Observable<UserData> = this.authservice.user$;
 
   ngOnInit(): void {}
 
