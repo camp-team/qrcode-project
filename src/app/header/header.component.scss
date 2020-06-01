@@ -8,6 +8,10 @@
   align-items: center;
   border-bottom: 1px solid rgba(black, 0.38);
   height: auto;
+  position: fixed;
+  z-index: 777;
+  top: 0;
+  left: 0;
   &__left {
     display: flex;
     align-items: center;
