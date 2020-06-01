@@ -128,7 +128,11 @@ export class FormComponent implements OnInit {
 
   private initForm(card: CodeCard) {
     this.chargePatterns = card.charge;
-    this.stores = card.storeIds;
+    this.stores = card.storeIds.map((id) => {
+      return this.storeService.store.find((store) => {
+        return store.id === id;
+      });
+    });
     this.form.patchValue({
       ...card,
       charge: null,
@@ -165,7 +169,7 @@ export class FormComponent implements OnInit {
       })
       .then(() => {
         this.isComplete = true;
-        this.router.navigateByUrl('/codeCard');
+        this.router.navigateByUrl('/code-card');
         this.snackBar.open('カードを作成しました', null, {
           duration: 2000,
         });
@@ -181,7 +185,7 @@ export class FormComponent implements OnInit {
         point: formData.point,
         addPoint: formData.addPoint,
         expiration: formData.expiration,
-        storeIds: this.stores,
+        storeIds: this.stores.map((store) => store.id),
         charge: this.chargePatterns,
         autoCharge: formData.autoCharge,
         availableCredit: formData.availableCredit,
