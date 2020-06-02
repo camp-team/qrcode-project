@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth, User } from 'firebase';
 import { Observable, of } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserData } from '@interfaces/user';
 import { switchMap } from 'rxjs/operators';
@@ -21,27 +21,15 @@ export class AuthService {
     })
   );
 
-  constructor(
-    private afAuth: AngularFireAuth,
-    private db: AngularFirestore,
-    private snackBar: MatSnackBar
-  ) {}
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {}
 
   login() {
     const provider = new auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
-    this.afAuth.signInWithPopup(provider).then(() => {
-      this.snackBar.open('ログインしました🥳', null, {
-        duration: 2000,
-      });
-    });
+    return this.afAuth.signInWithPopup(provider);
   }
 
   logout() {
-    this.afAuth.signOut().then(() => {
-      this.snackBar.open('ログアウトしました', null, {
-        duration: 2000,
-      });
-    });
+    return this.afAuth.signOut();
   }
 }

@@ -73,8 +73,9 @@
       mat-flat-button
       color="primary"
       (click)="login()"
+      [disabled]="isProcessing"
     >
-      ログイン
+      {{ isProcessing ? 'ログイン中' : 'ログイン' }}
     </button>
   </ng-template>
 </mat-toolbar>
