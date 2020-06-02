@@ -1,224 +1,226 @@
-<ng-container *ngIf="cardId; else defaultHeading">
-  <h1 class="heading">カードを編集する</h1>
-</ng-container>
-<ng-template #defaultHeading>
-  <h1 class="heading">カードを作成する</h1>
-</ng-template>
+<div class="container">
+  <ng-container *ngIf="cardId; else defaultHeading">
+    <h1 class="heading">カードを編集する</h1>
+  </ng-container>
+  <ng-template #defaultHeading>
+    <h1 class="heading">カードを作成する</h1>
+  </ng-template>
 
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <div class="common">
-    <mat-form-field class="common__content" appearance="fill">
-      <mat-label>サービス名</mat-label>
-      <input
-        matInput
-        placeholder="サービス名を入力してください（20文字以内）"
-        autocomplete="off"
-        formControlName="name"
-        required
-      />
-      <mat-error *ngIf="nameControl.hasError('required')"
-        >必須入力です</mat-error
-      >
-      <mat-error *ngIf="nameControl.hasError('maxlength')"
-        >長すぎます</mat-error
-      >
-    </mat-form-field>
-    <mat-form-field class="common__content" appearance="fill">
-      <mat-label>サービスのイメージ画像</mat-label>
-      <input
-        matInput
-        placeholder="画像のURLを貼ってください"
-        autocomplete="off"
-        formControlName="image"
-        required
-      />
-      <mat-error *ngIf="imageControl.hasError('required')"
-        >必須入力です</mat-error
-      >
-    </mat-form-field>
-    <mat-form-field class="common__content" appearance="fill">
-      <mat-label>ポイント（通常時）</mat-label>
-      <input
-        matInput
-        placeholder="数字を入力してください"
-        autocomplete="off"
-        formControlName="point"
-        required
-      />
-      <span matSuffix>%</span>
-      <mat-error *ngIf="pointControl.hasError('required')"
-        >必須入力です</mat-error
-      >
-    </mat-form-field>
-    <mat-form-field
-      class="common__content"
-      hintLabel="(例) ○○カード利用時+1%"
-      appearance="fill"
-    >
-      <mat-label>ポイント / 追加情報</mat-label>
-      <textarea
-        matInput
-        placeholder="ポイントの追加情報がある場合は入力してください"
-        autocomplete="off"
-        formControlName="addPoint"
-      ></textarea>
-    </mat-form-field>
-    <mat-form-field
-      class="common__content"
-      hintLabel="(例) 最終利用日から○○年間"
-      appearance="fill"
-    >
-      <mat-label>残高やポイントの有効期限</mat-label>
-      <textarea matInput formControlName="expiration" required></textarea>
-    </mat-form-field>
-
-    <mat-form-field class="common__chip-list">
-      <mat-label>使えるお店</mat-label>
-      <mat-chip-list #chipList aria-label="Store selection">
-        <mat-chip
-          *ngFor="let store of stores"
-          [selectable]="true"
-          [removable]="true"
-          (removed)="removeStore(store)"
-        >
-          {{ store.name }}
-          <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="common">
+      <mat-form-field class="common__content" appearance="fill">
+        <mat-label>サービス名</mat-label>
         <input
-          placeholder="使えるお店を選択してください"
-          #storeInput
-          formControlName="storeIds"
-          [matAutocomplete]="auto"
-          [matChipInputFor]="chipList"
+          matInput
+          placeholder="サービス名を入力してください（20文字以内）"
+          autocomplete="off"
+          formControlName="name"
+          required
         />
-      </mat-chip-list>
-      <mat-autocomplete
-        #auto="matAutocomplete"
-        (optionSelected)="selected($event)"
-      >
-        <mat-option
-          *ngFor="let store of filteredStores$ | async"
-          [value]="store"
+        <mat-error *ngIf="nameControl.hasError('required')"
+          >必須入力です</mat-error
         >
-          {{ store.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+        <mat-error *ngIf="nameControl.hasError('maxlength')"
+          >長すぎます</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="common__content" appearance="fill">
+        <mat-label>サービスのイメージ画像</mat-label>
+        <input
+          matInput
+          placeholder="画像のURLを貼ってください"
+          autocomplete="off"
+          formControlName="image"
+          required
+        />
+        <mat-error *ngIf="imageControl.hasError('required')"
+          >必須入力です</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="common__content" appearance="fill">
+        <mat-label>ポイント（通常時）</mat-label>
+        <input
+          matInput
+          placeholder="数字を入力してください"
+          autocomplete="off"
+          formControlName="point"
+          required
+        />
+        <span matSuffix>%</span>
+        <mat-error *ngIf="pointControl.hasError('required')"
+          >必須入力です</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field
+        class="common__content"
+        hintLabel="(例) ○○カード利用時+1%"
+        appearance="fill"
+      >
+        <mat-label>ポイント / 追加情報</mat-label>
+        <textarea
+          matInput
+          placeholder="ポイントの追加情報がある場合は入力してください"
+          autocomplete="off"
+          formControlName="addPoint"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field
+        class="common__content"
+        hintLabel="(例) 最終利用日から○○年間"
+        appearance="fill"
+      >
+        <mat-label>残高やポイントの有効期限</mat-label>
+        <textarea matInput formControlName="expiration" required></textarea>
+      </mat-form-field>
 
-    <h2>QRcodeにしかない作成機能</h2>
-    <ng-container [ngSwitch]="type">
-      <ng-container *ngSwitchCase="'qrCode'">
-        <mat-form-field class="common__chip-list">
-          <mat-label>チャージ方法</mat-label>
-          <mat-chip-list #chipList aria-label="Fruit selection">
-            <mat-chip
-              *ngFor="let chargePattern of chargePatterns"
-              [removable]="true"
-              (removed)="remove(chargePattern)"
-            >
-              {{ chargePattern }}
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <input
-              placeholder="チャージ方法を選択してください"
-              formControlName="charge"
-              [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="true"
-              (matChipInputTokenEnd)="add($event)"
-            />
-          </mat-chip-list>
-        </mat-form-field>
-
-        <div class="qr-code">
-          <mat-label class="qr-code__label">オートチャージ</mat-label>
-          <mat-radio-group
-            formControlName="autoCharge"
-            class="qr-code__radio-group"
+      <mat-form-field class="common__chip-list">
+        <mat-label>使えるお店</mat-label>
+        <mat-chip-list #chipList aria-label="Store selection">
+          <mat-chip
+            *ngFor="let store of stores"
+            [selectable]="true"
+            [removable]="true"
+            (removed)="removeStore(store)"
           >
-            <mat-radio-button
-              *ngFor="let autoChargePattern of autoChargePatterns"
-              [value]="autoChargePattern"
-              class="qr-code__radio-button"
-              required
-              >{{ autoChargePattern }}</mat-radio-button
-            >
-          </mat-radio-group>
-        </div>
-
-        <mat-form-field class="common__content" appearance="fill">
-          <mat-label>利用可能なクレジットカード</mat-label>
-          <textarea
-            matInput
-            autocomplete="off"
-            formControlName="availableCredit"
-            required
-          ></textarea>
-        </mat-form-field>
-
-        <div class="qr-code">
-          <mat-label class="qr-code__label">個人間送金</mat-label>
-          <mat-radio-group
-            formControlName="pushMoney"
-            class="qr-code__radio-group"
+            {{ store.name }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="使えるお店を選択してください"
+            #storeInput
+            formControlName="storeIds"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+          />
+        </mat-chip-list>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)"
+        >
+          <mat-option
+            *ngFor="let store of filteredStores$ | async"
+            [value]="store"
           >
-            <mat-radio-button
-              *ngFor="let simplePattern of simplePatterns"
-              [value]="simplePattern"
-              class="qr-code__radio-button"
-              required
-              >{{ simplePattern }}</mat-radio-button
+            {{ store.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <h2>QRcodeにしかない作成機能</h2>
+      <ng-container [ngSwitch]="type">
+        <ng-container *ngSwitchCase="'qrCode'">
+          <mat-form-field class="common__chip-list">
+            <mat-label>チャージ方法</mat-label>
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip
+                *ngFor="let chargePattern of chargePatterns"
+                [removable]="true"
+                (removed)="remove(chargePattern)"
+              >
+                {{ chargePattern }}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+              <input
+                placeholder="チャージ方法を選択してください"
+                formControlName="charge"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="true"
+                (matChipInputTokenEnd)="add($event)"
+              />
+            </mat-chip-list>
+          </mat-form-field>
+
+          <div class="qr-code">
+            <mat-label class="qr-code__label">オートチャージ</mat-label>
+            <mat-radio-group
+              formControlName="autoCharge"
+              class="qr-code__radio-group"
             >
-          </mat-radio-group>
-        </div>
-        <div class="qr-code">
-          <mat-label class="qr-code__label">出金</mat-label>
-          <mat-radio-group
-            formControlName="pullMoney"
-            class="qr-code__radio-group"
+              <mat-radio-button
+                *ngFor="let autoChargePattern of autoChargePatterns"
+                [value]="autoChargePattern"
+                class="qr-code__radio-button"
+                required
+                >{{ autoChargePattern }}</mat-radio-button
+              >
+            </mat-radio-group>
+          </div>
+
+          <mat-form-field class="common__content" appearance="fill">
+            <mat-label>利用可能なクレジットカード</mat-label>
+            <textarea
+              matInput
+              autocomplete="off"
+              formControlName="availableCredit"
+              required
+            ></textarea>
+          </mat-form-field>
+
+          <div class="qr-code">
+            <mat-label class="qr-code__label">個人間送金</mat-label>
+            <mat-radio-group
+              formControlName="pushMoney"
+              class="qr-code__radio-group"
+            >
+              <mat-radio-button
+                *ngFor="let simplePattern of simplePatterns"
+                [value]="simplePattern"
+                class="qr-code__radio-button"
+                required
+                >{{ simplePattern }}</mat-radio-button
+              >
+            </mat-radio-group>
+          </div>
+          <div class="qr-code">
+            <mat-label class="qr-code__label">出金</mat-label>
+            <mat-radio-group
+              formControlName="pullMoney"
+              class="qr-code__radio-group"
+            >
+              <mat-radio-button
+                *ngFor="let simplePattern of simplePatterns"
+                [value]="simplePattern"
+                class="qr-code__radio-button"
+                required
+                >{{ simplePattern }}</mat-radio-button
+              >
+            </mat-radio-group>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchDefault>output2</ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="cardId; else defaultButton">
+        <div class="form-btns">
+          <button
+            [disabled]="form.invalid || form.pristine"
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="updateCard()"
           >
-            <mat-radio-button
-              *ngFor="let simplePattern of simplePatterns"
-              [value]="simplePattern"
-              class="qr-code__radio-button"
-              required
-              >{{ simplePattern }}</mat-radio-button
-            >
-          </mat-radio-group>
+            適用する
+          </button>
+          <p>or</p>
+          <button
+            [disabled]="form.invalid"
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="openDeleteCardDialog()"
+          >
+            削除する
+          </button>
         </div>
       </ng-container>
-      <ng-container *ngSwitchDefault>output2</ng-container>
-    </ng-container>
-
-    <ng-container *ngIf="cardId; else defaultButton">
-      <div class="form-btns">
-        <button
-          [disabled]="form.invalid || form.pristine"
-          mat-raised-button
-          color="primary"
-          type="button"
-          (click)="updateCard()"
-        >
-          適用する
-        </button>
-        <p>or</p>
-        <button
-          [disabled]="form.invalid"
-          mat-raised-button
-          color="warn"
-          type="button"
-          (click)="openDeleteCardDialog()"
-        >
-          削除する
-        </button>
-      </div>
-    </ng-container>
-    <ng-template #defaultButton>
-      <div class="form-btns__btn">
-        <button [disabled]="form.invalid" mat-raised-button color="primary">
-          追加する
-        </button>
-      </div>
-    </ng-template>
-  </div>
-</form>
+      <ng-template #defaultButton>
+        <div class="form-btns__btn">
+          <button [disabled]="form.invalid" mat-raised-button color="primary">
+            追加する
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </form>
+</div>

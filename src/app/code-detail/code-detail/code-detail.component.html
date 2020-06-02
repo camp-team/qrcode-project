@@ -50,7 +50,7 @@
       <h2 class="store__title">使えるお店</h2>
       <mat-tab-group mat-align-tabs="center">
         <mat-tab label="実店舗">
-          <div class="grid">
+          <div class="store__grid">
             <div
               *ngFor="let store of codeCard.storeIds | idToStore: 'real'"
               class="store__cover"
@@ -61,7 +61,7 @@
           </div>
         </mat-tab>
         <mat-tab label="オンライン">
-          <div class="grid">
+          <div class="store__grid">
             <div
               *ngFor="let store of codeCard.storeIds | idToStore: 'online'"
               class="store__cover"
@@ -75,7 +75,7 @@
           </div>
         </mat-tab>
         <mat-tab label="請求書">
-          <div class="grid">
+          <div class="store__grid">
             <div
               *ngFor="let store of codeCard.storeIds | idToStore: 'invoice'"
               class="store__cover"

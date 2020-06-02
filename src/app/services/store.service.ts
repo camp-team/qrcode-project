@@ -52,7 +52,7 @@ export class StoreService {
       type: 'real',
     },
     {
-      id: 'ainzulpe',
+      id: 'ainztulpe',
       name: 'アインズ＆トルペ',
       type: 'real',
     },
@@ -156,7 +156,6 @@ export class StoreService {
       name: '',
       type: 'real',
     },
-
     {
       id: 'cokeon',
       name: 'CokeOn',
