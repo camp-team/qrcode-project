@@ -84,7 +84,11 @@
 
 .admin {
   margin-left: 16px;
-  &__icon {
-    padding: 8px;
-  }
+  padding: 8px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.38);
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  line-height: 1;
+  box-sizing: border-box;
 }

@@ -42,15 +42,14 @@
       <button mat-menu-item>ポイントカード</button>
     </mat-menu>
 
-    <div *ngIf="user.admin" class="admin">
-      <mat-icon class="admin__icon">verified_user</mat-icon>
-    </div>
+    <div *ngIf="user.admin" class="admin">管理人</div>
 
     <button
       class="btns__icon"
       mat-mini-fab
       [matMenuTriggerFor]="avatar"
       [style.background-image]="'url(' + user.avatarURL + ')'"
+      [style.border]="user.admin ? '1px solid blue' : ''"
     ></button>
     <mat-menu #avatar="matMenu">
       <button mat-menu-item (click)="logout()">
