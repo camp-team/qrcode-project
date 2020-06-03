@@ -17,6 +17,9 @@
     align-items: center;
     font-size: 8px;
     margin-right: 16px;
+    @include sp {
+      margin-right: 0;
+    }
   }
 }
 
@@ -76,5 +79,12 @@
     img {
       border-radius: 50%;
     }
+  }
+}
+
+.admin {
+  margin-left: 16px;
+  &__icon {
+    padding: 8px;
   }
 }

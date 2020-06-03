@@ -41,6 +41,11 @@
       <button mat-menu-item>交通系電子マネー</button>
       <button mat-menu-item>ポイントカード</button>
     </mat-menu>
+
+    <div *ngIf="user.admin" class="admin">
+      <mat-icon class="admin__icon">verified_user</mat-icon>
+    </div>
+
     <button
       class="btns__icon"
       mat-mini-fab
