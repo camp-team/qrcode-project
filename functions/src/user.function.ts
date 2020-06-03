@@ -1,10 +1,10 @@
 import * as functions from 'firebase-functions';
-import * as adimin from 'firebase-admin';
+import * as admin from 'firebase-admin';
 import { UserData } from './interfaces/user';
 
-adimin.initializeApp();
+admin.initializeApp();
 
-const db = adimin.firestore();
+const db = admin.firestore();
 
 export const createUser = functions
   .region('asia-northeast1')
@@ -15,6 +15,7 @@ export const createUser = functions
       avatarURL: user.photoURL?.replace('_nomal', '') || '',
       email: user.email || '',
       uid: user.uid,
+      admin: false,
       createdAt: new Date(),
     };
     return db.doc(`users/${user.uid}`).set(userData);

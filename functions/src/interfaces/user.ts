@@ -3,5 +3,6 @@ export interface UserData {
   avatarURL: string;
   email: string;
   uid: string;
+  admin: boolean;
   createdAt: Date;
 }
