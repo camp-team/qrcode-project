@@ -15,7 +15,7 @@ export const createUser = functions
       avatarURL: user.photoURL?.replace('_nomal', '') || '',
       email: user.email || '',
       uid: user.uid,
-      admin: user.email === 'hiroponpoko07@gmail.com' ? true : false,
+      admin: false,
       createdAt: new Date(),
     };
     return db.doc(`users/${user.uid}`).set(userData);
