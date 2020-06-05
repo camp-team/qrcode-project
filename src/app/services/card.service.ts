@@ -14,7 +14,7 @@ export class CardService {
   ) {}
 
   async createCodeCard(
-    codeCard: Omit<CodeCard, 'cardId'>,
+    codeCard: Omit<CodeCard, 'cardId' | 'imageURL'>,
     imageDataURL: string | ArrayBuffer
   ): Promise<void> {
     const cardId = this.db.createId();
@@ -39,10 +39,20 @@ export class CardService {
     return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
   }
 
-  updateCodeCard(codeCard: CodeCard): Promise<void> {
+  async updateCodeCard(
+    codeCard: Omit<CodeCard, 'imageURL'>,
+    imageDataURL: string | ArrayBuffer
+  ): Promise<void> {
+    const imageURL: string = await this.getUploadImageURL(
+      codeCard.cardId,
+      imageDataURL
+    );
     return this.db
       .doc(`codeCards/${codeCard.cardId}`)
-      .update(codeCard)
+      .update({
+        imageURL,
+        ...codeCard,
+      })
       .then(() => {
         console.log('データを編集しました');
       });

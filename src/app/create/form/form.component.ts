@@ -64,10 +64,6 @@ export class FormComponent implements OnInit {
     return this.form.get('name') as FormControl;
   }
 
-  get imageControl() {
-    return this.form.get('image') as FormControl;
-  }
-
   get pointControl() {
     return this.form.get('point') as FormControl;
   }
@@ -159,7 +155,6 @@ export class FormComponent implements OnInit {
   buildForm(type) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(20)]],
-      image: ['', Validators.required],
       point: ['', Validators.maxLength(5)],
       addPoint: [''],
       expiration: ['', Validators.required],
@@ -174,7 +169,6 @@ export class FormComponent implements OnInit {
       .createCodeCard(
         {
           name: formData.name,
-          image: formData.image,
           point: formData.point,
           addPoint: formData.addPoint,
           expiration: formData.expiration,
@@ -199,20 +193,22 @@ export class FormComponent implements OnInit {
   updateCard() {
     const formData = this.form.value;
     this.cardService
-      .updateCodeCard({
-        name: formData.name,
-        image: formData.image,
-        point: formData.point,
-        addPoint: formData.addPoint,
-        expiration: formData.expiration,
-        storeIds: this.stores.map((store) => store.id),
-        charge: this.chargePatterns,
-        autoCharge: formData.autoCharge,
-        availableCredit: formData.availableCredit,
-        pushMoney: formData.pushMoney,
-        pullMoney: formData.pullMoney,
-        cardId: this.cardId,
-      })
+      .updateCodeCard(
+        {
+          name: formData.name,
+          point: formData.point,
+          addPoint: formData.addPoint,
+          expiration: formData.expiration,
+          storeIds: this.stores.map((store) => store.id),
+          charge: this.chargePatterns,
+          autoCharge: formData.autoCharge,
+          availableCredit: formData.availableCredit,
+          pushMoney: formData.pushMoney,
+          pullMoney: formData.pullMoney,
+          cardId: this.cardId,
+        },
+        this.imageURL
+      )
       .then(() => {
         this.isComplete = true;
         this.router.navigateByUrl(`/code-detail/${this.cardId}`);
