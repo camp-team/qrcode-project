@@ -21,7 +21,6 @@ import { map, startWith, switchMap, tap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Card } from 'src/app/interfaces/card';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -37,6 +36,9 @@ export class FormComponent implements OnInit {
   stores = [];
   allStores: Store[] = this.storeService.store;
   filteredStores$: Observable<Store[]>;
+
+  file: File;
+  imageURL: string | ArrayBuffer;
 
   form: FormGroup;
   type: string;
@@ -126,6 +128,21 @@ export class FormComponent implements OnInit {
     }
   }
 
+  uploadImage(event) {
+    if (event.target.files.length) {
+      this.file = event.target.files[0];
+    }
+    this.convertImage(this.file);
+  }
+
+  convertImage(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.imageURL = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
   private initForm(card: CodeCard) {
     this.chargePatterns = card.charge;
     this.stores = card.storeIds.map((id) => {
@@ -154,19 +171,22 @@ export class FormComponent implements OnInit {
   submit() {
     const formData = this.form.value;
     this.cardService
-      .createCodeCard({
-        name: formData.name,
-        image: formData.image,
-        point: formData.point,
-        addPoint: formData.addPoint,
-        expiration: formData.expiration,
-        storeIds: this.stores.map((store) => store.id),
-        charge: this.chargePatterns,
-        autoCharge: formData.autoCharge,
-        availableCredit: formData.availableCredit,
-        pushMoney: formData.pushMoney,
-        pullMoney: formData.pullMoney,
-      })
+      .createCodeCard(
+        {
+          name: formData.name,
+          image: formData.image,
+          point: formData.point,
+          addPoint: formData.addPoint,
+          expiration: formData.expiration,
+          storeIds: this.stores.map((store) => store.id),
+          charge: this.chargePatterns,
+          autoCharge: formData.autoCharge,
+          availableCredit: formData.availableCredit,
+          pushMoney: formData.pushMoney,
+          pullMoney: formData.pullMoney,
+        },
+        this.imageURL
+      )
       .then(() => {
         this.isComplete = true;
         this.router.navigateByUrl('/code-card');

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="form-container">
   <ng-container *ngIf="cardId; else defaultHeading">
     <h1 class="heading">カードを編集する</h1>
   </ng-container>
@@ -37,6 +37,23 @@
           >必須入力です</mat-error
         >
       </mat-form-field>
+
+      <div>
+        <img *ngIf="imageURL" [src]="imageURL" alt="" />
+      </div>
+
+      <div class="sample" (click)="imageInput.click()">
+        <input
+          type="file"
+          style="display: none;"
+          accept=".png, .img, .jpeg"
+          (change)="uploadImage($event)"
+          #imageInput
+        />
+        <mat-icon>insert_photo</mat-icon>
+        <p>クリックしてファイルをアップロードしてください</p>
+      </div>
+
       <mat-form-field class="common__content" appearance="fill">
         <mat-label>ポイント（通常時）</mat-label>
         <input
