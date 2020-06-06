@@ -63,11 +63,15 @@ export class FormComponent implements OnInit {
   get nameControl() {
     return this.form.get('name') as FormControl;
   }
-
   get pointControl() {
     return this.form.get('point') as FormControl;
   }
-
+  get addPointControl() {
+    return this.form.get('addPoint') as FormControl;
+  }
+  get expirationControl() {
+    return this.form.get('expiration') as FormControl;
+  }
   get storeIdsControl() {
     return this.form.get('storeIds') as FormControl;
   }
@@ -156,8 +160,8 @@ export class FormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(20)]],
       point: ['', Validators.maxLength(5)],
-      addPoint: [''],
-      expiration: ['', Validators.required],
+      addPoint: ['', Validators.maxLength(1000)],
+      expiration: ['', [Validators.required, Validators.maxLength(1000)]],
       storeIds: [''],
       ...this.customForm[type],
     });

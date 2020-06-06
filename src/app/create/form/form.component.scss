@@ -15,7 +15,7 @@
   padding: 40px;
   &__content {
     display: block;
-    margin: 0 auto;
+    margin: 16px 0;
   }
   &__chip-list {
     width: 100%;
@@ -45,7 +45,7 @@
   }
 }
 
-.sample {
+.upload {
   background-color: rgb(245, 245, 245);
   cursor: pointer;
   text-align: center;
