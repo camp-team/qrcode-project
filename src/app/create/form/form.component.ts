@@ -179,7 +179,7 @@ export class FormComponent implements OnInit {
           pushMoney: formData.pushMoney,
           pullMoney: formData.pullMoney,
         },
-        this.imageURL
+        this.file
       )
       .then(() => {
         this.isComplete = true;
@@ -207,7 +207,7 @@ export class FormComponent implements OnInit {
           pullMoney: formData.pullMoney,
           cardId: this.cardId,
         },
-        this.imageURL
+        this.file
       )
       .then(() => {
         this.isComplete = true;

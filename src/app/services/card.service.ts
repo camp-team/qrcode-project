@@ -15,10 +15,10 @@ export class CardService {
 
   async createCodeCard(
     codeCard: Omit<CodeCard, 'cardId' | 'imageURL'>,
-    imageDataURL: string | ArrayBuffer
+    file: File
   ): Promise<void> {
     const cardId = this.db.createId();
-    const imageURL: string = await this.getUploadImageURL(cardId, imageDataURL);
+    const imageURL: string = await this.getUploadImageURL(cardId, file);
     return this.db
       .doc(`codeCards/${cardId}`)
       .set({
@@ -41,11 +41,11 @@ export class CardService {
 
   async updateCodeCard(
     codeCard: Omit<CodeCard, 'imageURL'>,
-    imageDataURL: string | ArrayBuffer
+    file: File
   ): Promise<void> {
     const imageURL: string = await this.getUploadImageURL(
       codeCard.cardId,
-      imageDataURL
+      file
     );
     return this.db
       .doc(`codeCards/${codeCard.cardId}`)
@@ -67,13 +67,8 @@ export class CardService {
       });
   }
 
-  async getUploadImageURL(
-    cardId: string,
-    imageDataURL: string | ArrayBuffer
-  ): Promise<string> {
-    const result = await this.storage
-      .ref(`codeCard/${cardId}`)
-      .put(imageDataURL);
+  async getUploadImageURL(cardId: string, file: File): Promise<string> {
+    const result = await this.storage.ref(`codeCards/${cardId}`).put(file);
     return result.ref.getDownloadURL();
   }
 }
