@@ -144,6 +144,7 @@ export class FormComponent implements OnInit {
   }
 
   private initForm(card: CodeCard) {
+    this.imageURL = card.imageURL;
     this.chargePatterns = card.charge;
     this.stores = card.storeIds.map((id) => {
       return this.storeService.store.find((store) => {
