@@ -68,6 +68,7 @@
 
 .btns {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   &__item {
     margin-left: 16px;

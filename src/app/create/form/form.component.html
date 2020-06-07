@@ -1,4 +1,4 @@
-<div class="container">
+<div class="form-container">
   <ng-container *ngIf="cardId; else defaultHeading">
     <h1 class="heading">カードを編集する</h1>
   </ng-container>
@@ -7,8 +7,23 @@
   </ng-template>
 
   <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="common">
-      <mat-form-field class="common__content" appearance="fill">
+    <div class="form-wrapper">
+      <div>
+        <img *ngIf="imageURL" [src]="imageURL" alt="" />
+      </div>
+      <div class="upload" (click)="imageInput.click()">
+        <input
+          type="file"
+          style="display: none;"
+          accept=".png, .img, .jpeg"
+          (change)="uploadImage($event)"
+          #imageInput
+          required
+        />
+        <mat-icon>insert_photo</mat-icon>
+        <p>クリックしてファイルをアップロードしてください</p>
+      </div>
+      <mat-form-field class="form-wrapper__content" appearance="fill">
         <mat-label>サービス名</mat-label>
         <input
           matInput
@@ -24,23 +39,12 @@
           >長すぎます</mat-error
         >
       </mat-form-field>
-      <mat-form-field class="common__content" appearance="fill">
-        <mat-label>サービスのイメージ画像</mat-label>
-        <input
-          matInput
-          placeholder="画像のURLを貼ってください"
-          autocomplete="off"
-          formControlName="image"
-          required
-        />
-        <mat-error *ngIf="imageControl.hasError('required')"
-          >必須入力です</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field class="common__content" appearance="fill">
+
+      <mat-form-field class="form-wrapper__content" appearance="fill">
         <mat-label>ポイント（通常時）</mat-label>
         <input
           matInput
+          type="number"
           placeholder="数字を入力してください"
           autocomplete="off"
           formControlName="point"
@@ -51,29 +55,35 @@
           >必須入力です</mat-error
         >
       </mat-form-field>
-      <mat-form-field
-        class="common__content"
-        hintLabel="(例) ○○カード利用時+1%"
-        appearance="fill"
-      >
+      <mat-form-field class="form-wrapper__content" appearance="fill">
         <mat-label>ポイント / 追加情報</mat-label>
         <textarea
           matInput
-          placeholder="ポイントの追加情報がある場合は入力してください"
-          autocomplete="off"
+          placeholder="例）前月決済回数50回以上で+0.5%"
           formControlName="addPoint"
+          matTextareaAutosize
+          [matAutosizeMinRows]="4"
         ></textarea>
+        <mat-hint align="end"
+          >{{ addPointControl.value.length }} / 1000</mat-hint
+        >
       </mat-form-field>
-      <mat-form-field
-        class="common__content"
-        hintLabel="(例) 最終利用日から○○年間"
-        appearance="fill"
-      >
+      <mat-form-field class="form-wrapper__content" appearance="fill">
         <mat-label>残高やポイントの有効期限</mat-label>
-        <textarea matInput formControlName="expiration" required></textarea>
+        <textarea
+          matInput
+          placeholder="例) 最終利用日から○○年間"
+          formControlName="expiration"
+          matTextareaAutosize
+          [matAutosizeMinRows]="4"
+          required
+        ></textarea>
+        <mat-hint align="end"
+          >{{ expirationControl.value.length }} / 1000</mat-hint
+        >
       </mat-form-field>
 
-      <mat-form-field class="common__chip-list">
+      <mat-form-field class="form-wrapper__chip-list">
         <mat-label>使えるお店</mat-label>
         <mat-chip-list #chipList aria-label="Store selection">
           <mat-chip
@@ -109,7 +119,7 @@
       <h2>QRcodeにしかない作成機能</h2>
       <ng-container [ngSwitch]="type">
         <ng-container *ngSwitchCase="'qrCode'">
-          <mat-form-field class="common__chip-list">
+          <mat-form-field class="form-wrapper__chip-list">
             <mat-label>チャージ方法</mat-label>
             <mat-chip-list #chipList aria-label="Fruit selection">
               <mat-chip
@@ -147,7 +157,7 @@
             </mat-radio-group>
           </div>
 
-          <mat-form-field class="common__content" appearance="fill">
+          <mat-form-field class="form-wrapper__content" appearance="fill">
             <mat-label>利用可能なクレジットカード</mat-label>
             <textarea
               matInput
