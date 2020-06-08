@@ -46,6 +46,7 @@ export class FormComponent implements OnInit {
   codeCard: CodeCard;
   customForm = {
     qrCode: {
+      payment: ['', Validators.required],
       charge: [''],
       autoCharge: ['', Validators.required],
       availableCredit: ['', Validators.required],
@@ -57,6 +58,7 @@ export class FormComponent implements OnInit {
   chargePatterns = ['銀行口座', 'セブン銀行ATM'];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
+  paymentList = ['前払い', '後払い', '即時払い'];
   autoChargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
   simplePatterns = ['可能', '不可能'];
 
@@ -74,6 +76,9 @@ export class FormComponent implements OnInit {
   }
   get storeIdsControl() {
     return this.form.get('storeIds') as FormControl;
+  }
+  get paymentControl() {
+    return this.form.get('payment') as FormControl;
   }
 
   @ViewChild('storeInput') private storeInput: ElementRef;
@@ -178,6 +183,7 @@ export class FormComponent implements OnInit {
           addPoint: formData.addPoint,
           expiration: formData.expiration,
           storeIds: this.stores.map((store) => store.id),
+          payment: formData.payment,
           charge: this.chargePatterns,
           autoCharge: formData.autoCharge,
           availableCredit: formData.availableCredit,
@@ -205,6 +211,7 @@ export class FormComponent implements OnInit {
           addPoint: formData.addPoint,
           expiration: formData.expiration,
           storeIds: this.stores.map((store) => store.id),
+          payment: formData.payment,
           charge: this.chargePatterns,
           autoCharge: formData.autoCharge,
           availableCredit: formData.availableCredit,
