@@ -59,6 +59,7 @@ export class FormComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   paymentList = ['前払い', '後払い', '即時払い'];
+  creditList = ['VISA', 'MasterCard', 'JCB', 'American Express', 'Diners Club'];
   autoChargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
   simplePatterns = ['可能', '不可能'];
 
@@ -79,6 +80,9 @@ export class FormComponent implements OnInit {
   }
   get paymentControl() {
     return this.form.get('payment') as FormControl;
+  }
+  get creditControl() {
+    return this.form.get('availableCredit') as FormControl;
   }
 
   @ViewChild('storeInput') private storeInput: ElementRef;
