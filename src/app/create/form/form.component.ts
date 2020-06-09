@@ -13,7 +13,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardService } from 'src/app/services/card.service';
-import { CodeCard } from 'src/app/interfaces/code-card';
+import { CodeCard } from '@interfaces/code-card';
 import { Store } from 'src/app/interfaces/store';
 import { StoreService } from 'src/app/services/store.service';
 import { Observable, of } from 'rxjs';

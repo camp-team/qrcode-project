@@ -3,7 +3,7 @@ import { CardService } from 'src/app/services/card.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { CodeCard } from 'src/app/interfaces/code-card';
+import { CodeCard } from '@interfaces/code-card';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({

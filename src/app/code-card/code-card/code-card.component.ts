@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
 import { Observable } from 'rxjs';
-import { CodeCard } from 'src/app/interfaces/code-card';
+import { CodeCard } from '@interfaces/code-card';
 
 @Component({
   selector: 'app-code-card',

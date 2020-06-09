@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { CodeCard } from '../interfaces/code-card';
+import { CodeCard } from '@interfaces/code-card';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 
