@@ -173,9 +173,13 @@
           <mat-form-field class="form-wrapper__content" appearance="outline">
             <mat-label>利用可能なクレジットカード</mat-label>
             <mat-select formControlName="availableCredit" multiple>
-              <mat-option *ngFor="let credit of creditList" [value]="credit">{{
-                credit
-              }}</mat-option>
+              <mat-option
+                *ngFor="let credit of creditList"
+                [value]="credit"
+                [disabled]="this.creditControl.value === 'なし'"
+                >{{ credit }}</mat-option
+              >
+              <mat-option value="なし">なし</mat-option>
             </mat-select>
             <mat-error *ngIf="creditControl.hasError('required')"
               >必須入力です</mat-error
