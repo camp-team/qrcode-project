@@ -54,10 +54,10 @@ export class FormComponent implements OnInit {
       pullMoney: ['', Validators.required],
     },
     electron: {
-      payment: ['', Validators.required],
+      payment: [[''], Validators.required],
       charge: [''],
       autoCharge: ['', Validators.required],
-      availableCredit: ['', Validators.required],
+      availableCredit: [[''], Validators.required],
     },
   };
 
@@ -239,33 +239,62 @@ export class FormComponent implements OnInit {
     }
   }
 
-  updateCard() {
+  updateCard(type: string) {
     const formData = this.form.value;
-    this.cardService
-      .updateCodeCard(
-        {
-          name: formData.name,
-          point: formData.point,
-          addPoint: formData.addPoint,
-          expiration: formData.expiration,
-          storeIds: this.stores.map((store) => store.id),
-          payment: formData.payment,
-          charge: this.chargePatterns,
-          autoCharge: formData.autoCharge,
-          availableCredit: formData.availableCredit,
-          pushMoney: formData.pushMoney,
-          pullMoney: formData.pullMoney,
-          cardId: this.cardId,
-        },
-        this.file
-      )
-      .then(() => {
-        this.isComplete = true;
-        this.router.navigateByUrl(`/code-detail/${this.cardId}`);
-        this.snackBar.open('カードを編集しました', null, {
-          duration: 2000,
-        });
-      });
+    switch (type) {
+      case 'qrCode':
+        this.cardService
+          .updateCodeCard(
+            {
+              name: formData.name,
+              point: formData.point,
+              addPoint: formData.addPoint,
+              expiration: formData.expiration,
+              storeIds: this.stores.map((store) => store.id),
+              payment: formData.payment,
+              charge: this.chargePatterns,
+              autoCharge: formData.autoCharge,
+              availableCredit: formData.availableCredit,
+              pushMoney: formData.pushMoney,
+              pullMoney: formData.pullMoney,
+              cardId: this.cardId,
+            },
+            this.file
+          )
+          .then(() => {
+            this.isComplete = true;
+            this.router.navigateByUrl(`/code-detail/${this.cardId}`);
+            this.snackBar.open('カードを編集しました', null, {
+              duration: 2000,
+            });
+          });
+        break;
+      case 'electron':
+        this.cardService
+          .updateElectronCard(
+            {
+              name: formData.name,
+              point: formData.point,
+              addPoint: formData.addPoint,
+              expiration: formData.expiration,
+              storeIds: this.stores.map((store) => store.id),
+              payment: formData.payment,
+              charge: this.chargePatterns,
+              autoCharge: formData.autoCharge,
+              availableCredit: formData.availableCredit,
+              cardId: this.cardId,
+            },
+            this.file
+          )
+          .then(() => {
+            this.isComplete = true;
+            this.router.navigateByUrl(`/electron-detail/${this.cardId}`);
+            this.snackBar.open(`カードを編集しました`, null, {
+              duration: 2000,
+            });
+          });
+        break;
+    }
   }
 
   deleteCard(type: string) {
