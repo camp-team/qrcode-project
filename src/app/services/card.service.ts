@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { CodeCard } from '../interfaces/code-card';
+import { CodeCard } from '@interfaces/code-card';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { ElectronCard } from '@interfaces/electron-card';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,19 @@ export class CardService {
       });
   }
 
+  async createElectornCard(
+    electronCard: Omit<ElectronCard, 'cardId' | 'imageURL'>,
+    file: File
+  ): Promise<void> {
+    const cardId = this.db.createId();
+    const imageURL = await this.getUploadImageURL(cardId, file);
+    return this.db.doc(`electronCards/${cardId}`).set({
+      cardId,
+      imageURL,
+      ...electronCard,
+    });
+  }
+
   getCodeCards(): Observable<CodeCard[]> {
     return this.db.collection<CodeCard>(`codeCards`).valueChanges();
   }
@@ -41,21 +55,43 @@ export class CardService {
 
   async updateCodeCard(
     codeCard: Omit<CodeCard, 'imageURL'>,
-    file: File
+    file?: File
   ): Promise<void> {
-    const imageURL: string = await this.getUploadImageURL(
-      codeCard.cardId,
-      file
-    );
+    const data: any = {};
+    if (file) {
+      const imageURL: string = await this.getUploadImageURL(
+        codeCard.cardId,
+        file
+      );
+      data.imageURL = imageURL;
+    }
     return this.db
       .doc(`codeCards/${codeCard.cardId}`)
       .update({
-        imageURL,
+        ...data,
         ...codeCard,
       })
       .then(() => {
         console.log('データを編集しました');
       });
+  }
+
+  async updateElectronCard(
+    electronCard: Omit<ElectronCard, 'imageURL'>,
+    file?: File
+  ): Promise<void> {
+    const data: any = {};
+    if (file) {
+      const imageURL: string = await this.getUploadImageURL(
+        electronCard.cardId,
+        file
+      );
+      data.imageURL = imageURL;
+    }
+    return this.db.doc(`electronCards/${electronCard.cardId}`).update({
+      ...data,
+      ...electronCard,
+    });
   }
 
   deleteCodeCard(cardId: string): Promise<void> {
@@ -65,6 +101,10 @@ export class CardService {
       .then(() => {
         console.log('データを削除しました');
       });
+  }
+
+  deleteElectronCard(cardId: string): Promise<void> {
+    return this.db.doc(`electronCards/${cardId}`).delete();
   }
 
   async getUploadImageURL(cardId: string, file: File): Promise<string> {
