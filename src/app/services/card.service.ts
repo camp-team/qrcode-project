@@ -41,16 +41,20 @@ export class CardService {
 
   async updateCodeCard(
     codeCard: Omit<CodeCard, 'imageURL'>,
-    file: File
+    file?: File
   ): Promise<void> {
-    const imageURL: string = await this.getUploadImageURL(
-      codeCard.cardId,
-      file
-    );
+    const data: any = {};
+    if (file) {
+      const imageURL: string = await this.getUploadImageURL(
+        codeCard.cardId,
+        file
+      );
+      data.imageURL = imageURL;
+    }
     return this.db
       .doc(`codeCards/${codeCard.cardId}`)
       .update({
-        imageURL,
+        ...data,
         ...codeCard,
       })
       .then(() => {
