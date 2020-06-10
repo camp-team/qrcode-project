@@ -10,16 +10,23 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'code-card',
-    loadChildren: () =>
-      import('./code-card/code-card.module').then((m) => m.CodeCardModule),
-  },
-  {
     path: 'create',
     loadChildren: () =>
       import('./create/create.module').then((m) => m.CreateModule),
     canActivate: [AdminGuard],
     canLoad: [AdminGuard],
+  },
+  {
+    path: 'code-card',
+    loadChildren: () =>
+      import('./code-card/code-card.module').then((m) => m.CodeCardModule),
+  },
+  {
+    path: 'electron-card',
+    loadChildren: () =>
+      import('./electron-card/electron-card.module').then(
+        (m) => m.ElectronCardModule
+      ),
   },
   {
     path: 'code-detail/:id',

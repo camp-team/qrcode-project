@@ -49,6 +49,10 @@ export class CardService {
     return this.db.collection<CodeCard>(`codeCards`).valueChanges();
   }
 
+  getElectronCards(): Observable<ElectronCard[]> {
+    return this.db.collection<ElectronCard>(`electronCards`).valueChanges();
+  }
+
   getCodeCard(cardId: string): Observable<CodeCard> {
     return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
   }

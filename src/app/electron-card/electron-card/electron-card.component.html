@@ -1,1 +1,16 @@
-<p>electron-card works!</p>
+<div class="container">
+  <div class="grid">
+    <mat-card *ngFor="let electronCard of electronCards$ | async" class="card">
+      <a
+        class="card__trigger"
+        routerLink="/electron-detail/{{ electronCard.cardId }}"
+      >
+        <div
+          class="card__cover"
+          [style.background-image]="'url(' + electronCard.imageURL + ')'"
+        ></div>
+        <p class="card__name">{{ electronCard.name }}</p>
+      </a>
+    </mat-card>
+  </div>
+</div>
