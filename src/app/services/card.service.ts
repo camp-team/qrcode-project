@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { CodeCard } from '@interfaces/code-card';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { ElectronCard } from '@interfaces/electron-card';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,19 @@ export class CardService {
       .then(() => {
         console.log('データの追加に成功しました！');
       });
+  }
+
+  async createElectornCard(
+    electronCard: Omit<ElectronCard, 'cardId' | 'imageURL'>,
+    file: File
+  ): Promise<void> {
+    const cardId = this.db.createId();
+    const imageURL = await this.getUploadImageURL(cardId, file);
+    return this.db.doc(`electronCards/${cardId}`).set({
+      cardId,
+      imageURL,
+      ...electronCard,
+    });
   }
 
   getCodeCards(): Observable<CodeCard[]> {
@@ -69,6 +83,10 @@ export class CardService {
       .then(() => {
         console.log('データを削除しました');
       });
+  }
+
+  deleteElectronCard(cardId: string): Promise<void> {
+    return this.db.doc(`electronCards/${cardId}`).delete();
   }
 
   async getUploadImageURL(cardId: string, file: File): Promise<string> {

@@ -46,12 +46,18 @@ export class FormComponent implements OnInit {
   codeCard: CodeCard;
   customForm = {
     qrCode: {
+      payment: [[''], Validators.required],
+      charge: [''],
+      autoCharge: ['', Validators.required],
+      availableCredit: [[''], Validators.required],
+      pushMoney: ['', Validators.required],
+      pullMoney: ['', Validators.required],
+    },
+    electron: {
       payment: ['', Validators.required],
       charge: [''],
       autoCharge: ['', Validators.required],
       availableCredit: ['', Validators.required],
-      pushMoney: ['', Validators.required],
-      pullMoney: ['', Validators.required],
     },
   };
 
@@ -177,32 +183,60 @@ export class FormComponent implements OnInit {
     });
   }
 
-  submit() {
+  submit(type: string) {
     const formData = this.form.value;
-    this.cardService
-      .createCodeCard(
-        {
-          name: formData.name,
-          point: formData.point,
-          addPoint: formData.addPoint,
-          expiration: formData.expiration,
-          storeIds: this.stores.map((store) => store.id),
-          payment: formData.payment,
-          charge: this.chargePatterns,
-          autoCharge: formData.autoCharge,
-          availableCredit: formData.availableCredit,
-          pushMoney: formData.pushMoney,
-          pullMoney: formData.pullMoney,
-        },
-        this.file
-      )
-      .then(() => {
-        this.isComplete = true;
-        this.router.navigateByUrl('/code-card');
-        this.snackBar.open('カードを作成しました', null, {
-          duration: 2000,
-        });
-      });
+    switch (type) {
+      case 'qrCode':
+        this.cardService
+          .createCodeCard(
+            {
+              name: formData.name,
+              point: formData.point,
+              addPoint: formData.addPoint,
+              expiration: formData.expiration,
+              storeIds: this.stores.map((store) => store.id),
+              payment: formData.payment,
+              charge: this.chargePatterns,
+              autoCharge: formData.autoCharge,
+              availableCredit: formData.availableCredit,
+              pushMoney: formData.pushMoney,
+              pullMoney: formData.pullMoney,
+            },
+            this.file
+          )
+          .then(() => {
+            this.isComplete = true;
+            this.router.navigateByUrl('/code-card');
+            this.snackBar.open('カードを作成しました', null, {
+              duration: 2000,
+            });
+          });
+        break;
+      case 'electron':
+        this.cardService
+          .createElectornCard(
+            {
+              name: formData.name,
+              point: formData.point,
+              addPoint: formData.addPoint,
+              expiration: formData.expiration,
+              storeIds: this.stores.map((store) => store.id),
+              payment: formData.payment,
+              charge: this.chargePatterns,
+              autoCharge: formData.autoCharge,
+              availableCredit: formData.availableCredit,
+            },
+            this.file
+          )
+          .then(() => {
+            this.isComplete = true;
+            this.router.navigateByUrl('/electron-card');
+            this.snackBar.open('カードを作成しました', null, {
+              duration: 2000,
+            });
+          });
+        break;
+    }
   }
 
   updateCard() {
@@ -234,8 +268,13 @@ export class FormComponent implements OnInit {
       });
   }
 
-  deleteCard() {
-    return this.cardService.deleteCodeCard(this.cardId);
+  deleteCard(type: string) {
+    switch (type) {
+      case 'qrCode':
+        return this.cardService.deleteCodeCard(this.cardId);
+      case 'electron':
+        return this.cardService.deleteElectronCard(this.cardId);
+    }
   }
 
   openDeleteCardDialog() {
@@ -244,7 +283,7 @@ export class FormComponent implements OnInit {
       .afterClosed()
       .subscribe((result) => {
         if (result) {
-          this.deleteCard().then(() => {
+          this.deleteCard(this.type).then(() => {
             this.router.navigateByUrl('/code-card');
             this.snackBar.open('カードを削除しました', null, {
               duration: 2000,
