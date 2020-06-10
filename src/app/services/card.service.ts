@@ -76,6 +76,24 @@ export class CardService {
       });
   }
 
+  async updateElectronCard(
+    electronCard: Omit<ElectronCard, 'imageURL'>,
+    file?: File
+  ): Promise<void> {
+    const data: any = {};
+    if (file) {
+      const imageURL: string = await this.getUploadImageURL(
+        electronCard.cardId,
+        file
+      );
+      data.imageURL = imageURL;
+    }
+    return this.db.doc(`electronCards/${electronCard.cardId}`).update({
+      ...data,
+      ...electronCard,
+    });
+  }
+
   deleteCodeCard(cardId: string): Promise<void> {
     return this.db
       .doc(`codeCards/${cardId}`)
