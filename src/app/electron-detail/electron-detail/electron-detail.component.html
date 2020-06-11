@@ -1,1 +1,91 @@
-<p>electron-detail works!</p>
+<ng-container *ngIf="electronCard$ | async as electronCard; else blank">
+  <div class="container">
+    <div class="card">
+      <figure
+        class="card__cover"
+        [style.background-image]="'url(' + electronCard.imageURL + ')'"
+      ></figure>
+    </div>
+    <div class="detail">
+      <div class="detail__title">
+        <h1 class="detail__logo">{{ electronCard.name }}</h1>
+        <div class="detail__btns">
+          <button
+            class="detail__btn"
+            [routerLink]="['/create/form']"
+            [queryParams]="{ id: electronCard.cardId, type: 'electron' }"
+            mat-icon-button
+          >
+            <mat-icon class="detail__icon">create</mat-icon>
+          </button>
+          <div class="detail__store-link">
+            <a
+              routerLink="/code-detail/{{ electronCard.cardId }}"
+              fragment="store"
+              mat-button
+            >
+              <mat-icon class="detail__icon">store</mat-icon>
+              <span>ストアページ</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <h2>チャージ方法</h2>
+      <p *ngFor="let chargeWay of electronCard.charge" class="detail__charge">
+        {{ chargeWay }}
+      </p>
+      <h2>オートチャージ</h2>
+      <p>{{ electronCard.autoCharge }}</p>
+      <h2>利用できるクレジットカード</h2>
+      <p>{{ electronCard.availableCredit }}</p>
+      <h2>ポイント</h2>
+      <p>{{ electronCard.point }}%</p>
+      <P>{{ electronCard.addPoint }}</P>
+    </div>
+    <div class="store" id="store">
+      <h2 class="store__title">使えるお店</h2>
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="実店舗">
+          <div class="store__grid">
+            <div
+              *ngFor="let store of electronCard.storeIds | idToStore: 'real'"
+              class="store__cover"
+            >
+              <img src="assets/images/{{ store.id }}.png" alt="実店舗の画像" />
+              <p>{{ store.name }}</p>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="オンライン">
+          <div class="store__grid">
+            <div
+              *ngFor="let store of electronCard.storeIds | idToStore: 'online'"
+              class="store__cover"
+            >
+              <img
+                src="assets/images/online/{{ store.id }}.png"
+                alt="オンライン店舗の画像"
+              />
+              <p>{{ store.name }}</p>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="請求書">
+          <div class="store__grid">
+            <div
+              *ngFor="let store of electronCard.storeIds | idToStore: 'invoice'"
+              class="store__cover"
+            >
+              <img
+                src="assets/images/invoice/{{ store.id }}.png"
+                alt="請求書の画像"
+              />
+              <p>{{ store.name }}</p>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</ng-container>
+<ng-template #blank>カードの詳細ページが見つかりませんでした。</ng-template>

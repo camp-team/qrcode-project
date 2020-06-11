@@ -57,6 +57,10 @@ export class CardService {
     return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
   }
 
+  getElectronCard(cardId: string): Observable<ElectronCard> {
+    return this.db.doc<ElectronCard>(`electornCards/${cardId}`).valueChanges();
+  }
+
   async updateCodeCard(
     codeCard: Omit<CodeCard, 'imageURL'>,
     file?: File

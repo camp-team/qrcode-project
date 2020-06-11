@@ -36,6 +36,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'electron-detail/:id',
+    loadChildren: () =>
+      import('./electron-detail/electron-detail.module').then(
+        (m) => m.ElectronDetailModule
+      ),
+  },
+  {
     path: '**',
     component: NotFoundComponent,
   },
