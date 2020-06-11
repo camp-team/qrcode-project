@@ -6,9 +6,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { IdToStorePipe } from '../pipes/id-to-store.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [IdToStorePipe],
   imports: [CommonModule],
   exports: [
     CommonModule,
@@ -19,6 +20,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatIconModule,
     MatCardModule,
     MatTabsModule,
+    IdToStorePipe,
   ],
 })
 export class SharedModule {}
