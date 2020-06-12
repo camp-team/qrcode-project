@@ -1,10 +1,10 @@
 <ng-container *ngIf="electronCard$ | async as electronCard; else blank">
   <div class="container">
     <div class="card">
-      <figure
+      <div
         class="card__cover"
         [style.background-image]="'url(' + electronCard.imageURL + ')'"
-      ></figure>
+      ></div>
     </div>
     <div class="detail">
       <div class="detail__title">
@@ -41,8 +41,10 @@
       <h2>利用できるクレジットカード</h2>
       <p>{{ electronCard.availableCredit }}</p>
       <h2>ポイント</h2>
-      <p>{{ electronCard.point }}%</p>
+      <p>{{ electronCard.point }}P</p>
       <P>{{ electronCard.addPoint }}</P>
+      <h2>残高やポイントの有効期限</h2>
+      <p>{{ electronCard.expiration }}</p>
     </div>
   </div>
   <div class="store" id="store">

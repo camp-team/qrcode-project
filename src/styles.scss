@@ -42,9 +42,6 @@ img {
     background: center/cover;
     padding-bottom: 52.5%;
     box-sizing: border-box;
-    @include sp {
-      margin: 0;
-    }
   }
 }
 

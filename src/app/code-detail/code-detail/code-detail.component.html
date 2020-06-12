@@ -1,10 +1,10 @@
 <ng-container *ngIf="codeCard$ | async as codeCard; else blank">
   <div class="container">
     <div class="card">
-      <figure
+      <div
         class="card__cover"
         [style.background-image]="'url(' + codeCard.imageURL + ')'"
-      ></figure>
+      ></div>
     </div>
     <div class="detail">
       <div class="detail__title">
@@ -43,6 +43,8 @@
       <h2>ポイント</h2>
       <p>{{ codeCard.point }}%</p>
       <P>{{ codeCard.addPoint }}</P>
+      <h2>残高やポイントの有効期限</h2>
+      <p>{{ codeCard.expiration }}</p>
       <h2>個人間送金</h2>
       <p>{{ codeCard.pushMoney }}</p>
       <h2>出金</h2>
