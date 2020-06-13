@@ -60,8 +60,14 @@
             *ngFor="let store of codeCard.storeIds | idToStore: 'real'"
             class="store__cover"
           >
-            <img src="assets/images/{{ store.id }}.png" alt="実店舗の画像" />
-            <p>{{ store.name }}</p>
+            <div class="store__img-wrapper">
+              <img
+                class="store__img"
+                src="assets/images/{{ store.id }}.png"
+                alt="実店舗の画像"
+              />
+            </div>
+            <span class="store__name">{{ store.name }}</span>
           </div>
         </div>
       </mat-tab>
@@ -71,11 +77,14 @@
             *ngFor="let store of codeCard.storeIds | idToStore: 'online'"
             class="store__cover"
           >
-            <img
-              src="assets/images/online/{{ store.id }}.png"
-              alt="オンライン店舗の画像"
-            />
-            <p>{{ store.name }}</p>
+            <div class="store__img-wrapper">
+              <img
+                class="store__img"
+                src="assets/images/{{ store.id }}.png"
+                alt="オンライン店舗の画像"
+              />
+            </div>
+            <span class="store__name">{{ store.name }}</span>
           </div>
         </div>
       </mat-tab>
@@ -85,11 +94,14 @@
             *ngFor="let store of codeCard.storeIds | idToStore: 'invoice'"
             class="store__cover"
           >
-            <img
-              src="assets/images/invoice/{{ store.id }}.png"
-              alt="請求書の画像"
-            />
-            <p>{{ store.name }}</p>
+            <div class="store__img-wrapper">
+              <img
+                class="store__img"
+                src="assets/images/{{ store.id }}.png"
+                alt="請求書の画像"
+              />
+            </div>
+            <span class="store__name">{{ store.name }}</span>
           </div>
         </div>
       </mat-tab>
