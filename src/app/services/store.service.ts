@@ -7,56 +7,201 @@ import { Store } from '../interfaces/store';
 export class StoreService {
   store: Store[] = [
     // コンビニ
-    { id: 'seicomart', name: 'セイコーマート', type: 'real' },
-    { id: 'seven-eleven', name: 'セブン‐イレブン', type: 'real' },
-    { id: 'dailyyamazaki', name: 'デイリーヤマザキ', type: 'real' },
-    { id: 'familymart', name: 'ファミリーマート', type: 'real' },
-    { id: 'popla', name: 'ポプラ', type: 'real' },
-    { id: 'ministop', name: 'ミニストップ', type: 'real' },
-    { id: 'lawson', name: 'ローソン', type: 'real' },
-    { id: 'naturallawson', name: 'ナチュラルローソン', type: 'real' },
-    { id: 'lawson100', name: 'ローソンストア100', type: 'real' },
+    {
+      id: 'seicomart',
+      name: 'セイコーマート',
+      type: 'real',
+      category: 'convenience',
+    },
+    {
+      id: 'seven-eleven',
+      name: 'セブン‐イレブン',
+      type: 'real',
+      category: 'convenience',
+    },
+    {
+      id: 'dailyyamazaki',
+      name: 'デイリーヤマザキ',
+      type: 'real',
+      category: 'convenience',
+    },
+    {
+      id: 'familymart',
+      name: 'ファミリーマート',
+      type: 'real',
+      category: 'convenience',
+    },
+    { id: 'popla', name: 'ポプラ', type: 'real', category: 'convenience' },
+    {
+      id: 'ministop',
+      name: 'ミニストップ',
+      type: 'real',
+      category: 'convenience',
+    },
+    { id: 'lawson', name: 'ローソン', type: 'real', category: 'convenience' },
+    {
+      id: 'naturallawson',
+      name: 'ナチュラルローソン',
+      type: 'real',
+      category: 'convenience',
+    },
+    {
+      id: 'lawson100',
+      name: 'ローソンストア100',
+      type: 'real',
+      category: 'convenience',
+    },
     // 総合スーパー
-    { id: 'akafudado', name: '赤札堂', type: 'real' },
-    { id: 'abab', name: 'ABAB', type: 'real' },
-    { id: 'ok', name: 'OK', type: 'real' },
-    { id: 'otani', name: 'スーパーオータニ', type: 'real' },
-    { id: 'superalps', name: 'スーパーアルプス', type: 'real' },
-    { id: 'okkasan', name: 'スーパーおっ母さん', type: 'real' },
-    { id: 'seiyu', name: '西友', type: 'real' },
-    { id: 'sekichu', name: 'セキチュー', type: 'real' },
-    { id: 'itoyokado', name: 'イトーヨーカドー', type: 'real' },
-    { id: 'yorkmart', name: 'ヨークマート', type: 'real' },
-    { id: 'sotetsurosen', name: 'そうてつローゼン', type: 'real' },
-    { id: 'takeya', name: '多慶屋', type: 'real' },
-    { id: 'daikokuya', name: '大黒屋', type: 'real' },
-    { id: 'es-tajima', name: 'エネルギースーパーたじま', type: 'real' },
-    { id: 'giga-pearl', name: 'ギガパール', type: 'real' },
-    { id: 'giga-mart', name: 'ギガマート', type: 'real' },
-    { id: 'nakamuraya', name: 'ナカムラヤ', type: 'real' },
-    { id: 'hallo-mart', name: 'ハローマート', type: 'real' },
-    { id: 'bonvisage', name: 'ボンヴィサージュ', type: 'real' },
-    { id: 'yaoyoshi', name: 'ヤオヨシ', type: 'real' },
-    { id: 'daiyu', name: 'ダイユー', type: 'real' },
-    { id: 'tokyustore', name: '東急ストア', type: 'real' },
-    { id: 'tobustore', name: '東武ストア', type: 'real' },
-    { id: 'torisen_02', name: 'とりせん', type: 'real' },
-    { id: 'biga', name: 'ビッグ・エー', type: 'real' },
-    { id: 'bigyosan', name: 'ビッグヨーサン', type: 'real' },
-    { id: 'mom', name: 'フードマーケットマム', type: 'real' },
-    { id: 'beisia', name: 'ベイシア', type: 'real' },
-    { id: 'belc', name: 'ベルク', type: 'real' },
-    { id: 'maruya', name: 'マルヤ', type: 'real' },
-    { id: 'joyfoods', name: 'ジョイフーズ', type: 'real' },
-    { id: 'yamaguchi', name: 'ヤマグチ', type: 'real' },
-    { id: 'mrmax_1', name: 'MrMax', type: 'real' },
-    { id: 'yamaichi', name: 'ヤマイチ', type: 'real' },
-    { id: 'yamaya', name: 'やまや', type: 'real' },
-    { id: 'yucoop', name: 'ユーコープ', type: 'real' },
-    { id: 'life', name: 'ライフ', type: 'real' },
-    { id: 'likaman', name: 'リカーマウンテン', type: 'real' },
-    { id: 'ysmart', name: 'ワイズマート', type: 'real' },
-    { id: 'watahan', name: '綿半', type: 'real' },
+    { id: 'akafudado', name: '赤札堂', type: 'real', category: 'superMarket' },
+    { id: 'abab', name: 'ABAB', type: 'real', category: 'superMarket' },
+    { id: 'ok', name: 'OK', type: 'real', category: 'superMarket' },
+    {
+      id: 'otani',
+      name: 'スーパーオータニ',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'superalps',
+      name: 'スーパーアルプス',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'okkasan',
+      name: 'スーパーおっ母さん',
+      type: 'real',
+      category: 'superMarket',
+    },
+    { id: 'seiyu', name: '西友', type: 'real', category: 'superMarket' },
+    {
+      id: 'sekichu',
+      name: 'セキチュー',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'itoyokado',
+      name: 'イトーヨーカドー',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'yorkmart',
+      name: 'ヨークマート',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'sotetsurosen',
+      name: 'そうてつローゼン',
+      type: 'real',
+      category: 'superMarket',
+    },
+    { id: 'takeya', name: '多慶屋', type: 'real', category: 'superMarket' },
+    { id: 'daikokuya', name: '大黒屋', type: 'real', category: 'superMarket' },
+    {
+      id: 'es-tajima',
+      name: 'エネルギースーパーたじま',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'giga-pearl',
+      name: 'ギガパール',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'giga-mart',
+      name: 'ギガマート',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'nakamuraya',
+      name: 'ナカムラヤ',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'hallo-mart',
+      name: 'ハローマート',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'bonvisage',
+      name: 'ボンヴィサージュ',
+      type: 'real',
+      category: 'superMarket',
+    },
+    { id: 'yaoyoshi', name: 'ヤオヨシ', type: 'real', category: 'superMarket' },
+    { id: 'daiyu', name: 'ダイユー', type: 'real', category: 'superMarket' },
+    {
+      id: 'tokyustore',
+      name: '東急ストア',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'tobustore',
+      name: '東武ストア',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'torisen_02',
+      name: 'とりせん',
+      type: 'real',
+      category: 'superMarket',
+    },
+    { id: 'biga', name: 'ビッグ・エー', type: 'real', category: 'superMarket' },
+    {
+      id: 'bigyosan',
+      name: 'ビッグヨーサン',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'mom',
+      name: 'フードマーケットマム',
+      type: 'real',
+      category: 'superMarket',
+    },
+    { id: 'beisia', name: 'ベイシア', type: 'real', category: 'superMarket' },
+    { id: 'belc', name: 'ベルク', type: 'real', category: 'superMarket' },
+    { id: 'maruya', name: 'マルヤ', type: 'real', category: 'superMarket' },
+    {
+      id: 'joyfoods',
+      name: 'ジョイフーズ',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'yamaguchi',
+      name: 'ヤマグチ',
+      type: 'real',
+      category: 'superMarket',
+    },
+    { id: 'mrmax_1', name: 'MrMax', type: 'real', category: 'superMarket' },
+    { id: 'yamaichi', name: 'ヤマイチ', type: 'real', category: 'superMarket' },
+    { id: 'yamaya', name: 'やまや', type: 'real', category: 'superMarket' },
+    { id: 'yucoop', name: 'ユーコープ', type: 'real', category: 'superMarket' },
+    { id: 'life', name: 'ライフ', type: 'real', category: 'superMarket' },
+    {
+      id: 'likaman',
+      name: 'リカーマウンテン',
+      type: 'real',
+      category: 'superMarket',
+    },
+    {
+      id: 'ysmart',
+      name: 'ワイズマート',
+      type: 'real',
+      category: 'superMarket',
+    },
+    { id: 'watahan', name: '綿半', type: 'real', category: 'superMarket' },
     // ドラッグストア
     { id: 'ainztulpe', name: 'アインズ&トルペ', type: 'real' },
     { id: 'ains', name: 'アインズ', type: 'real' },
@@ -391,6 +536,38 @@ export class StoreService {
     { id: 'ricoland', name: 'RICOLAND', type: 'real' },
     { id: 'relxle', name: 'りらくる', type: 'real' },
   ];
+
+  categories: {
+    title: string;
+    id: string;
+    items: Store[];
+  }[] = [
+    { name: 'コンビニ', id: 'convenience' },
+    { name: '総合スーパー', id: 'superMarket' },
+    // { name: 'konbini', id: 'conbini' },
+    // { name: 'konbini', id: 'conbini' },
+    // { name: 'konbini', id: 'conbini' },
+    // { name: 'konbini', id: 'conbini' },
+    // { name: 'konbini', id: 'conbini' },
+    // { name: 'konbini', id: 'conbini' },
+    // { name: 'konbini', id: 'conbini' },
+    // { name: 'konbini', id: 'conbini' },
+    // { name: 'konbini', id: 'conbini' },
+  ].map((category) => {
+    return {
+      title: category.name,
+      id: category.id,
+      items: this.store.filter((list) => list.category === category.id),
+    };
+  });
+
+  buildCategoryList() {}
+
+  // categorizeStore() {
+  //   this.store.map((store) => {
+  //     this.categories.map((category) => category.items.push())
+  //   })
+  // }
 
   constructor() {}
 }
