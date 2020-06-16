@@ -15,14 +15,18 @@ export class IdToStorePipe implements PipeTransform {
     const stores = ids.map((id) => {
       return this.storeService.store.find((store) => store.id === id);
     });
-    const categorisedStore = stores.map((store) => {
-      return this.storeService.categories.find((category) => {
-        return category.items.find((item) => item.id === store.id);
-      });
+    const categorisedStores = this.storeService.categories.map((category) => {
+      console.log(category);
+      return {
+        title: category.title,
+        id: category.id,
+        items: stores.map((store) => {
+          return category.items.find((item) => item.id === store.id);
+        }),
+      };
     });
-    console.log(stores);
-    console.log(categorisedStore);
-    return categorisedStore;
+    console.log(categorisedStores);
+    return categorisedStores;
     // return stores.filter((store) => store.type === type);
   }
 }
