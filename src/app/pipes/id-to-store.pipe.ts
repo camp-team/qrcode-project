@@ -26,7 +26,6 @@ export class IdToStorePipe implements PipeTransform {
         }),
       };
     });
-    console.log(storeCategories);
     return storeCategories.filter((category) => category.type === type);
   }
 }
