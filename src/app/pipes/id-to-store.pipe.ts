@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { StoreService } from '../services/store.service';
 import { Store } from '../interfaces/store';
+import { StoreCategory } from '../interfaces/store-category';
 
 @Pipe({
   name: 'idToStore',
@@ -11,22 +12,21 @@ export class IdToStorePipe implements PipeTransform {
   transform(
     ids: string[],
     type: 'real' | 'online' | 'invoice'
-  ): { title: string; id: string; items: Store[] }[] {
+  ): StoreCategory[] {
     const stores = ids.map((id) => {
       return this.storeService.store.find((store) => store.id === id);
     });
-    const categorisedStores = this.storeService.categories.map((category) => {
-      console.log(category);
+    const storeCategories = this.storeService.categories.map((category) => {
       return {
         title: category.title,
         id: category.id,
-        items: stores.map((store) => {
+        type: category.type,
+        items: stores.filter((store) => {
           return category.items.find((item) => item.id === store.id);
         }),
       };
     });
-    console.log(categorisedStores);
-    return categorisedStores;
-    // return stores.filter((store) => store.type === type);
+    console.log(storeCategories);
+    return storeCategories.filter((category) => category.type === type);
   }
 }

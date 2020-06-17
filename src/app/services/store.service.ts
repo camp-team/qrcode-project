@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '../interfaces/store';
+import { StoreCategory } from '../interfaces/store-category';
 
 @Injectable({
   providedIn: 'root',
@@ -203,36 +204,126 @@ export class StoreService {
     },
     { id: 'watahan', name: '綿半', type: 'real', category: 'superMarket' },
     // ドラッグストア
-    { id: 'ainztulpe', name: 'アインズ&トルペ', type: 'real' },
-    { id: 'ains', name: 'アインズ', type: 'real' },
-    { id: 'lipsandhips', name: 'LIPS', type: 'real' },
-    { id: 'welcia', name: 'ウエルシア', type: 'real' },
-    { id: 'hacdrug', name: 'ハックドラッグ', type: 'real' },
-    { id: 'bbon', name: 'B', type: 'real' },
-    { id: 'maruedrug', name: 'マルエドラッグ', type: 'real' },
-    { id: 'kawachi', name: 'カワチ薬品', type: 'real' },
-    { id: 'kimuraya', name: 'キムラヤ', type: 'real' },
-    { id: 'kirindo', name: 'キリン堂', type: 'real' },
-    { id: 'aoki', name: 'クスリのアオキ', type: 'real' },
-    { id: 'create', name: 'クリエイトエス・ディー', type: 'real' },
-    { id: 'kokumin', name: 'コクミンドラッグ', type: 'real' },
-    { id: 'cocokarafine', name: 'ココカラファイン', type: 'real' },
-    { id: 'yamadadrug', name: 'コスメティクスアンドメディカル', type: 'real' },
-    { id: 'satsudora', name: 'サツドラ', type: 'real' },
-    { id: 'sundrug', name: 'サンドラッグ', type: 'real' },
-    { id: 'sanyoyakuhin', name: '三洋薬品HBC株式会社', type: 'real' },
-    { id: 'sugiyakkyoku', name: 'スギ薬局', type: 'real' },
-    { id: 'japan', name: 'ジャパン', type: 'real' },
-    { id: 'sekiyakuhin', name: 'セキ薬局', type: 'real' },
-    { id: 'daikokudrug', name: 'ダイコクドラッグ', type: 'real' },
-    { id: 'tsuruhadrug', name: 'ツルハドラッグ', type: 'real' },
-    { id: 'fukutaro', name: 'くすりの福太郎', type: 'real' },
-    { id: 'tomods', name: 'トモズ', type: 'real' },
-    { id: 'drag11', name: 'ドラッグイレブン', type: 'real' },
-    { id: 'bigdrug', name: 'ビックドラッグ', type: 'real' },
-    { id: 'kozimadrug', name: 'コジマドラッグ', type: 'real' },
-    { id: 'seims', name: 'セイムス', type: 'real' },
-    { id: 'matsumoto_kiyosi', name: 'マツモトキヨシ', type: 'real' },
+    {
+      id: 'ainztulpe',
+      name: 'アインズ&トルペ',
+      type: 'real',
+      category: 'drugStore',
+    },
+    { id: 'ains', name: 'アインズ', type: 'real', category: 'drugStore' },
+    { id: 'lipsandhips', name: 'LIPS', type: 'real', category: 'drugStore' },
+    { id: 'welcia', name: 'ウエルシア', type: 'real', category: 'drugStore' },
+    {
+      id: 'hacdrug',
+      name: 'ハックドラッグ',
+      type: 'real',
+      category: 'drugStore',
+    },
+    { id: 'bbon', name: 'B', type: 'real', category: 'drugStore' },
+    {
+      id: 'maruedrug',
+      name: 'マルエドラッグ',
+      type: 'real',
+      category: 'drugStore',
+    },
+    { id: 'kawachi', name: 'カワチ薬品', type: 'real', category: 'drugStore' },
+    { id: 'kimuraya', name: 'キムラヤ', type: 'real', category: 'drugStore' },
+    { id: 'kirindo', name: 'キリン堂', type: 'real', category: 'drugStore' },
+    { id: 'aoki', name: 'クスリのアオキ', type: 'real', category: 'drugStore' },
+    {
+      id: 'create',
+      name: 'クリエイトエス・ディー',
+      type: 'real',
+      category: 'drugStore',
+    },
+    {
+      id: 'kokumin',
+      name: 'コクミンドラッグ',
+      type: 'real',
+      category: 'drugStore',
+    },
+    {
+      id: 'cocokarafine',
+      name: 'ココカラファイン',
+      type: 'real',
+      category: 'drugStore',
+    },
+    {
+      id: 'yamadadrug',
+      name: 'コスメティクスアンドメディカル',
+      type: 'real',
+      category: 'drugStore',
+    },
+    { id: 'satsudora', name: 'サツドラ', type: 'real', category: 'drugStore' },
+    {
+      id: 'sundrug',
+      name: 'サンドラッグ',
+      type: 'real',
+      category: 'drugStore',
+    },
+    {
+      id: 'sanyoyakuhin',
+      name: '三洋薬品HBC株式会社',
+      type: 'real',
+      category: 'drugStore',
+    },
+    {
+      id: 'sugiyakkyoku',
+      name: 'スギ薬局',
+      type: 'real',
+      category: 'drugStore',
+    },
+    { id: 'japan', name: 'ジャパン', type: 'real', category: 'drugStore' },
+    {
+      id: 'sekiyakuhin',
+      name: 'セキ薬局',
+      type: 'real',
+      category: 'drugStore',
+    },
+    {
+      id: 'daikokudrug',
+      name: 'ダイコクドラッグ',
+      type: 'real',
+      category: 'drugStore',
+    },
+    {
+      id: 'tsuruhadrug',
+      name: 'ツルハドラッグ',
+      type: 'real',
+      category: 'drugStore',
+    },
+    {
+      id: 'fukutaro',
+      name: 'くすりの福太郎',
+      type: 'real',
+      category: 'drugStore',
+    },
+    { id: 'tomods', name: 'トモズ', type: 'real', category: 'drugStore' },
+    {
+      id: 'drag11',
+      name: 'ドラッグイレブン',
+      type: 'real',
+      category: 'drugStore',
+    },
+    {
+      id: 'bigdrug',
+      name: 'ビックドラッグ',
+      type: 'real',
+      category: 'drugStore',
+    },
+    {
+      id: 'kozimadrug',
+      name: 'コジマドラッグ',
+      type: 'real',
+      category: 'drugStore',
+    },
+    { id: 'seims', name: 'セイムス', type: 'real', category: 'drugStore' },
+    {
+      id: 'matsumoto_kiyosi',
+      name: 'マツモトキヨシ',
+      type: 'real',
+      category: 'drugStore',
+    },
     // 飲食
     { id: 'ueshima', name: '上島珈琲店', type: 'real' },
     { id: 'ebisufoodhall', name: 'EBISU FOOD HALL', type: 'real' },
@@ -537,37 +628,34 @@ export class StoreService {
     { id: 'relxle', name: 'りらくる', type: 'real' },
   ];
 
-  categories: {
-    title: string;
-    id: string;
-    items: Store[];
-  }[] = [
-    { name: 'コンビニ', id: 'convenience' },
-    { name: '総合スーパー', id: 'superMarket' },
-    // { name: 'konbini', id: 'conbini' },
-    // { name: 'konbini', id: 'conbini' },
-    // { name: 'konbini', id: 'conbini' },
-    // { name: 'konbini', id: 'conbini' },
-    // { name: 'konbini', id: 'conbini' },
-    // { name: 'konbini', id: 'conbini' },
-    // { name: 'konbini', id: 'conbini' },
-    // { name: 'konbini', id: 'conbini' },
-    // { name: 'konbini', id: 'conbini' },
+  categories: StoreCategory[] = [
+    { name: 'コンビニ', id: 'convenience', type: 'real' },
+    { name: '総合スーパー', id: 'superMarket', type: 'real' },
+    { name: 'ドラッグストア', id: 'drugStore', type: 'real' },
+    // { name: '飲食', id: '' },
+    // { name: '宅配', id: '' },
+    // { name: '居酒屋', id: '' },
+    // { name: '家電量販', id: '' },
+    // { name: '書籍', id: '' },
+    // { name: 'ファッション', id: '' },
+    // { name: '百貨店', id: '' },
+    // { name: 'メガネ•コンタクト', id: '' },
+    // { name: 'ショッピング', id: '' },
+    // { name: '娯楽', id: '' },
+    // { name: '交通', id: '' },
+    // { name: '宿泊•旅', id: '' },
+    // { name: 'その他', id: '' },
+    // { name: '', id: '' },
   ].map((category) => {
     return {
       title: category.name,
       id: category.id,
+      type: category.type,
       items: this.store.filter((list) => list.category === category.id),
     };
   });
 
   buildCategoryList() {}
-
-  // categorizeStore() {
-  //   this.store.map((store) => {
-  //     this.categories.map((category) => category.items.push())
-  //   })
-  // }
 
   constructor() {}
 }
