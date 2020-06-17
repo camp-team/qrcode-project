@@ -59,7 +59,7 @@
           *ngFor="let category of codeCard.storeIds | idToStore: 'real'"
           class="store__cover"
         >
-          <h3 class="store__category">
+          <h3 *ngIf="category.items.length != 0" class="store__category">
             <span class="store__category-label">{{ category.title }}</span>
           </h3>
           <div class="store__grid">
@@ -81,7 +81,7 @@
           *ngFor="let category of codeCard.storeIds | idToStore: 'online'"
           class="store__cover"
         >
-          <h3 class="store__category">
+          <h3 *ngIf="category.items.length != 0" class="store__category">
             <span class="store__category-label">{{ category.title }}</span>
           </h3>
           <div class="store__grid">
@@ -103,7 +103,7 @@
           *ngFor="let category of codeCard.storeIds | idToStore: 'invoice'"
           class="store__cover"
         >
-          <h3 class="store__category">
+          <h3 *ngIf="category.items.length != 0" class="store__category">
             <span class="store__category-label">{{ category.title }}</span>
           </h3>
           <div class="store__grid">
