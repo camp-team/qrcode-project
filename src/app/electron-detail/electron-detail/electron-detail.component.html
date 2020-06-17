@@ -1,26 +1,26 @@
-<ng-container *ngIf="codeCard$ | async as codeCard; else blank">
+<ng-container *ngIf="electronCard$ | async as electronCard; else blank">
   <div class="container">
     <div class="card">
       <div
         class="card__cover"
-        [style.background-image]="'url(' + codeCard.imageURL + ')'"
+        [style.background-image]="'url(' + electronCard.imageURL + ')'"
       ></div>
     </div>
     <div class="detail">
       <div class="detail__title">
-        <h1 class="detail__logo">{{ codeCard.name }}</h1>
+        <h1 class="detail__logo">{{ electronCard.name }}</h1>
         <div class="detail__btns">
           <button
             class="detail__btn"
             [routerLink]="['/create/form']"
-            [queryParams]="{ id: codeCard.cardId, type: 'qrCode' }"
+            [queryParams]="{ id: electronCard.cardId, type: 'electron' }"
             mat-icon-button
           >
             <mat-icon class="detail__icon">create</mat-icon>
           </button>
           <div class="detail__store-link">
             <a
-              routerLink="/code-detail/{{ codeCard.cardId }}"
+              routerLink="/code-detail/{{ electronCard.cardId }}"
               fragment="store"
               mat-button
             >
@@ -31,24 +31,20 @@
         </div>
       </div>
       <h2>精算方法</h2>
-      <p>{{ codeCard.payment }}</p>
+      <p>{{ electronCard.payment }}</p>
       <h2>チャージ方法</h2>
-      <p *ngFor="let chargeWay of codeCard.charge" class="detail__charge">
+      <p *ngFor="let chargeWay of electronCard.charge" class="detail__charge">
         {{ chargeWay }}
       </p>
       <h2>オートチャージ</h2>
-      <p>{{ codeCard.autoCharge }}</p>
+      <p>{{ electronCard.autoCharge }}</p>
       <h2>利用できるクレジットカード</h2>
-      <p>{{ codeCard.availableCredit }}</p>
+      <p>{{ electronCard.availableCredit }}</p>
       <h2>ポイント</h2>
-      <p>{{ codeCard.point }}%</p>
-      <P>{{ codeCard.addPoint }}</P>
+      <p>{{ electronCard.point }}P</p>
+      <P>{{ electronCard.addPoint }}</P>
       <h2>残高やポイントの有効期限</h2>
-      <p>{{ codeCard.expiration }}</p>
-      <h2>個人間送金</h2>
-      <p>{{ codeCard.pushMoney }}</p>
-      <h2>出金</h2>
-      <p>{{ codeCard.pullMoney }}</p>
+      <p>{{ electronCard.expiration }}</p>
     </div>
   </div>
   <div class="store" id="store">
@@ -56,7 +52,7 @@
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="実店舗">
         <div
-          *ngFor="let category of codeCard.storeIds | idToStore: 'real'"
+          *ngFor="let category of electronCard.storeIds | idToStore: 'real'"
           class="store__cover"
         >
           <h3 *ngIf="category.items.length != 0" class="store__category">
@@ -78,7 +74,7 @@
       </mat-tab>
       <mat-tab label="オンライン">
         <div
-          *ngFor="let category of codeCard.storeIds | idToStore: 'online'"
+          *ngFor="let category of electronCard.storeIds | idToStore: 'online'"
           class="store__cover"
         >
           <h3 *ngIf="category.items.length != 0" class="store__category">
@@ -100,7 +96,7 @@
       </mat-tab>
       <mat-tab label="請求書">
         <div
-          *ngFor="let category of codeCard.storeIds | idToStore: 'invoice'"
+          *ngFor="let category of electronCard.storeIds | idToStore: 'invoice'"
           class="store__cover"
         >
           <h3 *ngIf="category.items.length != 0" class="store__category">
@@ -123,7 +119,4 @@
     </mat-tab-group>
   </div>
 </ng-container>
-
-<ng-template #blank>
-  カードの詳細ページが見つかりませんでした。
-</ng-template>
+<ng-template #blank>カードの詳細ページが見つかりませんでした。</ng-template>

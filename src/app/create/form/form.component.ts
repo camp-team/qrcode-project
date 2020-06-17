@@ -24,6 +24,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ElectronCard } from '@interfaces/electron-card';
 
 @Component({
   selector: 'app-form',
@@ -111,7 +112,12 @@ export class FormComponent implements OnInit {
         switchMap((params) => {
           this.cardId = params.get('id');
           if (this.cardId) {
-            return this.cardService.getCodeCard(this.cardId);
+            switch (this.type) {
+              case 'qrCode':
+                return this.cardService.getCodeCard(this.cardId);
+              case 'electron':
+                return this.cardService.getElectronCard(this.cardId);
+            }
           } else {
             return of(null);
           }
@@ -158,7 +164,7 @@ export class FormComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  private initForm(card: CodeCard) {
+  private initForm(card: CodeCard | ElectronCard) {
     this.imageURL = card.imageURL;
     this.chargePatterns = card.charge;
     this.stores = card.storeIds.map((id) => {

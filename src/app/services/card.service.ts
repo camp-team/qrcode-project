@@ -49,15 +49,25 @@ export class CardService {
     return this.db.collection<CodeCard>(`codeCards`).valueChanges();
   }
 
+  getElectronCards(): Observable<ElectronCard[]> {
+    return this.db.collection<ElectronCard>(`electronCards`).valueChanges();
+  }
+
   getCodeCard(cardId: string): Observable<CodeCard> {
     return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
+  }
+
+  getElectronCard(cardId: string): Observable<ElectronCard> {
+    return this.db.doc<ElectronCard>(`electronCards/${cardId}`).valueChanges();
   }
 
   async updateCodeCard(
     codeCard: Omit<CodeCard, 'imageURL'>,
     file?: File
   ): Promise<void> {
-    const data: any = {};
+    const data: {
+      imageURL?: string;
+    } = {};
     if (file) {
       const imageURL: string = await this.getUploadImageURL(
         codeCard.cardId,
@@ -67,10 +77,13 @@ export class CardService {
     }
     return this.db
       .doc(`codeCards/${codeCard.cardId}`)
-      .update({
-        ...data,
-        ...codeCard,
-      })
+      .set(
+        {
+          ...data,
+          ...codeCard,
+        },
+        { merge: true }
+      )
       .then(() => {
         console.log('データを編集しました');
       });
