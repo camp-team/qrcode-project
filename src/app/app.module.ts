@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { SharedModule } from './shared/shared.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -39,6 +40,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SharedModule,
     MatToolbarModule,
     MatSnackBarModule,
+    MatAutocompleteModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

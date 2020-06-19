@@ -11,14 +11,24 @@
     <input
       class="search__input"
       type="text"
-      placeholder="使えるお店を検索"
-      autocomplete="off"
-      [formControl]="search"
+      placeholder="使えるお店で検索"
+      autocomplete="auto"
+      [formControl]="searchControl"
     />
     <button class="search__button">
       <mat-icon>search</mat-icon>
     </button>
   </form>
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionActivated)="setSearchQuery($event.option?.value)"
+    (optionSelected)="routeSearch($event.option?.value)"
+  >
+    <mat-option *ngFor="let option of saerchOptions" [value]="option.name">{{
+      option.name
+    }}</mat-option>
+  </mat-autocomplete>
 
   <div *ngIf="user$ | async as user; else default" class="btns">
     <button
