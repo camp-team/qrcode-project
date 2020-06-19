@@ -9,10 +9,7 @@ import { StoreCategory } from '../interfaces/store-category';
 export class IdToStorePipe implements PipeTransform {
   constructor(private storeService: StoreService) {}
 
-  transform(
-    ids: string[],
-    type: 'real' | 'online' | 'invoice'
-  ): StoreCategory[] {
+  transform(ids: string[]): StoreCategory[] {
     const stores = ids.map((id) => {
       return this.storeService.store.find((store) => store.id === id);
     });

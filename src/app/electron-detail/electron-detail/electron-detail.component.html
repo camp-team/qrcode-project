@@ -46,77 +46,34 @@
       <h2>残高やポイントの有効期限</h2>
       <p>{{ electronCard.expiration }}</p>
     </div>
-  </div>
-  <div class="store" id="store">
-    <h2 class="store__title">使えるお店</h2>
-    <mat-tab-group mat-align-tabs="center">
-      <mat-tab label="実店舗">
-        <div
-          *ngFor="let category of electronCard.storeIds | idToStore: 'real'"
-          class="store__cover"
-        >
-          <h3 *ngIf="category.items.length != 0" class="store__category">
-            <span class="store__category-label">{{ category.title }}</span>
-          </h3>
-          <div class="store__grid">
-            <div *ngFor="let item of category.items">
-              <div class="store__img-wrapper">
-                <img
-                  class="store__img"
-                  src="assets/images/{{ item.id }}.png"
-                  alt="実店舗の画像"
-                />
+    <div class="store" id="store">
+      <h2 class="store__title">使えるお店</h2>
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="カテゴリ別">
+          <div
+            *ngFor="let category of electronCard.storeIds | idToStore: 'real'"
+            class="store__cover"
+          >
+            <h3 *ngIf="category.items.length" class="store__category">
+              <span class="store__category-label">{{ category.title }}</span>
+            </h3>
+            <div class="store__grid">
+              <div *ngFor="let item of category.items">
+                <div class="store__img-wrapper">
+                  <img
+                    class="store__img"
+                    src="assets/images/{{ item.id }}.png"
+                    alt="実店舗の画像"
+                  />
+                </div>
+                <span class="store__name">{{ item.name }}</span>
               </div>
-              <span class="store__name">{{ item.name }}</span>
             </div>
           </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="オンライン">
-        <div
-          *ngFor="let category of electronCard.storeIds | idToStore: 'online'"
-          class="store__cover"
-        >
-          <h3 *ngIf="category.items.length != 0" class="store__category">
-            <span class="store__category-label">{{ category.title }}</span>
-          </h3>
-          <div class="store__grid">
-            <div *ngFor="let item of category.items">
-              <div class="store__img-wrapper">
-                <img
-                  class="store__img"
-                  src="assets/images/{{ item.id }}.png"
-                  alt="オンラインショップの画像"
-                />
-              </div>
-              <span class="store__name">{{ item.name }}</span>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="請求書">
-        <div
-          *ngFor="let category of electronCard.storeIds | idToStore: 'invoice'"
-          class="store__cover"
-        >
-          <h3 *ngIf="category.items.length != 0" class="store__category">
-            <span class="store__category-label">{{ category.title }}</span>
-          </h3>
-          <div class="store__grid">
-            <div *ngFor="let item of category.items">
-              <div class="store__img-wrapper">
-                <img
-                  class="store__img"
-                  src="assets/images/{{ item.id }}.png"
-                  alt="請求書の画像"
-                />
-              </div>
-              <span class="store__name">{{ item.name }}</span>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+        </mat-tab>
+        <mat-tab label="周辺のお店"> </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </ng-container>
 <ng-template #blank>カードの詳細ページが見つかりませんでした。</ng-template>
