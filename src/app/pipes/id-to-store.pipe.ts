@@ -20,12 +20,11 @@ export class IdToStorePipe implements PipeTransform {
       return {
         title: category.title,
         id: category.id,
-        type: category.type,
         items: stores.filter((store) => {
           return category.items.find((item) => item.id === store.id);
         }),
       };
     });
-    return storeCategories.filter((category) => category.type === type);
+    return storeCategories;
   }
 }
