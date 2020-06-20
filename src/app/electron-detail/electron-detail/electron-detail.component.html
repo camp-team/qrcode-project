@@ -57,7 +57,7 @@
             <h3 *ngIf="category.items.length" class="store__category">
               <span class="store__category-label">{{ category.title }}</span>
             </h3>
-            <div class="store__grid">
+            <div *ngIf="category.items.length" class="store__grid">
               <div *ngFor="let item of category.items">
                 <div class="store__img-wrapper">
                   <img
