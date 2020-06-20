@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { startWith, debounceTime } from 'rxjs/operators';
 import { SearchService } from '../services/search.service';
 import { SearchIndex } from 'algoliasearch/lite';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +27,8 @@ export class HeaderComponent implements OnInit {
     private drawerService: DrawerService,
     private authservice: AuthService,
     private snackBar: MatSnackBar,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private router: Router
   ) {
     this.searchControl.valueChanges
       .pipe(startWith(''), debounceTime(500))
@@ -38,6 +40,21 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  setSearchQuery(value: string) {
+    this.searchControl.setValue(value, {
+      emitEvent: false,
+    });
+  }
+
+  routeSearch(searchQuery: string) {
+    this.router.navigate([], {
+      queryParamsHandling: 'merge',
+      queryParams: {
+        searchQuery,
+      },
+    });
+  }
 
   toggle() {
     this.drawerService.toggle();
