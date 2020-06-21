@@ -25,15 +25,17 @@ export class CodeCardComponent implements OnInit {
       this.searchService.index.store.search(searchQuery).then((result) => {
         this.result = result.hits;
         console.log(this.result.map((store) => store.id));
-        return this.codeCards$.pipe(
-          map((codeCards) => {
-            return codeCards.filter((codeCard) => {
-              return codeCard.storeIds.find(
-                (id) => id === this.result.map((store) => store.id)
-              );
-            });
-          })
-        );
+        return this.codeCards$
+          .pipe(
+            map((codeCards) => {
+              return codeCards.filter((codeCard) => {
+                return codeCard.storeIds.find(
+                  (id) => id === this.result.map((store) => store.id)
+                );
+              });
+            })
+          )
+          .subscribe((data) => console.log(data));
       });
     });
   }
