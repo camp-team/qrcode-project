@@ -1,13 +1,34 @@
 <div class="container">
-  <div class="grid">
-    <mat-card *ngFor="let codeCard of codeCards$ | async" class="card">
-      <a class="card__trigger" routerLink="/code-detail/{{ codeCard.cardId }}">
-        <div
-          class="card__cover"
-          [style.background-image]="'url(' + codeCard.imageURL + ')'"
-        ></div>
-        <p class="card__name">{{ codeCard.name }}</p>
-      </a>
-    </mat-card>
-  </div>
+  <ng-container *ngIf="result.length; else default">
+    <div class="grid">
+      <mat-card *ngFor="let codeCard of filterCards$ | async" class="card">
+        <a
+          class="card__trigger"
+          routerLink="/code-detail/{{ codeCard.cardId }}"
+        >
+          <div
+            class="card__cover"
+            [style.background-image]="'url(' + codeCard.imageURL + ')'"
+          ></div>
+          <p class="card__name">{{ codeCard.name }}</p>
+        </a>
+      </mat-card>
+    </div>
+  </ng-container>
+  <ng-template #default>
+    <div class="grid">
+      <mat-card *ngFor="let codeCard of codeCards$ | async" class="card">
+        <a
+          class="card__trigger"
+          routerLink="/code-detail/{{ codeCard.cardId }}"
+        >
+          <div
+            class="card__cover"
+            [style.background-image]="'url(' + codeCard.imageURL + ')'"
+          ></div>
+          <p class="card__name">{{ codeCard.name }}</p>
+        </a>
+      </mat-card>
+    </div>
+  </ng-template>
 </div>

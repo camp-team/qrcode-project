@@ -14,6 +14,7 @@ import { map, tap } from 'rxjs/operators';
 export class CodeCardComponent implements OnInit {
   codeCards$: Observable<CodeCard[]> = this.cardService.getCodeCards();
   result: any;
+  filterCards$: Observable<CodeCard[]>;
 
   constructor(
     private cardService: CardService,
@@ -27,25 +28,23 @@ export class CodeCardComponent implements OnInit {
         const resultIds = this.result.map((store) => store.id);
         console.log(resultIds);
         console.log(resultIds.find((resultId) => resultId === 'naturallawson'));
-        return this.codeCards$
-          .pipe(
-            tap((cards) => {
-              const ids = cards.map((card) => card.storeIds);
-              console.log(ids[2]);
-              const naturallawson = ids[2].find(
-                (storeId) => storeId === 'naturallawson'
+        return (this.filterCards$ = this.codeCards$.pipe(
+          tap((cards) => {
+            const ids = cards.map((card) => card.storeIds);
+            console.log(ids[2]);
+            const naturallawson = ids[2].find(
+              (storeId) => storeId === 'naturallawson'
+            );
+            console.log(naturallawson);
+          }),
+          map((codeCards) => {
+            return codeCards.filter((codeCard) => {
+              return codeCard.storeIds.find((id) =>
+                resultIds.find((resultId) => resultId === id)
               );
-              console.log(naturallawson);
-            }),
-            map((codeCards) => {
-              return codeCards.filter((codeCard) => {
-                return codeCard.storeIds.find((id) =>
-                  resultIds.find((resultId) => resultId === id)
-                );
-              });
-            })
-          )
-          .subscribe((data) => console.log(data));
+            });
+          })
+        ));
       });
     });
   }
