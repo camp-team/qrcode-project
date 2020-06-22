@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngIf="result.length; else default">
+  <ng-container *ngIf="result?.length; else default">
     <div class="grid">
       <mat-card *ngFor="let codeCard of filterCards$ | async" class="card">
         <a
