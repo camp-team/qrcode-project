@@ -1,16 +1,40 @@
 <div class="container">
-  <div class="grid">
-    <mat-card *ngFor="let electronCard of electronCards$ | async" class="card">
-      <a
-        class="card__trigger"
-        routerLink="/electron-detail/{{ electronCard.cardId }}"
+  <ng-container *ngIf="result?.length; else default">
+    <div class="grid">
+      <mat-card
+        *ngFor="let electronCard of filteredCards$ | async"
+        class="card"
       >
-        <div
-          class="card__cover"
-          [style.background-image]="'url(' + electronCard.imageURL + ')'"
-        ></div>
-        <p class="card__name">{{ electronCard.name }}</p>
-      </a>
-    </mat-card>
-  </div>
+        <a
+          class="card__trigger"
+          routerLink="/electron-detail/{{ electronCard.cardId }}"
+        >
+          <div
+            class="card__cover"
+            [style.background-image]="'url(' + electronCard.imageURL + ')'"
+          ></div>
+          <p class="card__name">{{ electronCard.name }}</p>
+        </a>
+      </mat-card>
+    </div>
+  </ng-container>
+  <ng-template #default>
+    <div class="grid">
+      <mat-card
+        *ngFor="let electronCard of electronCards$ | async"
+        class="card"
+      >
+        <a
+          class="card__trigger"
+          routerLink="/electron-detail/{{ electronCard.cardId }}"
+        >
+          <div
+            class="card__cover"
+            [style.background-image]="'url(' + electronCard.imageURL + ')'"
+          ></div>
+          <p class="card__name">{{ electronCard.name }}</p>
+        </a>
+      </mat-card>
+    </div>
+  </ng-template>
 </div>
