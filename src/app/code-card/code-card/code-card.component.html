@@ -1,7 +1,7 @@
 <div class="container">
   <ng-container *ngIf="result?.length; else default">
     <div class="grid">
-      <mat-card *ngFor="let codeCard of filterCards$ | async" class="card">
+      <mat-card *ngFor="let codeCard of filteredCards$ | async" class="card">
         <a
           class="card__trigger"
           routerLink="/code-detail/{{ codeCard.cardId }}"

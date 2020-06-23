@@ -14,7 +14,7 @@ import { map, tap } from 'rxjs/operators';
 export class CodeCardComponent implements OnInit {
   codeCards$: Observable<CodeCard[]> = this.cardService.getCodeCards();
   result: any;
-  filterCards$: Observable<CodeCard[]>;
+  filteredCards$: Observable<CodeCard[]>;
 
   constructor(
     private cardService: CardService,
@@ -26,7 +26,7 @@ export class CodeCardComponent implements OnInit {
       this.searchService.index.store.search(searchQuery).then((result) => {
         this.result = result.hits;
         const resultIds = this.result.map((store) => store.id);
-        return (this.filterCards$ = this.codeCards$.pipe(
+        return (this.filteredCards$ = this.codeCards$.pipe(
           map((codeCards) => {
             return codeCards.filter((codeCard) => {
               return codeCard.storeIds.find((id) =>
