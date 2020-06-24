@@ -46,6 +46,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAnalyticsModule,
+    AngularFireFunctionsModule,
   ],
   providers: [{ provide: REGION, useValue: 'asia-northeast1' }],
   bootstrap: [AppComponent],
