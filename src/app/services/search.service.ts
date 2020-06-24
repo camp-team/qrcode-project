@@ -13,6 +13,7 @@ const searchClient = algoliasearch(
 export class SearchService {
   index = {
     store: searchClient.initIndex('stores'),
+    popularStore: searchClient.initIndex('stores_popular'),
   };
 
   constructor() {}

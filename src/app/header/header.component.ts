@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   isProcessing: boolean;
 
   saerchOptions = [];
-  index: SearchIndex = this.searchService.index.store;
+  index: SearchIndex = this.searchService.index.popularStore;
 
   constructor(
     private drawerService: DrawerService,
