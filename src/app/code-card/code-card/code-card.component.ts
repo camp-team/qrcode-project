@@ -5,6 +5,7 @@ import { CodeCard } from '@interfaces/code-card';
 import { SearchService } from 'src/app/services/search.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-code-card',
@@ -19,12 +20,14 @@ export class CodeCardComponent implements OnInit {
   constructor(
     private cardService: CardService,
     private searchService: SearchService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storeService: StoreService
   ) {
     this.route.queryParamMap.subscribe((param) => {
       const searchQuery: string = param.get('searchQuery');
       this.searchService.index.store.search(searchQuery).then((result) => {
         this.result = result.hits;
+        this.storeService.incrementViewCount(this.result);
         const resultIds = this.result.map((store) => store.id);
         return (this.filteredCards$ = this.codeCards$.pipe(
           map((codeCards) => {

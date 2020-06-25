@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '../interfaces/store';
 import { StoreCategory } from '../interfaces/store-category';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Injectable({
   providedIn: 'root',
@@ -574,7 +575,12 @@ export class StoreService {
     };
   });
 
-  buildCategoryList() {}
+  incrementViewCount(result: any) {
+    const callable = this.fns.httpsCallable('incrementStoreViewCount');
+    return callable(result).toPromise();
+  }
 
-  constructor() {}
+  // buildCategoryList() {}
+
+  constructor(private fns: AngularFireFunctions) {}
 }
