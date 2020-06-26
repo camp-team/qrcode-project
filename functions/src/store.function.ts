@@ -12,7 +12,7 @@ export const incrementStoreViewCount = functions
       indexName: 'stores',
       isUpdate: true,
       data: {
-        viewCount: data.viewCount + 1,
+        viewCount: data.viewCount++,
         ...data,
       },
     });
