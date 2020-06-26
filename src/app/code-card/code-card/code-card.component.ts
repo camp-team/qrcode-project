@@ -27,7 +27,7 @@ export class CodeCardComponent implements OnInit {
       const searchQuery: string = param.get('searchQuery');
       this.searchService.index.store.search(searchQuery).then((result) => {
         this.result = result.hits;
-        this.storeService.incrementViewCount(this.result);
+        this.storeService.incrementViewCount(this.result[0]);
         const resultIds = this.result.map((store) => store.id);
         return (this.filteredCards$ = this.codeCards$.pipe(
           map((codeCards) => {

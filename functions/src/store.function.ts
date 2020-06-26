@@ -7,11 +7,12 @@ export const incrementStoreViewCount = functions
   .region('asia-northeast1')
   .https.onCall((data, context) => {
     console.log(data);
+    console.log(data.viewCount);
     return algolia.saveRecord({
       indexName: 'stores',
       isUpdate: true,
       data: {
-        viewCount: +1,
+        viewCount: data.viewCount + 1,
         ...data,
       },
     });
