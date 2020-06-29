@@ -1,7 +1,8 @@
 <div class="container">
   <ng-container *ngIf="result?.length; else default">
-    <h1>
-      {{ paramHitsStore?.name }}で利用できるお支払い方法 : {{ hitsNumber }}件
+    <h1 *ngIf="filteredCards$ | async as filteredCards">
+      {{ paramHitsStore.name }}で利用できるお支払い方法 :
+      {{ filteredCards.length }}件
     </h1>
     <div class="grid">
       <mat-card *ngFor="let codeCard of filteredCards$ | async" class="card">

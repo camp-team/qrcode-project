@@ -15,7 +15,6 @@ import { StoreService } from 'src/app/services/store.service';
 export class CodeCardComponent implements OnInit {
   codeCards$: Observable<CodeCard[]> = this.cardService.getCodeCards();
   result: any[];
-  hitsNumber: number;
   paramHitsStore: any;
   filteredCards$: Observable<CodeCard[]>;
 
@@ -29,7 +28,6 @@ export class CodeCardComponent implements OnInit {
       const searchQuery: string = param.get('searchQuery');
       this.searchService.index.store.search(searchQuery).then((result) => {
         this.result = result.hits;
-        this.hitsNumber = result.nbHits;
         this.paramHitsStore = this.result.find(
           (hitsStore) => hitsStore.name === searchQuery
         );
