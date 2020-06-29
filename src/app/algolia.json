@@ -1,23 +1,65 @@
 [
-  { "id": "seicomart", "name": "セイコーマート", "category": "convenience" },
   {
+    "objectID": "seicomart",
+    "id": "seicomart",
+    "name": "セイコーマート",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "seven-eleven",
     "id": "seven-eleven",
     "name": "セブン‐イレブン",
-    "category": "convenience"
+    "category": "convenience",
+    "viewCount": 0
   },
   {
+    "objectID": "dailyyamazaki",
     "id": "dailyyamazaki",
     "name": "デイリーヤマザキ",
-    "category": "convenience"
+    "category": "convenience",
+    "viewCount": 0
   },
-  { "id": "familymart", "name": "ファミリーマート", "category": "convenience" },
-  { "id": "popla", "name": "ポプラ", "category": "convenience" },
-  { "id": "ministop", "name": "ミニストップ", "category": "convenience" },
-  { "id": "lawson", "name": "ローソン", "category": "convenience" },
   {
+    "objectID": "familymart",
+    "id": "familymart",
+    "name": "ファミリーマート",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "popla",
+    "id": "popla",
+    "name": "ポプラ",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ministop",
+    "id": "ministop",
+    "name": "ミニストップ",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "lawson",
+    "id": "lawson",
+    "name": "ローソン",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "naturallawson",
     "id": "naturallawson",
     "name": "ナチュラルローソン",
-    "category": "convenience"
+    "category": "convenience",
+    "viewCount": 0
   },
-  { "id": "lawson100", "name": "ローソンストア100", "category": "convenience" }
+  {
+    "objectID": "lawson100",
+    "id": "lawson100",
+    "name": "ローソンストア100",
+    "category": "convenience",
+    "viewCount": 0
+  }
 ]

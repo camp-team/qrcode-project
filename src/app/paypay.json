@@ -1,0 +1,2830 @@
+[
+  {
+    "objectID": "seicomart",
+    "id": "seicomart",
+    "name": "セイコーマート",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "seven-eleven",
+    "id": "seven-eleven",
+    "name": "セブン‐イレブン",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "dailyyamazaki",
+    "id": "dailyyamazaki",
+    "name": "デイリーヤマザキ",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "familymart",
+    "id": "familymart",
+    "name": "ファミリーマート",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "popla",
+    "id": "popla",
+    "name": "ポプラ",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ministop",
+    "id": "ministop",
+    "name": "ミニストップ",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "lawson",
+    "id": "lawson",
+    "name": "ローソン",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "naturallawson",
+    "id": "naturallawson",
+    "name": "ナチュラルローソン",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "lawson100",
+    "id": "lawson100",
+    "name": "ローソンストア100",
+    "category": "convenience",
+    "viewCount": 0
+  },
+  {
+    "objectID": "akafudado",
+    "id": "akafudado",
+    "name": "赤札堂",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "abab",
+    "id": "abab",
+    "name": "ABAB",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ok",
+    "id": "ok",
+    "name": "OK",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "otani",
+    "id": "otani",
+    "name": "スーパーオータニ",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "superalps",
+    "id": "superalps",
+    "name": "スーパーアルプス",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "okkasan",
+    "id": "okkasan",
+    "name": "スーパーおっ母さん",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "seiyu",
+    "id": "seiyu",
+    "name": "西友",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sekichu",
+    "id": "sekichu",
+    "name": "セキチュー",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "itoyokado",
+    "id": "itoyokado",
+    "name": "イトーヨーカドー",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yorkmart",
+    "id": "yorkmart",
+    "name": "ヨークマート",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sotetsurosen",
+    "id": "sotetsurosen",
+    "name": "そうてつローゼン",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "takeya",
+    "id": "takeya",
+    "name": "多慶屋",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "daikokuya",
+    "id": "daikokuya",
+    "name": "大黒屋",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "es-tajima",
+    "id": "es-tajima",
+    "name": "エネルギースーパーたじま",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "giga-pearl",
+    "id": "giga-pearl",
+    "name": "ギガパール",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "giga-mart",
+    "id": "giga-mart",
+    "name": "ギガマート",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "nakamuraya",
+    "id": "nakamuraya",
+    "name": "ナカムラヤ",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hallo-mart",
+    "id": "hallo-mart",
+    "name": "ハローマート",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bonvisage",
+    "id": "bonvisage",
+    "name": "ボンヴィサージュ",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yaoyoshi",
+    "id": "yaoyoshi",
+    "name": "ヤオヨシ",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "daiyu",
+    "id": "daiyu",
+    "name": "ダイユー",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tokyustore",
+    "id": "tokyustore",
+    "name": "東急ストア",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tobustore",
+    "id": "tobustore",
+    "name": "東武ストア",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "torisen_02",
+    "id": "torisen_02",
+    "name": "とりせん",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "biga",
+    "id": "biga",
+    "name": "ビッグ・エー",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bigyosan",
+    "id": "bigyosan",
+    "name": "ビッグヨーサン",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "mom",
+    "id": "mom",
+    "name": "フードマーケットマム",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "beisia",
+    "id": "beisia",
+    "name": "ベイシア",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "belc",
+    "id": "belc",
+    "name": "ベルク",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "maruya",
+    "id": "maruya",
+    "name": "マルヤ",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "joyfoods",
+    "id": "joyfoods",
+    "name": "ジョイフーズ",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yamaguchi",
+    "id": "yamaguchi",
+    "name": "ヤマグチ",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "mrmax_1",
+    "id": "mrmax_1",
+    "name": "MrMax",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yamaichi",
+    "id": "yamaichi",
+    "name": "ヤマイチ",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yamaya",
+    "id": "yamaya",
+    "name": "やまや",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yucoop",
+    "id": "yucoop",
+    "name": "ユーコープ",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "life",
+    "id": "life",
+    "name": "ライフ",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "likaman",
+    "id": "likaman",
+    "name": "リカーマウンテン",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ysmart",
+    "id": "ysmart",
+    "name": "ワイズマート",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "watahan",
+    "id": "watahan",
+    "name": "綿半",
+    "category": "superMarket",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ainztulpe",
+    "id": "ainztulpe",
+    "name": "アインズ&トルペ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ains",
+    "id": "ains",
+    "name": "アインズ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "lipsandhips",
+    "id": "lipsandhips",
+    "name": "LIPS",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "welcia",
+    "id": "welcia",
+    "name": "ウエルシア",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hacdrug",
+    "id": "hacdrug",
+    "name": "ハックドラッグ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bbon",
+    "id": "bbon",
+    "name": "B",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "maruedrug",
+    "id": "maruedrug",
+    "name": "マルエドラッグ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kawachi",
+    "id": "kawachi",
+    "name": "カワチ薬品",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kimuraya",
+    "id": "kimuraya",
+    "name": "キムラヤ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kirindo",
+    "id": "kirindo",
+    "name": "キリン堂",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "aoki",
+    "id": "aoki",
+    "name": "クスリのアオキ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "create",
+    "id": "create",
+    "name": "クリエイトエス・ディー",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kokumin",
+    "id": "kokumin",
+    "name": "コクミンドラッグ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "cocokarafine",
+    "id": "cocokarafine",
+    "name": "ココカラファイン",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yamadadrug",
+    "id": "yamadadrug",
+    "name": "コスメティクスアンドメディカル",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "satsudora",
+    "id": "satsudora",
+    "name": "サツドラ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sundrug",
+    "id": "sundrug",
+    "name": "サンドラッグ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sanyoyakuhin",
+    "id": "sanyoyakuhin",
+    "name": "三洋薬品HBC株式会社",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sugiyakkyoku",
+    "id": "sugiyakkyoku",
+    "name": "スギ薬局",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "japan",
+    "id": "japan",
+    "name": "ジャパン",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sekiyakuhin",
+    "id": "sekiyakuhin",
+    "name": "セキ薬局",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "daikokudrug",
+    "id": "daikokudrug",
+    "name": "ダイコクドラッグ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tsuruhadrug",
+    "id": "tsuruhadrug",
+    "name": "ツルハドラッグ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "fukutaro",
+    "id": "fukutaro",
+    "name": "くすりの福太郎",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tomods",
+    "id": "tomods",
+    "name": "トモズ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "drag11",
+    "id": "drag11",
+    "name": "ドラッグイレブン",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bigdrug",
+    "id": "bigdrug",
+    "name": "ビックドラッグ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kozimadrug",
+    "id": "kozimadrug",
+    "name": "コジマドラッグ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "seims",
+    "id": "seims",
+    "name": "セイムス",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "matsumoto_kiyosi",
+    "id": "matsumoto_kiyosi",
+    "name": "マツモトキヨシ",
+    "category": "drugStore",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ueshima",
+    "id": "ueshima",
+    "name": "上島珈琲店",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ebisufoodhall",
+    "id": "ebisufoodhall",
+    "name": "EBISU FOOD HALL",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "origin",
+    "id": "origin",
+    "name": "キッチンオリジン",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "renge",
+    "id": "renge",
+    "name": "れんげ食堂 Toshu",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "keyscafe",
+    "id": "keyscafe",
+    "name": "KeysCafe",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kyotokatsugyu",
+    "id": "kyotokatsugyu",
+    "name": "京都勝牛",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kurazushi",
+    "id": "kurazushi",
+    "name": "くら寿司",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kfc",
+    "id": "kfc",
+    "name": "ケンタッキーフライドチキン",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "gyushige",
+    "id": "gyushige",
+    "name": "元氣七輪焼肉 牛繁",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "gyukaku",
+    "id": "gyukaku",
+    "name": "牛角",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "freshness",
+    "id": "freshness",
+    "name": "フレッシュネスバーガー",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kappa",
+    "id": "kappa",
+    "name": "かっぱ寿司",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "suteki",
+    "id": "suteki",
+    "name": "ステーキ宮",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "onyasai",
+    "id": "onyasai",
+    "name": "温野菜",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "31ice_cream",
+    "id": "31ice_cream",
+    "name": "サーティワンアイスクリーム",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yakinikubanri",
+    "id": "yakinikubanri",
+    "name": "焼肉万里",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "saintmarccafe",
+    "id": "saintmarccafe",
+    "name": "サンマルクカフェ",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "anan",
+    "id": "anan",
+    "name": "七輪焼肉 安安",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "gusto",
+    "id": "gusto",
+    "name": "ガスト",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "grazie",
+    "id": "grazie",
+    "name": "グラッチェガーデンズ",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "syabuyo2",
+    "id": "syabuyo2",
+    "name": "しゃぶ葉",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "jonathan",
+    "id": "jonathan",
+    "name": "ジョナサン",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bamiyan",
+    "id": "bamiyan",
+    "name": "バーミヤン",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "dennys",
+    "id": "dennys",
+    "name": "デニーズ",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "dennysdiner",
+    "id": "dennysdiner",
+    "name": "DennysDiner",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "grandiner",
+    "id": "grandiner",
+    "name": "GranDiner",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kojimachi",
+    "id": "kojimachi",
+    "name": "麹町珈琲",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "shiroyagi",
+    "id": "shiroyagi",
+    "name": "白ヤギ珈琲店",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "taiyounogrill",
+    "id": "taiyounogrill",
+    "name": "太陽のグリル",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "alohatable",
+    "id": "alohatable",
+    "name": "アロハテーブル",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ichikokudou",
+    "id": "ichikokudou",
+    "name": "壱鵠堂",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "katsuan",
+    "id": "katsuan",
+    "name": "かつ庵",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sukiya",
+    "id": "sukiya",
+    "name": "すき家",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "setoudon",
+    "id": "setoudon",
+    "name": "瀬戸うどん",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tamonan",
+    "id": "tamonan",
+    "name": "たもん庵",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tenkaichi",
+    "id": "tenkaichi",
+    "name": "天下一",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "denmaru",
+    "id": "denmaru",
+    "name": "伝丸",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "nakau",
+    "id": "nakau",
+    "name": "なか卯",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "nabekura",
+    "id": "nabekura",
+    "name": "菜べくら",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hanayayohei",
+    "id": "hanayayohei",
+    "name": "華屋与兵衛",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hamazushi",
+    "id": "hamazushi",
+    "name": "はま寿司",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bigboy",
+    "id": "bigboy",
+    "name": "BigBoy",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "morivacoffee",
+    "id": "morivacoffee",
+    "name": "モリバコーヒー",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "wasyokuyohei",
+    "id": "wasyokuyohei",
+    "name": "和食よへい",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "gindako",
+    "id": "gindako",
+    "name": "築地銀だこ",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hanbey",
+    "id": "hanbey",
+    "name": "薄利多賣半兵ヱ",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hanamaruudon",
+    "id": "hanamaruudon",
+    "name": "はなまるうどん",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "669",
+    "id": "669",
+    "name": "bb.q OLIVE CHICKEN cafe",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hidakaya_hiday",
+    "id": "hidakaya_hiday",
+    "name": "日高屋",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "firstkitchen_01",
+    "id": "firstkitchen_01",
+    "name": "ファーストキッチン",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "firstkitchen",
+    "id": "firstkitchen",
+    "name": "ウェンディーズ・ファーストキッチン",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hondanacoffer",
+    "id": "hondanacoffer",
+    "name": "本棚珈琲",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "matsuya",
+    "id": "matsuya",
+    "name": "松屋",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tonkatsumatsunoya",
+    "id": "tonkatsumatsunoya",
+    "name": "松のや",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yoshinoya",
+    "id": "yoshinoya",
+    "name": "吉野家",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "texmix",
+    "id": "texmix",
+    "name": "TEXMEX FACTORY",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "fridays",
+    "id": "fridays",
+    "name": "TGI フライデーズ",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "nikusuta",
+    "id": "nikusuta",
+    "name": "にくスタ",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ws",
+    "id": "ws",
+    "name": "WANGS GARDEN",
+    "category": "meal",
+    "viewCount": 0
+  },
+  {
+    "objectID": "deliveryskylark",
+    "id": "deliveryskylark",
+    "name": "すかいらーくグループの宅配",
+    "category": "delivery",
+    "viewCount": 0
+  },
+  {
+    "objectID": "strawberrycones",
+    "id": "strawberrycones",
+    "name": "ストロベリーコーンズ",
+    "category": "delivery",
+    "viewCount": 0
+  },
+  {
+    "objectID": "napolinokama",
+    "id": "napolinokama",
+    "name": "ナポリの窯",
+    "category": "delivery",
+    "viewCount": 0
+  },
+  {
+    "objectID": "delis",
+    "id": "delis",
+    "name": "デリズ",
+    "category": "delivery",
+    "viewCount": 0
+  },
+  {
+    "objectID": "pizza_pockets",
+    "id": "pizza_pockets",
+    "name": "ピザポケット",
+    "category": "delivery",
+    "viewCount": 0
+  },
+  {
+    "objectID": "pizzala",
+    "id": "pizzala",
+    "name": "ピザーラ",
+    "category": "delivery",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kakiyazushi",
+    "id": "kakiyazushi",
+    "name": "柿家鮨",
+    "category": "delivery",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kanteki",
+    "id": "kanteki",
+    "name": "かんてきや",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "fuziyamasakaya",
+    "id": "fuziyamasakaya",
+    "name": "フジヤマ桜",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "isomaru",
+    "id": "isomaru",
+    "name": "磯丸水産",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ichigorou",
+    "id": "ichigorou",
+    "name": "餃子製造販売店 いち五郎",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "toriyoshi",
+    "id": "toriyoshi",
+    "name": "手羽先唐揚専門店 鳥良",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "toriyoshisyoten",
+    "id": "toriyoshisyoten",
+    "name": "鳥良商店",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kinnokura",
+    "id": "kinnokura",
+    "name": "金の蔵",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "akamaruya",
+    "id": "akamaruya",
+    "name": "アカマル屋",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tohokenbunroku",
+    "id": "tohokenbunroku",
+    "name": "東方見聞録",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "baribaridori",
+    "id": "baribaridori",
+    "name": "バリバリ鶏",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sumibiizaykayaen",
+    "id": "sumibiizaykayaen",
+    "name": "炭火居酒屋 炎",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hananomai_01",
+    "id": "hananomai_01",
+    "name": "はなの舞",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tometeba",
+    "id": "tometeba",
+    "name": "とめ手羽",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "dartsshoptito",
+    "id": "dartsshoptito",
+    "name": "Darts Shop TiTO",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sushiuogin",
+    "id": "sushiuogin",
+    "name": "魚銀",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "uotami",
+    "id": "uotami",
+    "name": "魚民",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "uoman",
+    "id": "uoman",
+    "name": "北海道 魚萬",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "uoman01",
+    "id": "uoman01",
+    "name": "濱焼北海道魚萬",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "uoman02",
+    "id": "uoman02",
+    "name": "横濱 魚萬",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "utanosuke",
+    "id": "utanosuke",
+    "name": "歌之助",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "uchikuru",
+    "id": "uchikuru",
+    "name": "うちくる",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "oideyo",
+    "id": "oideyo",
+    "name": "おいで屋",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kuroda",
+    "id": "kuroda",
+    "name": "串かつ黒田めでた家",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kuromaru",
+    "id": "kuromaru",
+    "name": "くろ○",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "shitokuya",
+    "id": "shitokuya",
+    "name": "白木屋",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sennen",
+    "id": "sennen",
+    "name": "千年の宴",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tsukinoutage",
+    "id": "tsukinoutage",
+    "name": "月の宴",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "niatori",
+    "id": "niatori",
+    "name": "鶏のGeorge",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "fukufukuya",
+    "id": "fukufukuya",
+    "name": "福福屋",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "takadatori",
+    "id": "takadatori",
+    "name": "豊後高田どり酒場",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "mitsuecyan",
+    "id": "mitsuecyan",
+    "name": "みつえちゃん",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "mekiki",
+    "id": "mekiki",
+    "name": "目利きの銀次",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "medetaya",
+    "id": "medetaya",
+    "name": "めでた家",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yamauchi",
+    "id": "yamauchi",
+    "name": "山内農場",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "warawara",
+    "id": "warawara",
+    "name": "笑笑",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "wai",
+    "id": "wai",
+    "name": "バラエティ厨房 輪囲",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "robokichi",
+    "id": "robokichi",
+    "name": "ROBOT KICHI",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "watami02",
+    "id": "watami02",
+    "name": "和民",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "watami01",
+    "id": "watami01",
+    "name": "坐・和民",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "gohan",
+    "id": "gohan",
+    "name": "GOHAN",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "torimero",
+    "id": "torimero",
+    "name": "三代目鳥メロ",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "maguro",
+    "id": "maguro",
+    "name": "まぐろ漁業団",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "miraizaka",
+    "id": "miraizaka",
+    "name": "ミライザカ",
+    "category": "izakaya",
+    "viewCount": 0
+  },
+  {
+    "objectID": "edon",
+    "id": "edon",
+    "name": "エディオン",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ksdenki",
+    "id": "ksdenki",
+    "name": "ケーズデンキ",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "denkichi",
+    "id": "denkichi",
+    "name": "デンキチ",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "nojima",
+    "id": "nojima",
+    "name": "ノジマ",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "biccamera",
+    "id": "biccamera",
+    "name": "ビックカメラ",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kozima",
+    "id": "kozima",
+    "name": "コジマ",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sofmap",
+    "id": "sofmap",
+    "name": "ソフマップ",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "pcdepo",
+    "id": "pcdepo",
+    "name": "PC DEPOT",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "beishia",
+    "id": "beishia",
+    "name": "ベイシア電器",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yamada",
+    "id": "yamada",
+    "name": "ヤマダ電機",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tsukumo",
+    "id": "tsukumo",
+    "name": "TSUKUMO",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "best",
+    "id": "best",
+    "name": "ベスト電器",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "matsuyadenki",
+    "id": "matsuyadenki",
+    "name": "マツヤデンキ",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "pasocon",
+    "id": "pasocon",
+    "name": "パソコン工房",
+    "category": "appliances",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tsutaya",
+    "id": "tsutaya",
+    "name": "TSUTAYA",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "furuhonichiba",
+    "id": "furuhonichiba",
+    "name": "古本市場",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tranoana",
+    "id": "tranoana",
+    "name": "とらのあな",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "haruya",
+    "id": "haruya",
+    "name": "明屋書店",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "book1st",
+    "id": "book1st",
+    "name": "ブックファースト",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "maruzen",
+    "id": "maruzen",
+    "name": "MARUZEN",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "junkudo",
+    "id": "junkudo",
+    "name": "ジュンク堂",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "rashinban",
+    "id": "rashinban",
+    "name": "らしんばん",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "libro",
+    "id": "libro",
+    "name": "LIBRO",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ayumibooks",
+    "id": "ayumibooks",
+    "name": "あゆみBOOKS",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "orion",
+    "id": "orion",
+    "name": "オリオン書房",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "parcobook",
+    "id": "parcobook",
+    "name": "パルコブックセンター",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bunkitsu",
+    "id": "bunkitsu",
+    "name": "文喫",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bunrokudou",
+    "id": "bunrokudou",
+    "name": "文禄堂",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "miomio",
+    "id": "miomio",
+    "name": "miomio",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yomuyomu",
+    "id": "yomuyomu",
+    "name": "よむよむ",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "wandergoo",
+    "id": "wandergoo",
+    "name": "ワンダーGOO",
+    "category": "book",
+    "viewCount": 0
+  },
+  {
+    "objectID": "babydoll",
+    "id": "babydoll",
+    "name": "ベビードール",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "jeans",
+    "id": "jeans",
+    "name": "ジーンズメイト",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "outdoor",
+    "id": "outdoor",
+    "name": "Outdoor",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "takaq",
+    "id": "takaq",
+    "name": "TAKA-Q",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "grandback",
+    "id": "grandback",
+    "name": "GRAND BACK",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "diesel",
+    "id": "diesel",
+    "name": "DIESEL",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "haruyama",
+    "id": "haruyama",
+    "name": "はるやま",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "perfectsuitfactory",
+    "id": "perfectsuitfactory",
+    "name": "Perfect Suit FActory",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "fithouse",
+    "id": "fithouse",
+    "name": "FIT HOUSE",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "machouse",
+    "id": "machouse",
+    "name": "マックハウス",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "righton",
+    "id": "righton",
+    "name": "ライトオン",
+    "category": "fashion",
+    "viewCount": 0
+  },
+  {
+    "objectID": "odakyu",
+    "id": "odakyu",
+    "name": "小田急百貨店",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "grandberrypark",
+    "id": "grandberrypark",
+    "name": "グランベリーパーク",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "takashimaya",
+    "id": "takashimaya",
+    "name": "高島屋",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "dutyfree",
+    "id": "dutyfree",
+    "name": "髙島屋免税店SHILLA&amp;ANA",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "lacittadella",
+    "id": "lacittadella",
+    "name": "LA CITTADELLA",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "nihonkukobuilding",
+    "id": "nihonkukobuilding",
+    "name": "日本空港ビルディング",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "iiyo",
+    "id": "iiyo",
+    "name": "イーヨ!!",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "oazo",
+    "id": "oazo",
+    "name": "oazo",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "shinmarubiru",
+    "id": "shinmarubiru",
+    "name": "新丸ビル",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tokia",
+    "id": "tokia",
+    "name": "TOKIA",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "nijubashisquare",
+    "id": "nijubashisquare",
+    "name": "二重橋スクエア",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bricksquare",
+    "id": "bricksquare",
+    "name": "ブリックスクエア",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "marubiru",
+    "id": "marubiru",
+    "name": "丸ビル",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "randmarkplaza",
+    "id": "randmarkplaza",
+    "name": "ランドマークプラザ",
+    "category": "department",
+    "viewCount": 0
+  },
+  {
+    "objectID": "aimegane",
+    "id": "aimegane",
+    "name": "アイメガネ",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "owndays",
+    "id": "owndays",
+    "name": "OWNDAYS",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "jins",
+    "id": "jins",
+    "name": "JINS",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "zoff",
+    "id": "zoff",
+    "name": "Zoff",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "cyuoucontact",
+    "id": "cyuoucontact",
+    "name": "中央コンタクト・フラワーコンタクト",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "heartup",
+    "id": "heartup",
+    "name": "ハートアップ",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "parimiki",
+    "id": "parimiki",
+    "name": "パリミキ",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "meganesuper",
+    "id": "meganesuper",
+    "name": "メガネスーパー",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "fujicontact",
+    "id": "fujicontact",
+    "name": "富士コンタクト",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "meganeichiba",
+    "id": "meganeichiba",
+    "name": "眼鏡市場",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "alook",
+    "id": "alook",
+    "name": "ALOOK",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "meganedrug",
+    "id": "meganedrug",
+    "name": "メガネドラッグ",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "itagakiglasses",
+    "id": "itagakiglasses",
+    "name": "メガネのイタガキ",
+    "category": "glasses",
+    "viewCount": 0
+  },
+  {
+    "objectID": "akachan",
+    "id": "akachan",
+    "name": "アカチャンホンポ",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "animate",
+    "id": "animate",
+    "name": "アニメイト",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "gamers",
+    "id": "gamers",
+    "name": "ゲーマーズ",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ikea",
+    "id": "ikea",
+    "name": "イケア",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ichibashi",
+    "id": "ichibashi",
+    "name": "イシバシ楽器",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "windsor",
+    "id": "windsor",
+    "name": "ウインザーラケットショップ",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kameyatsurigu",
+    "id": "kameyatsurigu",
+    "name": "かめや釣具",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kitamura",
+    "id": "kitamura",
+    "name": "カメラのキタムラ",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "casting",
+    "id": "casting",
+    "name": "キャスティング",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "geo",
+    "id": "geo",
+    "name": "GEO",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "geomobile",
+    "id": "geomobile",
+    "name": "GEOmobile",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "2ndstreet",
+    "id": "2ndstreet",
+    "name": "2ndSTREET",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "cyclespot",
+    "id": "cyclespot",
+    "name": "サイクルスポット",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "cycle-spot-le",
+    "id": "cycle-spot-le",
+    "name": "サイクルスポット&amp;ル・サイク",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "cb-asahi",
+    "id": "cb-asahi",
+    "name": "サイクルベースあさひ",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "shimamura",
+    "id": "shimamura",
+    "name": "島村楽器",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "dream",
+    "id": "dream",
+    "name": "手芸センター ドリーム",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "stepsports",
+    "id": "stepsports",
+    "name": "SteP SPORTS",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "surugaya",
+    "id": "surugaya",
+    "name": "駿河屋",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sonystore",
+    "id": "sonystore",
+    "name": "ソニーストア",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "daiso",
+    "id": "daiso",
+    "name": "DAISO",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "dulton",
+    "id": "dulton",
+    "name": "DULTON",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "chiyoda",
+    "id": "chiyoda",
+    "name": "チヨダ",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "shoeplaza",
+    "id": "shoeplaza",
+    "name": "シュープラザ",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tokyoshoesretailingcenter",
+    "id": "tokyoshoesretailingcenter",
+    "name": "東京靴流通センター",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "point",
+    "id": "point",
+    "name": "釣具のポイント",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "golftsuruya",
+    "id": "golftsuruya",
+    "name": "つるやゴルフ",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "toysrus",
+    "id": "toysrus",
+    "name": "トイザらス",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tokyuhands",
+    "id": "tokyuhands",
+    "name": "東急ハンズ",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hobbyzone",
+    "id": "hobbyzone",
+    "name": "ホビーゾーン",
+    "category": "shopping",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kaikatsuclub",
+    "id": "kaikatsuclub",
+    "name": "快活CLUB",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "karaokekan",
+    "id": "karaokekan",
+    "name": "カラオケ館",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "usland",
+    "id": "usland",
+    "name": "Kids US.LAND",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "cotedazur",
+    "id": "cotedazur",
+    "name": "コート・ダ・ジュール",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "crokkeclub",
+    "id": "crokkeclub",
+    "name": "コロッケ倶楽部",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "joysound",
+    "id": "joysound",
+    "name": "JOYSOUND",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tackleberry",
+    "id": "tackleberry",
+    "name": "タックルベリー",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "cinecitta",
+    "id": "cinecitta",
+    "name": "CINECITTA",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bigecho",
+    "id": "bigecho",
+    "name": "BIGECHO",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yomiuri",
+    "id": "yomiuri",
+    "name": "よみうりランド",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "round1",
+    "id": "round1",
+    "name": "ラウンドワン",
+    "category": "entertainment",
+    "viewCount": 0
+  },
+  {
+    "objectID": "enoshima",
+    "id": "enoshima",
+    "name": "江ノ島タクシー",
+    "category": "traffic",
+    "viewCount": 0
+  },
+  {
+    "objectID": "shonanmonorail",
+    "id": "shonanmonorail",
+    "name": "湘南モノレール",
+    "category": "traffic",
+    "viewCount": 0
+  },
+  {
+    "objectID": "nihonchuou",
+    "id": "nihonchuou",
+    "name": "日本中央交通",
+    "category": "traffic",
+    "viewCount": 0
+  },
+  {
+    "objectID": "royallimousine",
+    "id": "royallimousine",
+    "name": "ロイヤルリムジン",
+    "category": "traffic",
+    "viewCount": 0
+  },
+  {
+    "objectID": "orientaltaxi",
+    "id": "orientaltaxi",
+    "name": "オリエンタルタクシー",
+    "category": "traffic",
+    "viewCount": 0
+  },
+  {
+    "objectID": "japanpremiumtokyo",
+    "id": "japanpremiumtokyo",
+    "name": "ジャパンプレミアム 東京シティエスコート",
+    "category": "traffic",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ichinisan",
+    "id": "ichinisan",
+    "name": "一二三交通自動車",
+    "category": "traffic",
+    "viewCount": 0
+  },
+  {
+    "objectID": "his",
+    "id": "his",
+    "name": "H.I.S.",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "juraku",
+    "id": "juraku",
+    "name": "聚楽",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tabix",
+    "id": "tabix",
+    "name": "タビックスジャパン",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "toyoko-inn",
+    "id": "toyoko-inn",
+    "name": "東横イン",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "nikkoniigata",
+    "id": "nikkoniigata",
+    "name": "ホテル日航新潟",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "monterey-akasaka",
+    "id": "monterey-akasaka",
+    "name": "ホテルモントレ赤坂",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "monterey-ginza",
+    "id": "monterey-ginza",
+    "name": "ホテルモントレ銀座",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "monterey-hanzomon",
+    "id": "monterey-hanzomon",
+    "name": "ホテルモントレ半蔵門",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "monterey-yokohama",
+    "id": "monterey-yokohama",
+    "name": "ホテルモントレ横浜",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "monterey-lasoeurginza",
+    "id": "monterey-lasoeurginza",
+    "name": "ホテルモントレ ラ・スールギンザ",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hotelmystays",
+    "id": "hotelmystays",
+    "name": "ホテルマイステイズ",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hotelmystayspremiem",
+    "id": "hotelmystayspremiem",
+    "name": "ホテルマイステイズプレミア",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "elexstay",
+    "id": "elexstay",
+    "name": "フレックスステイイン",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "monthlyresistays",
+    "id": "monthlyresistays",
+    "name": "マンスリーレジステイズ",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "washington-hotel-plaza",
+    "id": "washington-hotel-plaza",
+    "name": "ワシントンホテルプラザ",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "randbhotel",
+    "id": "randbhotel",
+    "name": "R&amp;Bホテル",
+    "category": "stay",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ubereats",
+    "id": "ubereats",
+    "name": "Uber Eats",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "demaecan",
+    "id": "demaecan",
+    "name": "出前館",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "osakaohsho",
+    "id": "osakaohsho",
+    "name": "大阪王将公式通販",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "cokeon",
+    "id": "cokeon",
+    "name": "Coke ON",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "appbankstore",
+    "id": "appbankstore",
+    "name": "AppBank StorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "soundhouse",
+    "id": "soundhouse",
+    "name": "サウンドハウスStorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ezoa",
+    "id": "ezoa",
+    "name": "ZOAStorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "okusuri02",
+    "id": "okusuri02",
+    "name": "通販できるみんなのお薬StorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "naturum",
+    "id": "naturum",
+    "name": "アウトドア&amp;フィッシング ナチュラムStorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tshop",
+    "id": "tshop",
+    "name": "T-SHOPStorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "paypay_mall",
+    "id": "paypay_mall",
+    "name": "PayPayモールStorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "paypay_freemarket",
+    "id": "paypay_freemarket",
+    "name": "PayPayフリマStorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yahoo_shopping",
+    "id": "yahoo_shopping",
+    "name": "Yahoo!ショッピングStorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yahuoku",
+    "id": "yahuoku",
+    "name": "ヤフオクStorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "lohaco",
+    "id": "lohaco",
+    "name": "LOHACOStorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "cycleyoshida",
+    "id": "cycleyoshida",
+    "name": "CYCLE YOSHIDAStorageEvent",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "dlsite",
+    "id": "dlsite",
+    "name": "DLsite",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "niconico",
+    "id": "niconico",
+    "name": "ニコニコポイント",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "winticket",
+    "id": "winticket",
+    "name": "WINTICKET",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "segacatcher",
+    "id": "segacatcher",
+    "name": "SEGA CATCHER ONLINE",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "mobage",
+    "id": "mobage",
+    "name": "mobage",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "torumo",
+    "id": "torumo",
+    "name": "ネットクレーンモール「とるモ」",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "icatch",
+    "id": "icatch",
+    "name": "アイキャッチオンライン",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "getlive",
+    "id": "getlive",
+    "name": "ゲットライブ",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "mobacure",
+    "id": "mobacure",
+    "name": "モバクレ",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "flier",
+    "id": "flier",
+    "name": "フライヤー",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "paypaydome02",
+    "id": "paypaydome02",
+    "name": "PayPayドームツアー",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yahoo_uranai",
+    "id": "yahoo_uranai",
+    "name": "Yahoo!占い",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yahoo_game",
+    "id": "yahoo_game",
+    "name": "Yahoo!ゲーム",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yahoo_news",
+    "id": "yahoo_news",
+    "name": "Yahoo!ニュース",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ebooks",
+    "id": "ebooks",
+    "name": "ebookjapan",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "gyaostore",
+    "id": "gyaostore",
+    "name": "GYAO!ストア",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "premoa",
+    "id": "premoa",
+    "name": "PREMOA",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "dospara",
+    "id": "dospara",
+    "name": "ドスパラ",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sycom",
+    "id": "sycom",
+    "name": "BTOパソコンのサイコム",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "drise",
+    "id": "drise",
+    "name": "ディーライズ",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yamadawebcom",
+    "id": "yamadawebcom",
+    "name": "ヤマダウェブコム",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "fabrictokyo",
+    "id": "fabrictokyo",
+    "name": "ˆFABRIC TOKYO",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "oyolife",
+    "id": "oyolife",
+    "name": "OYO LIFE",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sakuratravel",
+    "id": "sakuratravel",
+    "name": "さくらトラベル",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yahoo_travel",
+    "id": "yahoo_travel",
+    "name": "Yahoo!トラベル",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "didi",
+    "id": "didi",
+    "name": "DiDi",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ins",
+    "id": "ins",
+    "name": "三井住友海上・保険料スマホ決済サービス",
+    "category": "online",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tepco",
+    "id": "tepco",
+    "name": "東京電力",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kansaidenryoku",
+    "id": "kansaidenryoku",
+    "name": "関西電力",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "chugokudenryoku",
+    "id": "chugokudenryoku",
+    "name": "中国電力",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kyusyudenryoku",
+    "id": "kyusyudenryoku",
+    "name": "九州電力",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "okinawadenryoku",
+    "id": "okinawadenryoku",
+    "name": "沖縄電力",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hokkaidougas",
+    "id": "hokkaidougas",
+    "name": "北海道ガス",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "keiyogas",
+    "id": "keiyogas",
+    "name": "京葉ガス",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tokyogas",
+    "id": "tokyogas",
+    "name": "東京ガス",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "osakagas",
+    "id": "osakagas",
+    "name": "大阪ガス",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "hiroshimagas",
+    "id": "hiroshimagas",
+    "name": "広島ガス",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "saitamashisuidou",
+    "id": "saitamashisuidou",
+    "name": "さいたま市水道局",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "tokyotosuidou",
+    "id": "tokyotosuidou",
+    "name": "東京都水道局",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sakaishisuidou",
+    "id": "sakaishisuidou",
+    "name": "堺市上下水道局",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "okayamashisuidou",
+    "id": "okayamashisuidou",
+    "name": "岡山市水道局",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kitakyusyushisuidou",
+    "id": "kitakyusyushisuidou",
+    "name": "北九州市上下水道局",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kumamotoshisuidou",
+    "id": "kumamotoshisuidou",
+    "name": "熊本市上下水道局",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "egao",
+    "id": "egao",
+    "name": "えがお",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "qsai",
+    "id": "qsai",
+    "name": "キューサイ",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "kenkoukazoku",
+    "id": "kenkoukazoku",
+    "name": "健康家族",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "sakuranomori",
+    "id": "sakuranomori",
+    "name": "さくらの森",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "chojyunosato",
+    "id": "chojyunosato",
+    "name": "長寿の里",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "fancl",
+    "id": "fancl",
+    "name": "ファンケル",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "belluna",
+    "id": "belluna",
+    "name": "ベルーナ",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yazuya",
+    "id": "yazuya",
+    "name": "やずや",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "wakasaseikatsu",
+    "id": "wakasaseikatsu",
+    "name": "わかさ生活",
+    "category": "invoice",
+    "viewCount": 0
+  },
+  {
+    "objectID": "arthikkoshi",
+    "id": "arthikkoshi",
+    "name": "アート引越センター",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "aichintai",
+    "id": "aichintai",
+    "name": "ai賃貸",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "arisan",
+    "id": "arisan",
+    "name": "アリさんマークの引越社",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ash",
+    "id": "ash",
+    "name": "アッシュ",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "diamondeyes",
+    "id": "diamondeyes",
+    "name": "ダイヤモンドアイズ",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "yellowhat",
+    "id": "yellowhat",
+    "name": "イエローハット",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "usachan2",
+    "id": "usachan2",
+    "name": "うさちゃんクリーニング",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "empire",
+    "id": "empire",
+    "name": "エンパイアー",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "autobacs",
+    "id": "autobacs",
+    "name": "オートバックス",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "nihoncyusyajokaihatsu",
+    "id": "nihoncyusyajokaihatsu",
+    "name": "日本駐車場開発",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "bikeou",
+    "id": "bikeou",
+    "name": "バイク王",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "fuji",
+    "id": "fuji",
+    "name": "Fuji",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "headlight",
+    "id": "headlight",
+    "name": "HEADLIGHT",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "ricoland",
+    "id": "ricoland",
+    "name": "RICOLAND",
+    "category": "other",
+    "viewCount": 0
+  },
+  {
+    "objectID": "relxle",
+    "id": "relxle",
+    "name": "りらくる",
+    "category": "other",
+    "viewCount": 0
+  }
+]
