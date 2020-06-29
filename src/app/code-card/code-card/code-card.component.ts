@@ -14,8 +14,8 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class CodeCardComponent implements OnInit {
   codeCards$: Observable<CodeCard[]> = this.cardService.getCodeCards();
+  searchQuery: string;
   result: any[];
-  paramHitsStore: any;
   filteredCards$: Observable<CodeCard[]>;
 
   constructor(
@@ -25,14 +25,14 @@ export class CodeCardComponent implements OnInit {
     private storeService: StoreService
   ) {
     this.route.queryParamMap.subscribe((param) => {
-      const searchQuery: string = param.get('searchQuery');
-      this.searchService.index.store.search(searchQuery).then((result) => {
+      this.searchQuery = param.get('searchQuery');
+      this.searchService.index.store.search(this.searchQuery).then((result) => {
         this.result = result.hits;
-        this.paramHitsStore = this.result.find(
-          (hitsStore) => hitsStore.name === searchQuery
+        const paramHitsStore = this.result.find(
+          (hitsStore) => hitsStore.name === this.searchQuery
         );
-        if (this.paramHitsStore) {
-          this.storeService.incrementViewCount(this.paramHitsStore);
+        if (paramHitsStore) {
+          this.storeService.incrementViewCount(paramHitsStore);
         }
         const resultIds = this.result.map((store) => store.id);
         return (this.filteredCards$ = this.codeCards$.pipe(

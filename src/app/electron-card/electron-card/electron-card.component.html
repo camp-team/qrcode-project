@@ -1,10 +1,18 @@
 <div class="container">
-  <ng-container *ngIf="result?.length; else default">
+  <ng-container
+    *ngIf="
+      result?.length && filteredCards$ | async as filteredCards;
+      else default
+    "
+  >
+    <h1 *ngIf="filteredCards.length">
+      {{ searchQuery }}で利用できるお支払い方法 : {{ filteredCards.length }}件
+    </h1>
+    <h1 *ngIf="!filteredCards.length">
+      {{ searchQuery }}で利用できるお支払い方法はありません
+    </h1>
     <div class="grid">
-      <mat-card
-        *ngFor="let electronCard of filteredCards$ | async"
-        class="card"
-      >
+      <mat-card *ngFor="let electronCard of filteredCards" class="card">
         <a
           class="card__trigger"
           routerLink="/electron-detail/{{ electronCard.cardId }}"
