@@ -55,7 +55,7 @@
       <mat-tab-group mat-align-tabs="center">
         <mat-tab label="カテゴリ別">
           <div
-            *ngFor="let category of codeCard.storeIds | idToStore: 'real'"
+            *ngFor="let category of codeCard.storeIds | idToStore"
             class="store__cover"
           >
             <h3 *ngIf="category.items.length" class="store__category">
