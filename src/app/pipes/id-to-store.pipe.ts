@@ -9,10 +9,7 @@ import { StoreCategory } from '../interfaces/store-category';
 export class IdToStorePipe implements PipeTransform {
   constructor(private storeService: StoreService) {}
 
-  transform(
-    ids: string[],
-    type: 'real' | 'online' | 'invoice'
-  ): StoreCategory[] {
+  transform(ids: string[]): StoreCategory[] {
     const stores = ids.map((id) => {
       return this.storeService.store.find((store) => store.id === id);
     });
@@ -20,13 +17,11 @@ export class IdToStorePipe implements PipeTransform {
       return {
         title: category.title,
         id: category.id,
-        type: category.type,
         items: stores.filter((store) => {
           return category.items.find((item) => item.id === store.id);
         }),
       };
     });
-    console.log(storeCategories);
-    return storeCategories.filter((category) => category.type === type);
+    return storeCategories;
   }
 }

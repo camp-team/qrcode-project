@@ -5,6 +5,10 @@ import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 import { UserData } from '@interfaces/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { startWith, debounceTime } from 'rxjs/operators';
+import { SearchService } from '../services/search.service';
+import { SearchIndex } from 'algoliasearch/lite';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,17 +16,45 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(
-    private drawerService: DrawerService,
-    private authservice: AuthService,
-    private snackBar: MatSnackBar
-  ) {}
-
-  search = new FormControl('');
+  searchControl: FormControl = new FormControl('');
   user$: Observable<UserData> = this.authservice.user$;
   isProcessing: boolean;
 
+  saerchOptions = [];
+  index: SearchIndex = this.searchService.index.popularStore;
+
+  constructor(
+    private drawerService: DrawerService,
+    private authservice: AuthService,
+    private snackBar: MatSnackBar,
+    private searchService: SearchService,
+    private router: Router
+  ) {
+    this.searchControl.valueChanges
+      .pipe(startWith(''), debounceTime(500))
+      .subscribe((key) => {
+        this.index
+          .search(key)
+          .then((result) => (this.saerchOptions = result.hits));
+      });
+  }
+
   ngOnInit(): void {}
+
+  setSearchQuery(value: string) {
+    this.searchControl.setValue(value, {
+      emitEvent: false,
+    });
+  }
+
+  routeSearch(searchQuery: string) {
+    this.router.navigate([], {
+      queryParamsHandling: 'merge',
+      queryParams: {
+        searchQuery,
+      },
+    });
+  }
 
   toggle() {
     this.drawerService.toggle();

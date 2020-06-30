@@ -1,16 +1,48 @@
 <div class="container">
-  <div class="grid">
-    <mat-card *ngFor="let electronCard of electronCards$ | async" class="card">
-      <a
-        class="card__trigger"
-        routerLink="/electron-detail/{{ electronCard.cardId }}"
+  <ng-container
+    *ngIf="
+      result?.length && filteredCards$ | async as filteredCards;
+      else default
+    "
+  >
+    <h1 *ngIf="filteredCards.length">
+      {{ searchQuery }}で利用できるお支払い方法 : {{ filteredCards.length }}件
+    </h1>
+    <h1 *ngIf="!filteredCards.length">
+      {{ searchQuery }}で利用できるお支払い方法はありません
+    </h1>
+    <div class="grid">
+      <mat-card *ngFor="let electronCard of filteredCards" class="card">
+        <a
+          class="card__trigger"
+          routerLink="/electron-detail/{{ electronCard.cardId }}"
+        >
+          <div
+            class="card__cover"
+            [style.background-image]="'url(' + electronCard.imageURL + ')'"
+          ></div>
+          <p class="card__name">{{ electronCard.name }}</p>
+        </a>
+      </mat-card>
+    </div>
+  </ng-container>
+  <ng-template #default>
+    <div class="grid">
+      <mat-card
+        *ngFor="let electronCard of electronCards$ | async"
+        class="card"
       >
-        <div
-          class="card__cover"
-          [style.background-image]="'url(' + electronCard.imageURL + ')'"
-        ></div>
-        <p class="card__name">{{ electronCard.name }}</p>
-      </a>
-    </mat-card>
-  </div>
+        <a
+          class="card__trigger"
+          routerLink="/electron-detail/{{ electronCard.cardId }}"
+        >
+          <div
+            class="card__cover"
+            [style.background-image]="'url(' + electronCard.imageURL + ')'"
+          ></div>
+          <p class="card__name">{{ electronCard.name }}</p>
+        </a>
+      </mat-card>
+    </div>
+  </ng-template>
 </div>
