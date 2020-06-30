@@ -26,8 +26,5 @@ export class AppComponent {
         .querySelector('[rel=icon]')
         .setAttribute('href', 'favicon-dev.svg');
     }
-    this.isMobile$ = this.breakpointObserver
-      .observe(Breakpoints.XSmall)
-      .pipe(map((result) => result.matches));
   }
 }
