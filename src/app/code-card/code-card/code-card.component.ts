@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
 import { Observable } from 'rxjs';
 import { CodeCard } from '@interfaces/code-card';
@@ -12,7 +12,7 @@ import { StoreService } from 'src/app/services/store.service';
   templateUrl: './code-card.component.html',
   styleUrls: ['./code-card.component.scss'],
 })
-export class CodeCardComponent implements OnInit {
+export class CodeCardComponent implements OnInit, OnDestroy {
   codeCards$: Observable<CodeCard[]> = this.cardService.getCodeCards();
   searchQuery: string;
   result: any[];
@@ -46,6 +46,10 @@ export class CodeCardComponent implements OnInit {
         ));
       });
     });
+  }
+  ngOnDestroy(): void {
+    // throw new Error();
+    this.searchService.searchControl.setValue('');
   }
 
   ngOnInit(): void {}
