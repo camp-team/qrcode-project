@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
 import { StoreService } from 'src/app/services/store.service';
 import { RouterService } from 'src/app/services/router.service';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-code-card',
@@ -18,6 +19,7 @@ export class CodeCardComponent implements OnInit, OnDestroy {
   searchQuery: string;
   result: any[];
   filteredCards$: Observable<CodeCard[]>;
+  previousUrl = this.routerService.previousUrl;
 
   constructor(
     private cardService: CardService,
@@ -33,7 +35,7 @@ export class CodeCardComponent implements OnInit, OnDestroy {
         const paramHitsStore = this.result.find(
           (hitsStore) => hitsStore.name === this.searchQuery
         );
-        if (paramHitsStore) {
+        if (paramHitsStore && !this.previousUrl) {
           this.storeService.incrementViewCount(paramHitsStore);
         }
         const resultIds = this.result.map((store) => store.id);
@@ -50,12 +52,19 @@ export class CodeCardComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    // throw new Error();
     this.searchService.searchControl.setValue('');
   }
 
   ngOnInit(): void {
     console.log(this.routerService.previousUrl);
     console.log(this.routerService.currentUrl);
+    if (this.previousUrl) {
+      const preFound = this.previousUrl.match(/code-detail/gm);
+      console.log(preFound);
+    }
+    const paragraph = '/code-detail/fO055QDHM2e2U5tblT2t';
+    console.log(paragraph);
+    const found = paragraph.match(/code-detail/gm);
+    console.log(found);
   }
 }

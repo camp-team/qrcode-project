@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { startWith, debounceTime } from 'rxjs/operators';
 import { SearchService } from '../services/search.service';
 import { SearchIndex } from 'algoliasearch/lite';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
