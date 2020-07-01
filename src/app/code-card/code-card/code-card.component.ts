@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
 import { StoreService } from 'src/app/services/store.service';
 import { RouterService } from 'src/app/services/router.service';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-code-card',
@@ -57,7 +56,7 @@ export class CodeCardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log(this.routerService.previousUrl);
-    console.log(this.routerService.currentUrl);
+    console.log(this.previousUrl);
     if (this.previousUrl) {
       const preFound = this.previousUrl.match(/code-detail/gm);
       console.log(preFound);
