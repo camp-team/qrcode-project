@@ -3,9 +3,10 @@ import { CardService } from 'src/app/services/card.service';
 import { Observable } from 'rxjs';
 import { CodeCard } from '@interfaces/code-card';
 import { SearchService } from 'src/app/services/search.service';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
 import { StoreService } from 'src/app/services/store.service';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-code-card',
@@ -17,26 +18,14 @@ export class CodeCardComponent implements OnInit, OnDestroy {
   searchQuery: string;
   result: any[];
   filteredCards$: Observable<CodeCard[]>;
-  previousUrl: string;
-  currentUrl: string;
 
   constructor(
     private cardService: CardService,
     private searchService: SearchService,
     private route: ActivatedRoute,
     private storeService: StoreService,
-    private router: Router
+    private routerService: RouterService
   ) {
-    this.router.events.subscribe((event) => {
-      this.currentUrl = this.router.url;
-      console.log(this.currentUrl);
-      if (event instanceof NavigationEnd) {
-        this.previousUrl = this.currentUrl;
-        this.currentUrl = event.url;
-        console.log(this.currentUrl);
-      }
-    });
-
     this.route.queryParamMap.subscribe((param) => {
       this.searchQuery = param.get('searchQuery');
       this.searchService.index.store.search(this.searchQuery).then((result) => {
@@ -65,5 +54,8 @@ export class CodeCardComponent implements OnInit, OnDestroy {
     this.searchService.searchControl.setValue('');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.routerService.previousUrl);
+    console.log(this.routerService.currentUrl);
+  }
 }
