@@ -19,6 +19,7 @@ export class CodeCardComponent implements OnInit, OnDestroy {
   result: any[];
   filteredCards$: Observable<CodeCard[]>;
   previousUrl = this.routerService.previousUrl;
+  previousFound: RegExpMatchArray;
 
   constructor(
     private cardService: CardService,
@@ -34,7 +35,12 @@ export class CodeCardComponent implements OnInit, OnDestroy {
         const paramHitsStore = this.result.find(
           (hitsStore) => hitsStore.name === this.searchQuery
         );
-        if (paramHitsStore && !this.previousUrl) {
+        if (this.previousUrl) {
+          this.previousFound = this.routerService.previousUrl.match(
+            /code-detail/gm
+          );
+        }
+        if (paramHitsStore) {
           this.storeService.incrementViewCount(paramHitsStore);
         }
         const resultIds = this.result.map((store) => store.id);
@@ -57,13 +63,5 @@ export class CodeCardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log(this.routerService.previousUrl);
     console.log(this.previousUrl);
-    if (this.previousUrl) {
-      const preFound = this.previousUrl.match(/code-detail/gm);
-      console.log(preFound);
-    }
-    const paragraph = '/code-detail/fO055QDHM2e2U5tblT2t';
-    console.log(paragraph);
-    const found = paragraph.match(/code-detail/gm);
-    console.log(found);
   }
 }
