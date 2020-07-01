@@ -6,6 +6,13 @@ import { MainShellComponent } from './main-shell/main-shell.component';
 
 const routes: Routes = [
   {
+    path: 'create',
+    loadChildren: () =>
+      import('./create/create.module').then((m) => m.CreateModule),
+    canActivate: [AdminGuard],
+    canLoad: [AdminGuard],
+  },
+  {
     path: '',
     component: MainShellComponent,
     children: [
@@ -14,13 +21,6 @@ const routes: Routes = [
         pathMatch: 'full',
         loadChildren: () =>
           import('./home/home.module').then((m) => m.HomeModule),
-      },
-      {
-        path: 'create',
-        loadChildren: () =>
-          import('./create/create.module').then((m) => m.CreateModule),
-        canActivate: [AdminGuard],
-        canLoad: [AdminGuard],
       },
       {
         path: 'code-card',
