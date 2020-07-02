@@ -1,15 +1,1 @@
-<app-header></app-header>
-
-<mat-sidenav-container>
-  <mat-sidenav
-    fixedInViewport
-    [fixedTopGap]="(isMobile$ | async) ? 97 : 57"
-    [mode]="(isMobile$ | async) ? 'over' : 'side'"
-    [opened]="isOpened$ | async"
-    ><app-drawer></app-drawer>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<router-outlet></router-outlet>

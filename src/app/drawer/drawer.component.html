@@ -25,7 +25,34 @@
       <p>ポイントカード</p>
     </a>
     <mat-divider></mat-divider>
-    <a mat-list-item routerLink="">比較する</a>
-    <a mat-list-item routerLink="">キャンペーン情報</a>
+    <a mat-list-item routerLink="">
+      <mat-icon>compare_arrows</mat-icon>
+      <p>比較する</p>
+    </a>
+    <a mat-list-item routerLink="">
+      <mat-icon>info</mat-icon>
+      <p>キャンペーン情報</p>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/intl/help">
+      <mat-icon>help</mat-icon>
+      <p>このサイトの使い方</p>
+    </a>
+    <a mat-list-item routerLink="/intl/terms">
+      <mat-icon>assignment</mat-icon>
+      <p>利用規約</p>
+    </a>
+    <a mat-list-item routerLink="/intl/legal">
+      <mat-icon>assignment</mat-icon>
+      <p>特定商取引に関する表記</p>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item href="https://twitter.com/mikatahiro" target="_blank">
+      <div class="icon">
+        <img src="/assets/images/icons/TWITTER.png" alt="" />
+      </div>
+      <p>制作者：ちゃま</p>
+      <mat-icon class="link">open_in_new</mat-icon>
+    </a>
   </mat-nav-list>
 </mat-list>

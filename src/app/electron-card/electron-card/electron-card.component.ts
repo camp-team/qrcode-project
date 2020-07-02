@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
 import { Observable } from 'rxjs';
 import { ElectronCard } from '@interfaces/electron-card';
@@ -12,7 +12,7 @@ import { StoreService } from 'src/app/services/store.service';
   templateUrl: './electron-card.component.html',
   styleUrls: ['./electron-card.component.scss'],
 })
-export class ElectronCardComponent implements OnInit {
+export class ElectronCardComponent implements OnInit, OnDestroy {
   electronCards$: Observable<
     ElectronCard[]
   > = this.cardService.getElectronCards();
@@ -47,6 +47,9 @@ export class ElectronCardComponent implements OnInit {
         ));
       });
     });
+  }
+  ngOnDestroy(): void {
+    this.searchService.searchControl.setValue('');
   }
 
   ngOnInit(): void {}

@@ -7,13 +7,16 @@
       <h1 class="">PAYpick</h1>
     </a>
   </div>
-  <form class="search" (ngSubmit)="routeSearch(searchControl.value)">
+  <form
+    class="search"
+    (ngSubmit)="routeSearch(searchService.searchControl.value)"
+  >
     <input
       class="search__input"
       type="text"
       placeholder="使えるお店で検索"
       [matAutocomplete]="auto"
-      [formControl]="searchControl"
+      [formControl]="searchService.searchControl"
     />
     <button class="search__button">
       <mat-icon>search</mat-icon>

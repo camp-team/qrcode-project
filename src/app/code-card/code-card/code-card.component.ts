@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
 import { Observable } from 'rxjs';
 import { CodeCard } from '@interfaces/code-card';
@@ -6,23 +6,27 @@ import { SearchService } from 'src/app/services/search.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
 import { StoreService } from 'src/app/services/store.service';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-code-card',
   templateUrl: './code-card.component.html',
   styleUrls: ['./code-card.component.scss'],
 })
-export class CodeCardComponent implements OnInit {
+export class CodeCardComponent implements OnInit, OnDestroy {
   codeCards$: Observable<CodeCard[]> = this.cardService.getCodeCards();
   searchQuery: string;
   result: any[];
   filteredCards$: Observable<CodeCard[]>;
+  previousUrl = this.routerService.previousUrl;
+  previousFound: RegExpMatchArray;
 
   constructor(
     private cardService: CardService,
     private searchService: SearchService,
     private route: ActivatedRoute,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private routerService: RouterService
   ) {
     this.route.queryParamMap.subscribe((param) => {
       this.searchQuery = param.get('searchQuery');
@@ -31,7 +35,12 @@ export class CodeCardComponent implements OnInit {
         const paramHitsStore = this.result.find(
           (hitsStore) => hitsStore.name === this.searchQuery
         );
-        if (paramHitsStore) {
+        if (this.previousUrl) {
+          this.previousFound = this.routerService.previousUrl.match(
+            /code-detail/gm
+          );
+        }
+        if (paramHitsStore && !this.previousFound) {
           this.storeService.incrementViewCount(paramHitsStore);
         }
         const resultIds = this.result.map((store) => store.id);
@@ -47,6 +56,12 @@ export class CodeCardComponent implements OnInit {
       });
     });
   }
+  ngOnDestroy(): void {
+    this.searchService.searchControl.setValue('');
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.routerService.previousUrl);
+    console.log(this.previousUrl);
+  }
 }

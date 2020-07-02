@@ -16,7 +16,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  searchControl: FormControl = new FormControl('');
   user$: Observable<UserData> = this.authservice.user$;
   isProcessing: boolean;
 
@@ -27,10 +26,10 @@ export class HeaderComponent implements OnInit {
     private drawerService: DrawerService,
     private authservice: AuthService,
     private snackBar: MatSnackBar,
-    private searchService: SearchService,
+    public searchService: SearchService,
     private router: Router
   ) {
-    this.searchControl.valueChanges
+    this.searchService.searchControl.valueChanges
       .pipe(startWith(''), debounceTime(500))
       .subscribe((key) => {
         this.index
@@ -42,7 +41,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   setSearchQuery(value: string) {
-    this.searchControl.setValue(value, {
+    this.searchService.searchControl.setValue(value, {
       emitEvent: false,
     });
   }
