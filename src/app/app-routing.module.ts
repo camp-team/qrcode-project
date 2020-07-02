@@ -48,6 +48,11 @@ const routes: Routes = [
             (m) => m.ElectronDetailModule
           ),
       },
+      {
+        path: 'intl',
+        loadChildren: () =>
+          import('./intl/intl.module').then((m) => m.IntlModule),
+      },
     ],
   },
   {
