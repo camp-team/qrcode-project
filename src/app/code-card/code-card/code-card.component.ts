@@ -40,7 +40,7 @@ export class CodeCardComponent implements OnInit, OnDestroy {
             /code-detail/gm
           );
         }
-        if (paramHitsStore) {
+        if (paramHitsStore && !this.previousFound) {
           this.storeService.incrementViewCount(paramHitsStore);
         }
         const resultIds = this.result.map((store) => store.id);
