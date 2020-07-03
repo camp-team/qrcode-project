@@ -18,7 +18,6 @@ export class CodeCardComponent implements OnInit, OnDestroy {
   searchQuery: string;
   result: any[];
   filteredCards$: Observable<CodeCard[]>;
-  previousUrl = this.routerService.previousUrl;
   previousFound: RegExpMatchArray;
 
   constructor(
@@ -35,7 +34,7 @@ export class CodeCardComponent implements OnInit, OnDestroy {
         const paramHitsStore = this.result.find(
           (hitsStore) => hitsStore.name === this.searchQuery
         );
-        if (this.previousUrl) {
+        if (this.routerService.previousUrl) {
           this.previousFound = this.routerService.previousUrl.match(
             /code-detail/gm
           );
@@ -60,8 +59,5 @@ export class CodeCardComponent implements OnInit, OnDestroy {
     this.searchService.searchControl.setValue('');
   }
 
-  ngOnInit(): void {
-    console.log(this.routerService.previousUrl);
-    console.log(this.previousUrl);
-  }
+  ngOnInit(): void {}
 }
