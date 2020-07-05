@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CodeCard } from '@interfaces/code-card';
 import { SearchService } from 'src/app/services/search.service';
 import { ActivatedRoute } from '@angular/router';
@@ -17,6 +17,7 @@ export class CodeCardComponent implements OnInit, OnDestroy {
   codeCards$: Observable<CodeCard[]> = this.cardService.getCodeCards();
   searchQuery: string;
   result: any[];
+  paramHitsStore: any;
   filteredCards$: Observable<CodeCard[]>;
   previousFound: RegExpMatchArray;
 
@@ -31,27 +32,33 @@ export class CodeCardComponent implements OnInit, OnDestroy {
       this.searchQuery = param.get('searchQuery');
       this.searchService.index.store.search(this.searchQuery).then((result) => {
         this.result = result.hits;
-        const paramHitsStore = this.result.find(
+        this.paramHitsStore = this.result.find(
           (hitsStore) => hitsStore.name === this.searchQuery
         );
-        if (this.routerService.previousUrl) {
-          this.previousFound = this.routerService.previousUrl.match(
-            /code-detail/gm
-          );
+        // if (this.routerService.previousUrl) {
+        //   this.previousFound = this.routerService.previousUrl.match(
+        //     /code-detail/gm
+        //   );
+        // }
+        // if (this.paramHitsStore && !this.previousFound) {
+        //   this.storeService.incrementViewCount(this.paramHitsStore);
+        // }
+        if (this.paramHitsStore) {
+          return (this.filteredCards$ = this.codeCards$.pipe(
+            map((codeCards) => {
+              return codeCards.filter((codeCard) => {
+                return codeCard.storeIds.find(
+                  (id) => id === this.paramHitsStore.id
+                );
+              });
+            })
+          ));
+        } else if (this.searchQuery && !this.paramHitsStore) {
+          return (this.filteredCards$ = of([]));
+        } else {
+          this.filteredCards$ = this.codeCards$;
+          this.searchService.searchControl.setValue('');
         }
-        if (paramHitsStore && !this.previousFound) {
-          this.storeService.incrementViewCount(paramHitsStore);
-        }
-        const resultIds = this.result.map((store) => store.id);
-        return (this.filteredCards$ = this.codeCards$.pipe(
-          map((codeCards) => {
-            return codeCards.filter((codeCard) => {
-              return codeCard.storeIds.find((id) =>
-                resultIds.find((resultId) => resultId === id)
-              );
-            });
-          })
-        ));
       });
     });
   }

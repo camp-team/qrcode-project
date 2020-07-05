@@ -47,12 +47,14 @@ export class HeaderComponent implements OnInit {
   }
 
   routeSearch(searchQuery: string) {
-    this.router.navigate([], {
-      queryParamsHandling: 'merge',
-      queryParams: {
-        searchQuery,
-      },
-    });
+    if (searchQuery) {
+      this.router.navigate([], {
+        queryParamsHandling: 'merge',
+        queryParams: {
+          searchQuery,
+        },
+      });
+    }
   }
 
   toggle() {
