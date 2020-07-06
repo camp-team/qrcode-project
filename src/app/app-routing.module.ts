@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminGuard } from './guards/admin.guard';
 import { MainShellComponent } from './main-shell/main-shell.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -52,6 +53,8 @@ const routes: Routes = [
         path: 'settings',
         loadChildren: () =>
           import('./settings/settings.module').then((m) => m.SettingsModule),
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
       },
       {
         path: 'intl',
