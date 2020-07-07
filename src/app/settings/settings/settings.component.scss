@@ -1,0 +1,48 @@
+@import 'mixins';
+
+.container {
+  @include sp {
+    padding: 120px 16px 80px;
+  }
+}
+
+.account {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-bottom: 40px;
+  &__icon {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    margin-right: 24px;
+    @include sp {
+      width: 88px;
+      height: 88px;
+    }
+  }
+  @include sp {
+    padding: 0;
+  }
+}
+
+.form-container {
+  margin: 0 auto;
+  padding: 40px 0 40px;
+  max-width: 700px;
+}
+
+.edit {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+
+.upload {
+  width: inherit;
+  height: inherit;
+  background: center/cover;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
