@@ -17,8 +17,8 @@
     border-radius: 50%;
     margin-right: 24px;
     @include sp {
-      width: 88px;
-      height: 88px;
+      width: 80px;
+      height: 80px;
     }
   }
   @include sp {
@@ -30,13 +30,18 @@
   margin: 0 auto;
   padding: 40px 0 40px;
   max-width: 700px;
+  text-align: center;
 }
 
 .edit {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 24px;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 24px;
   cursor: pointer;
+  @include sp {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .upload {
@@ -45,4 +50,20 @@
   background: center/cover;
   box-sizing: border-box;
   border-radius: 50%;
+}
+
+image-cropper {
+  display: none;
+}
+
+image-cropper.active {
+  display: block;
+  margin: 24px auto;
+  width: 280px;
+}
+
+mat-form-field {
+  display: block;
+  margin: 0 auto;
+  max-width: 300px;
 }

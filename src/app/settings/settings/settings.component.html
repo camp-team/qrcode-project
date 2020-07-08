@@ -8,26 +8,38 @@
         <h2>{{ user.email }}</h2>
       </div>
     </div>
-    <mat-tab-group>
+    <mat-tab-group mat-align-tabs="center">
       <mat-tab label="設定">
         <div class="form-container">
-          <form>
+          <form (ngSubmit)="submit()">
             <div class="edit">
               <div
                 class="upload"
-                [style.background-image]="'url(' + user.avatarURL + ')'"
+                [style.background-image]="'url(' + imageURL + ')'"
                 (click)="imageInput.click()"
               >
                 <input
                   type="file"
                   style="display: none;"
                   accept=".png, .img, .jpeg"
-                  (change)="uploadAvatar($event)"
+                  (change)="fileChangeEvent($event)"
                   #imageInput
                   required
                 />
               </div>
             </div>
+
+            <image-cropper
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1 / 1"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded()"
+              (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()"
+              [class.active]="imageChangedEvent"
+            ></image-cropper>
 
             <mat-form-field>
               <mat-label>ユーザー名</mat-label>

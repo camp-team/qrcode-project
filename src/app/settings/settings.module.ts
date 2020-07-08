@@ -6,6 +6,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [SettingsComponent],
@@ -15,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
     SharedModule,
     MatFormFieldModule,
     MatInputModule,
+    ImageCropperModule,
+    MatSnackBarModule,
   ],
 })
 export class SettingsModule {}
