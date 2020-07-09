@@ -8,9 +8,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [SettingsComponent],
+  declarations: [SettingsComponent, DeleteUserDialogComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,
@@ -19,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     ImageCropperModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
 })
 export class SettingsModule {}

@@ -67,3 +67,10 @@ mat-form-field {
   margin: 0 auto;
   max-width: 300px;
 }
+
+.delete {
+  padding: 100px;
+  @include sp {
+    padding: 100px 0;
+  }
+}

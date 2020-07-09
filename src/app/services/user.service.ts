@@ -23,4 +23,8 @@ export class UserService {
       { merge: true }
     );
   }
+
+  deleteUser(uid: string): Promise<void> {
+    return this.db.doc(`users/${uid}`).delete();
+  }
 }

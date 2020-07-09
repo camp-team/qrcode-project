@@ -11,6 +11,7 @@
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="設定">
         <div class="form-container">
+          <h3>アカウントを更新する</h3>
           <form (ngSubmit)="submit()">
             <div class="edit">
               <div
@@ -58,6 +59,20 @@
             </mat-form-field>
             <button mat-raised-button color="primary">更新する</button>
           </form>
+          <div class="delete">
+            <h3>アカウントを削除する</h3>
+            <p>
+              一度アカウントを削除すると、二度と元に戻せません。
+            </p>
+            <p>ご注意ください。</p>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="openDeleteUserDialog()"
+            >
+              削除する
+            </button>
+          </div>
         </div>
       </mat-tab>
       <mat-tab label="お支払い情報"> Content 2 </mat-tab>

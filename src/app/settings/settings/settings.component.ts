@@ -7,6 +7,8 @@ import { UserService } from 'src/app/services/user.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
 
 @Component({
   selector: 'app-settings',
@@ -29,7 +31,8 @@ export class SettingsComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private storage: AngularFireStorage,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     this.userService.getUser(this.uid).subscribe((user) => {
       this.imageURL = user.avatarURL;
@@ -66,8 +69,8 @@ export class SettingsComponent implements OnInit {
     //   .ref(`users/${this.uid}`)
     //   .putString(this.imageURL)
     //   .then(async (resultImage) => {
-    //      this.imageURL = await resultImage.ref.getDownloadURL();
-    //     console.log(this.imageURL);
+    //      this.imageURL =  await resultImage.ref.getDownloadURL();
+    //      console.log(this.imageURL);
     //   });
     this.imageURL = await this.uploadImage(this.uid, this.imageURL);
     return this.userService
@@ -80,6 +83,21 @@ export class SettingsComponent implements OnInit {
         this.snackBar.open('アカウントを更新しました', null, {
           duration: 2000,
         });
+      });
+  }
+
+  openDeleteUserDialog() {
+    this.dialog
+      .open(DeleteUserDialogComponent)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.userService.deleteUser(this.uid).then(() => {
+            this.snackBar.open('アカウントを削除しました', null, {
+              duration: 2000,
+            });
+          });
+        }
       });
   }
 }
