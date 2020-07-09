@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawerService } from '../services/drawer.service';
-import { FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 import { UserData } from '@interfaces/user';
@@ -9,6 +8,7 @@ import { startWith, debounceTime } from 'rxjs/operators';
 import { SearchService } from '../services/search.service';
 import { SearchIndex } from 'algoliasearch/lite';
 import { Router } from '@angular/router';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +27,8 @@ export class HeaderComponent implements OnInit {
     private authservice: AuthService,
     private snackBar: MatSnackBar,
     public searchService: SearchService,
-    private router: Router
+    private router: Router,
+    private storeService: StoreService
   ) {
     this.searchService.searchControl.valueChanges
       .pipe(startWith(''), debounceTime(500))
@@ -48,6 +49,14 @@ export class HeaderComponent implements OnInit {
 
   routeSearch(searchQuery: string) {
     if (searchQuery) {
+      this.index.search(searchQuery).then(async (searchResult) => {
+        const hits: any = searchResult.hits;
+        const hitStore = hits.find((hit) => hit.name === searchQuery);
+        console.log(hitStore);
+        if (hitStore) {
+          await this.storeService.incrementViewCount(hitStore);
+        }
+      });
       this.router.navigate([], {
         queryParamsHandling: 'merge',
         queryParams: {
