@@ -4,7 +4,6 @@ import { CardService } from 'src/app/services/card.service';
 import { Observable, observable } from 'rxjs';
 import { ElectronCard } from '@interfaces/electron-card';
 import { switchMap } from 'rxjs/operators';
-import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-electron-detail',

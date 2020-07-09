@@ -9,6 +9,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
+import { Router } from '@angular/router';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Component({
   selector: 'app-settings',
@@ -32,10 +34,13 @@ export class SettingsComponent implements OnInit {
     private userService: UserService,
     private storage: AngularFireStorage,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private fns: AngularFireFunctions
   ) {
     this.userService.getUser(this.uid).subscribe((user) => {
       this.imageURL = user.avatarURL;
+
       this.userControl.patchValue(user.name);
     });
   }
@@ -60,7 +65,9 @@ export class SettingsComponent implements OnInit {
   }
 
   async uploadImage(uid: string, imageURL: string) {
-    const result = await this.storage.ref(`users/${uid}`).putString(imageURL);
+    const result = await this.storage
+      .ref(`users/${uid}`)
+      .putString(imageURL, 'data_url');
     return result.ref.getDownloadURL();
   }
 
@@ -73,7 +80,7 @@ export class SettingsComponent implements OnInit {
     //      console.log(this.imageURL);
     //   });
     this.imageURL = await this.uploadImage(this.uid, this.imageURL);
-    return this.userService
+    this.userService
       .updateUser({
         name: this.userControl.value,
         avatarURL: this.imageURL,
@@ -83,6 +90,7 @@ export class SettingsComponent implements OnInit {
         this.snackBar.open('アカウントを更新しました', null, {
           duration: 2000,
         });
+        this.imageChangedEvent = '';
       });
   }
 
@@ -92,11 +100,21 @@ export class SettingsComponent implements OnInit {
       .afterClosed()
       .subscribe((result) => {
         if (result) {
-          this.userService.deleteUser(this.uid).then(() => {
-            this.snackBar.open('アカウントを削除しました', null, {
-              duration: 2000,
+          // this.userService.deleteUser(this.uid).then(() => {
+          //   this.snackBar.open('アカウントを削除しました', null, {
+          //     duration: 5000,
+          //   });
+          // });
+          const callable = this.fns.httpsCallable('deleteUser');
+          callable(this.uid)
+            .toPromise()
+            .then(() => {
+              console.log(this.uid);
+              this.snackBar.open('アカウントを削除しました', null, {
+                duration: 5000,
+              });
+              this.router.navigateByUrl('/');
             });
-          });
         }
       });
   }

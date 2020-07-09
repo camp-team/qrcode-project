@@ -20,3 +20,17 @@ export const createUser = functions
     };
     return db.doc(`users/${user.uid}`).set(userData);
   });
+
+export const deleteUser = functions
+  .region('asia-northeast1')
+  .https.onCall((data, context) => {
+    console.log(data);
+    return admin.auth().deleteUser(data);
+  });
+
+export const deleteUserData = functions
+  .region('asia-northeast1')
+  .auth.user()
+  .onDelete((user) => {
+    return db.doc(`users/${user.uid}`).delete();
+  });
