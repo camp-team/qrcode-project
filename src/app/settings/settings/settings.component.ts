@@ -39,9 +39,10 @@ export class SettingsComponent implements OnInit {
     private fns: AngularFireFunctions
   ) {
     this.userService.getUser(this.uid).subscribe((user) => {
-      this.imageURL = user.avatarURL;
-
-      this.userControl.patchValue(user.name);
+      if (user) {
+        this.imageURL = user.avatarURL;
+        this.userControl.patchValue(user.name);
+      }
     });
   }
 
@@ -72,13 +73,6 @@ export class SettingsComponent implements OnInit {
   }
 
   async submit() {
-    // await this.storage
-    //   .ref(`users/${this.uid}`)
-    //   .putString(this.imageURL)
-    //   .then(async (resultImage) => {
-    //      this.imageURL =  await resultImage.ref.getDownloadURL();
-    //      console.log(this.imageURL);
-    //   });
     this.imageURL = await this.uploadImage(this.uid, this.imageURL);
     this.userService
       .updateUser({
@@ -94,27 +88,23 @@ export class SettingsComponent implements OnInit {
       });
   }
 
+  deleteUser(uid: string) {
+    const callable = this.fns.httpsCallable('deleteUser');
+    return callable(uid).toPromise();
+  }
+
   openDeleteUserDialog() {
     this.dialog
       .open(DeleteUserDialogComponent)
       .afterClosed()
       .subscribe((result) => {
         if (result) {
-          // this.userService.deleteUser(this.uid).then(() => {
-          //   this.snackBar.open('アカウントを削除しました', null, {
-          //     duration: 5000,
-          //   });
-          // });
-          const callable = this.fns.httpsCallable('deleteUser');
-          callable(this.uid)
-            .toPromise()
-            .then(() => {
-              console.log(this.uid);
-              this.snackBar.open('アカウントを削除しました', null, {
-                duration: 5000,
-              });
-              this.router.navigateByUrl('/');
+          this.deleteUser(this.uid).then(() => {
+            this.snackBar.open('アカウントを削除しました', null, {
+              duration: 5000,
             });
+            this.router.navigateByUrl('/');
+          });
         }
       });
   }

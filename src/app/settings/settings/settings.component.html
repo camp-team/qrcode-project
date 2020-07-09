@@ -34,6 +34,7 @@
               [imageChangedEvent]="imageChangedEvent"
               [maintainAspectRatio]="true"
               [aspectRatio]="1 / 1"
+              [roundCropper]="true"
               format="png"
               (imageCropped)="imageCropped($event)"
               (imageLoaded)="imageLoaded()"
@@ -57,7 +58,13 @@
                 >長すぎます</mat-error
               >
             </mat-form-field>
-            <button mat-raised-button color="primary">更新する</button>
+            <button
+              [disabled]="userControl.invalid"
+              mat-raised-button
+              color="primary"
+            >
+              更新する
+            </button>
           </form>
           <div class="delete">
             <h3>アカウントを削除する</h3>

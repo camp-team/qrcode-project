@@ -24,7 +24,6 @@ export const createUser = functions
 export const deleteUser = functions
   .region('asia-northeast1')
   .https.onCall((data, context) => {
-    console.log(data);
     return admin.auth().deleteUser(data);
   });
 
