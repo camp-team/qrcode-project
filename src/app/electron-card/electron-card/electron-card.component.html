@@ -1,5 +1,7 @@
 <div class="container">
-  <ng-container *ngIf="filteredCards$ | async as filteredCards">
+  <ng-container
+    *ngIf="result?.length && filteredCards$ | async as filteredCards"
+  >
     <h1 *ngIf="filteredCards.length">
       {{ searchQuery }}で利用できるお支払い方法 : {{ filteredCards.length }}件
     </h1>
