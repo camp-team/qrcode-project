@@ -33,7 +33,7 @@ export class ElectronCardComponent implements OnInit, OnDestroy {
           (hitsStore) => hitsStore.name === this.searchQuery
         );
         if (paramHitsStore) {
-          this.storeSerice.incrementViewCount(paramHitsStore);
+          // this.storeSerice.incrementViewCount(paramHitsStore);
         }
         const resultIds: string[] = this.result.map((store) => store.id);
         return (this.filteredCards$ = this.electronCards$.pipe(
