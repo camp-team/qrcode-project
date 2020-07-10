@@ -4,9 +4,7 @@ import { Observable, of } from 'rxjs';
 import { CodeCard } from '@interfaces/code-card';
 import { SearchService } from 'src/app/services/search.service';
 import { ActivatedRoute } from '@angular/router';
-import { map, tap } from 'rxjs/operators';
-import { StoreService } from 'src/app/services/store.service';
-import { RouterService } from 'src/app/services/router.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-code-card',
@@ -17,43 +15,29 @@ export class CodeCardComponent implements OnInit, OnDestroy {
   codeCards$: Observable<CodeCard[]> = this.cardService.getCodeCards();
   searchQuery: string;
   result: any[];
-  paramHitsStore: any;
   filteredCards$: Observable<CodeCard[]>;
-  previousFound: RegExpMatchArray;
 
   constructor(
     private cardService: CardService,
     private searchService: SearchService,
-    private route: ActivatedRoute,
-    private storeService: StoreService,
-    private routerService: RouterService
+    private route: ActivatedRoute
   ) {
     this.route.queryParamMap.subscribe((param) => {
       this.searchQuery = param.get('searchQuery');
       this.searchService.index.store.search(this.searchQuery).then((result) => {
         this.result = result.hits;
-        this.paramHitsStore = this.result.find(
+        const paramHitsStore = this.result.find(
           (hitsStore) => hitsStore.name === this.searchQuery
         );
-        // if (this.routerService.previousUrl) {
-        //   this.previousFound = this.routerService.previousUrl.match(
-        //     /code-detail/gm
-        //   );
-        // }
-        // if (this.paramHitsStore && !this.previousFound) {
-        //   this.storeService.incrementViewCount(this.paramHitsStore);
-        // }
-        if (this.paramHitsStore) {
+        if (paramHitsStore) {
           return (this.filteredCards$ = this.codeCards$.pipe(
             map((codeCards) => {
               return codeCards.filter((codeCard) => {
-                return codeCard.storeIds.find(
-                  (id) => id === this.paramHitsStore.id
-                );
+                return codeCard.storeIds.find((id) => id === paramHitsStore.id);
               });
             })
           ));
-        } else if (this.searchQuery && !this.paramHitsStore) {
+        } else if (this.searchQuery && !paramHitsStore) {
           return (this.filteredCards$ = of([]));
         } else {
           this.filteredCards$ = this.codeCards$;
