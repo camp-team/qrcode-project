@@ -1,0 +1,96 @@
+<div class="container">
+  <p>アカウント</p>
+  <ng-container class="settings" *ngIf="user$ | async as user">
+    <div class="account">
+      <img class="account__icon" [src]="user.avatarURL" alt="" />
+      <div class="account__body">
+        <h1>{{ user.name }}</h1>
+        <h2>{{ user.email }}</h2>
+      </div>
+    </div>
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="設定">
+        <div class="form-container">
+          <h3>アカウントを更新する</h3>
+          <form (ngSubmit)="submit()">
+            <div class="edit">
+              <div
+                class="upload"
+                [style.background-image]="'url(' + imageURL + ')'"
+                (click)="imageInput.click()"
+              >
+                <input
+                  type="file"
+                  style="display: none;"
+                  accept=".png, .img, .jpeg"
+                  (change)="fileChangeEvent($event)"
+                  #imageInput
+                  required
+                />
+              </div>
+            </div>
+
+            <image-cropper
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1 / 1"
+              [roundCropper]="true"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded()"
+              (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()"
+              [class.active]="imageChangedEvent"
+            ></image-cropper>
+
+            <mat-form-field>
+              <mat-label>ユーザー名</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                [formControl]="userControl"
+                required
+              />
+              <mat-error *ngIf="userControl.hasError('required')"
+                >必須入力です</mat-error
+              >
+              <mat-error *ngIf="userControl.hasError('maxlength')"
+                >長すぎます</mat-error
+              >
+            </mat-form-field>
+            <button
+              [disabled]="userControl.invalid"
+              mat-raised-button
+              color="primary"
+            >
+              更新する
+            </button>
+          </form>
+          <div class="delete">
+            <h3>アカウントを削除する</h3>
+            <p>
+              一度アカウントを削除すると、二度と元に戻せません。
+            </p>
+            <p>ご注意ください。</p>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="openDeleteUserDialog()"
+            >
+              削除する
+            </button>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="お支払い情報">
+        <div class="form-container">
+          <h3>クレジットカード</h3>
+          <p>
+            クレジットカードは世界的な決済サービスStripeによって厳重に保管されており、漏洩の心配はありません。
+          </p>
+          <button mat-raised-button color="primary">カードを登録する</button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
+</div>

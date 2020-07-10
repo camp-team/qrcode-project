@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ElectronCard } from '@interfaces/electron-card';
 import { SearchService } from 'src/app/services/search.service';
 import { ActivatedRoute } from '@angular/router';
@@ -22,8 +22,7 @@ export class ElectronCardComponent implements OnInit, OnDestroy {
   constructor(
     private cardService: CardService,
     private searchService: SearchService,
-    private router: ActivatedRoute,
-    private storeSerice: StoreService
+    private router: ActivatedRoute
   ) {
     this.router.queryParamMap.subscribe((param) => {
       this.searchQuery = param.get('searchQuery');
@@ -33,18 +32,21 @@ export class ElectronCardComponent implements OnInit, OnDestroy {
           (hitsStore) => hitsStore.name === this.searchQuery
         );
         if (paramHitsStore) {
-          this.storeSerice.incrementViewCount(paramHitsStore);
+          return (this.filteredCards$ = this.electronCards$.pipe(
+            map((electronCards) => {
+              return electronCards.filter((electronCard) => {
+                return electronCard.storeIds.find(
+                  (id) => id === paramHitsStore.id
+                );
+              });
+            })
+          ));
+        } else if (this.searchQuery && !paramHitsStore) {
+          return (this.filteredCards$ = of([]));
+        } else {
+          this.filteredCards$ = this.electronCards$;
+          this.searchService.searchControl.setValue('');
         }
-        const resultIds: string[] = this.result.map((store) => store.id);
-        return (this.filteredCards$ = this.electronCards$.pipe(
-          map((electronCards) => {
-            return electronCards.filter((electronCard) => {
-              return electronCard.storeIds.find((id) =>
-                resultIds.find((resultId) => resultId === id)
-              );
-            });
-          })
-        ));
       });
     });
   }

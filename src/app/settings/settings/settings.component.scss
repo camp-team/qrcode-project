@@ -1,0 +1,76 @@
+@import 'mixins';
+
+.container {
+  @include sp {
+    padding: 120px 16px 80px;
+  }
+}
+
+.account {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-bottom: 40px;
+  &__icon {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    margin-right: 24px;
+    @include sp {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  @include sp {
+    padding: 0;
+  }
+}
+
+.form-container {
+  margin: 0 auto;
+  padding: 40px 0 40px;
+  max-width: 700px;
+  text-align: center;
+}
+
+.edit {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 24px;
+  cursor: pointer;
+  @include sp {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.upload {
+  width: inherit;
+  height: inherit;
+  background: center/cover;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+
+image-cropper {
+  display: none;
+}
+
+image-cropper.active {
+  display: block;
+  margin: 24px auto;
+  width: 280px;
+}
+
+mat-form-field {
+  display: block;
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+.delete {
+  padding: 100px;
+  @include sp {
+    padding: 100px 0;
+  }
+}

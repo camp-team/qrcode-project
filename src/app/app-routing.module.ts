@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminGuard } from './guards/admin.guard';
 import { MainShellComponent } from './main-shell/main-shell.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -47,6 +48,13 @@ const routes: Routes = [
           import('./electron-detail/electron-detail.module').then(
             (m) => m.ElectronDetailModule
           ),
+      },
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('./settings/settings.module').then((m) => m.SettingsModule),
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
       },
       {
         path: 'intl',

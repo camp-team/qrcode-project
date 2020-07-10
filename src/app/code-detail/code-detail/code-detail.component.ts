@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { CodeCard } from '@interfaces/code-card';
@@ -13,6 +13,7 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class CodeDetailComponent implements OnInit {
   cardId: string;
+  searchQuery: string;
 
   codeCard$: Observable<CodeCard> = this.route.paramMap.pipe(
     switchMap((map) => {
@@ -24,8 +25,17 @@ export class CodeDetailComponent implements OnInit {
   constructor(
     private cardService: CardService,
     private route: ActivatedRoute,
-    private storeService: StoreService
-  ) {}
+    private router: Router
+  ) {
+    this.route.queryParamMap.subscribe((param) => {
+      this.searchQuery = param.get('searchQuery');
+      if (this.searchQuery) {
+        this.router.navigate(['/code-card'], {
+          queryParams: { searchQuery: this.searchQuery },
+        });
+      }
+    });
+  }
 
   ngOnInit(): void {}
 }
