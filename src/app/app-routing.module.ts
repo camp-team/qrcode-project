@@ -50,6 +50,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'compare',
+        loadChildren: () =>
+          import('./compare/compare.module').then((m) => m.CompareModule),
+      },
+      {
         path: 'settings',
         loadChildren: () =>
           import('./settings/settings.module').then((m) => m.SettingsModule),
