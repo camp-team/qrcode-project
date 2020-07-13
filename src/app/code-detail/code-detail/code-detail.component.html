@@ -54,6 +54,7 @@
       <h2 class="store__title">使えるお店</h2>
       <mat-tab-group mat-align-tabs="center">
         <mat-tab label="カテゴリ別">
+          <h3>※店舗によってはご利用頂けない場合があります</h3>
           <div
             *ngFor="let category of codeCard.storeIds | idToStore"
             class="store__cover"
@@ -75,7 +76,6 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="周辺のお店"> </mat-tab>
       </mat-tab-group>
     </div>
   </div>
