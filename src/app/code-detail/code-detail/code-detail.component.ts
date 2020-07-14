@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { CodeCard } from '@interfaces/code-card';
 import { RouterService } from 'src/app/services/router.service';
 
@@ -19,7 +19,8 @@ export class CodeDetailComponent implements OnInit, OnDestroy {
     switchMap((map) => {
       this.cardId = map.get('id');
       return this.cardService.getCodeCard(this.cardId);
-    })
+    }),
+    tap(() => this.routerService.toggleSticky())
   );
 
   constructor(
@@ -28,7 +29,7 @@ export class CodeDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private routerService: RouterService
   ) {
-    this.routerService.toggleSticky();
+    // this.routerService.toggleSticky();
     this.route.queryParamMap.subscribe((param) => {
       this.searchQuery = param.get('searchQuery');
       if (this.searchQuery) {
