@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .compare {
   text-align: center;
   &__wrapper {
@@ -6,6 +8,9 @@
   }
   &__cards {
     padding: 40px;
+    @include sp {
+      padding: 16px;
+    }
   }
 }
 
