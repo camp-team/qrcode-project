@@ -1,3 +1,20 @@
 .compare {
   text-align: center;
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  &__cards {
+    padding: 40px;
+  }
+}
+
+.card {
+  margin-bottom: 40px;
+}
+
+.detail {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 0;
 }
