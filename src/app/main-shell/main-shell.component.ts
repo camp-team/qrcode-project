@@ -4,6 +4,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RouterService } from '../services/router.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-shell',
@@ -18,12 +19,30 @@ export class MainShellComponent implements OnInit {
   constructor(
     private drawerService: DrawerService,
     private breakpointObserver: BreakpointObserver,
-    private routerService: RouterService
+    private routerService: RouterService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
+    this.route.paramMap.subscribe((param) => {
+      const cardId = param.get('/code-detail/:id');
+      console.log(cardId);
+    });
     this.isMobile$ = this.breakpointObserver
       .observe(Breakpoints.XSmall)
       .pipe(map((result) => result.matches));
   }
 
   ngOnInit(): void {}
+
+  navigate() {
+    this.route.paramMap.subscribe((paramMap) => {
+      const id = paramMap.get('id');
+      console.log(id);
+      this.router.navigate(['/compare'], {
+        queryParams: {
+          cardId1: id,
+        },
+      });
+    });
+  }
 }
