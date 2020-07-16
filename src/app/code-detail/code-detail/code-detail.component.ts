@@ -29,7 +29,6 @@ export class CodeDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private routerService: RouterService
   ) {
-    // this.routerService.toggleSticky();
     this.route.queryParamMap.subscribe((param) => {
       this.searchQuery = param.get('searchQuery');
       if (this.searchQuery) {
