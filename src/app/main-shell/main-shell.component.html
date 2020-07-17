@@ -12,13 +12,3 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<div
-  *ngIf="isSticky$ | async"
-  class="sticky"
-  [class.active]="(isOpened$ | async) && (isMobile$ | async)"
->
-  <button (click)="navigate()" mat-fab color="accent">
-    <mat-icon>compare_arrows</mat-icon>
-  </button>
-</div>

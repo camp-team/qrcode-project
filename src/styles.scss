@@ -134,18 +134,15 @@ img {
 }
 
 .sticky {
-  position: sticky;
-  text-align: right;
-  z-index: 2000;
+  position: fixed;
   bottom: 0;
-  margin: 0 auto;
-  padding: 24px;
-  max-width: 1024px;
-  @include sp {
-    padding: 16px;
+  right: 0;
+  left: 0;
+  text-align: right;
+  z-index: 1;
+  &__container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 24px;
   }
-}
-
-.sticky.active {
-  z-index: 0;
 }

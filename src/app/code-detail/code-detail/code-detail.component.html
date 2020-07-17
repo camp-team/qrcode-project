@@ -78,6 +78,19 @@
         </mat-tab>
       </mat-tab-group>
     </div>
+
+    <div class="sticky">
+      <div class="sticky__container">
+        <button
+          [routerLink]="['/compare']"
+          [queryParams]="{ cardId1: codeCard.cardId }"
+          mat-fab
+          color="accent"
+        >
+          <mat-icon>compare_arrows</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </ng-container>
 
