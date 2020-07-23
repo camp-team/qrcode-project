@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { CodeCard } from '@interfaces/code-card';
 import { SearchService } from 'src/app/services/search.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, take, switchMap } from 'rxjs/operators';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -28,20 +28,18 @@ export class CodeCardComponent implements OnInit, OnDestroy {
     map((codeCards) => {
       const formData = this.form.value;
       if (formData.firstSelect) {
-        console.log(formData.firstSelect);
-        console.log(this.firstSelectControl.value);
         return codeCards.filter(
           (codeCard) => codeCard.cardId !== formData.firstSelect
         );
       } else if (formData.lastSelect) {
-        console.log(formData.lastSelect);
-        console.log(this.lastSelectControl.value);
         return codeCards.filter(
           (codeCard) => codeCard.cardId !== formData.lastSelect
         );
       }
     })
   );
+  firstCards$: Observable<CodeCard[]>;
+  lastCards$: Observable<CodeCard[]> = null;
 
   get firstSelectControl() {
     return this.form.get('firstSelect') as FormControl;
@@ -84,37 +82,57 @@ export class CodeCardComponent implements OnInit, OnDestroy {
 
   navigate() {
     const formData = this.form.value;
+    // this.cardService
+    //   .getCodeCards()
+    //   .pipe(
+    //     map((codeCards) => {
+    //       if (formData.firstSelect) {
+    //         return codeCards.filter(
+    //           (codeCard) => codeCard.cardId !== formData.firstSelect
+    //         );
+    //       } else if (formData.lastSelect) {
+    //         return codeCards.filter(
+    //           (codeCard) => codeCard.cardId !== formData.lastSelect
+    //         );
+    //       }
+    //     })
+    //   )
+    //   .subscribe((res) => {
+    //     console.log(res);
+    //   });
 
-    this.cardService
-      .getCodeCards()
-      .pipe(
-        map((codeCards) => {
-          // const formData = this.form.value;
-          if (formData.firstSelect) {
-            return codeCards.filter(
-              (codeCard) => codeCard.cardId !== formData.firstSelect
-            );
-          } else if (formData.lastSelect) {
-            return codeCards.filter(
-              (codeCard) => codeCard.cardId !== formData.lastSelect
-            );
-          }
-        })
-      )
-      .subscribe((res) => {
-        console.log(res);
-      });
-
-    // this.router.navigate(['/compare'], {
-    //   queryParams: {
-    //     cardIds: [formData.firstSelect, formData.lastSelect].join(','),
-    //   },
-    // });
+    this.router.navigate(['/compare'], {
+      queryParams: {
+        cardIds: [formData.firstSelect, formData.lastSelect].join(','),
+      },
+    });
   }
 
   ngOnDestroy(): void {
     this.searchService.searchControl.setValue('');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.lastCards$ = this.firstSelectControl.valueChanges.pipe(
+    //   switchMap((id) => {
+    //     console.log(id);
+    //     if (id) {
+    //       return this.codeCards$.pipe(
+    //         map((codeCards) => {
+    //           return codeCards.filter((codeCard) => codeCard.cardId !== id);
+    //         })
+    //       );
+    //     } else {
+    //       return null;
+    //     }
+    //   })
+    // );
+    this.firstSelectControl.valueChanges.subscribe((id) => {
+      this.lastCards$ = this.codeCards$.pipe(
+        map((codeCards) => {
+          return codeCards.filter((codeCard) => codeCard.cardId !== id);
+        })
+      );
+    });
+  }
 }
