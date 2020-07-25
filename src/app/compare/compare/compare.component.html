@@ -1,6 +1,6 @@
 <div class="container">
   <div class="compare">
-    <h1>比較する</h1>
+    <h1>{{ type }}を比較する</h1>
     <p>compare works!</p>
     <div class="compare__wrapper">
       <div class="compare__select">
@@ -15,7 +15,7 @@
               (selectionChange)="navigate($event.value, index)"
             >
               <mat-option
-                *ngFor="let codeCard of codeCards$ | async"
+                *ngFor="let codeCard of cardsOption$ | async"
                 [value]="codeCard.cardId"
               >
                 {{ codeCard.name }}

@@ -13,10 +13,11 @@ import { map, tap, switchMap } from 'rxjs/operators';
   styleUrls: ['./compare.component.scss'],
 })
 export class CompareComponent implements OnInit {
-  codeCards$: Observable<CodeCard[]>;
+  cardsOption$: Observable<CodeCard[] | ElectronCard[]>;
   selectedCard$: Observable<CodeCard>;
   comparedCards$: Observable<CodeCard[]>;
   selectedCardIds: string[] = [];
+  type: string;
 
   constructor(
     private cardService: CardService,
@@ -24,10 +25,19 @@ export class CompareComponent implements OnInit {
     private route: ActivatedRoute,
     public mobileService: MobileService
   ) {
-    this.codeCards$ = this.route.queryParamMap.pipe(
+    this.route.paramMap.subscribe((param) => {
+      this.type = param.get('type');
+    });
+
+    this.cardsOption$ = this.route.queryParamMap.pipe(
       switchMap((param) => {
         const cardIds = param.get('cardIds')?.split(',');
-        return this.cardService.getCodeCards();
+        switch (this.type) {
+          case 'モバイル決済':
+            return this.cardService.getCodeCards();
+          case '電子マネー':
+            return this.cardService.getElectronCards();
+        }
       })
     );
 
@@ -48,9 +58,7 @@ export class CompareComponent implements OnInit {
   navigate(cardId: string, index: number) {
     const sameIdsIndex = this.selectedCardIds.indexOf(cardId);
     if (sameIdsIndex > -1) {
-      console.log(sameIdsIndex, 'switcvh');
       const oldCard = this.selectedCardIds[index];
-      console.log(index);
       this.selectedCardIds[sameIdsIndex] = oldCard;
       this.selectedCardIds[index] = cardId;
     } else {
