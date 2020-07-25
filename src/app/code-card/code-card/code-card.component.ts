@@ -82,25 +82,6 @@ export class CodeCardComponent implements OnInit, OnDestroy {
 
   navigate() {
     const formData = this.form.value;
-    // this.cardService
-    //   .getCodeCards()
-    //   .pipe(
-    //     map((codeCards) => {
-    //       if (formData.firstSelect) {
-    //         return codeCards.filter(
-    //           (codeCard) => codeCard.cardId !== formData.firstSelect
-    //         );
-    //       } else if (formData.lastSelect) {
-    //         return codeCards.filter(
-    //           (codeCard) => codeCard.cardId !== formData.lastSelect
-    //         );
-    //       }
-    //     })
-    //   )
-    //   .subscribe((res) => {
-    //     console.log(res);
-    //   });
-
     this.router.navigate(['/compare', 'モバイル決済'], {
       queryParams: {
         cardIds: [formData.firstSelect, formData.lastSelect].join(','),
