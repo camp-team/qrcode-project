@@ -45,10 +45,12 @@
           <P>{{ card.addPoint }}</P>
           <h2>残高やポイントの有効期限</h2>
           <p>{{ card.expiration }}</p>
-          <h2>個人間送金</h2>
-          <p>{{ card.pushMoney }}</p>
-          <h2>出金</h2>
-          <p>{{ card.pullMoney }}</p>
+          <ng-container *ngIf="type === 'モバイル決済'">
+            <h2>個人間送金</h2>
+            <p>{{ card.pushMoney }}</p>
+            <h2>出金</h2>
+            <p>{{ card.pullMoney }}</p>
+          </ng-container>
         </div>
       </div>
     </div>

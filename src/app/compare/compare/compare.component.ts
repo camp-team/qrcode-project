@@ -15,7 +15,7 @@ import { map, tap, switchMap } from 'rxjs/operators';
 export class CompareComponent implements OnInit {
   cardsOption$: Observable<CodeCard[] | ElectronCard[]>;
   selectedCard$: Observable<CodeCard>;
-  comparedCards$: Observable<CodeCard[]>;
+  comparedCards$: Observable<CodeCard[] | ElectronCard[]>;
   selectedCardIds: string[] = [];
   type: string;
 
@@ -47,7 +47,14 @@ export class CompareComponent implements OnInit {
 
       if (cardIds) {
         this.comparedCards$ = combineLatest(
-          cardIds.map((id) => this.cardService.getCodeCard(id))
+          cardIds.map((id) => {
+            switch (this.type) {
+              case 'モバイル決済':
+                return this.cardService.getCodeCard(id);
+              case '電子マネー':
+                return this.cardService.getElectronCard(id);
+            }
+          })
         );
       }
     });
