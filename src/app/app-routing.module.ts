@@ -50,7 +50,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'compare',
+        path: 'compare/:type',
         loadChildren: () =>
           import('./compare/compare.module').then((m) => m.CompareModule),
       },

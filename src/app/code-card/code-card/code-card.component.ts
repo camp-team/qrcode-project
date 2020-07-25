@@ -101,7 +101,7 @@ export class CodeCardComponent implements OnInit, OnDestroy {
     //     console.log(res);
     //   });
 
-    this.router.navigate(['/compare'], {
+    this.router.navigate(['/compare', 'モバイル決済'], {
       queryParams: {
         cardIds: [formData.firstSelect, formData.lastSelect].join(','),
       },
