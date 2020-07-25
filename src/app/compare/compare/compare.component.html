@@ -3,45 +3,52 @@
     <h1>比較する</h1>
     <p>compare works!</p>
     <div class="compare__wrapper">
-      <div *ngFor="let index of indexes" class="compare__cards">
-        <mat-form-field appearance="outline">
-          <mat-label>選択する</mat-label>
-          <mat-select (selectionChange)="navigate($event.value, index)">
-            <mat-option
-              *ngFor="let codeCard of codeCards$ | async"
-              [value]="codeCard.cardId"
-            >
-              {{ codeCard.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="compare__select">
         <div
-          *ngIf="selectedCards$[index] | async as selectedCard"
-          class="detail"
+          *ngFor="let index of (mobileService.isMobile ? 2 : 3) | times"
+          class="compare__cards"
         >
+          <mat-form-field appearance="outline">
+            <mat-label>選択する</mat-label>
+            <mat-select
+              [value]="selectedCardIds[index]"
+              (selectionChange)="navigate($event.value, index)"
+            >
+              <mat-option
+                *ngFor="let codeCard of codeCards$ | async"
+                [value]="codeCard.cardId"
+              >
+                {{ codeCard.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="compare__detail">
+        <div *ngFor="let card of comparedCards$ | async" class="detail">
           <div class="card">
             <div
               class="card__cover"
-              [style.background-image]="'url(' + selectedCard.imageURL + ')'"
+              [style.background-image]="'url(' + card.imageURL + ')'"
             ></div>
           </div>
           <h2>精算方法</h2>
-          <p>{{ selectedCard.payment }}</p>
+          <p>{{ card.payment }}</p>
           <h2>チャージ方法</h2>
-          <p>{{ selectedCard.charge }}</p>
+          <p>{{ card.charge }}</p>
           <h2>オートチャージ</h2>
-          <p>{{ selectedCard.autoCharge }}</p>
+          <p>{{ card.autoCharge }}</p>
           <h2>利用できるクレジットカード</h2>
-          <p>{{ selectedCard.availableCredit }}</p>
+          <p>{{ card.availableCredit }}</p>
           <h2>ポイント</h2>
-          <p>{{ selectedCard.point }}%</p>
-          <P>{{ selectedCard.addPoint }}</P>
+          <p>{{ card.point }}%</p>
+          <P>{{ card.addPoint }}</P>
           <h2>残高やポイントの有効期限</h2>
-          <p>{{ selectedCard.expiration }}</p>
+          <p>{{ card.expiration }}</p>
           <h2>個人間送金</h2>
-          <p>{{ selectedCard.pushMoney }}</p>
+          <p>{{ card.pushMoney }}</p>
           <h2>出金</h2>
-          <p>{{ selectedCard.pullMoney }}</p>
+          <p>{{ card.pullMoney }}</p>
         </div>
       </div>
     </div>

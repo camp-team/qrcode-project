@@ -3,14 +3,20 @@
 .compare {
   text-align: center;
   &__wrapper {
-    display: flex;
+    // display: flex;
     justify-content: center;
+  }
+  &__select {
+    display: flex;
   }
   &__cards {
     padding: 40px;
     @include sp {
       padding: 16px;
     }
+  }
+  &__detail {
+    display: flex;
   }
 }
 
