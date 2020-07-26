@@ -25,10 +25,10 @@
     </h1>
   </ng-container>
 
-  <mat-card class="compare">
+  <mat-card class="compared">
     <mat-card-header>モバイル決済を比較する</mat-card-header>
     <form [formGroup]="form" (ngSubmit)="navigate()">
-      <mat-form-field class="compare__select">
+      <mat-form-field class="compared__select">
         <mat-label>選択する</mat-label>
         <mat-select formControlName="firstSelect">
           <mat-option
@@ -44,7 +44,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="compare__select">
+      <mat-form-field class="compared__select">
         <mat-label>選択する</mat-label>
         <mat-select formControlName="lastSelect">
           <mat-option

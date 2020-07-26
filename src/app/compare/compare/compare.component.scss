@@ -8,11 +8,12 @@
   }
   &__select {
     display: flex;
+    justify-content: center;
   }
-  &__cards {
-    padding: 40px;
+  &__option {
+    padding: 16px;
     @include sp {
-      padding: 16px;
+      padding: 8px;
     }
   }
   &__detail {
