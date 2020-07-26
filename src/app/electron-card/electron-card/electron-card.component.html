@@ -29,6 +29,7 @@
     <mat-card-header>電子マネーを比較する</mat-card-header>
     <form [formGroup]="form" (ngSubmit)="navigate()">
       <mat-form-field class="compare__select">
+        <mat-label>選択する</mat-label>
         <mat-select formControlName="firstSelect">
           <mat-option
             *ngFor="
@@ -44,6 +45,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="compare__select">
+        <mat-label>選択する</mat-label>
         <mat-select formControlName="lastSelect">
           <mat-option
             *ngFor="

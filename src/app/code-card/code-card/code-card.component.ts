@@ -22,24 +22,8 @@ export class CodeCardComponent implements OnInit, OnDestroy {
     firstSelect: [''],
     lastSelect: [''],
   });
-  selectableCards$: Observable<
-    CodeCard[]
-  > = this.cardService.getCodeCards().pipe(
-    map((codeCards) => {
-      const formData = this.form.value;
-      if (formData.firstSelect) {
-        return codeCards.filter(
-          (codeCard) => codeCard.cardId !== formData.firstSelect
-        );
-      } else if (formData.lastSelect) {
-        return codeCards.filter(
-          (codeCard) => codeCard.cardId !== formData.lastSelect
-        );
-      }
-    })
-  );
   firstCards$: Observable<CodeCard[]>;
-  lastCards$: Observable<CodeCard[]> = null;
+  lastCards$: Observable<CodeCard[]>;
 
   get firstSelectControl() {
     return this.form.get('firstSelect') as FormControl;
@@ -94,22 +78,15 @@ export class CodeCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.lastCards$ = this.firstSelectControl.valueChanges.pipe(
-    //   switchMap((id) => {
-    //     console.log(id);
-    //     if (id) {
-    //       return this.codeCards$.pipe(
-    //         map((codeCards) => {
-    //           return codeCards.filter((codeCard) => codeCard.cardId !== id);
-    //         })
-    //       );
-    //     } else {
-    //       return null;
-    //     }
-    //   })
-    // );
     this.firstSelectControl.valueChanges.subscribe((id) => {
       this.lastCards$ = this.codeCards$.pipe(
+        map((codeCards) => {
+          return codeCards.filter((codeCard) => codeCard.cardId !== id);
+        })
+      );
+    });
+    this.lastSelectControl.valueChanges.subscribe((id) => {
+      this.firstCards$ = this.codeCards$.pipe(
         map((codeCards) => {
           return codeCards.filter((codeCard) => codeCard.cardId !== id);
         })

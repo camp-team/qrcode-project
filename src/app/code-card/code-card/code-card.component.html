@@ -29,9 +29,15 @@
     <mat-card-header>モバイル決済を比較する</mat-card-header>
     <form [formGroup]="form" (ngSubmit)="navigate()">
       <mat-form-field class="compare__select">
+        <mat-label>選択する</mat-label>
         <mat-select formControlName="firstSelect">
           <mat-option
-            *ngFor="let codeCard of codeCards$ | async"
+            *ngFor="
+              let codeCard of (lastSelectControl.value.length
+                ? firstCards$
+                : codeCards$
+              ) | async
+            "
             [value]="codeCard.cardId"
           >
             {{ codeCard.name }}
@@ -39,13 +45,15 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="compare__select">
-        <mat-label *ngIf="lastCards$ === null">左を選択して下さい</mat-label>
-        <mat-select
-          formControlName="lastSelect"
-          [disabled]="lastCards$ === null"
-        >
+        <mat-label>選択する</mat-label>
+        <mat-select formControlName="lastSelect">
           <mat-option
-            *ngFor="let codeCard of lastCards$ | async"
+            *ngFor="
+              let codeCard of (firstSelectControl.value.length
+                ? lastCards$
+                : codeCards$
+              ) | async
+            "
             [value]="codeCard.cardId"
           >
             {{ codeCard.name }}
