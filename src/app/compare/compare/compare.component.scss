@@ -17,12 +17,20 @@
     }
   }
   &__detail {
-    display: flex;
+    // display: flex;
   }
 }
 
-.card {
+.compare-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   margin-bottom: 40px;
+  &__cover {
+    background: center/cover;
+    padding-bottom: 52.5%;
+    box-sizing: border-box;
+  }
 }
 
 .detail {

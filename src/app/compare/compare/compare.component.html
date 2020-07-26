@@ -25,13 +25,16 @@
         </div>
       </div>
       <div class="compare__detail">
-        <div *ngFor="let card of comparedCards$ | async" class="detail">
-          <div class="card">
+        <div class="compare-card">
+          <ng-container *ngFor="let card of comparedCards$ | async">
             <div
-              class="card__cover"
+              class="compare-card__cover"
               [style.background-image]="'url(' + card.imageURL + ')'"
             ></div>
-          </div>
+          </ng-container>
+        </div>
+
+        <div *ngFor="let card of comparedCards$ | async" class="detail">
           <h2>精算方法</h2>
           <p>{{ card.payment }}</p>
           <h2>チャージ方法</h2>
