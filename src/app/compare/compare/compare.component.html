@@ -33,28 +33,75 @@
             ></div>
           </ng-container>
         </div>
-
-        <div *ngFor="let card of comparedCards$ | async" class="detail">
-          <h2>精算方法</h2>
-          <p>{{ card.payment }}</p>
-          <h2>チャージ方法</h2>
-          <p>{{ card.charge }}</p>
-          <h2>オートチャージ</h2>
-          <p>{{ card.autoCharge }}</p>
-          <h2>利用できるクレジットカード</h2>
-          <p>{{ card.availableCredit }}</p>
-          <h2>ポイント</h2>
-          <p>{{ card.point }}%</p>
-          <P>{{ card.addPoint }}</P>
-          <h2>残高やポイントの有効期限</h2>
-          <p>{{ card.expiration }}</p>
-          <ng-container *ngIf="type === 'モバイル決済'">
-            <h2>個人間送金</h2>
-            <p>{{ card.pushMoney }}</p>
-            <h2>出金</h2>
-            <p>{{ card.pullMoney }}</p>
-          </ng-container>
+        <div class="row">
+          <h2 class="row__header">精算方法</h2>
+          <div class="row__grid">
+            <p *ngFor="let card of comparedCards$ | async">
+              {{ card.payment }}
+            </p>
+          </div>
         </div>
+        <div class="row">
+          <h2 class="row__header">チャージ方法</h2>
+          <div class="row__grid">
+            <p *ngFor="let card of comparedCards$ | async">
+              {{ card.charge }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <h2 class="row__header">オートチャージ</h2>
+          <div class="row__grid">
+            <p *ngFor="let card of comparedCards$ | async">
+              {{ card.autoCharge }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <h2 class="row__header">利用できるクレジットカード</h2>
+          <div class="row__grid">
+            <p *ngFor="let card of comparedCards$ | async">
+              {{ card.availableCredit }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <h2 class="row__header">ポイント</h2>
+          <div class="row__grid">
+            <p *ngFor="let card of comparedCards$ | async">
+              {{ card.point }}
+            </p>
+            <p *ngFor="let card of comparedCards$ | async">
+              {{ card.addPoint }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <h2 class="row__header">残高やポイントの有効期限</h2>
+          <div class="row__grid">
+            <p *ngFor="let card of comparedCards$ | async">
+              {{ card.expiration }}
+            </p>
+          </div>
+        </div>
+        <ng-container *ngIf="type === 'モバイル決済'">
+          <div class="row">
+            <h2 class="row__header">個人間送金</h2>
+            <div class="row__grid">
+              <p *ngFor="let card of comparedCards$ | async">
+                {{ card.pushMoney }}
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <h2 class="row__header">出金</h2>
+            <div class="row__grid">
+              <p *ngFor="let card of comparedCards$ | async">
+                {{ card.pullMoney }}
+              </p>
+            </div>
+          </div>
+        </ng-container>
       </div>
     </div>
   </div>
