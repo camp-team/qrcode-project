@@ -1,14 +1,18 @@
 <div class="container">
   <div class="compare">
-    <h1>{{ type }}を比較する</h1>
-    <p>compare works!</p>
+    <div class="compare__title">
+      <h1>{{ type }}を</h1>
+      <h1>比較する</h1>
+    </div>
     <div class="compare__wrapper">
-      <div class="compare__select">
-        <div
+      <div class="row__grid">
+        <ng-container
           *ngFor="let index of (mobileService.isMobile ? 2 : 3) | times"
-          class="compare__option"
         >
-          <mat-form-field appearance="outline">
+          <mat-form-field
+            class="compare__select"
+            [appearance]="mobileService.isMobile ? 'standard' : 'outline'"
+          >
             <mat-label>選択する</mat-label>
             <mat-select
               [value]="selectedCardIds[index]"
@@ -22,16 +26,18 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
+        </ng-container>
       </div>
       <div class="compare__detail">
-        <div class="compare-card">
-          <ng-container *ngFor="let card of comparedCards$ | async">
-            <div
-              class="compare-card__cover"
-              [style.background-image]="'url(' + card.imageURL + ')'"
-            ></div>
-          </ng-container>
+        <div class="row">
+          <div class="row__grid">
+            <ng-container *ngFor="let card of comparedCards$ | async">
+              <div
+                class="row__cover"
+                [style.background-image]="'url(' + card.imageURL + ')'"
+              ></div>
+            </ng-container>
+          </div>
         </div>
         <div class="row">
           <h2 class="row__header">精算方法</h2>
