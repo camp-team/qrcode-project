@@ -99,17 +99,5 @@ export class ElectronCardComponent implements OnInit, OnDestroy {
         })
       );
     });
-    // this.lastChoices$ = this.lastSelectControl.valueChanges.pipe(
-    //   switchMap((id) => {
-    //     console.log(id);
-    //     return this.electronCards$.pipe(
-    //       map((electronCards) => {
-    //         return electronCards.filter(
-    //           (electronCard) => electronCard.cardId !== id
-    //         );
-    //       })
-    //     );
-    //   })
-    // );
   }
 }
