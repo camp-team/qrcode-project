@@ -1,0 +1,50 @@
+@import 'mixins';
+
+.compare {
+  text-align: center;
+  &__title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 32px;
+    h1 {
+      margin: 0;
+    }
+  }
+  &__wrapper {
+    padding: 40px;
+    @include sp {
+      padding: 0;
+    }
+  }
+  &__select {
+    min-width: 80px;
+  }
+}
+
+.row {
+  margin-bottom: 48px;
+  &__header {
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+  }
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    @include sp {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+  &__cover {
+    background: center/cover;
+    padding-bottom: 52.5%;
+    box-sizing: border-box;
+  }
+  @include sp {
+    margin-bottom: 32px;
+  }
+}

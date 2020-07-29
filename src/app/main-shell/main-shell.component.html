@@ -3,8 +3,8 @@
 <mat-sidenav-container>
   <mat-sidenav
     fixedInViewport
-    [fixedTopGap]="(isMobile$ | async) ? 97 : 57"
-    [mode]="(isMobile$ | async) ? 'over' : 'side'"
+    [fixedTopGap]="mobileService.isMobile ? 97 : 57"
+    [mode]="mobileService.isMobile ? 'over' : 'side'"
     [opened]="isOpened$ | async"
     ><app-drawer></app-drawer>
   </mat-sidenav>

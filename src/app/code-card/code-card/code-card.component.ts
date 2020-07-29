@@ -3,8 +3,9 @@ import { CardService } from 'src/app/services/card.service';
 import { Observable, of } from 'rxjs';
 import { CodeCard } from '@interfaces/code-card';
 import { SearchService } from 'src/app/services/search.service';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, take, switchMap } from 'rxjs/operators';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-code-card',
@@ -17,10 +18,26 @@ export class CodeCardComponent implements OnInit, OnDestroy {
   result: any[];
   filteredCards$: Observable<CodeCard[]>;
 
+  form: FormGroup = this.fb.group({
+    firstSelect: [''],
+    lastSelect: [''],
+  });
+  firstCards$: Observable<CodeCard[]>;
+  lastCards$: Observable<CodeCard[]>;
+
+  get firstSelectControl() {
+    return this.form.get('firstSelect') as FormControl;
+  }
+  get lastSelectControl() {
+    return this.form.get('lastSelect') as FormControl;
+  }
+
   constructor(
     private cardService: CardService,
     private searchService: SearchService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private fb: FormBuilder
   ) {
     this.route.queryParamMap.subscribe((param) => {
       this.searchQuery = param.get('searchQuery');
@@ -46,9 +63,34 @@ export class CodeCardComponent implements OnInit, OnDestroy {
       });
     });
   }
+
+  navigate() {
+    const formData = this.form.value;
+    this.router.navigate(['/compare', 'モバイル決済'], {
+      queryParams: {
+        cardIds: [formData.firstSelect, formData.lastSelect].join(','),
+      },
+    });
+  }
+
   ngOnDestroy(): void {
     this.searchService.searchControl.setValue('');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.firstSelectControl.valueChanges.subscribe((id) => {
+      this.lastCards$ = this.codeCards$.pipe(
+        map((codeCards) => {
+          return codeCards.filter((codeCard) => codeCard.cardId !== id);
+        })
+      );
+    });
+    this.lastSelectControl.valueChanges.subscribe((id) => {
+      this.firstCards$ = this.codeCards$.pipe(
+        map((codeCards) => {
+          return codeCards.filter((codeCard) => codeCard.cardId !== id);
+        })
+      );
+    });
+  }
 }

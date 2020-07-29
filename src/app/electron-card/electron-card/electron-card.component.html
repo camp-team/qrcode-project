@@ -24,4 +24,43 @@
       {{ searchQuery }}で利用できるお支払い方法はありません
     </h1>
   </ng-container>
+
+  <mat-card class="compared">
+    <mat-card-header>電子マネーを比較する</mat-card-header>
+    <form [formGroup]="form" (ngSubmit)="navigate()">
+      <mat-form-field class="compared__select">
+        <mat-label>選択する</mat-label>
+        <mat-select formControlName="firstSelect">
+          <mat-option
+            *ngFor="
+              let card of (lastSelectControl.value.length
+                ? firstChoices$
+                : electronCards$
+              ) | async
+            "
+            [value]="card.cardId"
+          >
+            {{ card.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="compared__select">
+        <mat-label>選択する</mat-label>
+        <mat-select formControlName="lastSelect">
+          <mat-option
+            *ngFor="
+              let card of (firstSelectControl.value.length
+                ? lastChoices$
+                : electronCards$
+              ) | async
+            "
+            [value]="card.cardId"
+          >
+            {{ card.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary">比較する</button>
+    </form>
+  </mat-card>
 </div>
