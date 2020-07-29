@@ -18,6 +18,10 @@ export const environment = {
     appId: '90D626C6ZJ',
     searchKey: 'd9d2d89e563f167223403a05053e26f4',
   },
+  stripe: {
+    publicKey:
+      'pk_test_51HA6GyImimR6yYQtdwsq0foEalfhg7ctY1hk42HLWjhmCVwTw7gnLt4ab40dbvgoKHVZVz7hlFWx4IG6JIvGSGXu00bJZpxcl3',
+  },
 };
 
 /*
