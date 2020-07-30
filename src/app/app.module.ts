@@ -15,6 +15,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { AngularFireModule } from '@angular/fire';
+// import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -49,6 +50,7 @@ import { MainShellComponent } from './main-shell/main-shell.component';
     AngularFireStorageModule,
     AngularFireAnalyticsModule,
     AngularFireFunctionsModule,
+    // NgxStripeModule.forRoot(environment.stripe.publicKey),
   ],
   providers: [{ provide: REGION, useValue: 'asia-northeast1' }],
   bootstrap: [AppComponent],
