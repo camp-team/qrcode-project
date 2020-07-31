@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import { auth } from 'firebase-admin';
 import Stripe from 'stripe';
-import { db } from './db';
+import { db } from './../db';
 import { stripe } from './client';
 
 export const createStripeCustomer = functions

@@ -1,10 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { UserData } from './interfaces/user';
-
-admin.initializeApp();
-
-const db = admin.firestore();
+import { db } from './db';
 
 export const createUser = functions
   .region('asia-northeast1')
