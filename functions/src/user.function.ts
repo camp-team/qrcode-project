@@ -6,7 +6,7 @@ import { db } from './db';
 export const createUser = functions
   .region('asia-northeast1')
   .auth.user()
-  .onCreate((user) => {
+  .onCreate((user: admin.auth.UserRecord) => {
     const userData: UserData = {
       name: user.displayName || '',
       avatarURL: user.photoURL?.replace('_nomal', '') || '',
