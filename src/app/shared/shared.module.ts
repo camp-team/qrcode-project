@@ -9,11 +9,21 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { IdToStorePipe } from '../pipes/id-to-store.pipe';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 import { RegisterCardDialogComponent } from './register-card-dialog/register-card-dialog.component';
 
 @NgModule({
   declarations: [IdToStorePipe, RegisterCardDialogComponent],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+  ],
   exports: [
     CommonModule,
     FormsModule,
