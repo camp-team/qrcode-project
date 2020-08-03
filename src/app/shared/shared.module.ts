@@ -8,9 +8,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { IdToStorePipe } from '../pipes/id-to-store.pipe';
 import { MatSelectModule } from '@angular/material/select';
+import { RegisterCardDialogComponent } from './register-card-dialog/register-card-dialog.component';
 
 @NgModule({
-  declarations: [IdToStorePipe],
+  declarations: [IdToStorePipe, RegisterCardDialogComponent],
   imports: [CommonModule],
   exports: [
     CommonModule,
@@ -23,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatTabsModule,
     IdToStorePipe,
     MatSelectModule,
+    RegisterCardDialogComponent,
   ],
 })
 export class SharedModule {}

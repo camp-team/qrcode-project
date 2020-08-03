@@ -88,7 +88,13 @@
           <p>
             クレジットカードは世界的な決済サービスStripeによって厳重に保管されており、漏洩の心配はありません。
           </p>
-          <button mat-raised-button color="primary">カードを登録する</button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="openRegisterCardDialog()"
+          >
+            カードを登録する
+          </button>
         </div>
       </mat-tab>
     </mat-tab-group>

@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
 import { Router } from '@angular/router';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { RegisterCardDialogComponent } from 'src/app/shared/register-card-dialog/register-card-dialog.component';
 
 @Component({
   selector: 'app-settings',
@@ -107,5 +108,9 @@ export class SettingsComponent implements OnInit {
           });
         }
       });
+  }
+
+  openRegisterCardDialog() {
+    this.dialog.open(RegisterCardDialogComponent);
   }
 }
