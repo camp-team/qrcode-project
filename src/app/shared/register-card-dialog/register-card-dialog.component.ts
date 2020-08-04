@@ -36,4 +36,15 @@ export class RegisterCardDialogComponent implements OnInit {
       (event) => (this.isComplete = event.complete)
     );
   }
+
+  createCard() {
+    if (this.form.valid) {
+      this.paymentService.setPaymentMethod(
+        this.stripeClient,
+        this.cardElement,
+        this.form.value.name,
+        this.form.value.email
+      );
+    }
+  }
 }
