@@ -9,3 +9,19 @@ mat-form-field {
 .card-element {
   margin-bottom: 24px;
 }
+
+.form {
+  .card-element {
+    margin-bottom: 16px;
+  }
+  &__badge {
+    text-align: right;
+  }
+  &__note {
+    margin: 16px 0;
+    color: rgba(0, 0, 0, 0.38);
+    font-size: 13px;
+    list-style: none;
+    padding-left: 0;
+  }
+}
