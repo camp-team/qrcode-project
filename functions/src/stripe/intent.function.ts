@@ -14,10 +14,10 @@ export const createStripeSetupIntent = functions
           '認証エラーが発生しました。'
         );
       }
-      const cusomer: Customer = (
-        await db.doc(`customer/${context.auth.uid}`).get()
+      const customer: Customer = (
+        await db.doc(`customers/${context.auth.uid}`).get()
       ).data() as Customer;
-      if (!cusomer) {
+      if (!customer) {
         throw new functions.https.HttpsError(
           'permission-denied',
           'プラットフォームにカスタマーが存在しません。'
@@ -25,7 +25,7 @@ export const createStripeSetupIntent = functions
       }
       return stripe.setupIntents.create({
         payment_method_types: ['card'],
-        customer: cusomer.customerId,
+        customer: customer.customerId,
       });
     }
   );

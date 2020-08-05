@@ -22,7 +22,7 @@ export const setStripePaymentMethod = functions
         );
       }
 
-      const customerDoc = await db.doc(`customer/${context.auth.uid}`);
+      const customerDoc = await db.doc(`customers/${context.auth.uid}`);
       const customer = (await customerDoc.get()).data() as Customer;
 
       if (!customer) {
@@ -31,7 +31,7 @@ export const setStripePaymentMethod = functions
           'プラットフォームにカスタマーが存在しません。'
         );
       }
-      if (!customer.paymentMethods.length) {
+      if (!customer.paymentMethods?.length) {
         await stripe.customers.update(customer.customerId, {
           invoice_settings: {
             default_payment_method: data.paymentMethod,
