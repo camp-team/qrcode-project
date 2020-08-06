@@ -12,6 +12,8 @@ import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dia
 import { Router } from '@angular/router';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { RegisterCardDialogComponent } from 'src/app/shared/register-card-dialog/register-card-dialog.component';
+import { PaymentService } from 'src/app/services/payment.service';
+import Stripe from 'stripe';
 
 @Component({
   selector: 'app-settings',
@@ -29,6 +31,7 @@ export class SettingsComponent implements OnInit {
   imageURL: string;
   imageChangedEvent: any = '';
   croppedImage: any = '';
+  paymentCards: Stripe.PaymentMethod[];
 
   constructor(
     private authService: AuthService,
@@ -37,7 +40,8 @@ export class SettingsComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private router: Router,
-    private fns: AngularFireFunctions
+    private fns: AngularFireFunctions,
+    private paymentService: PaymentService
   ) {
     this.userService.getUser(this.uid).subscribe((user) => {
       if (user) {
@@ -47,7 +51,10 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getPaymentCard();
+    console.log(this.paymentCards);
+  }
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -112,5 +119,11 @@ export class SettingsComponent implements OnInit {
 
   openRegisterCardDialog() {
     this.dialog.open(RegisterCardDialogComponent);
+  }
+
+  private getPaymentCard() {
+    this.paymentService.getPaymentMethod().then((cards) => {
+      this.paymentCards = cards.data;
+    });
   }
 }

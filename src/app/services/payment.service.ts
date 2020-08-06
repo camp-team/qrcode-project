@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { AngularFireFunctions } from '@angular/fire/functions';
 import {
   loadStripe,
   Stripe as StripeClient,
   StripeCardElement,
 } from '@stripe/stripe-js';
+import { environment } from 'src/environments/environment';
 import Stripe from 'stripe';
-import { AngularFireFunctions } from '@angular/fire/functions';
-import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -53,5 +52,10 @@ export class PaymentService {
         }).toPromise();
       }
     }
+  }
+
+  getPaymentMethod(): Promise<Stripe.ApiList<Stripe.PaymentMethod>> {
+    const callable = this.fns.httpsCallable('getStripePaymentMethod');
+    return callable({}).toPromise();
   }
 }

@@ -4,6 +4,7 @@ import { db } from './../db';
 import * as functions from 'firebase-functions';
 // import Stripe from 'stripe';
 import admin = require('firebase-admin');
+import Stripe from 'stripe';
 
 export const setStripePaymentMethod = functions
   .region('asia-northeast1')
@@ -46,6 +47,37 @@ export const setStripePaymentMethod = functions
           customer.paymentMethods?.length > 0
             ? customer.defaultPaymentMethod
             : data.paymentMethod,
+      });
+    }
+  );
+
+export const getStripePaymentMethod = functions
+  .region('asia-northeast1')
+  .https.onCall(
+    async (data, context): Promise<Stripe.ApiList<Stripe.PaymentMethod>> => {
+      if (!context.auth) {
+        throw new functions.https.HttpsError('permission-denied', 'not user');
+      }
+
+      const customerDoc = await db.doc(`customers/${context.auth.uid}`).get();
+      const customer = customerDoc.data() as Customer;
+
+      if (!customer) {
+        throw new functions.https.HttpsError(
+          'permission-denied',
+          'there is no customer'
+        );
+      }
+
+      const test = stripe.paymentMethods.list({
+        customer: customer.customerId,
+        type: 'card',
+      });
+      console.log(test);
+
+      return stripe.paymentMethods.list({
+        customer: customer.customerId,
+        type: 'card',
       });
     }
   );

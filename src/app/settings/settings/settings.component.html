@@ -1,6 +1,6 @@
 <div class="container">
   <p>アカウント</p>
-  <ng-container class="settings" *ngIf="user$ | async as user">
+  <div class="settings" *ngIf="user$ | async as user">
     <div class="account">
       <img class="account__icon" [src]="user.avatarURL" alt="" />
       <div class="account__body">
@@ -88,15 +88,38 @@
           <p>
             クレジットカードは世界的な決済サービスStripeによって厳重に保管されており、漏洩の心配はありません。
           </p>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="openRegisterCardDialog()"
-          >
-            カードを登録する
-          </button>
+          <!-- <ng-container *ngIf="paymentCard; else register">
+            <div class="user-card">
+              <p>
+                <i
+                  class="fab fa-cc-{{
+                    paymentCard.card.brand.toLowerCase() === 'american express'
+                      ? 'amex'
+                      : paymentCard.card.brand.toLowerCase()
+                  }}"
+                ></i>
+                **** **** **** {{ paymentCard.card.last4 }}
+              </p>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="openRegisterCardDialog()"
+              >
+                変更する
+              </button>
+            </div>
+          </ng-container> -->
+          <ng-template #register>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openRegisterCardDialog()"
+            >
+              カードを登録する
+            </button>
+          </ng-template>
         </div>
       </mat-tab>
     </mat-tab-group>
-  </ng-container>
+  </div>
 </div>
