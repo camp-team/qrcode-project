@@ -69,12 +69,6 @@ export const getStripePaymentMethod = functions
         );
       }
 
-      const test = stripe.paymentMethods.list({
-        customer: customer.customerId,
-        type: 'card',
-      });
-      console.log(test);
-
       return stripe.paymentMethods.list({
         customer: customer.customerId,
         type: 'card',

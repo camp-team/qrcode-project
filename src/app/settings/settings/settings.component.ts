@@ -53,8 +53,6 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.paymentService.getPaymentMethod().then((cards) => {
-      console.log(cards);
-      console.log(cards.data);
       this.paymentCard = cards.data[0];
     });
   }
