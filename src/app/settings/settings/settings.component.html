@@ -88,7 +88,7 @@
           <p>
             クレジットカードは世界的な決済サービスStripeによって厳重に保管されており、漏洩の心配はありません。
           </p>
-          <!-- <ng-container *ngIf="paymentCard; else register">
+          <ng-container *ngIf="paymentCard; else register">
             <div class="user-card">
               <p>
                 <i
@@ -108,7 +108,7 @@
                 変更する
               </button>
             </div>
-          </ng-container> -->
+          </ng-container>
           <ng-template #register>
             <button
               mat-raised-button

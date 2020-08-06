@@ -31,7 +31,7 @@ export class SettingsComponent implements OnInit {
   imageURL: string;
   imageChangedEvent: any = '';
   croppedImage: any = '';
-  paymentCards: Stripe.PaymentMethod[];
+  paymentCard: Stripe.PaymentMethod;
 
   constructor(
     private authService: AuthService,
@@ -52,8 +52,11 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPaymentCard();
-    console.log(this.paymentCards);
+    this.paymentService.getPaymentMethod().then((cards) => {
+      console.log(cards);
+      console.log(cards.data);
+      this.paymentCard = cards.data[0];
+    });
   }
 
   fileChangeEvent(event: any): void {
@@ -119,11 +122,5 @@ export class SettingsComponent implements OnInit {
 
   openRegisterCardDialog() {
     this.dialog.open(RegisterCardDialogComponent);
-  }
-
-  private getPaymentCard() {
-    this.paymentService.getPaymentMethod().then((cards) => {
-      this.paymentCards = cards.data;
-    });
   }
 }
