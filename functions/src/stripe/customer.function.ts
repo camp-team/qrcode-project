@@ -25,7 +25,7 @@ export const getStripeCustomer = functions
       throw new functions.https.HttpsError('permission-denied', 'not user');
     }
     const customer = (
-      await db.doc(`customer/${context.auth.uid}`).get()
+      await db.doc(`customers/${context.auth.uid}`).get()
     ).data();
     if (!customer) {
       throw new functions.https.HttpsError(
@@ -34,4 +34,25 @@ export const getStripeCustomer = functions
       );
     }
     return stripe.customers.retrieve(customer.customerId);
+  });
+
+export const deleteStripeCustomer = functions
+  .region('asia-northeast1')
+  .auth.user()
+  .onDelete(async (user: auth.UserRecord) => {
+    const customer = (await db.doc(`customers/${user.uid}`).get()).data();
+    if (!customer) {
+      throw new functions.https.HttpsError(
+        'permission-denied',
+        'there is no customer'
+      );
+    }
+
+    try {
+      await stripe.customers.del(customer.customerId);
+    } catch (error) {
+      throw new functions.https.HttpsError('internal', error.code);
+    }
+
+    return db.doc(`customers/${user.uid}`).delete();
   });
