@@ -22,8 +22,6 @@ export class CodeCardComponent implements OnInit, OnDestroy {
     firstSelect: [''],
     lastSelect: [''],
   });
-  firstCards$: Observable<CodeCard[]>;
-  lastCards$: Observable<CodeCard[]>;
 
   get firstSelectControl() {
     return this.form.get('firstSelect') as FormControl;
@@ -77,20 +75,5 @@ export class CodeCardComponent implements OnInit, OnDestroy {
     this.searchService.searchControl.setValue('');
   }
 
-  ngOnInit(): void {
-    this.firstSelectControl.valueChanges.subscribe((id) => {
-      this.lastCards$ = this.codeCards$.pipe(
-        map((codeCards) => {
-          return codeCards.filter((codeCard) => codeCard.cardId !== id);
-        })
-      );
-    });
-    this.lastSelectControl.valueChanges.subscribe((id) => {
-      this.firstCards$ = this.codeCards$.pipe(
-        map((codeCards) => {
-          return codeCards.filter((codeCard) => codeCard.cardId !== id);
-        })
-      );
-    });
-  }
+  ngOnInit(): void {}
 }
