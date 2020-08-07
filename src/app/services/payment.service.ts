@@ -7,12 +7,17 @@ import {
 } from '@stripe/stripe-js';
 import { environment } from 'src/environments/environment';
 import Stripe from 'stripe';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { stringify } from 'querystring';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PaymentService {
-  constructor(private fns: AngularFireFunctions) {}
+  constructor(
+    private fns: AngularFireFunctions,
+    private snackBar: MatSnackBar
+  ) {}
 
   getStripeClient(): Promise<StripeClient> {
     return loadStripe(environment.stripe.publicKey);
@@ -57,5 +62,26 @@ export class PaymentService {
   getPaymentMethod(): Promise<Stripe.ApiList<Stripe.PaymentMethod>> {
     const callable = this.fns.httpsCallable('getStripePaymentMethod');
     return callable({}).toPromise();
+  }
+
+  charge(priceId: string): Promise<void> {
+    const callable = this.fns.httpsCallable('payStripeProduct');
+    const process = this.snackBar.open('決済を開始します', null, {
+      duration: null,
+    });
+    return callable({
+      priceId,
+    })
+      .toPromise()
+      .then(() => {
+        this.snackBar.open('決済成功');
+      })
+      .catch((error) => {
+        console.error(error?.message);
+        this.snackBar.open('決済失敗');
+      })
+      .finally(() => {
+        process.dismiss();
+      });
   }
 }
