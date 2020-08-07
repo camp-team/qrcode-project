@@ -23,8 +23,8 @@ export const setStripePaymentMethod = functions
         );
       }
 
-      const customerDoc = await db.doc(`customers/${context.auth.uid}`);
-      const customer = (await customerDoc.get()).data() as Customer;
+      const customerDoc = db.doc(`customers/${context.auth.uid}`);
+      const customer: Customer = (await customerDoc.get()).data() as Customer;
 
       if (!customer) {
         throw new functions.https.HttpsError(
@@ -60,7 +60,7 @@ export const getStripePaymentMethod = functions
       }
 
       const customerDoc = await db.doc(`customers/${context.auth.uid}`).get();
-      const customer = customerDoc.data() as Customer;
+      const customer: Customer = customerDoc.data() as Customer;
 
       if (!customer) {
         throw new functions.https.HttpsError(

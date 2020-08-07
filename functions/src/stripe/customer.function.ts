@@ -3,6 +3,7 @@ import { auth } from 'firebase-admin';
 import Stripe from 'stripe';
 import { db } from './../db';
 import { stripe } from './client';
+import { Customer } from '../interfaces/customer';
 
 export const createStripeCustomer = functions
   .region('asia-northeast1')
@@ -24,9 +25,9 @@ export const getStripeCustomer = functions
     if (!context.auth) {
       throw new functions.https.HttpsError('permission-denied', 'not user');
     }
-    const customer = (
+    const customer: Customer = (
       await db.doc(`customers/${context.auth.uid}`).get()
-    ).data();
+    ).data() as Customer;
     if (!customer) {
       throw new functions.https.HttpsError(
         'permission-denied',
@@ -40,7 +41,9 @@ export const deleteStripeCustomer = functions
   .region('asia-northeast1')
   .auth.user()
   .onDelete(async (user: auth.UserRecord) => {
-    const customer = (await db.doc(`customers/${user.uid}`).get()).data();
+    const customer: Customer = (
+      await db.doc(`customers/${user.uid}`).get()
+    ).data() as Customer;
     if (!customer) {
       throw new functions.https.HttpsError(
         'permission-denied',
