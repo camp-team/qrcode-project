@@ -8,6 +8,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [SettingsComponent, DeleteUserDialogComponent],
@@ -19,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ImageCropperModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatListModule,
   ],
 })
 export class SettingsModule {}
