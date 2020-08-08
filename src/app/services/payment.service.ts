@@ -64,13 +64,13 @@ export class PaymentService {
     return callable({}).toPromise();
   }
 
-  charge(priceId: string): Promise<void> {
+  charge(): Promise<void> {
     const callable = this.fns.httpsCallable('payStripeProduct');
     const process = this.snackBar.open('決済を開始します', null, {
       duration: null,
     });
     return callable({
-      priceId,
+      priceId: 'prod_Hmdxbe7ubDGf2S',
     })
       .toPromise()
       .then(() => {
