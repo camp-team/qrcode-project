@@ -70,7 +70,7 @@ export class PaymentService {
       duration: null,
     });
     return callable({
-      priceId: 'prod_Hmdxbe7ubDGf2S',
+      priceId: 'price_1HD4fjImimR6yYQtxh5Y49jp',
     })
       .toPromise()
       .then(() => {
