@@ -14,6 +14,8 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { RegisterCardDialogComponent } from 'src/app/shared/register-card-dialog/register-card-dialog.component';
 import { PaymentService } from 'src/app/services/payment.service';
 import Stripe from 'stripe';
+import { CustomerService } from 'src/app/services/customer.service';
+import { ChargeWithInvoice } from '@interfaces/charge';
 
 @Component({
   selector: 'app-settings',
@@ -32,6 +34,7 @@ export class SettingsComponent implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
   paymentCard: Stripe.PaymentMethod;
+  charge: ChargeWithInvoice;
 
   constructor(
     private authService: AuthService,
@@ -41,7 +44,8 @@ export class SettingsComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private fns: AngularFireFunctions,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private customerService: CustomerService
   ) {
     this.userService.getUser(this.uid).subscribe((user) => {
       if (user) {
@@ -55,6 +59,7 @@ export class SettingsComponent implements OnInit {
     this.paymentService.getPaymentMethod().then((cards) => {
       this.paymentCard = cards.data[0];
     });
+    this.getCharges();
   }
 
   fileChangeEvent(event: any): void {
@@ -120,5 +125,11 @@ export class SettingsComponent implements OnInit {
 
   openRegisterCardDialog() {
     this.dialog.open(RegisterCardDialogComponent);
+  }
+
+  private getCharges() {
+    this.customerService.getInvoice().then((result) => {
+      this.charge = result?.data[0];
+    });
   }
 }
