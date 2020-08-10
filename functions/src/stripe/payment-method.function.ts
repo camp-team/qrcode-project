@@ -2,7 +2,6 @@ import { Customer } from './../interfaces/customer';
 import { stripe } from './client';
 import { db } from './../db';
 import * as functions from 'firebase-functions';
-// import Stripe from 'stripe';
 import admin = require('firebase-admin');
 import Stripe from 'stripe';
 
