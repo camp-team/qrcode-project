@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   loadStripe,
   Stripe as StripeClient,
@@ -7,8 +8,6 @@ import {
 } from '@stripe/stripe-js';
 import { environment } from 'src/environments/environment';
 import Stripe from 'stripe';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { stringify } from 'querystring';
 
 @Injectable({
   providedIn: 'root',
