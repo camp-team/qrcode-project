@@ -110,7 +110,7 @@
             </div>
             <mat-list dense>
               <h1 matSubheader>購入履歴</h1>
-              <mat-list-item>
+              <mat-list-item *ngIf="charge">
                 <span matLine
                   >{{
                     (charge.invoice?.lines?.data)[0]?.description ||
