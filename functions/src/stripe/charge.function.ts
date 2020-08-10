@@ -27,7 +27,7 @@ export const payStripeProduct = functions
       }
 
       const customer: Customer = (
-        await db.doc(`custoomers/${context.auth.uid}`).get()
+        await db.doc(`customers/${context.auth.uid}`).get()
       ).data() as Customer;
 
       if (!customer) {
