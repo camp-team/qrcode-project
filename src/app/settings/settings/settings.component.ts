@@ -11,6 +11,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
 import { Router } from '@angular/router';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { RegisterCardDialogComponent } from 'src/app/shared/register-card-dialog/register-card-dialog.component';
+import { PaymentService } from 'src/app/services/payment.service';
+import Stripe from 'stripe';
+import { CustomerService } from 'src/app/services/customer.service';
+import { ChargeWithInvoice } from '@interfaces/charge';
 
 @Component({
   selector: 'app-settings',
@@ -28,6 +33,8 @@ export class SettingsComponent implements OnInit {
   imageURL: string;
   imageChangedEvent: any = '';
   croppedImage: any = '';
+  paymentCard: Stripe.PaymentMethod;
+  charge: ChargeWithInvoice;
 
   constructor(
     private authService: AuthService,
@@ -36,7 +43,9 @@ export class SettingsComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private router: Router,
-    private fns: AngularFireFunctions
+    private fns: AngularFireFunctions,
+    private paymentService: PaymentService,
+    private customerService: CustomerService
   ) {
     this.userService.getUser(this.uid).subscribe((user) => {
       if (user) {
@@ -46,7 +55,12 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.paymentService.getPaymentMethod().then((cards) => {
+      this.paymentCard = cards.data[0];
+    });
+    this.getCharges();
+  }
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -107,5 +121,15 @@ export class SettingsComponent implements OnInit {
           });
         }
       });
+  }
+
+  openRegisterCardDialog() {
+    this.dialog.open(RegisterCardDialogComponent);
+  }
+
+  private getCharges() {
+    this.customerService.getInvoice().then((result) => {
+      this.charge = result?.data[0];
+    });
   }
 }

@@ -11,7 +11,10 @@ import { DrawerComponent } from './drawer/drawer.component';
 import { MatListModule } from '@angular/material/list';
 import { SharedModule } from './shared/shared.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { AngularFireModule } from '@angular/fire';
@@ -50,7 +53,10 @@ import { MainShellComponent } from './main-shell/main-shell.component';
     AngularFireAnalyticsModule,
     AngularFireFunctionsModule,
   ],
-  providers: [{ provide: REGION, useValue: 'asia-northeast1' }],
+  providers: [
+    { provide: REGION, useValue: 'asia-northeast1' },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

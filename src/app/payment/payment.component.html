@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="payment">
+    <ng-container *ngIf="!paidAds; else complete">
+      <h2 class="heading">広告を非表示にする</h2>
+      <mat-vertical-stepper linear="ture">
+        <mat-step editable="false">
+          <ng-template matStepLabel>クレジットカード</ng-template>
+          <ng-container *ngIf="paymentCard; else register">
+            <div class="customer">
+              <p>こちらのカードを使用します</p>
+              <p class="customer__card">
+                <i
+                  class="fab fa-cc-{{
+                    paymentCard.card.brand.toLowerCase() === 'american express'
+                      ? 'amex'
+                      : paymentCard.card.brand.toLowerCase()
+                  }}"
+                ></i>
+                **** **** **** {{ paymentCard.card.last4 }}
+              </p>
+              <div class="customer__actions">
+                <button mat-flat-button color="primary" matStepperNext>
+                  OK
+                </button>
+                <button
+                  mat-button
+                  color="primary"
+                  (click)="openRegisterCardDialog()"
+                >
+                  変更する
+                </button>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #register>
+            <div class="register">
+              <p>お支払いに使用するカードを登録してください</p>
+              <button
+                (click)="openRegisterCardDialog()"
+                mat-flat-button
+                color="primary"
+              >
+                登録する
+              </button>
+              <ul>
+                <li>
+                  カード情報は世界的に信頼が厚いStripeで厳重に管理されます。
+                </li>
+                <li>
+                  サービスではクレジットカード情報を保持しないので漏洩の心配はありません。
+                </li>
+              </ul>
+            </div>
+          </ng-template>
+        </mat-step>
+        <mat-step editable="false">
+          <ng-template matStepLabel>お支払い</ng-template>
+          <div class="plan">
+            <h3 class="plan__title">広告非表示プラン</h3>
+            <p>100円</p>
+          </div>
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="charge()"
+            matStepperNext
+          >
+            購入する
+          </button>
+        </mat-step>
+      </mat-vertical-stepper>
+    </ng-container>
+    <ng-template #complete>
+      <div class="complete">
+        <p>広告を非表示にしました。</p>
+        <p>ありがとうございました！</p>
+        <button routerLink="/" mat-raised-button color="primary">
+          トップへ戻る
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>

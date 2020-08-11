@@ -31,33 +31,27 @@
       <mat-form-field class="compared__select">
         <mat-label>選択する</mat-label>
         <mat-select formControlName="firstSelect">
-          <mat-option
-            *ngFor="
-              let codeCard of (lastSelectControl.value.length
-                ? firstCards$
-                : codeCards$
-              ) | async
-            "
-            [value]="codeCard.cardId"
-          >
-            {{ codeCard.name }}
-          </mat-option>
+          <ng-container *ngFor="let codeCard of codeCards$ | async">
+            <mat-option
+              [value]="codeCard.cardId"
+              *ngIf="lastSelectControl.value !== codeCard.cardId"
+            >
+              {{ codeCard.name }}
+            </mat-option>
+          </ng-container>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="compared__select">
         <mat-label>選択する</mat-label>
         <mat-select formControlName="lastSelect">
-          <mat-option
-            *ngFor="
-              let codeCard of (firstSelectControl.value.length
-                ? lastCards$
-                : codeCards$
-              ) | async
-            "
-            [value]="codeCard.cardId"
-          >
-            {{ codeCard.name }}
-          </mat-option>
+          <ng-container *ngFor="let codeCard of codeCards$ | async">
+            <mat-option
+              *ngIf="firstSelectControl.value !== codeCard.cardId"
+              [value]="codeCard.cardId"
+            >
+              {{ codeCard.name }}
+            </mat-option>
+          </ng-container>
         </mat-select>
       </mat-form-field>
       <button mat-raised-button color="primary">比較する</button>
