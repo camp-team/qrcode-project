@@ -6,4 +6,6 @@ export interface Card {
   addPoint: string;
   expiration: string;
   storeIds: string[];
+  campaign?: string;
+  viewCount?: number;
 }
