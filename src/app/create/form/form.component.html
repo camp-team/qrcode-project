@@ -116,6 +116,24 @@
         </mat-autocomplete>
       </mat-form-field>
 
+      <mat-form-field
+        class="form-wrapper__content"
+        hintLabel="例: https://example/promotions"
+        appearance="fill"
+      >
+        <mat-label>キャンペーンURL</mat-label>
+        <input
+          matInput
+          placeholder="URLを入力してください"
+          autocomplete="off"
+          formControlName="campaign"
+          required
+        />
+        <mat-error *ngIf="campaignControl.hasError('required')"
+          >必須入力です</mat-error
+        >
+      </mat-form-field>
+
       <h2>
         {{ type === 'qrCode' ? 'QRcode' : '電子マネー' }}にしかない作成機能
       </h2>

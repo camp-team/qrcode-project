@@ -91,6 +91,9 @@ export class FormComponent implements OnInit {
   get creditControl() {
     return this.form.get('availableCredit') as FormControl;
   }
+  get campaignControl() {
+    return this.form.get('campaign') as FormControl;
+  }
 
   @ViewChild('storeInput') private storeInput: ElementRef;
 
@@ -185,6 +188,7 @@ export class FormComponent implements OnInit {
       addPoint: ['', Validators.maxLength(1000)],
       expiration: ['', [Validators.required, Validators.maxLength(1000)]],
       storeIds: [''],
+      campaign: ['', [Validators.required]],
       ...this.customForm[type],
     });
   }
@@ -201,6 +205,7 @@ export class FormComponent implements OnInit {
               addPoint: formData.addPoint,
               expiration: formData.expiration,
               storeIds: this.stores.map((store) => store.id),
+              campaign: formData.campaign,
               payment: formData.payment,
               charge: this.chargePatterns,
               autoCharge: formData.autoCharge,
@@ -227,6 +232,7 @@ export class FormComponent implements OnInit {
               addPoint: formData.addPoint,
               expiration: formData.expiration,
               storeIds: this.stores.map((store) => store.id),
+              campaign: formData.campaign,
               payment: formData.payment,
               charge: this.chargePatterns,
               autoCharge: formData.autoCharge,
@@ -257,6 +263,7 @@ export class FormComponent implements OnInit {
               addPoint: formData.addPoint,
               expiration: formData.expiration,
               storeIds: this.stores.map((store) => store.id),
+              campaign: formData.campaign,
               payment: formData.payment,
               charge: this.chargePatterns,
               autoCharge: formData.autoCharge,
@@ -284,6 +291,7 @@ export class FormComponent implements OnInit {
               addPoint: formData.addPoint,
               expiration: formData.expiration,
               storeIds: this.stores.map((store) => store.id),
+              campaign: formData.campaign,
               payment: formData.payment,
               charge: this.chargePatterns,
               autoCharge: formData.autoCharge,
