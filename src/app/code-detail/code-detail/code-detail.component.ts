@@ -18,9 +18,10 @@ export class CodeDetailComponent implements OnInit, OnDestroy {
   codeCard$: Observable<CodeCard> = this.route.paramMap.pipe(
     switchMap((map) => {
       this.cardId = map.get('id');
+      this.cardService.countUpCodeCard(this.cardId);
       return this.cardService.getCodeCard(this.cardId);
-    }),
-    tap(() => this.routerService.toggleSticky())
+    })
+    // tap((card) => this.cardService.countUpCodeCard(card.cardId))
   );
 
   constructor(
@@ -32,7 +33,6 @@ export class CodeDetailComponent implements OnInit, OnDestroy {
     this.route.queryParamMap.subscribe((param) => {
       this.searchQuery = param.get('searchQuery');
       if (this.searchQuery) {
-        console.log(this.routerService.isSticky);
         this.router.navigate(['/code-card'], {
           queryParams: { searchQuery: this.searchQuery },
         });
