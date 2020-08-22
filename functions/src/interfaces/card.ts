@@ -1,3 +1,5 @@
+import { firestore } from 'firebase-admin';
+
 export interface Card {
   cardId: string;
   imageURL: string;
@@ -6,4 +8,6 @@ export interface Card {
   addPoint: string;
   expiration: string;
   storeIds: string[];
+  campaign?: string;
+  viewCount?: firestore.FieldValue;
 }

@@ -16,6 +16,7 @@ export class ElectronDetailComponent implements OnInit {
   electronCard$: Observable<ElectronCard> = this.route.paramMap.pipe(
     switchMap((map) => {
       this.cardId = map.get('id');
+      this.cardService.countUpElectronCard(this.cardId);
       return this.cardService.getElectronCard(this.cardId);
     })
   );

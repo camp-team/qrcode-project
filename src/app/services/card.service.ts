@@ -4,6 +4,7 @@ import { CodeCard } from '@interfaces/code-card';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ElectronCard } from '@interfaces/electron-card';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -118,6 +119,17 @@ export class CardService {
 
   deleteElectronCard(cardId: string): Promise<void> {
     return this.db.doc(`electronCards/${cardId}`).delete();
+  }
+
+  countUpCodeCard(cardId: string): Promise<void> {
+    return this.db.doc<CodeCard>(`codeCards/${cardId}`).update({
+      viewCount: firestore.FieldValue.increment(1),
+    });
+  }
+  countUpElectronCard(cardId: string): Promise<void> {
+    return this.db.doc<ElectronCard>(`electronCards/${cardId}`).update({
+      viewCount: firestore.FieldValue.increment(1),
+    });
   }
 
   async getUploadImageURL(cardId: string, file: File): Promise<string> {
