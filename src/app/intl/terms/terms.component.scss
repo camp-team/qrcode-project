@@ -1,0 +1,11 @@
+@import '_mixins';
+
+.terms {
+  &__header {
+    text-align: center;
+    margin-bottom: 80px;
+    @include sp {
+      margin-bottom: 40px;
+    }
+  }
+}
