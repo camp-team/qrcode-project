@@ -1,7 +1,7 @@
 @import '_mixins';
 
 .terms {
-  &__header {
+  &__heading {
     text-align: center;
     margin-bottom: 80px;
     @include sp {
