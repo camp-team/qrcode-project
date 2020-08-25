@@ -1,0 +1,116 @@
+<div [formGroup]="form">
+  <div>
+    <img *ngIf="imageURL" [src]="imageURL" alt="" />
+  </div>
+  <div class="upload" (click)="imageInput.click()">
+    <input
+      type="file"
+      style="display: none;"
+      accept=".png, .img, .jpeg"
+      (change)="uploadImage($event)"
+      #imageInput
+      required
+    />
+    <mat-icon>insert_photo</mat-icon>
+    <p>クリックしてファイルをアップロードしてください</p>
+  </div>
+  <mat-form-field class="form-wrapper__content" appearance="fill">
+    <mat-label>サービス名</mat-label>
+    <input
+      matInput
+      placeholder="サービス名を入力してください（20文字以内）"
+      autocomplete="off"
+      formControlName="name"
+      required
+    />
+    <mat-error *ngIf="nameControl.hasError('required')">必須入力です</mat-error>
+    <mat-error *ngIf="nameControl.hasError('maxlength')">長すぎます</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-wrapper__content" appearance="fill">
+    <mat-label>ポイント（通常時）</mat-label>
+    <input
+      matInput
+      type="number"
+      placeholder="数字を入力してください"
+      autocomplete="off"
+      formControlName="point"
+      required
+    />
+    <span matSuffix>%</span>
+    <mat-error *ngIf="pointControl.hasError('required')"
+      >必須入力です</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field class="form-wrapper__content" appearance="fill">
+    <mat-label>ポイント / 追加情報</mat-label>
+    <textarea
+      matInput
+      placeholder="例）前月決済回数50回以上で+0.5%"
+      formControlName="addPoint"
+      matTextareaAutosize
+      [matAutosizeMinRows]="4"
+    ></textarea>
+    <mat-hint align="end">{{ addPointControl.value.length }} / 1000</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="form-wrapper__content" appearance="fill">
+    <mat-label>残高やポイントの有効期限</mat-label>
+    <textarea
+      matInput
+      placeholder="例) 最終利用日から○○年間"
+      formControlName="expiration"
+      matTextareaAutosize
+      [matAutosizeMinRows]="4"
+      required
+    ></textarea>
+    <mat-hint align="end">{{ expirationControl.value.length }} / 1000</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="form-wrapper__chip-list">
+    <mat-label>使えるお店</mat-label>
+    <mat-chip-list #chipList aria-label="Store selection">
+      <mat-chip
+        *ngFor="let store of stores"
+        [selectable]="true"
+        [removable]="true"
+        (removed)="removeStore(store)"
+      >
+        {{ store.name }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="使えるお店を選択してください"
+        #storeInput
+        formControlName="storeIds"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+      />
+    </mat-chip-list>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selected($event)"
+    >
+      <mat-option *ngFor="let store of filteredStores$ | async" [value]="store">
+        {{ store.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field
+    class="form-wrapper__content"
+    hintLabel="例: https://example/promotions"
+    appearance="fill"
+  >
+    <mat-label>キャンペーンURL</mat-label>
+    <input
+      matInput
+      placeholder="URLを入力してください"
+      autocomplete="off"
+      formControlName="campaign"
+      required
+    />
+    <mat-error *ngIf="campaignControl.hasError('required')"
+      >必須入力です</mat-error
+    >
+  </mat-form-field>
+</div>

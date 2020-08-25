@@ -13,9 +13,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteCardDialogComponent } from './delete-card-dialog/delete-card-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { SharedFormSectionComponent } from './shared-form-section/shared-form-section.component';
 
 @NgModule({
-  declarations: [FormComponent, DeleteCardDialogComponent],
+  declarations: [
+    FormComponent,
+    DeleteCardDialogComponent,
+    SharedFormSectionComponent,
+  ],
   imports: [
     CommonModule,
     CreateRoutingModule,
