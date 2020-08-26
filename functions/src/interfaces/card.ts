@@ -8,6 +8,6 @@ export interface Card {
   addPoint: string;
   expiration: string;
   storeIds: string[];
-  campaign?: string;
+  campaign: string;
   viewCount?: firestore.FieldValue;
 }

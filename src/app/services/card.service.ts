@@ -21,16 +21,11 @@ export class CardService {
   ): Promise<void> {
     const cardId = this.db.createId();
     const imageURL: string = await this.getUploadImageURL(cardId, file);
-    return this.db
-      .doc(`codeCards/${cardId}`)
-      .set({
-        cardId,
-        imageURL,
-        ...codeCard,
-      })
-      .then(() => {
-        console.log('データの追加に成功しました！');
-      });
+    return this.db.doc(`codeCards/${cardId}`).set({
+      cardId,
+      imageURL,
+      ...codeCard,
+    });
   }
 
   async createElectornCard(
@@ -76,18 +71,13 @@ export class CardService {
       );
       data.imageURL = imageURL;
     }
-    return this.db
-      .doc(`codeCards/${codeCard.cardId}`)
-      .set(
-        {
-          ...data,
-          ...codeCard,
-        },
-        { merge: true }
-      )
-      .then(() => {
-        console.log('データを編集しました');
-      });
+    return this.db.doc(`codeCards/${codeCard.cardId}`).set(
+      {
+        ...data,
+        ...codeCard,
+      },
+      { merge: true }
+    );
   }
 
   async updateElectronCard(
@@ -109,12 +99,7 @@ export class CardService {
   }
 
   deleteCodeCard(cardId: string): Promise<void> {
-    return this.db
-      .doc(`codeCards/${cardId}`)
-      .delete()
-      .then(() => {
-        console.log('データを削除しました');
-      });
+    return this.db.doc(`codeCards/${cardId}`).delete();
   }
 
   deleteElectronCard(cardId: string): Promise<void> {
