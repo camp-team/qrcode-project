@@ -1,5 +1,5 @@
 <div class="form-container">
-  <h1 class="heading">カードを{{ cardId ? '編集' : '作成' }}する</h1>
+  <h1 class="heading">カードを{{ (cardId$ | async) ? '編集' : '作成' }}する</h1>
 
   <form [formGroup]="form" (ngSubmit)="submit(type)">
     <div class="form-wrapper">
@@ -7,7 +7,7 @@
         [form]="form"
         [card]="card$"
         [length]="maxLength"
-        (file)="file = $event"
+        (fileChange)="file = $event"
       ></app-shared-form-section>
 
       <ng-container *ngIf="type === 'qrCode' || type === 'electron'">
@@ -106,7 +106,7 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="cardId; else defaultButton">
+      <ng-container *ngIf="cardId$ | async; else defaultButton">
         <div class="form-btns">
           <button
             [disabled]="form.invalid || form.pristine"

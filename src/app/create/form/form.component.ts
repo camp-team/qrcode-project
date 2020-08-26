@@ -1,5 +1,11 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -12,18 +18,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CodeCard } from '@interfaces/code-card';
 import { ElectronCard } from '@interfaces/electron-card';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { CardService } from 'src/app/services/card.service';
 import { StoreService } from 'src/app/services/store.service';
 import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
+import { SharedFormSectionComponent } from '../shared-form-section/shared-form-section.component';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
+  @ViewChild(SharedFormSectionComponent)
+  private sharedFormComponent: SharedFormSectionComponent;
+  subscription: Subscription;
   isComplete: boolean;
   isInit: boolean;
   maxLength = 1000;
@@ -95,13 +105,17 @@ export class FormComponent implements OnInit {
       this.buildForm(this.type);
     });
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.card$.subscribe((card) => {
+    this.subscription = this.card$.subscribe((card) => {
       if (card) {
         this.initForm(card);
       }
     });
+    this.cardId$.subscribe((cardId) => (this.cardId = cardId));
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -114,7 +128,7 @@ export class FormComponent implements OnInit {
 
   private initForm(card: CodeCard | ElectronCard) {
     this.chargePatterns = card.charge;
-    this.stores = card.storeIds.map((id) => {
+    this.sharedFormComponent.stores = card.storeIds.map((id) => {
       return this.storeService.store.find((store) => {
         return store.id === id;
       });
@@ -138,9 +152,6 @@ export class FormComponent implements OnInit {
       campaign: ['', [Validators.required]],
       ...this.customForm[type],
     });
-    // this.form.valueChanges.subscribe((value) => {
-    //   console.log(value);
-    // });
   }
 
   submit(type: string) {
@@ -154,7 +165,9 @@ export class FormComponent implements OnInit {
               point: formData.point,
               addPoint: formData.addPoint,
               expiration: formData.expiration,
-              storeIds: this.stores.map((store) => store.id),
+              storeIds: this.sharedFormComponent.stores.map(
+                (store) => store.id
+              ),
               campaign: formData.campaign,
               payment: formData.payment,
               charge: this.chargePatterns,
@@ -212,7 +225,9 @@ export class FormComponent implements OnInit {
               point: formData.point,
               addPoint: formData.addPoint,
               expiration: formData.expiration,
-              storeIds: this.stores.map((store) => store.id),
+              storeIds: this.sharedFormComponent.stores.map(
+                (store) => store.id
+              ),
               campaign: formData.campaign,
               payment: formData.payment,
               charge: this.chargePatterns,
