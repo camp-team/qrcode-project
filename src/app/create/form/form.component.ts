@@ -12,8 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CodeCard } from '@interfaces/code-card';
 import { ElectronCard } from '@interfaces/electron-card';
-import { of, Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { CardService } from 'src/app/services/card.service';
 import { StoreService } from 'src/app/services/store.service';
 import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
@@ -25,6 +25,8 @@ import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dia
 })
 export class FormComponent implements OnInit {
   isComplete: boolean;
+  isInit: boolean;
+  maxLength = 1000;
 
   file;
   stores = [];
@@ -32,9 +34,6 @@ export class FormComponent implements OnInit {
   form: FormGroup;
   type: string;
   cardId: string;
-  codeCard: CodeCard;
-  card;
-  card$: Observable<CodeCard>;
   customForm = {
     qrCode: {
       payment: [[''], Validators.required],
@@ -52,6 +51,21 @@ export class FormComponent implements OnInit {
     },
   };
 
+  cardId$: Observable<string> = this.route.queryParamMap.pipe(
+    map((params) => params.get('id'))
+  );
+  card$: Observable<CodeCard | ElectronCard> = this.cardId$.pipe(
+    switchMap((cardId) => {
+      switch (this.type) {
+        case 'qrCode':
+          return this.cardService.getCodeCard(cardId);
+        case 'electron':
+          return this.cardService.getElectronCard(cardId);
+        default:
+          return of(null);
+      }
+    })
+  );
   chargePatterns = ['銀行口座', 'セブン銀行ATM'];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -76,37 +90,19 @@ export class FormComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router
   ) {
-    this.route.queryParamMap
-      .pipe(
-        tap((params) => {
-          this.type = params.get('type');
-          this.buildForm(this.type);
-        }),
-        switchMap((params) => {
-          this.cardId = params.get('id');
-          if (this.cardId) {
-            switch (this.type) {
-              case 'qrCode':
-                return this.cardService.getCodeCard(this.cardId);
-              case 'electron':
-                return this.cardService.getElectronCard(this.cardId);
-            }
-          } else {
-            return of(null);
-          }
-        })
-      )
-      .subscribe((card) => {
-        if (card) {
-          this.initForm(card);
-          this.card = card;
-        } else {
-          return;
-        }
-      });
+    this.route.queryParamMap.subscribe((params) => {
+      this.type = params.get('type');
+      this.buildForm(this.type);
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.card$.subscribe((card) => {
+      if (card) {
+        this.initForm(card);
+      }
+    });
+  }
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -133,16 +129,18 @@ export class FormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(20)]],
       point: ['', Validators.maxLength(5)],
-      addPoint: ['', Validators.maxLength(1000)],
-      expiration: ['', [Validators.required, Validators.maxLength(1000)]],
+      addPoint: ['', Validators.maxLength(this.maxLength)],
+      expiration: [
+        '',
+        [Validators.required, Validators.maxLength(this.maxLength)],
+      ],
       storeIds: [''],
       campaign: ['', [Validators.required]],
       ...this.customForm[type],
     });
-
-    this.form.valueChanges.subscribe((value) => {
-      console.log(value);
-    });
+    // this.form.valueChanges.subscribe((value) => {
+    //   console.log(value);
+    // });
   }
 
   submit(type: string) {

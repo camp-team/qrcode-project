@@ -5,13 +5,10 @@
     <div class="form-wrapper">
       <app-shared-form-section
         [form]="form"
-        [card]="card$ | async"
+        [card]="card$"
+        [length]="maxLength"
         (file)="file = $event"
       ></app-shared-form-section>
-
-      <h2>
-        {{ type === 'qrCode' ? 'QRcode' : '電子マネー' }}にしかない作成機能
-      </h2>
 
       <ng-container *ngIf="type === 'qrCode' || type === 'electron'">
         <mat-form-field class="form-wrapper__content" appearance="outline">
@@ -76,39 +73,37 @@
         </mat-form-field>
       </ng-container>
 
-      <ng-container [ngSwitch]="type">
-        <ng-container *ngSwitchCase="'qrCode'">
-          <div class="qr-code">
-            <mat-label class="qr-code__label">個人間送金</mat-label>
-            <mat-radio-group
-              formControlName="pushMoney"
-              class="qr-code__radio-group"
+      <ng-container *ngIf="type === 'qrCode'">
+        <div class="qr-code">
+          <mat-label class="qr-code__label">個人間送金</mat-label>
+          <mat-radio-group
+            formControlName="pushMoney"
+            class="qr-code__radio-group"
+          >
+            <mat-radio-button
+              *ngFor="let simplePattern of simplePatterns"
+              [value]="simplePattern"
+              class="qr-code__radio-button"
+              required
+              >{{ simplePattern }}</mat-radio-button
             >
-              <mat-radio-button
-                *ngFor="let simplePattern of simplePatterns"
-                [value]="simplePattern"
-                class="qr-code__radio-button"
-                required
-                >{{ simplePattern }}</mat-radio-button
-              >
-            </mat-radio-group>
-          </div>
-          <div class="qr-code">
-            <mat-label class="qr-code__label">出金</mat-label>
-            <mat-radio-group
-              formControlName="pullMoney"
-              class="qr-code__radio-group"
+          </mat-radio-group>
+        </div>
+        <div class="qr-code">
+          <mat-label class="qr-code__label">出金</mat-label>
+          <mat-radio-group
+            formControlName="pullMoney"
+            class="qr-code__radio-group"
+          >
+            <mat-radio-button
+              *ngFor="let simplePattern of simplePatterns"
+              [value]="simplePattern"
+              class="qr-code__radio-button"
+              required
+              >{{ simplePattern }}</mat-radio-button
             >
-              <mat-radio-button
-                *ngFor="let simplePattern of simplePatterns"
-                [value]="simplePattern"
-                class="qr-code__radio-button"
-                required
-                >{{ simplePattern }}</mat-radio-button
-              >
-            </mat-radio-group>
-          </div>
-        </ng-container>
+          </mat-radio-group>
+        </div>
       </ng-container>
 
       <ng-container *ngIf="cardId; else defaultButton">
