@@ -6,33 +6,37 @@ import {
   ElementRef,
   Output,
   EventEmitter,
+  OnDestroy,
 } from '@angular/core';
 import { CodeCard } from '@interfaces/code-card';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Store } from 'src/app/interfaces/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { StoreService } from 'src/app/services/store.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { CardService } from 'src/app/services/card.service';
+import { ElectronCard } from '@interfaces/electron-card';
 
 @Component({
   selector: 'app-shared-form-section',
   templateUrl: './shared-form-section.component.html',
   styleUrls: ['./shared-form-section.component.scss'],
 })
-export class SharedFormSectionComponent implements OnInit {
-  @Input() card: CodeCard;
-  @Input() cardId: string;
+export class SharedFormSectionComponent implements OnInit, OnDestroy {
+  @Input() card: Observable<CodeCard | ElectronCard>;
+  @Input() length: number;
   @Input() form: FormGroup;
   @ViewChild('storeInput') private storeInput: ElementRef;
   @Output() fileChange = new EventEmitter();
+  // @Output() stores = new EventEmitter<Store[]>();
 
   filteredStores$: Observable<Store[]>;
   imageURL: string | ArrayBuffer;
   file: File;
   stores = [];
   allStores: Store[] = this.storeService.store;
+  subscription: Subscription;
 
   get storeIdsControl() {
     return this.form?.get('storeIds') as FormControl;
@@ -68,7 +72,9 @@ export class SharedFormSectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.imageURL = this.card?.imageURL;
+    this.subscription = this.card?.subscribe((card) => {
+      this.imageURL = card?.imageURL;
+    });
 
     this.filteredStores$ = this.storeIdsControl.valueChanges.pipe(
       startWith(''),
@@ -76,6 +82,10 @@ export class SharedFormSectionComponent implements OnInit {
         return store ? this._filter(store) : this.allStores.slice();
       })
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   private convertImage(file: File) {

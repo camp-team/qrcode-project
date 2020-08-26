@@ -51,7 +51,9 @@
       matTextareaAutosize
       [matAutosizeMinRows]="4"
     ></textarea>
-    <mat-hint align="end">{{ addPointControl.value.length }} / 1000</mat-hint>
+    <mat-hint align="end"
+      >{{ addPointControl.value.length }} / {{ length }}</mat-hint
+    >
   </mat-form-field>
   <mat-form-field class="form-wrapper__content" appearance="fill">
     <mat-label>残高やポイントの有効期限</mat-label>
@@ -63,7 +65,9 @@
       [matAutosizeMinRows]="4"
       required
     ></textarea>
-    <mat-hint align="end">{{ expirationControl.value.length }} / 1000</mat-hint>
+    <mat-hint align="end"
+      >{{ expirationControl.value.length }} / {{ length }}</mat-hint
+    >
   </mat-form-field>
 
   <mat-form-field class="form-wrapper__chip-list">
