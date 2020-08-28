@@ -33,7 +33,7 @@ import { SharedFormSectionComponent } from '../shared-form-section/shared-form-s
 export class FormComponent implements OnInit, OnDestroy {
   @ViewChild(SharedFormSectionComponent)
   private sharedFormComponent: SharedFormSectionComponent;
-  subscription: Subscription;
+  private subscription: Subscription;
   isComplete: boolean;
   isInit: boolean;
   maxLength = 1000;
@@ -44,7 +44,7 @@ export class FormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   type: string;
   cardId: string;
-  customForm = {
+  private customForm = {
     qrCode: {
       payment: [[''], Validators.required],
       charge: [''],
