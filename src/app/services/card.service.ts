@@ -4,6 +4,7 @@ import { CodeCard } from '@interfaces/code-card';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ElectronCard } from '@interfaces/electron-card';
+import { BasicCard } from '@interfaces/card';
 import { firestore } from 'firebase';
 
 @Injectable({
@@ -41,6 +42,19 @@ export class CardService {
     });
   }
 
+  async createPointCard(
+    pointCard: Omit<BasicCard, 'cardId' | 'imageURL'>,
+    file: File
+  ): Promise<void> {
+    const cardId = this.db.createId();
+    const imageURL: string = await this.getUploadImageURL(cardId, file);
+    return this.db.doc(`pointCards/${cardId}`).set({
+      cardId,
+      imageURL,
+      ...pointCard,
+    });
+  }
+
   getCodeCards(): Observable<CodeCard[]> {
     return this.db.collection<CodeCard>(`codeCards`).valueChanges();
   }
@@ -49,12 +63,20 @@ export class CardService {
     return this.db.collection<ElectronCard>(`electronCards`).valueChanges();
   }
 
+  getPointCards(): Observable<BasicCard[]> {
+    return this.db.collection<BasicCard>(`pointCards`).valueChanges();
+  }
+
   getCodeCard(cardId: string): Observable<CodeCard> {
     return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
   }
 
   getElectronCard(cardId: string): Observable<ElectronCard> {
     return this.db.doc<ElectronCard>(`electronCards/${cardId}`).valueChanges();
+  }
+
+  getPointCard(cardId: string): Observable<BasicCard> {
+    return this.db.doc<BasicCard>(`pointCards/${cardId}`).valueChanges();
   }
 
   async updateCodeCard(
@@ -98,11 +120,33 @@ export class CardService {
     });
   }
 
+  async updatePointCard(
+    pointCard: Omit<BasicCard, 'imageURL'>,
+    file?: File
+  ): Promise<void> {
+    const data: any = {};
+    if (file) {
+      const imageURL: string = await this.getUploadImageURL(
+        pointCard.cardId,
+        file
+      );
+      data.imageURL = imageURL;
+    }
+    return this.db.doc(`pointCards/${pointCard.cardId}`).update({
+      ...data,
+      ...pointCard,
+    });
+  }
+
   deleteCodeCard(cardId: string): Promise<void> {
     return this.db.doc(`codeCards/${cardId}`).delete();
   }
 
   deleteElectronCard(cardId: string): Promise<void> {
+    return this.db.doc(`electronCards/${cardId}`).delete();
+  }
+
+  deletePointCard(cardId: string): Promise<void> {
     return this.db.doc(`electronCards/${cardId}`).delete();
   }
 
@@ -113,6 +157,11 @@ export class CardService {
   }
   countUpElectronCard(cardId: string): Promise<void> {
     return this.db.doc<ElectronCard>(`electronCards/${cardId}`).update({
+      viewCount: firestore.FieldValue.increment(1),
+    });
+  }
+  countUpPointCard(cardId: string): Promise<void> {
+    return this.db.doc<BasicCard>(`pointCards/${cardId}`).update({
       viewCount: firestore.FieldValue.increment(1),
     });
   }
