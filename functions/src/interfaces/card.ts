@@ -1,6 +1,6 @@
 import { firestore } from 'firebase-admin';
 
-export interface Card {
+export interface BasicCard {
   cardId: string;
   imageURL: string;
   name: string;
