@@ -25,13 +25,13 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {}
 
-  login() {
+  login(): Promise<auth.UserCredential> {
     const provider = new auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
     return this.afAuth.signInWithPopup(provider);
   }
 
-  logout() {
+  logout(): Promise<void> {
     return this.afAuth.signOut();
   }
 }

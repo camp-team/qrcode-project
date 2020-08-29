@@ -181,9 +181,7 @@ export class FormComponent implements OnInit, OnDestroy {
           .then(() => {
             this.isComplete = true;
             this.router.navigateByUrl('/code-card');
-            this.snackBar.open('カードを作成しました', null, {
-              duration: 2000,
-            });
+            this.snackBar.open('カードを作成しました');
           });
         break;
       case 'electron':
@@ -206,9 +204,7 @@ export class FormComponent implements OnInit, OnDestroy {
           .then(() => {
             this.isComplete = true;
             this.router.navigateByUrl('/electron-card');
-            this.snackBar.open('カードを作成しました', null, {
-              duration: 2000,
-            });
+            this.snackBar.open('カードを作成しました');
           });
         break;
     }
@@ -242,9 +238,7 @@ export class FormComponent implements OnInit, OnDestroy {
           .then(() => {
             this.isComplete = true;
             this.router.navigateByUrl(`/code-detail/${this.cardId}`);
-            this.snackBar.open('カードを編集しました', null, {
-              duration: 2000,
-            });
+            this.snackBar.open('カードを編集しました');
           });
         break;
       case 'electron':
@@ -268,9 +262,7 @@ export class FormComponent implements OnInit, OnDestroy {
           .then(() => {
             this.isComplete = true;
             this.router.navigateByUrl(`/electron-detail/${this.cardId}`);
-            this.snackBar.open(`カードを編集しました`, null, {
-              duration: 2000,
-            });
+            this.snackBar.open(`カードを編集しました`);
           });
         break;
     }
@@ -293,9 +285,7 @@ export class FormComponent implements OnInit, OnDestroy {
         if (result) {
           this.deleteCard(this.type).then(() => {
             this.router.navigateByUrl('/code-card');
-            this.snackBar.open('カードを削除しました', null, {
-              duration: 2000,
-            });
+            this.snackBar.open('カードを削除しました');
           });
         } else {
           return;
