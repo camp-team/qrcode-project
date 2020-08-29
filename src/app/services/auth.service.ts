@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserData } from '@interfaces/user';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,8 @@ export class AuthService {
       } else {
         return of(null);
       }
-    })
+    }),
+    shareReplay(1)
   );
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {}
