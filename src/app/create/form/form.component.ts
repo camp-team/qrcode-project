@@ -156,6 +156,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
   submit(type: string) {
     const formData = this.form.value;
+    const snackBarMessage = 'カードを作成しました';
     switch (type) {
       case 'qrCode':
         this.cardService
@@ -181,7 +182,7 @@ export class FormComponent implements OnInit, OnDestroy {
           .then(() => {
             this.isComplete = true;
             this.router.navigateByUrl('/code-card');
-            this.snackBar.open('カードを作成しました');
+            this.snackBar.open(snackBarMessage);
           });
         break;
       case 'electron':
@@ -204,7 +205,28 @@ export class FormComponent implements OnInit, OnDestroy {
           .then(() => {
             this.isComplete = true;
             this.router.navigateByUrl('/electron-card');
-            this.snackBar.open('カードを作成しました');
+            this.snackBar.open(snackBarMessage);
+          });
+        break;
+      case 'point':
+        this.cardService
+          .createPointCard(
+            {
+              name: formData.name,
+              point: formData.point,
+              addPoint: formData.addPoint,
+              expiration: formData.expiration,
+              storeIds: this.sharedFormComponent.stores.map(
+                (store) => store.id
+              ),
+              campaign: formData.campaign,
+            },
+            this.file
+          )
+          .then(() => {
+            this.isComplete = true;
+            this.router.navigateByUrl('/point-card');
+            this.snackBar.open(snackBarMessage);
           });
         break;
     }
@@ -212,6 +234,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
   updateCard(type: string) {
     const formData = this.form.value;
+    const snackBarMessage = 'カードを編集しました';
     switch (type) {
       case 'qrCode':
         this.cardService
@@ -238,7 +261,7 @@ export class FormComponent implements OnInit, OnDestroy {
           .then(() => {
             this.isComplete = true;
             this.router.navigateByUrl(`/code-detail/${this.cardId}`);
-            this.snackBar.open('カードを編集しました');
+            this.snackBar.open(snackBarMessage);
           });
         break;
       case 'electron':
@@ -262,7 +285,29 @@ export class FormComponent implements OnInit, OnDestroy {
           .then(() => {
             this.isComplete = true;
             this.router.navigateByUrl(`/electron-detail/${this.cardId}`);
-            this.snackBar.open(`カードを編集しました`);
+            this.snackBar.open(snackBarMessage);
+          });
+        break;
+      case 'pointCard':
+        this.cardService
+          .updatePointCard(
+            {
+              name: formData.name,
+              point: formData.point,
+              addPoint: formData.addPoint,
+              expiration: formData.expiration,
+              storeIds: this.sharedFormComponent.stores.map(
+                (store) => store.id
+              ),
+              campaign: formData.campaign,
+              cardId: this.cardId,
+            },
+            this.file
+          )
+          .then(() => {
+            this.isComplete = true;
+            this.router.navigateByUrl(`/point-detail/${this.cardId}`);
+            this.snackBar.open(snackBarMessage);
           });
         break;
     }
@@ -274,6 +319,8 @@ export class FormComponent implements OnInit, OnDestroy {
         return this.cardService.deleteCodeCard(this.cardId);
       case 'electron':
         return this.cardService.deleteElectronCard(this.cardId);
+      case 'point':
+        return this.cardService.deletePointCard(this.cardId);
     }
   }
 
@@ -284,7 +331,7 @@ export class FormComponent implements OnInit, OnDestroy {
       .subscribe((result) => {
         if (result) {
           this.deleteCard(this.type).then(() => {
-            this.router.navigateByUrl('/code-card');
+            this.router.navigateByUrl('/');
             this.snackBar.open('カードを削除しました');
           });
         } else {
