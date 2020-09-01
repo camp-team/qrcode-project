@@ -19,7 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CodeCard } from '@interfaces/code-card';
 import { ElectronCard } from '@interfaces/electron-card';
 import { Observable, of, Subscription } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap, take } from 'rxjs/operators';
 import { CardService } from 'src/app/services/card.service';
 import { StoreService } from 'src/app/services/store.service';
 import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
@@ -68,9 +68,9 @@ export class FormComponent implements OnInit, OnDestroy {
     switchMap((cardId) => {
       switch (this.type) {
         case 'qrCode':
-          return this.cardService.getCodeCard(cardId);
+          return this.cardService.getCodeCard(cardId).pipe(take(1));
         case 'electron':
-          return this.cardService.getElectronCard(cardId);
+          return this.cardService.getElectronCard(cardId).pipe(take(1));
         default:
           return of(null);
       }
@@ -79,10 +79,16 @@ export class FormComponent implements OnInit, OnDestroy {
   chargePatterns = ['銀行口座', 'セブン銀行ATM'];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  paymentList = ['前払い', '後払い', '即時払い'];
-  creditList = ['VISA', 'MasterCard', 'JCB', 'American Express', 'Diners Club'];
-  autoChargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
-  simplePatterns = ['可能', '不可能'];
+  readonly paymentList = ['前払い', '後払い', '即時払い'];
+  readonly creditList = [
+    'VISA',
+    'MasterCard',
+    'JCB',
+    'American Express',
+    'Diners Club',
+  ];
+  readonly autoChargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
+  readonly simplePatterns = ['可能', '不可能'];
 
   get paymentControl() {
     return this.form.get('payment') as FormControl;
