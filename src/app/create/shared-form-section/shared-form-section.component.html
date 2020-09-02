@@ -23,8 +23,11 @@
       formControlName="name"
       required
     />
+    <mat-hint align="end">{{ nameControl.value.length }} / 20</mat-hint>
     <mat-error *ngIf="nameControl.hasError('required')">必須入力です</mat-error>
-    <mat-error *ngIf="nameControl.hasError('maxlength')">長すぎます</mat-error>
+    <mat-error *ngIf="nameControl.hasError('maxlength')"
+      >20文字以内です</mat-error
+    >
   </mat-form-field>
 
   <mat-form-field class="form-wrapper__content" appearance="fill">
@@ -54,6 +57,9 @@
     <mat-hint align="end"
       >{{ addPointControl.value.length }} / {{ length }}</mat-hint
     >
+    <mat-error *ngIf="addPointControl.hasError('maxlength')"
+      >{{ length }}以内です</mat-error
+    >
   </mat-form-field>
   <mat-form-field class="form-wrapper__content" appearance="fill">
     <mat-label>残高やポイントの有効期限</mat-label>
@@ -67,6 +73,12 @@
     ></textarea>
     <mat-hint align="end"
       >{{ expirationControl.value.length }} / {{ length }}</mat-hint
+    >
+    <mat-error *ngIf="expirationControl.hasError('required')"
+      >必須入力です</mat-error
+    >
+    <mat-error *ngIf="expirationControl.hasError('maxlength')"
+      >{{ length }}以内です</mat-error
     >
   </mat-form-field>
 

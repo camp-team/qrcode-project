@@ -1,15 +1,5 @@
 @import 'mixins';
 
-.form-container {
-  margin: 0 auto;
-  max-width: 700px;
-}
-
-.heading {
-  text-align: center;
-  border-bottom: 1px solid black;
-}
-
 .form-wrapper {
   padding: 40px;
   &__content {
@@ -22,31 +12,6 @@
   @include sp {
     padding: 16px;
   }
-}
-
-.qr-code {
-  background-color: rgba(0, 0, 0, 0.04);
-  margin-bottom: 24px;
-  padding: 12px;
-  &__label {
-    display: block;
-    padding-bottom: 8px;
-  }
-  &__radio-button {
-    margin-right: 16px;
-  }
-}
-
-.form-btns {
-  text-align: center;
-  &__btn {
-    text-align: center;
-  }
-}
-
-.back-btn {
-  text-align: center;
-  margin-top: 40px;
 }
 
 .upload {
