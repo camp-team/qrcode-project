@@ -8,10 +8,10 @@ export interface CreditCard {
   pointName?: string;
   viewCount?: firestore.FieldValue;
   annualFee: string;
-  brand: string[];
+  brands: string[];
   miles?: string[];
-  additionCard: string[];
-  insurance: string;
+  additionCards: string[];
+  insurances: string;
   electron?: string[];
   mobile?: string[];
 }
