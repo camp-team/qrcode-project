@@ -1,0 +1,40 @@
+@import 'mixins';
+
+.form-wrapper {
+  padding: 40px;
+  &__content {
+    display: block;
+    margin: 16px 0;
+  }
+  &__chip-list {
+    width: 100%;
+  }
+  @include sp {
+    padding: 16px;
+  }
+}
+
+.upload {
+  background-color: rgb(245, 245, 245);
+  cursor: pointer;
+  text-align: center;
+  padding: 36px;
+  border-width: 1px;
+  border-style: dashed;
+  border-color: rgb(204, 204, 204);
+  font-size: 13px;
+  margin-bottom: 24px;
+  p {
+    margin: 0;
+  }
+}
+
+.submit {
+  text-align: center;
+  &__btn {
+    width: 100%;
+  }
+  button + button {
+    margin-top: 24px;
+  }
+}

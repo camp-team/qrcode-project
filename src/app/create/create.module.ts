@@ -14,12 +14,14 @@ import { DeleteCardDialogComponent } from './delete-card-dialog/delete-card-dial
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { SharedFormSectionComponent } from './shared-form-section/shared-form-section.component';
+import { CreditFormComponent } from './credit-form/credit-form.component';
 
 @NgModule({
   declarations: [
     FormComponent,
     DeleteCardDialogComponent,
     SharedFormSectionComponent,
+    CreditFormComponent,
   ],
   imports: [
     CommonModule,
