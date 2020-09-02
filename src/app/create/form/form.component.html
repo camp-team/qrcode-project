@@ -1,146 +1,158 @@
 <div class="form-container">
   <h1 class="heading">カードを{{ (cardId$ | async) ? '編集' : '作成' }}する</h1>
 
-  <form [formGroup]="form" (ngSubmit)="submit(type)">
-    <div class="form-wrapper">
-      <app-shared-form-section
-        [form]="form"
-        [card]="card$"
-        [length]="maxLength"
-        (fileChange)="file = $event"
-      ></app-shared-form-section>
+  <ng-container *ngIf="type === 'credit'; else otherForm">
+    <app-credit-form [cardId]="cardId"></app-credit-form>
+  </ng-container>
 
-      <ng-container *ngIf="type === 'qrCode' || type === 'electron'">
-        <mat-form-field class="form-wrapper__content" appearance="outline">
-          <mat-label>精算方法</mat-label>
-          <mat-select formControlName="payment" multiple>
-            <mat-option *ngFor="let payment of paymentList" [value]="payment">{{
-              payment
-            }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="paymentControl.hasError('required')"
-            >必須入力です</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field class="form-wrapper__chip-list">
-          <mat-label>チャージ方法</mat-label>
-          <mat-chip-list #chipList aria-label="Fruit selection">
-            <mat-chip
-              *ngFor="let chargePattern of chargePatterns"
-              [removable]="true"
-              (removed)="remove(chargePattern)"
+  <ng-template #otherForm>
+    <form [formGroup]="form" (ngSubmit)="submit(type)">
+      <div class="form-wrapper">
+        <app-shared-form-section
+          [form]="form"
+          [card]="card$"
+          [length]="maxLength"
+          (fileChange)="file = $event"
+        ></app-shared-form-section>
+
+        <ng-container *ngIf="type === 'qrCode' || type === 'electron'">
+          <mat-form-field class="form-wrapper__content" appearance="outline">
+            <mat-label>精算方法</mat-label>
+            <mat-select formControlName="payment" multiple required>
+              <mat-option
+                *ngFor="let payment of paymentList"
+                [value]="payment"
+                >{{ payment }}</mat-option
+              >
+            </mat-select>
+            <mat-error *ngIf="paymentControl.hasError('required')"
+              >必須入力です</mat-error
             >
-              {{ chargePattern }}
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <input
-              placeholder="チャージ方法を選択してください"
-              formControlName="charge"
-              [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="true"
-              (matChipInputTokenEnd)="add($event)"
-            />
-          </mat-chip-list>
-        </mat-form-field>
+          </mat-form-field>
+          <mat-form-field class="form-wrapper__chip-list">
+            <mat-label>チャージ方法</mat-label>
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip
+                *ngFor="let chargePattern of chargePatterns"
+                [removable]="true"
+                (removed)="remove(chargePattern)"
+              >
+                {{ chargePattern }}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+              <input
+                placeholder="チャージ方法を選択してください"
+                formControlName="charge"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="true"
+                (matChipInputTokenEnd)="add($event)"
+              />
+            </mat-chip-list>
+          </mat-form-field>
 
-        <div class="qr-code">
-          <mat-label class="qr-code__label">オートチャージ</mat-label>
-          <mat-radio-group
-            formControlName="autoCharge"
-            class="qr-code__radio-group"
-          >
-            <mat-radio-button
-              *ngFor="let autoChargePattern of autoChargePatterns"
-              [value]="autoChargePattern"
-              class="qr-code__radio-button"
-              required
-              >{{ autoChargePattern }}</mat-radio-button
+          <div class="qr-code">
+            <mat-label class="qr-code__label">オートチャージ</mat-label>
+            <mat-radio-group
+              formControlName="autoCharge"
+              class="qr-code__radio-group"
             >
-          </mat-radio-group>
-        </div>
+              <mat-radio-button
+                *ngFor="let autoChargePattern of autoChargePatterns"
+                [value]="autoChargePattern"
+                class="qr-code__radio-button"
+                required
+                >{{ autoChargePattern }}</mat-radio-button
+              >
+            </mat-radio-group>
+          </div>
 
-        <mat-form-field class="form-wrapper__content" appearance="outline">
-          <mat-label>利用可能なクレジットカード</mat-label>
-          <mat-select formControlName="availableCredit" multiple>
-            <mat-option *ngFor="let credit of creditList" [value]="credit">{{
-              credit
-            }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="creditControl.hasError('required')"
-            >必須入力です</mat-error
-          >
-        </mat-form-field>
-      </ng-container>
-
-      <ng-container *ngIf="type === 'qrCode'">
-        <div class="qr-code">
-          <mat-label class="qr-code__label">個人間送金</mat-label>
-          <mat-radio-group
-            formControlName="pushMoney"
-            class="qr-code__radio-group"
-          >
-            <mat-radio-button
-              *ngFor="let simplePattern of simplePatterns"
-              [value]="simplePattern"
-              class="qr-code__radio-button"
-              required
-              >{{ simplePattern }}</mat-radio-button
+          <mat-form-field class="form-wrapper__content" appearance="outline">
+            <mat-label>利用可能なクレジットカード</mat-label>
+            <mat-select formControlName="availableCredit" multiple>
+              <mat-option *ngFor="let credit of creditList" [value]="credit">{{
+                credit
+              }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="creditControl.hasError('required')"
+              >必須入力です</mat-error
             >
-          </mat-radio-group>
-        </div>
-        <div class="qr-code">
-          <mat-label class="qr-code__label">出金</mat-label>
-          <mat-radio-group
-            formControlName="pullMoney"
-            class="qr-code__radio-group"
-          >
-            <mat-radio-button
-              *ngFor="let simplePattern of simplePatterns"
-              [value]="simplePattern"
-              class="qr-code__radio-button"
-              required
-              >{{ simplePattern }}</mat-radio-button
-            >
-          </mat-radio-group>
-        </div>
-      </ng-container>
+          </mat-form-field>
+        </ng-container>
 
-      <ng-container *ngIf="cardId$ | async; else defaultButton">
-        <div class="form-btns">
-          <button
-            [disabled]="form.invalid || form.pristine"
-            mat-raised-button
-            color="primary"
-            type="button"
-            (click)="updateCard(type)"
-          >
-            適用する
+        <ng-container *ngIf="type === 'qrCode'">
+          <div class="qr-code">
+            <mat-label class="qr-code__label">個人間送金</mat-label>
+            <mat-radio-group
+              formControlName="pushMoney"
+              class="qr-code__radio-group"
+            >
+              <mat-radio-button
+                *ngFor="let simplePattern of simplePatterns"
+                [value]="simplePattern"
+                class="qr-code__radio-button"
+                required
+                >{{ simplePattern }}</mat-radio-button
+              >
+            </mat-radio-group>
+          </div>
+          <div class="qr-code">
+            <mat-label class="qr-code__label">出金</mat-label>
+            <mat-radio-group
+              formControlName="pullMoney"
+              class="qr-code__radio-group"
+            >
+              <mat-radio-button
+                *ngFor="let simplePattern of simplePatterns"
+                [value]="simplePattern"
+                class="qr-code__radio-button"
+                required
+                >{{ simplePattern }}</mat-radio-button
+              >
+            </mat-radio-group>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="cardId$ | async; else defaultButton">
+          <div class="form-btns">
+            <button
+              [disabled]="form.invalid || form.pristine || processing"
+              mat-raised-button
+              color="primary"
+              type="button"
+              (click)="updateCard(type)"
+            >
+              適用する
+            </button>
+            <p>or</p>
+            <button
+              [disabled]="form.invalid"
+              mat-raised-button
+              color="warn"
+              type="button"
+              (click)="openDeleteCardDialog()"
+            >
+              削除する
+            </button>
+          </div>
+        </ng-container>
+        <ng-template #defaultButton>
+          <div class="form-btns__btn">
+            <button
+              [disabled]="form.invalid || form.pristine || processing"
+              mat-raised-button
+              color="primary"
+            >
+              追加する
+            </button>
+          </div>
+        </ng-template>
+        <div class="back-btn">
+          <button type="button" routerLink="/" mat-button color="primary">
+            トップへ戻る
           </button>
-          <p>or</p>
-          <button
-            [disabled]="form.invalid"
-            mat-raised-button
-            color="warn"
-            type="button"
-            (click)="openDeleteCardDialog()"
-          >
-            削除する
-          </button>
         </div>
-      </ng-container>
-      <ng-template #defaultButton>
-        <div class="form-btns__btn">
-          <button [disabled]="form.invalid" mat-raised-button color="primary">
-            追加する
-          </button>
-        </div>
-      </ng-template>
-      <div class="back-btn">
-        <button type="button" routerLink="/" mat-button color="primary">
-          トップへ戻る
-        </button>
       </div>
-    </div>
-  </form>
+    </form>
+  </ng-template>
 </div>
