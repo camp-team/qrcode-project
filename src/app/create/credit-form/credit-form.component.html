@@ -173,6 +173,17 @@
       >
         {{ cardId ? '編集' : '作成' }}する
       </button>
+      <button
+        *ngIf="cardId"
+        class="submit__btn"
+        [disabled]="form.invalid"
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="openDeleteCardDialog()"
+      >
+        削除する
+      </button>
       <button type="button" routerLink="/" mat-button color="primary">
         トップへ戻る
       </button>

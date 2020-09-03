@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -9,6 +9,8 @@ import { CreditCard } from '@interfaces/credit-card';
 import { CardService } from 'src/app/services/card.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-credit-form',
@@ -16,7 +18,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./credit-form.component.scss'],
 })
 export class CreditFormComponent implements OnInit {
-  @Input() cardId: string;
+  @Input()
+  cardId: string;
   maxLength = 20;
   processing: boolean;
 
@@ -92,7 +95,8 @@ export class CreditFormComponent implements OnInit {
     private fb: FormBuilder,
     private cardService: CardService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -139,10 +143,34 @@ export class CreditFormComponent implements OnInit {
     } else {
       await this.cardService.createCreditCard(cardData, this.file);
     }
-    this.snackBar.open(`カードを${snackBarMessage}しました`);
     this.router.navigateByUrl(
       cardId ? `/credit-detail/${cardId}` : '/credit-card'
     );
+    this.snackBar.open(`カードを${snackBarMessage}しました`);
     this.processing = false;
+  }
+
+  openDeleteCardDialog() {
+    this.dialog
+      .open(DeleteCardDialogComponent)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.cardService.deletePointCard(this.cardId).then(() => {
+            this.router.navigateByUrl(`/credit-card`);
+            this.snackBar.open('カードを削除しました');
+          });
+        } else {
+          return;
+        }
+      });
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (this.form.dirty) {
+      $event.preventDefault();
+      $event.returnValue = '作業中の内容が失われますがよろしいですか？';
+    }
   }
 }
