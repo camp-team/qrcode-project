@@ -29,7 +29,6 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
   @ViewChild('storeInput') private storeInput: ElementRef;
   @Output() fileChange = new EventEmitter();
-  // @Output() stores = new EventEmitter<Store[]>();
 
   filteredStores$: Observable<Store[]>;
   imageURL: string | ArrayBuffer;
