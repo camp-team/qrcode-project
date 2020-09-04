@@ -41,6 +41,7 @@ export class FormComponent implements OnInit, OnDestroy {
   isComplete: boolean;
   processing: boolean;
   maxLength = 1000;
+  formTitle: string;
 
   file;
   stores = [];
@@ -126,6 +127,7 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.initTitle(this.type);
     this.subscription = this.card$.subscribe((card) => {
       if (card) {
         this.initForm(card);
@@ -139,6 +141,23 @@ export class FormComponent implements OnInit, OnDestroy {
     if (this.form.dirty) {
       $event.preventDefault();
       $event.returnValue = '作業中の内容が失われますがよろしいですか？';
+    }
+  }
+
+  private initTitle(type: string) {
+    switch (type) {
+      case 'code':
+        this.formTitle = 'モバイル決済';
+        break;
+      case 'electron':
+        this.formTitle = '電子マネー';
+        break;
+      case 'credit':
+        this.formTitle = 'クレジットカード ';
+        break;
+      case 'point':
+        this.formTitle = 'ポイントカード';
+        break;
     }
   }
 

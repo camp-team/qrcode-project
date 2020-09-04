@@ -6,7 +6,13 @@
 }
 
 .heading {
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 32px;
+  h1 {
+    margin: 0;
+  }
   border-bottom: 1px solid black;
 }
 

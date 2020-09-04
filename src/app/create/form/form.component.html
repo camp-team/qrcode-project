@@ -1,5 +1,8 @@
 <div class="form-container">
-  <h1 class="heading">カードを{{ cardId ? '編集' : '作成' }}する</h1>
+  <div class="heading">
+    <h1>{{ formTitle }}を</h1>
+    <h1>{{ cardId ? '編集' : '作成' }}する</h1>
+  </div>
 
   <ng-container *ngIf="type === 'credit'; else otherForm">
     <app-credit-form #creditForm [cardId]="cardId"></app-credit-form>
