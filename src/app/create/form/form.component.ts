@@ -24,6 +24,8 @@ import { CardService } from 'src/app/services/card.service';
 import { StoreService } from 'src/app/services/store.service';
 import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
 import { SharedFormSectionComponent } from '../shared-form-section/shared-form-section.component';
+import { BasicCard } from '@interfaces/card';
+import { CreditCard } from '@interfaces/credit-card';
 
 @Component({
   selector: 'app-form',
@@ -35,7 +37,7 @@ export class FormComponent implements OnInit, OnDestroy {
   private sharedFormComponent: SharedFormSectionComponent;
   private subscription: Subscription;
   isComplete: boolean;
-  isInit: boolean;
+  processing: boolean;
   maxLength = 1000;
 
   file;
@@ -45,7 +47,7 @@ export class FormComponent implements OnInit, OnDestroy {
   type: string;
   cardId: string;
   private customForm = {
-    qrCode: {
+    code: {
       payment: [[''], Validators.required],
       charge: [''],
       autoCharge: ['', Validators.required],
@@ -67,10 +69,14 @@ export class FormComponent implements OnInit, OnDestroy {
   card$: Observable<CodeCard | ElectronCard> = this.cardId$.pipe(
     switchMap((cardId) => {
       switch (this.type) {
-        case 'qrCode':
+        case 'code':
           return this.cardService.getCodeCard(cardId).pipe(take(1));
         case 'electron':
           return this.cardService.getElectronCard(cardId).pipe(take(1));
+        case 'credit':
+          return this.cardService.getCreditCard(cardId).pipe(take(1));
+        case 'point':
+          return this.cardService.getPointCard(cardId).pipe(take(1));
         default:
           return of(null);
       }
@@ -160,168 +166,93 @@ export class FormComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit(type: string) {
+  submit(type: string, cardId?: string) {
+    this.processing = true;
     const formData = this.form.value;
-    const snackBarMessage = 'カードを作成しました';
+    let task: Promise<void>;
+    const snackBarMessage = cardId ? '編集' : '作成';
     switch (type) {
-      case 'qrCode':
-        this.cardService
-          .createCodeCard(
-            {
-              name: formData.name,
-              point: formData.point,
-              addPoint: formData.addPoint,
-              expiration: formData.expiration,
-              storeIds: this.sharedFormComponent.stores.map(
-                (store) => store.id
-              ),
-              campaign: formData.campaign,
-              payment: formData.payment,
-              charge: this.chargePatterns,
-              autoCharge: formData.autoCharge,
-              availableCredit: formData.availableCredit,
-              pushMoney: formData.pushMoney,
-              pullMoney: formData.pullMoney,
-            },
-            this.file
-          )
-          .then(() => {
-            this.isComplete = true;
-            this.router.navigateByUrl('/code-card');
-            this.snackBar.open(snackBarMessage);
-          });
+      case 'code':
+        const codeData: Omit<CodeCard, 'cardId' | 'imageURL'> = {
+          name: formData.name,
+          point: formData.point,
+          addPoint: formData.addPoint,
+          expiration: formData.expiration,
+          storeIds: this.sharedFormComponent.stores.map((store) => store.id),
+          campaign: formData.campaign,
+          payment: formData.payment,
+          charge: this.chargePatterns,
+          autoCharge: formData.autoCharge,
+          availableCredit: formData.availableCredit,
+          pushMoney: formData.pushMoney,
+          pullMoney: formData.pullMoney,
+        };
+        task = cardId
+          ? this.cardService.updateCodeCard(
+              {
+                ...codeData,
+                cardId,
+              },
+              this.file
+            )
+          : this.cardService.createCodeCard(codeData, this.file);
         break;
       case 'electron':
-        this.cardService
-          .createElectornCard(
-            {
-              name: formData.name,
-              point: formData.point,
-              addPoint: formData.addPoint,
-              expiration: formData.expiration,
-              storeIds: this.stores.map((store) => store.id),
-              campaign: formData.campaign,
-              payment: formData.payment,
-              charge: this.chargePatterns,
-              autoCharge: formData.autoCharge,
-              availableCredit: formData.availableCredit,
-            },
-            this.file
-          )
-          .then(() => {
-            this.isComplete = true;
-            this.router.navigateByUrl('/electron-card');
-            this.snackBar.open(snackBarMessage);
-          });
+        const electronData: Omit<ElectronCard, 'cardId' | 'imageURL'> = {
+          name: formData.name,
+          point: formData.point,
+          addPoint: formData.addPoint,
+          expiration: formData.expiration,
+          storeIds: this.stores.map((store) => store.id),
+          campaign: formData.campaign,
+          payment: formData.payment,
+          charge: this.chargePatterns,
+          autoCharge: formData.autoCharge,
+          availableCredit: formData.availableCredit,
+        };
+        task = cardId
+          ? this.cardService.updateElectronCard(
+              {
+                ...electronData,
+                cardId,
+              },
+              this.file
+            )
+          : this.cardService.createElectornCard(electronData, this.file);
         break;
       case 'point':
-        this.cardService
-          .createPointCard(
-            {
-              name: formData.name,
-              point: formData.point,
-              addPoint: formData.addPoint,
-              expiration: formData.expiration,
-              storeIds: this.sharedFormComponent.stores.map(
-                (store) => store.id
-              ),
-              campaign: formData.campaign,
-            },
-            this.file
-          )
-          .then(() => {
-            this.isComplete = true;
-            this.router.navigateByUrl('/point-card');
-            this.snackBar.open(snackBarMessage);
-          });
+        const pointData: Omit<BasicCard, 'cardId' | 'imageURL'> = {
+          name: formData.name,
+          point: formData.point,
+          addPoint: formData.addPoint,
+          expiration: formData.expiration,
+          storeIds: this.sharedFormComponent.stores.map((store) => store.id),
+          campaign: formData.campaign,
+        };
+        task = cardId
+          ? this.cardService.updatePointCard(
+              {
+                ...pointData,
+                cardId,
+              },
+              this.file
+            )
+          : this.cardService.createPointCard(pointData, this.file);
         break;
     }
-  }
-
-  updateCard(type: string) {
-    const formData = this.form.value;
-    const snackBarMessage = 'カードを編集しました';
-    switch (type) {
-      case 'qrCode':
-        this.cardService
-          .updateCodeCard(
-            {
-              name: formData.name,
-              point: formData.point,
-              addPoint: formData.addPoint,
-              expiration: formData.expiration,
-              storeIds: this.sharedFormComponent.stores.map(
-                (store) => store.id
-              ),
-              campaign: formData.campaign,
-              payment: formData.payment,
-              charge: this.chargePatterns,
-              autoCharge: formData.autoCharge,
-              availableCredit: formData.availableCredit,
-              pushMoney: formData.pushMoney,
-              pullMoney: formData.pullMoney,
-              cardId: this.cardId,
-            },
-            this.file
-          )
-          .then(() => {
-            this.isComplete = true;
-            this.router.navigateByUrl(`/code-detail/${this.cardId}`);
-            this.snackBar.open(snackBarMessage);
-          });
-        break;
-      case 'electron':
-        this.cardService
-          .updateElectronCard(
-            {
-              name: formData.name,
-              point: formData.point,
-              addPoint: formData.addPoint,
-              expiration: formData.expiration,
-              storeIds: this.stores.map((store) => store.id),
-              campaign: formData.campaign,
-              payment: formData.payment,
-              charge: this.chargePatterns,
-              autoCharge: formData.autoCharge,
-              availableCredit: formData.availableCredit,
-              cardId: this.cardId,
-            },
-            this.file
-          )
-          .then(() => {
-            this.isComplete = true;
-            this.router.navigateByUrl(`/electron-detail/${this.cardId}`);
-            this.snackBar.open(snackBarMessage);
-          });
-        break;
-      case 'pointCard':
-        this.cardService
-          .updatePointCard(
-            {
-              name: formData.name,
-              point: formData.point,
-              addPoint: formData.addPoint,
-              expiration: formData.expiration,
-              storeIds: this.sharedFormComponent.stores.map(
-                (store) => store.id
-              ),
-              campaign: formData.campaign,
-              cardId: this.cardId,
-            },
-            this.file
-          )
-          .then(() => {
-            this.isComplete = true;
-            this.router.navigateByUrl(`/point-detail/${this.cardId}`);
-            this.snackBar.open(snackBarMessage);
-          });
-        break;
-    }
+    task.then(() => {
+      this.isComplete = true;
+      this.processing = false;
+      this.router.navigateByUrl(
+        cardId ? `/${type}-detail/${this.cardId}` : `/${type}-card`
+      );
+      this.snackBar.open(`カードを${snackBarMessage}しました`);
+    });
   }
 
   deleteCard(type: string) {
     switch (type) {
-      case 'qrCode':
+      case 'code':
         return this.cardService.deleteCodeCard(this.cardId);
       case 'electron':
         return this.cardService.deleteElectronCard(this.cardId);
@@ -337,7 +268,7 @@ export class FormComponent implements OnInit, OnDestroy {
       .subscribe((result) => {
         if (result) {
           this.deleteCard(this.type).then(() => {
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl(`/${this.type}-card`);
             this.snackBar.open('カードを削除しました');
           });
         } else {

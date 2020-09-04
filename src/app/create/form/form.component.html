@@ -1,12 +1,12 @@
 <div class="form-container">
-  <h1 class="heading">カードを{{ (cardId$ | async) ? '編集' : '作成' }}する</h1>
+  <h1 class="heading">カードを{{ cardId ? '編集' : '作成' }}する</h1>
 
   <ng-container *ngIf="type === 'credit'; else otherForm">
     <app-credit-form [cardId]="cardId"></app-credit-form>
   </ng-container>
 
   <ng-template #otherForm>
-    <form [formGroup]="form" (ngSubmit)="submit(type)">
+    <form [formGroup]="form" (ngSubmit)="submit(type, cardId)">
       <div class="form-wrapper">
         <app-shared-form-section
           [form]="form"
@@ -15,7 +15,7 @@
           (fileChange)="file = $event"
         ></app-shared-form-section>
 
-        <ng-container *ngIf="type === 'qrCode' || type === 'electron'">
+        <ng-container *ngIf="type === 'code' || type === 'electron'">
           <mat-form-field class="form-wrapper__content" appearance="outline">
             <mat-label>精算方法</mat-label>
             <mat-select formControlName="payment" multiple required>
@@ -51,16 +51,13 @@
             </mat-chip-list>
           </mat-form-field>
 
-          <div class="qr-code">
-            <mat-label class="qr-code__label">オートチャージ</mat-label>
-            <mat-radio-group
-              formControlName="autoCharge"
-              class="qr-code__radio-group"
-            >
+          <div class="code">
+            <mat-label class="code__label">オートチャージ *</mat-label>
+            <mat-radio-group formControlName="autoCharge">
               <mat-radio-button
                 *ngFor="let autoChargePattern of autoChargePatterns"
                 [value]="autoChargePattern"
-                class="qr-code__radio-button"
+                class="code__radio-button"
                 required
                 >{{ autoChargePattern }}</mat-radio-button
               >
@@ -69,7 +66,7 @@
 
           <mat-form-field class="form-wrapper__content" appearance="outline">
             <mat-label>利用可能なクレジットカード</mat-label>
-            <mat-select formControlName="availableCredit" multiple>
+            <mat-select formControlName="availableCredit" multiple required>
               <mat-option *ngFor="let credit of creditList" [value]="credit">{{
                 credit
               }}</mat-option>
@@ -80,32 +77,26 @@
           </mat-form-field>
         </ng-container>
 
-        <ng-container *ngIf="type === 'qrCode'">
-          <div class="qr-code">
-            <mat-label class="qr-code__label">個人間送金</mat-label>
-            <mat-radio-group
-              formControlName="pushMoney"
-              class="qr-code__radio-group"
-            >
+        <ng-container *ngIf="type === 'code'">
+          <div class="code">
+            <mat-label class="code__label">個人間送金 *</mat-label>
+            <mat-radio-group formControlName="pushMoney">
               <mat-radio-button
                 *ngFor="let simplePattern of simplePatterns"
                 [value]="simplePattern"
-                class="qr-code__radio-button"
+                class="code__radio-button"
                 required
                 >{{ simplePattern }}</mat-radio-button
               >
             </mat-radio-group>
           </div>
-          <div class="qr-code">
-            <mat-label class="qr-code__label">出金</mat-label>
-            <mat-radio-group
-              formControlName="pullMoney"
-              class="qr-code__radio-group"
-            >
+          <div class="code">
+            <mat-label class="code__label">出金 *</mat-label>
+            <mat-radio-group formControlName="pullMoney">
               <mat-radio-button
                 *ngFor="let simplePattern of simplePatterns"
                 [value]="simplePattern"
-                class="qr-code__radio-button"
+                class="code__radio-button"
                 required
                 >{{ simplePattern }}</mat-radio-button
               >
@@ -113,41 +104,26 @@
           </div>
         </ng-container>
 
-        <ng-container *ngIf="cardId$ | async; else defaultButton">
-          <div class="form-btns">
-            <button
-              [disabled]="form.invalid || form.pristine || processing"
-              mat-raised-button
-              color="primary"
-              type="button"
-              (click)="updateCard(type)"
-            >
-              適用する
-            </button>
-            <p>or</p>
-            <button
-              [disabled]="form.invalid"
-              mat-raised-button
-              color="warn"
-              type="button"
-              (click)="openDeleteCardDialog()"
-            >
-              削除する
-            </button>
-          </div>
-        </ng-container>
-        <ng-template #defaultButton>
-          <div class="form-btns__btn">
-            <button
-              [disabled]="form.invalid || form.pristine || processing"
-              mat-raised-button
-              color="primary"
-            >
-              追加する
-            </button>
-          </div>
-        </ng-template>
-        <div class="back-btn">
+        <div class="submit">
+          <button
+            class="submit__btn"
+            [disabled]="form.invalid || form.pristine || processing"
+            mat-raised-button
+            color="primary"
+          >
+            {{ cardId ? '編集' : '作成' }}する
+          </button>
+          <button
+            *ngIf="cardId"
+            class="submit__btn"
+            [disabled]="form.invalid"
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="openDeleteCardDialog()"
+          >
+            削除する
+          </button>
           <button type="button" routerLink="/" mat-button color="primary">
             トップへ戻る
           </button>

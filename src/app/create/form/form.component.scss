@@ -24,7 +24,7 @@
   }
 }
 
-.qr-code {
+.code {
   background-color: rgba(0, 0, 0, 0.04);
   margin-bottom: 24px;
   padding: 12px;
@@ -35,18 +35,6 @@
   &__radio-button {
     margin-right: 16px;
   }
-}
-
-.form-btns {
-  text-align: center;
-  &__btn {
-    text-align: center;
-  }
-}
-
-.back-btn {
-  text-align: center;
-  margin-top: 40px;
 }
 
 .upload {
@@ -61,5 +49,15 @@
   margin-bottom: 24px;
   p {
     margin: 0;
+  }
+}
+
+.submit {
+  text-align: center;
+  &__btn {
+    width: 100%;
+  }
+  button + button {
+    margin-top: 24px;
   }
 }
