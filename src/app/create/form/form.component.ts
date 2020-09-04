@@ -26,6 +26,7 @@ import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dia
 import { SharedFormSectionComponent } from '../shared-form-section/shared-form-section.component';
 import { BasicCard } from '@interfaces/card';
 import { CreditCard } from '@interfaces/credit-card';
+import { CreditFormComponent } from '../credit-form/credit-form.component';
 
 @Component({
   selector: 'app-form',
@@ -35,6 +36,7 @@ import { CreditCard } from '@interfaces/credit-card';
 export class FormComponent implements OnInit, OnDestroy {
   @ViewChild(SharedFormSectionComponent)
   private sharedFormComponent: SharedFormSectionComponent;
+  @ViewChild('creditForm') public creditForm: CreditFormComponent;
   private subscription: Subscription;
   isComplete: boolean;
   processing: boolean;
@@ -66,7 +68,9 @@ export class FormComponent implements OnInit, OnDestroy {
   cardId$: Observable<string> = this.route.queryParamMap.pipe(
     map((params) => params.get('id'))
   );
-  card$: Observable<CodeCard | ElectronCard> = this.cardId$.pipe(
+  card$: Observable<
+    CodeCard | ElectronCard | CreditCard | BasicCard
+  > = this.cardId$.pipe(
     switchMap((cardId) => {
       switch (this.type) {
         case 'code':
@@ -138,9 +142,9 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
 
-  private initForm(card: CodeCard | ElectronCard) {
-    this.chargePatterns = card.charge;
-    this.sharedFormComponent.stores = card.storeIds.map((id) => {
+  private initForm(card: CodeCard | ElectronCard | CreditCard | BasicCard) {
+    this.chargePatterns = (card as CodeCard | ElectronCard).charge;
+    this.sharedFormComponent.stores = (card as CodeCard).storeIds.map((id) => {
       return this.storeService.store.find((store) => {
         return store.id === id;
       });
@@ -203,7 +207,7 @@ export class FormComponent implements OnInit, OnDestroy {
           point: formData.point,
           addPoint: formData.addPoint,
           expiration: formData.expiration,
-          storeIds: this.stores.map((store) => store.id),
+          storeIds: this.sharedFormComponent.stores.map((store) => store.id),
           campaign: formData.campaign,
           payment: formData.payment,
           charge: this.chargePatterns,
