@@ -8,9 +8,19 @@ import { FormComponent } from '../create/form/form.component';
 })
 export class FormGuard implements CanDeactivate<FormComponent> {
   canDeactivate(component: FormComponent): Observable<boolean> | boolean {
-    if (component.form.pristine || component.isComplete) {
-      return true;
+    if (component.creditForm) {
+      if (
+        component.creditForm.form.pristine ||
+        component.creditForm.isComplete
+      ) {
+        return true;
+      }
+    } else {
+      if (component.form.pristine || component.isComplete) {
+        return true;
+      }
     }
+
     const confirmation = window.confirm(
       '作業中の内容が失われますがよろしいですか？'
     );

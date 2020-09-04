@@ -18,8 +18,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./credit-form.component.scss'],
 })
 export class CreditFormComponent implements OnInit {
-  @Input()
-  cardId: string;
+  @Input() cardId: string;
+  isComplete: boolean;
   maxLength = 20;
   processing: boolean;
 
@@ -143,6 +143,7 @@ export class CreditFormComponent implements OnInit {
     } else {
       await this.cardService.createCreditCard(cardData, this.file);
     }
+    this.isComplete = true;
     this.router.navigateByUrl(
       cardId ? `/credit-detail/${cardId}` : '/credit-card'
     );
