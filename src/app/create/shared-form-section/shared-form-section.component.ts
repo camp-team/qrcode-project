@@ -15,7 +15,6 @@ import { Observable, Subscription } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { StoreService } from 'src/app/services/store.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { CardService } from 'src/app/services/card.service';
 import { ElectronCard } from '@interfaces/electron-card';
 
 @Component({
@@ -36,6 +35,8 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
   stores = [];
   allStores: Store[] = this.storeService.store;
   subscription: Subscription;
+  chipsInvalid = true;
+  fileInvalid = true;
 
   get storeIdsControl() {
     return this.form?.get('storeIds') as FormControl;
@@ -61,10 +62,7 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
     return this.allStores.filter((store) => store.name.indexOf(value) === 0);
   }
 
-  constructor(
-    private storeService: StoreService,
-    private cardService: CardService
-  ) {}
+  constructor(private storeService: StoreService) {}
 
   get nameControl() {
     return this.form.get('name') as FormControl;
@@ -72,7 +70,10 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.card?.subscribe((card) => {
-      this.imageURL = card?.imageURL;
+      if (card) {
+        this.imageURL = card.imageURL;
+        this.fileInvalid = false;
+      }
     });
 
     this.filteredStores$ = this.storeIdsControl.valueChanges.pipe(
@@ -98,6 +99,7 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
   uploadImage({ target }: { target: HTMLInputElement }) {
     if (target.files.length) {
       this.file = target.files[0];
+      this.fileInvalid = false;
       this.fileChange.emit(this.file);
     }
     this.convertImage(this.file);
@@ -107,6 +109,7 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
     this.stores.push(event.option.value);
     this.storeInput.nativeElement.value = '';
     this.storeIdsControl.setValue(null);
+    this.chipsInvalid = false;
   }
 
   removeStore(store: string): void {
@@ -114,6 +117,9 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
 
     if (index >= 0) {
       this.stores.splice(index, 1);
+    }
+    if (!this.stores.length) {
+      this.chipsInvalid = true;
     }
   }
 }

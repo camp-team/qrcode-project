@@ -107,7 +107,13 @@
         <div class="submit">
           <button
             class="submit__btn"
-            [disabled]="form.invalid || form.pristine || processing"
+            [disabled]="
+              form.invalid ||
+              form.pristine ||
+              sharedFormComponent.chipsInvalid ||
+              sharedFormComponent.fileInvalid ||
+              processing
+            "
             mat-raised-button
             color="primary"
           >

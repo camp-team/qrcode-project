@@ -35,7 +35,7 @@ import { CreditFormComponent } from '../credit-form/credit-form.component';
 })
 export class FormComponent implements OnInit, OnDestroy {
   @ViewChild(SharedFormSectionComponent)
-  private sharedFormComponent: SharedFormSectionComponent;
+  public sharedFormComponent: SharedFormSectionComponent;
   @ViewChild('creditForm') public creditForm: CreditFormComponent;
   private subscription: Subscription;
   isComplete: boolean;

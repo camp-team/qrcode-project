@@ -6,11 +6,20 @@
     display: block;
     margin: 16px 0;
   }
-  &__chip-list {
-    width: 100%;
-  }
   @include sp {
     padding: 16px;
+  }
+}
+
+.chip-list {
+  width: 100%;
+  &__label.active {
+    color: #f44336;
+  }
+  &__error {
+    margin-top: -16px;
+    padding-left: 12px;
+    font-size: 12px;
   }
 }
 
