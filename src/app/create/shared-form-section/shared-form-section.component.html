@@ -83,7 +83,7 @@
 
   <mat-form-field class="form-wrapper__chip-list">
     <mat-label>使えるお店</mat-label>
-    <mat-chip-list #chipList aria-label="Store selection">
+    <mat-chip-list #chipList aria-label="Store selection" required>
       <mat-chip
         *ngFor="let store of stores"
         [selectable]="true"

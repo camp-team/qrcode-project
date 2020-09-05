@@ -34,7 +34,7 @@
           </mat-form-field>
           <mat-form-field class="form-wrapper__chip-list">
             <mat-label>チャージ方法</mat-label>
-            <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip-list #chipList aria-label="Fruit selection" required>
               <mat-chip
                 *ngFor="let chargePattern of chargePatterns"
                 [removable]="true"
