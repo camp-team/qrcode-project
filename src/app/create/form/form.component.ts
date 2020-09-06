@@ -53,10 +53,10 @@ export class FormComponent implements OnInit, OnDestroy {
     code: {
       payment: [[''], Validators.required],
       charge: [''],
-      autoCharge: ['', Validators.required],
+      autoCharge: ['1000円から可能', Validators.required],
       availableCredit: [[''], Validators.required],
-      pushMoney: ['', Validators.required],
-      pullMoney: ['', Validators.required],
+      pushMoney: [true, Validators.required],
+      pullMoney: [true, Validators.required],
     },
     electron: {
       payment: [[''], Validators.required],
@@ -99,7 +99,6 @@ export class FormComponent implements OnInit, OnDestroy {
     'Diners Club',
   ];
   readonly autoChargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
-  readonly simplePatterns = ['可能', '不可能'];
 
   get paymentControl() {
     return this.form.get('payment') as FormControl;

@@ -83,22 +83,22 @@
           <div class="code">
             <mat-label class="code__label">個人間送金</mat-label>
             <mat-radio-group formControlName="pushMoney" required>
-              <mat-radio-button
-                *ngFor="let simplePattern of simplePatterns"
-                [value]="simplePattern"
-                class="code__radio-button"
-                >{{ simplePattern }}</mat-radio-button
+              <mat-radio-button [value]="true" class="code__radio-button"
+                >可能</mat-radio-button
+              >
+              <mat-radio-button [value]="false" class="code__radio-button"
+                >不可能</mat-radio-button
               >
             </mat-radio-group>
           </div>
           <div class="code">
             <mat-label class="code__label">出金</mat-label>
             <mat-radio-group formControlName="pullMoney" required>
-              <mat-radio-button
-                *ngFor="let simplePattern of simplePatterns"
-                [value]="simplePattern"
-                class="code__radio-button"
-                >{{ simplePattern }}</mat-radio-button
+              <mat-radio-button [value]="true" class="code__radio-button"
+                >可能</mat-radio-button
+              >
+              <mat-radio-button [value]="false" class="code__radio-button"
+                >不可能</mat-radio-button
               >
             </mat-radio-group>
           </div>
