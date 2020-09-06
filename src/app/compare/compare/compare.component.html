@@ -95,7 +95,7 @@
             <h2 class="row__header">個人間送金</h2>
             <div class="row__grid">
               <p *ngFor="let card of comparedCards$ | async">
-                {{ card.pushMoney }}
+                {{ card.remittance ? '可能' : '不可能' }}
               </p>
             </div>
           </div>
@@ -103,7 +103,7 @@
             <h2 class="row__header">出金</h2>
             <div class="row__grid">
               <p *ngFor="let card of comparedCards$ | async">
-                {{ card.pullMoney }}
+                {{ card.withdrawal ? '可能' : '不可能' }}
               </p>
             </div>
           </div>

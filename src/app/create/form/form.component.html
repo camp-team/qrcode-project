@@ -82,7 +82,7 @@
         <ng-container *ngIf="type === 'code'">
           <div class="code">
             <mat-label class="code__label">個人間送金</mat-label>
-            <mat-radio-group formControlName="pushMoney" required>
+            <mat-radio-group formControlName="remittance" required>
               <mat-radio-button [value]="true" class="code__radio-button"
                 >可能</mat-radio-button
               >
@@ -93,7 +93,7 @@
           </div>
           <div class="code">
             <mat-label class="code__label">出金</mat-label>
-            <mat-radio-group formControlName="pullMoney" required>
+            <mat-radio-group formControlName="withdrawal" required>
               <mat-radio-button [value]="true" class="code__radio-button"
                 >可能</mat-radio-button
               >

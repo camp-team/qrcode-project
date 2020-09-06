@@ -5,6 +5,6 @@ export interface CodeCard extends BasicCard {
   charge: string[];
   autoCharge: string;
   availableCredit: string[];
-  pushMoney: string;
-  pullMoney: string;
+  remittance: boolean;
+  withdrawal: boolean;
 }

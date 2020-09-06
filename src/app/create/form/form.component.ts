@@ -55,13 +55,13 @@ export class FormComponent implements OnInit, OnDestroy {
       charge: [''],
       autoCharge: ['1000円から可能', Validators.required],
       availableCredit: [[''], Validators.required],
-      pushMoney: [true, Validators.required],
-      pullMoney: [true, Validators.required],
+      remittance: [true, Validators.required],
+      withdrawal: [true, Validators.required],
     },
     electron: {
       payment: [[''], Validators.required],
       charge: [''],
-      autoCharge: ['', Validators.required],
+      autoCharge: ['1000円から可能', Validators.required],
       availableCredit: [[''], Validators.required],
     },
   };
@@ -206,8 +206,8 @@ export class FormComponent implements OnInit, OnDestroy {
           charge: this.chargePatterns,
           autoCharge: formData.autoCharge,
           availableCredit: formData.availableCredit,
-          pushMoney: formData.pushMoney,
-          pullMoney: formData.pullMoney,
+          remittance: formData.remittance,
+          withdrawal: formData.withdrawal,
         };
         task = cardId
           ? this.cardService.updateCodeCard(

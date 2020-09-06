@@ -43,9 +43,9 @@
       <h2>残高やポイントの有効期限</h2>
       <p>{{ codeCard.expiration }}</p>
       <h2>個人間送金</h2>
-      <p>{{ codeCard.pushMoney }}</p>
+      <p>{{ codeCard.remittance ? '可能' : '不可能' }}</p>
       <h2>出金</h2>
-      <p>{{ codeCard.pullMoney }}</p>
+      <p>{{ codeCard.withdrawal ? '可能' : '不可能' }}</p>
     </div>
     <div class="store">
       <h2 class="store__title">使えるお店</h2>
