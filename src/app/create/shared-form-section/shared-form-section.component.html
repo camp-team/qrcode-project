@@ -114,7 +114,7 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <mat-error class="chip-list__error" *ngIf="!form.pristine && chipsInvalid"
+  <mat-error class="chip-list__error" *ngIf="chipsInvalid && chipsError"
     >必須入力です</mat-error
   >
 

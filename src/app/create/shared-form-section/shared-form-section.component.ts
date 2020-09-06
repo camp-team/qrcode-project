@@ -35,6 +35,7 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
   stores = [];
   allStores: Store[] = this.storeService.store;
   subscription: Subscription;
+  chipsError: boolean;
   chipsInvalid = true;
   fileInvalid = true;
 
@@ -120,6 +121,7 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
     }
     if (!this.stores.length) {
       this.chipsInvalid = true;
+      this.chipsError = true;
     }
   }
 }
