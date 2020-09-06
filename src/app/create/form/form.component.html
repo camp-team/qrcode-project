@@ -56,7 +56,7 @@
 
           <div class="code">
             <mat-label class="code__label">オートチャージ</mat-label>
-            <mat-radio-group formControlName="autoCharge" required>
+            <mat-radio-group formControlName="autoCharge">
               <mat-radio-button
                 *ngFor="let autoChargePattern of autoChargePatterns"
                 [value]="autoChargePattern"
@@ -80,20 +80,9 @@
         </ng-container>
 
         <ng-container *ngIf="type === 'code'">
-          <div class="code">
-            <mat-label class="code__label">個人間送金</mat-label>
-            <mat-radio-group formControlName="remittance" required>
-              <mat-radio-button [value]="true" class="code__radio-button"
-                >可能</mat-radio-button
-              >
-              <mat-radio-button [value]="false" class="code__radio-button"
-                >不可能</mat-radio-button
-              >
-            </mat-radio-group>
-          </div>
-          <div class="code">
-            <mat-label class="code__label">出金</mat-label>
-            <mat-radio-group formControlName="withdrawal" required>
+          <div *ngFor="let moneyExchange of moneyExchanges" class="code">
+            <mat-label class="code__label">{{ moneyExchange.label }}</mat-label>
+            <mat-radio-group [formControlName]="moneyExchange.controlName">
               <mat-radio-button [value]="true" class="code__radio-button"
                 >可能</mat-radio-button
               >

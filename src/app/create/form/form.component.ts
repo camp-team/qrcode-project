@@ -42,26 +42,24 @@ export class FormComponent implements OnInit, OnDestroy {
   processing: boolean;
   maxLength = 1000;
   formTitle: string;
-
   file;
-  stores = [];
-
   form: FormGroup;
   type: string;
   cardId: string;
+
   private customForm = {
     code: {
       payment: [[''], Validators.required],
       charge: [''],
-      autoCharge: ['1000円から可能', Validators.required],
+      autoCharge: ['1000円から可能'],
       availableCredit: [[''], Validators.required],
-      remittance: [true, Validators.required],
-      withdrawal: [true, Validators.required],
+      remittance: [true],
+      withdrawal: [true],
     },
     electron: {
       payment: [[''], Validators.required],
       charge: [''],
-      autoCharge: ['1000円から可能', Validators.required],
+      autoCharge: ['1000円から可能'],
       availableCredit: [[''], Validators.required],
     },
   };
@@ -99,6 +97,10 @@ export class FormComponent implements OnInit, OnDestroy {
     'Diners Club',
   ];
   readonly autoChargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
+  readonly moneyExchanges = [
+    { label: '個人間送金', controlName: 'remittance' },
+    { label: '出金', controlName: 'withdrawal' },
+  ];
 
   get paymentControl() {
     return this.form.get('payment') as FormControl;
@@ -183,7 +185,7 @@ export class FormComponent implements OnInit, OnDestroy {
         [Validators.required, Validators.maxLength(this.maxLength)],
       ],
       storeIds: [''],
-      campaign: ['', [Validators.required]],
+      campaign: ['', Validators.required],
       ...this.customForm[type],
     });
   }
