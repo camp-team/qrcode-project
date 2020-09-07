@@ -18,6 +18,14 @@ service cloud.firestore {
       allow read: if true;
       allow write: if request.auth.uid != null;
     }
+    match /creditCards/{cardId} {
+      allow read: if true;
+      allow write: if request.auth.uid != null;
+    }
+    match /pointCards/{cardId} {
+      allow read: if true;
+      allow write: if request.auth.uid != null;
+    }
     match /users/{userId} {
       allow read: if true;
       allow write: if request.auth.uid != null;

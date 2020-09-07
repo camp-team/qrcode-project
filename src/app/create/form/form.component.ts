@@ -1,101 +1,113 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
   Component,
+  HostListener,
   OnInit,
   ViewChild,
-  ElementRef,
-  HostListener,
+  OnDestroy,
 } from '@angular/core';
 import {
   FormBuilder,
-  Validators,
   FormControl,
   FormGroup,
+  Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CardService } from 'src/app/services/card.service';
-import { CodeCard } from '@interfaces/code-card';
-import { Store } from 'src/app/interfaces/store';
-import { StoreService } from 'src/app/services/store.service';
-import { Observable, of } from 'rxjs';
-import { map, startWith, switchMap, tap } from 'rxjs/operators';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CodeCard } from '@interfaces/code-card';
 import { ElectronCard } from '@interfaces/electron-card';
+import { Observable, of, Subscription } from 'rxjs';
+import { map, switchMap, tap, take } from 'rxjs/operators';
+import { CardService } from 'src/app/services/card.service';
+import { StoreService } from 'src/app/services/store.service';
+import { DeleteCardDialogComponent } from '../delete-card-dialog/delete-card-dialog.component';
+import { SharedFormSectionComponent } from '../shared-form-section/shared-form-section.component';
+import { BasicCard } from '@interfaces/card';
+import { CreditCard } from '@interfaces/credit-card';
+import { CreditFormComponent } from '../credit-form/credit-form.component';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
+  @ViewChild(SharedFormSectionComponent)
+  public sharedFormComponent: SharedFormSectionComponent;
+  @ViewChild('creditForm') public creditForm: CreditFormComponent;
+  private subscription: Subscription;
   isComplete: boolean;
-
-  stores = [];
-  allStores: Store[] = this.storeService.store;
-  filteredStores$: Observable<Store[]>;
-
-  file: File;
-  imageURL: string | ArrayBuffer;
-
+  processing: boolean;
+  maxLength = 1000;
+  formTitle: string;
+  file;
   form: FormGroup;
   type: string;
   cardId: string;
-  codeCard: CodeCard;
-  customForm = {
-    qrCode: {
+
+  private customForm = {
+    code: {
       payment: [[''], Validators.required],
       charge: [''],
-      autoCharge: ['', Validators.required],
+      autoCharge: ['1000円から可能'],
       availableCredit: [[''], Validators.required],
-      pushMoney: ['', Validators.required],
-      pullMoney: ['', Validators.required],
+      remittance: [true],
+      withdrawal: [true],
     },
     electron: {
       payment: [[''], Validators.required],
       charge: [''],
-      autoCharge: ['', Validators.required],
+      autoCharge: ['1000円から可能'],
       availableCredit: [[''], Validators.required],
     },
   };
 
+  cardId$: Observable<string> = this.route.queryParamMap.pipe(
+    map((params) => params.get('id'))
+  );
+  card$: Observable<
+    CodeCard | ElectronCard | CreditCard | BasicCard
+  > = this.cardId$.pipe(
+    switchMap((cardId) => {
+      switch (this.type) {
+        case 'code':
+          return this.cardService.getCodeCard(cardId).pipe(take(1));
+        case 'electron':
+          return this.cardService.getElectronCard(cardId).pipe(take(1));
+        case 'credit':
+          return this.cardService.getCreditCard(cardId).pipe(take(1));
+        case 'point':
+          return this.cardService.getPointCard(cardId).pipe(take(1));
+        default:
+          return of(null);
+      }
+    })
+  );
   chargePatterns = ['銀行口座', 'セブン銀行ATM'];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  paymentList = ['前払い', '後払い', '即時払い'];
-  creditList = ['VISA', 'MasterCard', 'JCB', 'American Express', 'Diners Club'];
-  autoChargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
-  simplePatterns = ['可能', '不可能'];
+  readonly paymentList = ['前払い', '後払い', '即時払い'];
+  readonly creditList = [
+    'VISA',
+    'MasterCard',
+    'JCB',
+    'American Express',
+    'Diners Club',
+  ];
+  readonly autoChargePatterns = ['1000円から可能', '1000円単位で可能', '不可'];
+  readonly moneyExchanges = [
+    { label: '個人間送金', controlName: 'remittance' },
+    { label: '出金', controlName: 'withdrawal' },
+  ];
 
-  get nameControl() {
-    return this.form.get('name') as FormControl;
-  }
-  get pointControl() {
-    return this.form.get('point') as FormControl;
-  }
-  get addPointControl() {
-    return this.form.get('addPoint') as FormControl;
-  }
-  get expirationControl() {
-    return this.form.get('expiration') as FormControl;
-  }
-  get storeIdsControl() {
-    return this.form.get('storeIds') as FormControl;
-  }
   get paymentControl() {
     return this.form.get('payment') as FormControl;
   }
   get creditControl() {
     return this.form.get('availableCredit') as FormControl;
   }
-  get campaignControl() {
-    return this.form.get('campaign') as FormControl;
-  }
-
-  @ViewChild('storeInput') private storeInput: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -106,43 +118,24 @@ export class FormComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router
   ) {
-    this.route.queryParamMap
-      .pipe(
-        tap((params) => {
-          this.type = params.get('type');
-          this.buildForm(this.type);
-        }),
-        switchMap((params) => {
-          this.cardId = params.get('id');
-          if (this.cardId) {
-            switch (this.type) {
-              case 'qrCode':
-                return this.cardService.getCodeCard(this.cardId);
-              case 'electron':
-                return this.cardService.getElectronCard(this.cardId);
-            }
-          } else {
-            return of(null);
-          }
-        })
-      )
-      .subscribe((card) => {
-        if (card) {
-          this.initForm(card);
-        } else {
-          return;
-        }
-      });
-
-    this.filteredStores$ = this.storeIdsControl.valueChanges.pipe(
-      startWith(''),
-      map((store: string | null) => {
-        return store ? this._filter(store) : this.allStores.slice();
-      })
-    );
+    this.route.queryParamMap.subscribe((params) => {
+      this.type = params.get('type');
+      this.buildForm(this.type);
+    });
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initTitle(this.type);
+    this.subscription = this.card$.subscribe((card) => {
+      if (card) {
+        this.initForm(card);
+      }
+    });
+    this.cardId$.subscribe((cardId) => (this.cardId = cardId));
+  }
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -152,25 +145,26 @@ export class FormComponent implements OnInit {
     }
   }
 
-  uploadImage(event) {
-    if (event.target.files.length) {
-      this.file = event.target.files[0];
+  private initTitle(type: string) {
+    switch (type) {
+      case 'code':
+        this.formTitle = 'モバイル決済';
+        break;
+      case 'electron':
+        this.formTitle = '電子マネー';
+        break;
+      case 'credit':
+        this.formTitle = 'クレジットカード ';
+        break;
+      case 'point':
+        this.formTitle = 'ポイントカード';
+        break;
     }
-    this.convertImage(this.file);
   }
 
-  convertImage(file: File) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      this.imageURL = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-
-  private initForm(card: CodeCard | ElectronCard) {
-    this.imageURL = card.imageURL;
-    this.chargePatterns = card.charge;
-    this.stores = card.storeIds.map((id) => {
+  private initForm(card: CodeCard | ElectronCard | CreditCard | BasicCard) {
+    this.chargePatterns = (card as CodeCard | ElectronCard).charge;
+    this.sharedFormComponent.stores = (card as CodeCard).storeIds.map((id) => {
       return this.storeService.store.find((store) => {
         return store.id === id;
       });
@@ -181,142 +175,113 @@ export class FormComponent implements OnInit {
     });
   }
 
-  buildForm(type) {
+  private buildForm(type: string) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(20)]],
       point: ['', Validators.maxLength(5)],
-      addPoint: ['', Validators.maxLength(1000)],
-      expiration: ['', [Validators.required, Validators.maxLength(1000)]],
+      addPoint: ['', Validators.maxLength(this.maxLength)],
+      expiration: [
+        '',
+        [Validators.required, Validators.maxLength(this.maxLength)],
+      ],
       storeIds: [''],
-      campaign: ['', [Validators.required]],
+      campaign: ['', Validators.required],
       ...this.customForm[type],
     });
   }
 
-  submit(type: string) {
+  submit(type: string, cardId?: string) {
+    this.processing = true;
     const formData = this.form.value;
+    let task: Promise<void>;
+    const snackBarMessage = cardId ? '編集' : '作成';
     switch (type) {
-      case 'qrCode':
-        this.cardService
-          .createCodeCard(
-            {
-              name: formData.name,
-              point: formData.point,
-              addPoint: formData.addPoint,
-              expiration: formData.expiration,
-              storeIds: this.stores.map((store) => store.id),
-              campaign: formData.campaign,
-              payment: formData.payment,
-              charge: this.chargePatterns,
-              autoCharge: formData.autoCharge,
-              availableCredit: formData.availableCredit,
-              pushMoney: formData.pushMoney,
-              pullMoney: formData.pullMoney,
-            },
-            this.file
-          )
-          .then(() => {
-            this.isComplete = true;
-            this.router.navigateByUrl('/code-card');
-            this.snackBar.open('カードを作成しました', null, {
-              duration: 2000,
-            });
-          });
+      case 'code':
+        const codeData: Omit<CodeCard, 'cardId' | 'imageURL'> = {
+          name: formData.name,
+          point: formData.point,
+          addPoint: formData.addPoint,
+          expiration: formData.expiration,
+          storeIds: this.sharedFormComponent.stores.map((store) => store.id),
+          campaign: formData.campaign,
+          payment: formData.payment,
+          charge: this.chargePatterns,
+          autoCharge: formData.autoCharge,
+          availableCredit: formData.availableCredit,
+          remittance: formData.remittance,
+          withdrawal: formData.withdrawal,
+        };
+        task = cardId
+          ? this.cardService.updateCodeCard(
+              {
+                ...codeData,
+                cardId,
+              },
+              this.file
+            )
+          : this.cardService.createCodeCard(codeData, this.file);
         break;
       case 'electron':
-        this.cardService
-          .createElectornCard(
-            {
-              name: formData.name,
-              point: formData.point,
-              addPoint: formData.addPoint,
-              expiration: formData.expiration,
-              storeIds: this.stores.map((store) => store.id),
-              campaign: formData.campaign,
-              payment: formData.payment,
-              charge: this.chargePatterns,
-              autoCharge: formData.autoCharge,
-              availableCredit: formData.availableCredit,
-            },
-            this.file
-          )
-          .then(() => {
-            this.isComplete = true;
-            this.router.navigateByUrl('/electron-card');
-            this.snackBar.open('カードを作成しました', null, {
-              duration: 2000,
-            });
-          });
+        const electronData: Omit<ElectronCard, 'cardId' | 'imageURL'> = {
+          name: formData.name,
+          point: formData.point,
+          addPoint: formData.addPoint,
+          expiration: formData.expiration,
+          storeIds: this.sharedFormComponent.stores.map((store) => store.id),
+          campaign: formData.campaign,
+          payment: formData.payment,
+          charge: this.chargePatterns,
+          autoCharge: formData.autoCharge,
+          availableCredit: formData.availableCredit,
+        };
+        task = cardId
+          ? this.cardService.updateElectronCard(
+              {
+                ...electronData,
+                cardId,
+              },
+              this.file
+            )
+          : this.cardService.createElectornCard(electronData, this.file);
+        break;
+      case 'point':
+        const pointData: Omit<BasicCard, 'cardId' | 'imageURL'> = {
+          name: formData.name,
+          point: formData.point,
+          addPoint: formData.addPoint,
+          expiration: formData.expiration,
+          storeIds: this.sharedFormComponent.stores.map((store) => store.id),
+          campaign: formData.campaign,
+        };
+        task = cardId
+          ? this.cardService.updatePointCard(
+              {
+                ...pointData,
+                cardId,
+              },
+              this.file
+            )
+          : this.cardService.createPointCard(pointData, this.file);
         break;
     }
-  }
-
-  updateCard(type: string) {
-    const formData = this.form.value;
-    switch (type) {
-      case 'qrCode':
-        this.cardService
-          .updateCodeCard(
-            {
-              name: formData.name,
-              point: formData.point,
-              addPoint: formData.addPoint,
-              expiration: formData.expiration,
-              storeIds: this.stores.map((store) => store.id),
-              campaign: formData.campaign,
-              payment: formData.payment,
-              charge: this.chargePatterns,
-              autoCharge: formData.autoCharge,
-              availableCredit: formData.availableCredit,
-              pushMoney: formData.pushMoney,
-              pullMoney: formData.pullMoney,
-              cardId: this.cardId,
-            },
-            this.file
-          )
-          .then(() => {
-            this.isComplete = true;
-            this.router.navigateByUrl(`/code-detail/${this.cardId}`);
-            this.snackBar.open('カードを編集しました', null, {
-              duration: 2000,
-            });
-          });
-        break;
-      case 'electron':
-        this.cardService
-          .updateElectronCard(
-            {
-              name: formData.name,
-              point: formData.point,
-              addPoint: formData.addPoint,
-              expiration: formData.expiration,
-              storeIds: this.stores.map((store) => store.id),
-              campaign: formData.campaign,
-              payment: formData.payment,
-              charge: this.chargePatterns,
-              autoCharge: formData.autoCharge,
-              availableCredit: formData.availableCredit,
-              cardId: this.cardId,
-            },
-            this.file
-          )
-          .then(() => {
-            this.isComplete = true;
-            this.router.navigateByUrl(`/electron-detail/${this.cardId}`);
-            this.snackBar.open(`カードを編集しました`, null, {
-              duration: 2000,
-            });
-          });
-        break;
-    }
+    task.then(() => {
+      this.isComplete = true;
+      this.processing = false;
+      this.router.navigateByUrl(
+        cardId ? `/${type}-detail/${this.cardId}` : `/${type}-card`
+      );
+      this.snackBar.open(`カードを${snackBarMessage}しました`);
+    });
   }
 
   deleteCard(type: string) {
     switch (type) {
-      case 'qrCode':
+      case 'code':
         return this.cardService.deleteCodeCard(this.cardId);
       case 'electron':
         return this.cardService.deleteElectronCard(this.cardId);
+      case 'point':
+        return this.cardService.deletePointCard(this.cardId);
     }
   }
 
@@ -327,33 +292,13 @@ export class FormComponent implements OnInit {
       .subscribe((result) => {
         if (result) {
           this.deleteCard(this.type).then(() => {
-            this.router.navigateByUrl('/code-card');
-            this.snackBar.open('カードを削除しました', null, {
-              duration: 2000,
-            });
+            this.router.navigateByUrl(`/${this.type}-card`);
+            this.snackBar.open('カードを削除しました');
           });
         } else {
           return;
         }
       });
-  }
-
-  private _filter(value: string): Store[] {
-    return this.allStores.filter((store) => store.name.indexOf(value) === 0);
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.stores.push(event.option.value);
-    this.storeInput.nativeElement.value = '';
-    this.storeIdsControl.setValue(null);
-  }
-
-  removeStore(store: string): void {
-    const index = this.stores.indexOf(store);
-
-    if (index >= 0) {
-      this.stores.splice(index, 1);
-    }
   }
 
   add(event: MatChipInputEvent): void {

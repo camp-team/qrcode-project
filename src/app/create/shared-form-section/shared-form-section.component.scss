@@ -1,0 +1,42 @@
+@import 'mixins';
+
+.form-wrapper {
+  padding: 40px;
+  &__content {
+    display: block;
+    margin: 16px 0;
+  }
+  @include sp {
+    padding: 16px;
+  }
+}
+
+.chip-list {
+  width: 100%;
+  &__label.active {
+    color: #f44336;
+  }
+  &__error {
+    margin-top: -16px;
+    padding-left: 12px;
+    font-size: 12px;
+  }
+}
+
+.upload {
+  background-color: rgb(245, 245, 245);
+  cursor: pointer;
+  text-align: center;
+  padding: 36px;
+  border-width: 1px;
+  border-style: dashed;
+  border-color: rgb(204, 204, 204);
+  font-size: 13px;
+  margin-bottom: 24px;
+  input {
+    display: none;
+  }
+  p {
+    margin: 0;
+  }
+}

@@ -1,0 +1,191 @@
+<form [formGroup]="form" (ngSubmit)="submit(cardId)">
+  <div class="form-wrapper">
+    <div>
+      <img *ngIf="imageURL" [src]="imageURL" alt="" />
+    </div>
+    <div class="upload" (click)="imageInput.click()">
+      <input
+        type="file"
+        accept=".png, .img, .jpeg"
+        (change)="uploadImage($event)"
+        #imageInput
+        required
+      />
+      <mat-icon>insert_photo</mat-icon>
+      <p>クリックしてファイルをアップロードしてください</p>
+    </div>
+    <mat-form-field class="form-wrapper__content" appearance="outline">
+      <mat-label>サービス名</mat-label>
+      <input
+        matInput
+        placeholder="サービス名を入力してください（{{ maxLength }}文字以内）"
+        autocomplete="off"
+        formControlName="name"
+        required
+      />
+      <mat-hint align="end"
+        >{{ nameControl.value.length }} / {{ maxLength }}</mat-hint
+      >
+      <mat-error *ngIf="nameControl.hasError('required')"
+        >必須入力です</mat-error
+      >
+      <mat-error *ngIf="nameControl.hasError('maxlength')"
+        >{{ maxLength }}文字以内です</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="form-wrapper__content" appearance="outline">
+      <mat-label>国際プランド</mat-label>
+      <mat-select formControlName="brands" multiple required>
+        <mat-option
+          *ngFor="let creditBrand of creditBrands"
+          [value]="creditBrand.id"
+          >{{ creditBrand.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-wrapper__content" appearance="outline">
+      <mat-label>ポイント（通常時）</mat-label>
+      <input
+        matInput
+        type="number"
+        placeholder="数字を入力してください"
+        autocomplete="off"
+        formControlName="point"
+        required
+      />
+      <span matSuffix>%</span>
+      <mat-error *ngIf="pointControl.hasError('required')"
+        >必須入力です</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="form-wrapper__content" appearance="outline">
+      <mat-label>貯まるポイント</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="例）オリコポイント"
+        autocomplete="off"
+        formControlName="pointName"
+        required
+      />
+      <mat-hint align="end"
+        >{{ pointNameControl.value.length }} / {{ maxLength }}</mat-hint
+      >
+      <mat-error *ngIf="pointNameControl.hasError('required')"
+        >必須入力です</mat-error
+      >
+      <mat-error *ngIf="pointNameControl.hasError('maxlength')"
+        >{{ maxLength }}文字以内です</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="form-wrapper__content" appearance="outline">
+      <mat-label>年会費</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="例）13,200円"
+        autocomplete="off"
+        formControlName="annualFee"
+        required
+      />
+      <mat-hint align="end"
+        >{{ annualFeeControl.value.length }} / {{ maxLength }}</mat-hint
+      >
+      <mat-error *ngIf="annualFeeControl.hasError('required')"
+        >必須入力です</mat-error
+      >
+      <mat-error *ngIf="annualFeeControl.hasError('maxlength')"
+        >{{ maxLength }}文字以内です</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="form-wrapper__content" appearance="outline">
+      <mat-label>交換可能マイル</mat-label>
+      <mat-select formControlName="miles" multiple>
+        <mat-option *ngFor="let mile of miles" [value]="mile">{{
+          mile
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-wrapper__content" appearance="outline">
+      <mat-label>追加カード</mat-label>
+      <mat-select formControlName="additionCards" multiple required>
+        <mat-option
+          *ngFor="let additionCard of additionCards"
+          [value]="additionCard"
+          >{{ additionCard }}</mat-option
+        >
+      </mat-select>
+      <mat-error *ngIf="additonCardControl.hasError('required')"
+        >必須入力です</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="form-wrapper__content" appearance="outline">
+      <mat-label>付帯保険</mat-label>
+      <mat-select formControlName="insurances" multiple>
+        <mat-option *ngFor="let insurance of insurances" [value]="insurance">{{
+          insurance
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-wrapper__content" appearance="outline">
+      <mat-label>電子マネー機能</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="例）楽天Edy"
+        autocomplete="off"
+        formControlName="electron"
+      />
+      <mat-hint align="end"
+        >{{ electronControl.value.length }} / {{ maxLength }}</mat-hint
+      >
+      <mat-error *ngIf="electronControl.hasError('maxlength')"
+        >{{ maxLength }}文字以内です</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="form-wrapper__content" appearance="outline">
+      <mat-label>モバイル決済</mat-label>
+      <mat-select formControlName="mobile" multiple>
+        <mat-option
+          *ngFor="let mobileSettlement of mobileSettlements"
+          [value]="mobileSettlement"
+          >{{ mobileSettlement }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <div class="submit">
+      <button
+        class="submit__btn"
+        [disabled]="form.invalid || form.pristine || processing"
+        mat-raised-button
+        color="primary"
+      >
+        {{ cardId ? '編集' : '作成' }}する
+      </button>
+      <button
+        *ngIf="cardId"
+        class="submit__btn"
+        [disabled]="form.invalid"
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="openDeleteCardDialog()"
+      >
+        削除する
+      </button>
+      <button type="button" routerLink="/" mat-button color="primary">
+        トップへ戻る
+      </button>
+    </div>
+  </div>
+</form>

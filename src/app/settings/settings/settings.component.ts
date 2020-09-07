@@ -95,9 +95,7 @@ export class SettingsComponent implements OnInit {
         uid: this.uid,
       })
       .then(() => {
-        this.snackBar.open('アカウントを更新しました', null, {
-          duration: 2000,
-        });
+        this.snackBar.open('アカウントを更新しました');
         this.imageChangedEvent = '';
       });
   }
