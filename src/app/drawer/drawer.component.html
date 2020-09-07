@@ -29,23 +29,21 @@
     </div>
     <p>ポイントカード</p>
   </a>
-  <mat-divider></mat-divider>
-  <a mat-list-item routerLink="/intl/help">
-    <mat-icon>help</mat-icon>
-    <p>PAYpickについて</p>
-  </a>
-  <a mat-list-item routerLink="/intl/terms">
-    <mat-icon>assignment</mat-icon>
-    <p>利用規約</p>
-  </a>
-  <a mat-list-item routerLink="/intl/legal">
-    <mat-icon>assignment</mat-icon>
-    <p>特定商取引に関する表記</p>
-  </a>
-  <mat-divider></mat-divider>
-  <a mat-list-item href="https://twitter.com/mikatahiro" target="_blank">
-    <mat-icon><span class="icon-twitter"></span></mat-icon>
-    <p>制作者：ちゃま</p>
-    <mat-icon class="link">open_in_new</mat-icon>
-  </a>
 </mat-nav-list>
+<mat-divider></mat-divider>
+<footer class="footer">
+  <ul class="list">
+    <li><a class="list__item" routerLink="/intl/terms">利用規約</a></li>
+    <li>
+      <a class="list__item" routerLink="/intl/legal">特定商取引に関する表記</a>
+    </li>
+    <li><a class="list__item" routerLink="/intl/help">PAYpickについて</a></li>
+  </ul>
+  <span>
+    <a class="list__item" href="https://twitter.com/mikatahiro" target="_blank"
+      >制作者：ちゃま</a
+    >
+    <mat-icon class="link">open_in_new</mat-icon>
+  </span>
+  <p class="copyright">© 2020 PAYpick by takami</p>
+</footer>
