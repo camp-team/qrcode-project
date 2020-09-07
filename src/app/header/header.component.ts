@@ -78,17 +78,13 @@ export class HeaderComponent implements OnInit {
         this.isProcessing = false;
       })
       .then(() => {
-        this.snackBar.open('ログインしました🥳', null, {
-          duration: 2000,
-        });
+        this.snackBar.open('ログインしました🥳');
       });
   }
 
   logout() {
     this.authservice.logout().then(() => {
-      this.snackBar.open('ログアウトしました', null, {
-        duration: 2000,
-      });
+      this.snackBar.open('ログアウトしました');
     });
   }
 }

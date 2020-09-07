@@ -1,6 +1,6 @@
-import { Card } from './card';
+import { BasicCard } from './card';
 
-export interface ElectronCard extends Card {
+export interface ElectronCard extends BasicCard {
   payment: string[];
   charge: string[];
   autoCharge: string;

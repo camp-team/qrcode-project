@@ -1,0 +1,22 @@
+@import '_mixins';
+
+.legal {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 80px 24px 80px;
+  @include sp {
+    padding: 120px 16px 80px;
+  }
+  &__heading {
+    text-align: center;
+    @include sp {
+      margin: 0 0 40px;
+    }
+  }
+  &__contents {
+    padding: 40px;
+    @include sp {
+      padding: 0;
+    }
+  }
+}

@@ -4,7 +4,9 @@ import { CodeCard } from '@interfaces/code-card';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ElectronCard } from '@interfaces/electron-card';
+import { BasicCard } from '@interfaces/card';
 import { firestore } from 'firebase';
+import { CreditCard } from '@interfaces/credit-card';
 
 @Injectable({
   providedIn: 'root',
@@ -21,16 +23,11 @@ export class CardService {
   ): Promise<void> {
     const cardId = this.db.createId();
     const imageURL: string = await this.getUploadImageURL(cardId, file);
-    return this.db
-      .doc(`codeCards/${cardId}`)
-      .set({
-        cardId,
-        imageURL,
-        ...codeCard,
-      })
-      .then(() => {
-        console.log('データの追加に成功しました！');
-      });
+    return this.db.doc(`codeCards/${cardId}`).set({
+      cardId,
+      imageURL,
+      ...codeCard,
+    });
   }
 
   async createElectornCard(
@@ -46,6 +43,32 @@ export class CardService {
     });
   }
 
+  async createCreditCard(
+    creditCard: Omit<CreditCard, 'cardId' | 'imageURL'>,
+    file: File
+  ): Promise<void> {
+    const cardId = this.db.createId();
+    const imageURL = await this.getUploadImageURL(cardId, file);
+    return this.db.doc(`creditCards/${cardId}`).set({
+      cardId,
+      imageURL,
+      ...creditCard,
+    });
+  }
+
+  async createPointCard(
+    pointCard: Omit<BasicCard, 'cardId' | 'imageURL'>,
+    file: File
+  ): Promise<void> {
+    const cardId = this.db.createId();
+    const imageURL: string = await this.getUploadImageURL(cardId, file);
+    return this.db.doc(`pointCards/${cardId}`).set({
+      cardId,
+      imageURL,
+      ...pointCard,
+    });
+  }
+
   getCodeCards(): Observable<CodeCard[]> {
     return this.db.collection<CodeCard>(`codeCards`).valueChanges();
   }
@@ -54,12 +77,28 @@ export class CardService {
     return this.db.collection<ElectronCard>(`electronCards`).valueChanges();
   }
 
+  getCreditCards(): Observable<CreditCard[]> {
+    return this.db.collection<CreditCard>(`creditCards`).valueChanges();
+  }
+
+  getPointCards(): Observable<BasicCard[]> {
+    return this.db.collection<BasicCard>(`pointCards`).valueChanges();
+  }
+
   getCodeCard(cardId: string): Observable<CodeCard> {
     return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
   }
 
   getElectronCard(cardId: string): Observable<ElectronCard> {
     return this.db.doc<ElectronCard>(`electronCards/${cardId}`).valueChanges();
+  }
+
+  getCreditCard(cardId: string): Observable<CreditCard> {
+    return this.db.doc<CreditCard>(`creditCards/${cardId}`).valueChanges();
+  }
+
+  getPointCard(cardId: string): Observable<BasicCard> {
+    return this.db.doc<BasicCard>(`pointCards/${cardId}`).valueChanges();
   }
 
   async updateCodeCard(
@@ -76,18 +115,13 @@ export class CardService {
       );
       data.imageURL = imageURL;
     }
-    return this.db
-      .doc(`codeCards/${codeCard.cardId}`)
-      .set(
-        {
-          ...data,
-          ...codeCard,
-        },
-        { merge: true }
-      )
-      .then(() => {
-        console.log('データを編集しました');
-      });
+    return this.db.doc(`codeCards/${codeCard.cardId}`).set(
+      {
+        ...data,
+        ...codeCard,
+      },
+      { merge: true }
+    );
   }
 
   async updateElectronCard(
@@ -108,16 +142,55 @@ export class CardService {
     });
   }
 
+  async updateCreditCard(
+    creditCard: Omit<CreditCard, 'imageURL'>,
+    file?: File
+  ): Promise<void> {
+    const data: any = {};
+    if (file) {
+      const imageURL: string = await this.getUploadImageURL(
+        creditCard.cardId,
+        file
+      );
+      data.imageURL = imageURL;
+    }
+    return this.db.doc(`creditCards/${creditCard.cardId}`).update({
+      ...data,
+      ...creditCard,
+    });
+  }
+
+  async updatePointCard(
+    pointCard: Omit<BasicCard, 'imageURL'>,
+    file?: File
+  ): Promise<void> {
+    const data: any = {};
+    if (file) {
+      const imageURL: string = await this.getUploadImageURL(
+        pointCard.cardId,
+        file
+      );
+      data.imageURL = imageURL;
+    }
+    return this.db.doc(`pointCards/${pointCard.cardId}`).update({
+      ...data,
+      ...pointCard,
+    });
+  }
+
   deleteCodeCard(cardId: string): Promise<void> {
-    return this.db
-      .doc(`codeCards/${cardId}`)
-      .delete()
-      .then(() => {
-        console.log('データを削除しました');
-      });
+    return this.db.doc(`codeCards/${cardId}`).delete();
   }
 
   deleteElectronCard(cardId: string): Promise<void> {
+    return this.db.doc(`electronCards/${cardId}`).delete();
+  }
+
+  deleteCreditCard(cardId: string): Promise<void> {
+    return this.db.doc(`creditCards/${cardId}`).delete();
+  }
+
+  deletePointCard(cardId: string): Promise<void> {
     return this.db.doc(`electronCards/${cardId}`).delete();
   }
 
@@ -126,8 +199,21 @@ export class CardService {
       viewCount: firestore.FieldValue.increment(1),
     });
   }
+
   countUpElectronCard(cardId: string): Promise<void> {
     return this.db.doc<ElectronCard>(`electronCards/${cardId}`).update({
+      viewCount: firestore.FieldValue.increment(1),
+    });
+  }
+
+  countUpCreditCard(cardId: string): Promise<void> {
+    return this.db.doc<CreditCard>(`creditCards/${cardId}`).update({
+      viewCount: firestore.FieldValue.increment(1),
+    });
+  }
+
+  countUpPointCard(cardId: string): Promise<void> {
+    return this.db.doc<BasicCard>(`pointCards/${cardId}`).update({
       viewCount: firestore.FieldValue.increment(1),
     });
   }
