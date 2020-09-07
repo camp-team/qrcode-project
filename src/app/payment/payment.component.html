@@ -9,13 +9,13 @@
             <div class="customer">
               <p>こちらのカードを使用します</p>
               <p class="customer__card">
-                <i
-                  class="fab fa-cc-{{
+                <span
+                  class="icon-cc-{{
                     paymentCard.card.brand.toLowerCase() === 'american express'
                       ? 'amex'
                       : paymentCard.card.brand.toLowerCase()
                   }}"
-                ></i>
+                ></span>
                 **** **** **** {{ paymentCard.card.last4 }}
               </p>
               <div class="customer__actions">

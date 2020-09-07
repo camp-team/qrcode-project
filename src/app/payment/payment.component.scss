@@ -14,3 +14,22 @@
 .complete {
   text-align: center;
 }
+
+.customer {
+  margin-top: 24px;
+  &__card {
+    display: inline-block;
+    font-size: 18px;
+    margin-top: 6px;
+    padding: 8px 24px;
+    background-color: #eceff1;
+    border-radius: 5px;
+    span {
+      margin-right: 8px;
+    }
+  }
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}
