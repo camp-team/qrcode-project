@@ -82,11 +82,7 @@
   </mat-form-field>
 
   <mat-form-field class="chip-list">
-    <mat-label
-      class="chip-list__label"
-      [class.active]="!form.pristine && chipsInvalid"
-      >使えるお店</mat-label
-    >
+    <mat-label>使えるお店</mat-label>
     <mat-chip-list #chipList aria-label="Store selection" required>
       <mat-chip
         *ngFor="let store of stores"
@@ -103,6 +99,8 @@
         formControlName="storeIds"
         [matAutocomplete]="auto"
         [matChipInputFor]="chipList"
+        [matChipInputAddOnBlur]="true"
+        (matChipInputTokenEnd)="setError($event)"
       />
     </mat-chip-list>
     <mat-autocomplete
@@ -113,10 +111,8 @@
         {{ store.name }}
       </mat-option>
     </mat-autocomplete>
+    <mat-error *ngIf="!stores.length">必須入力です</mat-error>
   </mat-form-field>
-  <mat-error class="chip-list__error" *ngIf="chipsInvalid && chipsError"
-    >必須入力です</mat-error
-  >
 
   <mat-form-field
     class="form-wrapper__content"

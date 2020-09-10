@@ -27,6 +27,7 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
   @Input() length: number;
   @Input() form: FormGroup;
   @ViewChild('storeInput') private storeInput: ElementRef;
+  @ViewChild('chipList') private chipList;
   @Output() fileChange = new EventEmitter();
 
   filteredStores$: Observable<Store[]>;
@@ -35,9 +36,10 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
   stores = [];
   allStores: Store[] = this.storeService.store;
   subscription: Subscription;
-  chipsError: boolean;
-  chipsInvalid = true;
-  fileInvalid = true;
+
+  get nameControl() {
+    return this.form.get('name') as FormControl;
+  }
 
   get storeIdsControl() {
     return this.form?.get('storeIds') as FormControl;
@@ -65,15 +67,10 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
 
   constructor(private storeService: StoreService) {}
 
-  get nameControl() {
-    return this.form.get('name') as FormControl;
-  }
-
   ngOnInit(): void {
     this.subscription = this.card?.subscribe((card) => {
       if (card) {
         this.imageURL = card.imageURL;
-        this.fileInvalid = false;
       }
     });
 
@@ -100,7 +97,6 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
   uploadImage({ target }: { target: HTMLInputElement }) {
     if (target.files.length) {
       this.file = target.files[0];
-      this.fileInvalid = false;
       this.fileChange.emit(this.file);
     }
     this.convertImage(this.file);
@@ -110,7 +106,7 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
     this.stores.push(event.option.value);
     this.storeInput.nativeElement.value = '';
     this.storeIdsControl.setValue(null);
-    this.chipsInvalid = false;
+    this.chipList.errorState = false;
   }
 
   removeStore(store: string): void {
@@ -120,8 +116,13 @@ export class SharedFormSectionComponent implements OnInit, OnDestroy {
       this.stores.splice(index, 1);
     }
     if (!this.stores.length) {
-      this.chipsInvalid = true;
-      this.chipsError = true;
+      this.chipList.errorState = true;
+    }
+  }
+
+  setError(event) {
+    if (!this.stores.length && !event.input.value) {
+      this.chipList.errorState = true;
     }
   }
 }

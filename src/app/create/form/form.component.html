@@ -99,8 +99,8 @@
             [disabled]="
               form.invalid ||
               form.pristine ||
-              sharedFormComponent.chipsInvalid ||
-              sharedFormComponent.fileInvalid ||
+              !sharedFormComponent.stores.length ||
+              (!file && !sharedFormComponent.imageURL) ||
               processing
             "
             mat-raised-button
