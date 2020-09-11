@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ElectronCard } from '@interfaces/electron-card';
 import { BasicCard } from '@interfaces/card';
-import { firestore } from 'firebase';
+import { firestore } from 'firebase/app';
 import { CreditCard } from '@interfaces/credit-card';
 
 @Injectable({
@@ -195,27 +195,43 @@ export class CardService {
   }
 
   countUpCodeCard(cardId: string): Promise<void> {
-    return this.db.doc<CodeCard>(`codeCards/${cardId}`).update({
-      viewCount: firestore.FieldValue.increment(1),
-    });
+    return this.db
+      .doc<{
+        viewCount: firestore.FieldValue;
+      }>(`codeCards/${cardId}`)
+      .update({
+        viewCount: firestore.FieldValue.increment(1),
+      });
   }
 
   countUpElectronCard(cardId: string): Promise<void> {
-    return this.db.doc<ElectronCard>(`electronCards/${cardId}`).update({
-      viewCount: firestore.FieldValue.increment(1),
-    });
+    return this.db
+      .doc<{
+        viewCount: firestore.FieldValue;
+      }>(`electronCards/${cardId}`)
+      .update({
+        viewCount: firestore.FieldValue.increment(1),
+      });
   }
 
   countUpCreditCard(cardId: string): Promise<void> {
-    return this.db.doc<CreditCard>(`creditCards/${cardId}`).update({
-      viewCount: firestore.FieldValue.increment(1),
-    });
+    return this.db
+      .doc<{
+        viewCount: firestore.FieldValue;
+      }>(`creditCards/${cardId}`)
+      .update({
+        viewCount: firestore.FieldValue.increment(1),
+      });
   }
 
   countUpPointCard(cardId: string): Promise<void> {
-    return this.db.doc<BasicCard>(`pointCards/${cardId}`).update({
-      viewCount: firestore.FieldValue.increment(1),
-    });
+    return this.db
+      .doc<{
+        viewCount: firestore.FieldValue;
+      }>(`pointCards/${cardId}`)
+      .update({
+        viewCount: firestore.FieldValue.increment(1),
+      });
   }
 
   async getUploadImageURL(cardId: string, file: File): Promise<string> {
