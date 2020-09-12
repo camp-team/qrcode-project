@@ -91,13 +91,13 @@
           <ng-container *ngIf="paymentCard; else register">
             <div class="user-card">
               <p>
-                <i
-                  class="fab fa-cc-{{
+                <span
+                  class="icon-cc-{{
                     paymentCard.card.brand.toLowerCase() === 'american express'
                       ? 'amex'
                       : paymentCard.card.brand.toLowerCase()
                   }}"
-                ></i>
+                ></span>
                 **** **** **** {{ paymentCard.card.last4 }}
               </p>
               <button

@@ -21,17 +21,16 @@
     <button class="search__button">
       <mat-icon>search</mat-icon>
     </button>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionActivated)="setSearchQuery($event.option?.value)"
+      (optionSelected)="routeSearch($event.option?.value)"
+    >
+      <mat-option *ngFor="let option of saerchOptions" [value]="option.name">{{
+        option.name
+      }}</mat-option>
+    </mat-autocomplete>
   </form>
-
-  <mat-autocomplete
-    #auto="matAutocomplete"
-    (optionActivated)="setSearchQuery($event.option?.value)"
-    (optionSelected)="routeSearch($event.option?.value)"
-  >
-    <mat-option *ngFor="let option of saerchOptions" [value]="option.name">{{
-      option.name
-    }}</mat-option>
-  </mat-autocomplete>
 
   <div *ngIf="user$ | async as user; else default" class="btns">
     <button
@@ -83,22 +82,18 @@
       [style.background-image]="'url(' + user.avatarURL + ')'"
     ></button>
     <mat-menu #avatar="matMenu">
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>ログアウト</span>
-      </button>
-      <mat-divider></mat-divider>
       <button routerLink="/settings" mat-menu-item>
         <mat-icon>settings</mat-icon>
         <span>設定</span>
       </button>
-      <button routerLink="/intl/help" mat-menu-item>
-        <mat-icon>help</mat-icon>
-        <span>使い方</span>
-      </button>
       <button routerLink="/payment" mat-menu-item>
         <mat-icon>attach_money</mat-icon>
         <span>広告を非表示にする</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>ログアウト</span>
       </button>
     </mat-menu>
   </div>

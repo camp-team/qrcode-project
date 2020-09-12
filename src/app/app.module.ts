@@ -26,6 +26,7 @@ import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MainShellComponent } from './main-shell/main-shell.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,9 @@ import { MainShellComponent } from './main-shell/main-shell.component';
     AngularFireStorageModule,
     AngularFireAnalyticsModule,
     AngularFireFunctionsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     { provide: REGION, useValue: 'asia-northeast1' },
