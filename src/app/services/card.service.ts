@@ -85,6 +85,14 @@ export class CardService {
     return this.db.collection<BasicCard>(`pointCards`).valueChanges();
   }
 
+  getCardsByType(type: string): Observable<any> {
+    return this.db
+      .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
+        `${type}Cards`
+      )
+      .valueChanges();
+  }
+
   getCodeCard(cardId: string): Observable<CodeCard> {
     return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
   }
@@ -99,6 +107,15 @@ export class CardService {
 
   getPointCard(cardId: string): Observable<BasicCard> {
     return this.db.doc<BasicCard>(`pointCards/${cardId}`).valueChanges();
+  }
+
+  getPopularCards(type: string): Observable<any> {
+    return this.db
+      .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
+        `${type}Cards`,
+        (ref) => ref.orderBy('viewCount', 'desc').limit(5)
+      )
+      .valueChanges();
   }
 
   async updateCodeCard(

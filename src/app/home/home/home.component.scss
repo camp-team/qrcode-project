@@ -1,27 +1,35 @@
 @import 'mixins';
 
-.section-heading {
-  margin: 0 0 16px;
-  font-size: 22px;
+.section {
+  margin-bottom: 80px;
   @include sp {
-    font-size: 16px;
+    margin-bottom: 40px;
   }
-}
-
-.genre-grid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(4, 1fr);
-  text-align: center;
-  @include sp {
-    grid-template-columns: repeat(2, 1fr);
+  &__heading {
+    margin: 0 0 16px;
+    font-size: 22px;
+    @include sp {
+      font-size: 16px;
+    }
+  }
+  &__grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    @include sp {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  &__list {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
 
 .genre {
   display: block;
-  text-decoration: none;
-  color: inherit;
   &__cover {
     background: center/contain no-repeat;
     padding-bottom: 52.5%;
@@ -31,5 +39,72 @@
     @include sp {
       font-size: 13px;
     }
+  }
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  background: #fff;
+  &__title {
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 8px;
+    margin: 0;
+  }
+  &__arrow {
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 8px;
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+      text-decoration: underline;
+      color: #4db6ac;
+    }
+  }
+}
+
+.list-item {
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  height: 80px;
+  &__img {
+    height: inherit;
+    object-fit: scale-down;
+  }
+  &__content {
+    padding-left: 8px;
+    p {
+      padding-top: 8px;
+      margin: 0;
+    }
+  }
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+    p {
+      text-decoration: underline;
+      color: #4db6ac;
+    }
+  }
+}
+
+li + li {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.rank {
+  &--0 {
+    color: #d3b134;
+  }
+  &--1 {
+    color: #adb2b9;
+  }
+  &--2 {
+    color: #b78d7a;
   }
 }

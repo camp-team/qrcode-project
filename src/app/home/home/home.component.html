@@ -1,20 +1,59 @@
 <div class="container">
-  <h2 class="section-heading">ジャンルから探す</h2>
-  <div class="genre-grid">
-    <ng-container *ngFor="let genreList of genreLists">
-      <a class="genre" [routerLink]="'/' + genreList.id + '-card'">
-        <mat-card>
-          <div
-            class="genre__cover"
-            [style]="
-              'background-image: url(assets/pay/' + genreList.id + '.png);'
-            "
-          ></div>
-          <mat-card-content>
-            <p class="genre__content">{{ genreList.name }}</p>
-          </mat-card-content>
-        </mat-card>
-      </a>
-    </ng-container>
-  </div>
+  <section class="section">
+    <h2 class="section__heading">ジャンルから探す</h2>
+    <div class="section__grid">
+      <ng-container *ngFor="let genreList of genreLists">
+        <a class="genre" [routerLink]="'/' + genreList.id + '-card'">
+          <mat-card>
+            <div
+              class="genre__cover"
+              [style]="
+                'background-image: url(assets/pay/' + genreList.id + '.png);'
+              "
+            ></div>
+            <mat-card-content>
+              <p class="genre__content">{{ genreList.name }}</p>
+            </mat-card-content>
+          </mat-card>
+        </a>
+      </ng-container>
+    </div>
+  </section>
+  <section class="section">
+    <h2 class="section__heading">電子決済 人気ランキング</h2>
+    <div class="section__list">
+      <ng-container *ngFor="let cards of cardsGroup; index as g">
+        <ul class="list">
+          <h3 class="list__title">
+            <span>{{ genreLists[g].name }}ランキング</span>
+          </h3>
+          <li *ngFor="let card of cards; index as i">
+            <a
+              class="list-item"
+              [routerLink]="genreLists[g].id + '-detail/' + card.cardId"
+            >
+              <img
+                class="list-item__img"
+                [src]="card.imageURL"
+                alt="電子決済の画像"
+              />
+              <div class="list-item__content">
+                <span [class]="'rank rank--' + i">
+                  <mat-icon *ngIf="i < 3" [inline]="true"
+                    >military_tech</mat-icon
+                  >
+                  <span>{{ i + 1 }}</span>
+                  <span>位</span>
+                </span>
+                <p>{{ card.name }}</p>
+              </div>
+            </a>
+          </li>
+          <div class="list__arrow">
+            <a href=""><span>ランキングをもっと見る</span></a>
+          </div>
+        </ul>
+      </ng-container>
+    </div>
+  </section>
 </div>
