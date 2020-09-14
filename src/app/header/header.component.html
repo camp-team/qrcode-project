@@ -14,7 +14,7 @@
     <input
       class="search__input"
       type="text"
-      placeholder="使えるお店で検索"
+      placeholder="使えるお店から検索"
       [matAutocomplete]="auto"
       [formControl]="searchService.searchControl"
     />
@@ -34,10 +34,10 @@
 
   <div *ngIf="user$ | async as user; else default" class="btns">
     <button
+      color="primary"
       *ngIf="user.admin"
       class="btns__item"
       mat-flat-button
-      color="primary"
       [mat-menu-trigger-for]="addition"
     >
       追加
