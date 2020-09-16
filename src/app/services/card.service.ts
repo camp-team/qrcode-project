@@ -102,6 +102,17 @@ export class CardService {
       .valueChanges();
   }
 
+  getCard(
+    type: string,
+    cardId: string
+  ): Observable<Partial<CodeCard & ElectronCard & CreditCard & BasicCard>> {
+    return this.db
+      .doc<CodeCard | ElectronCard | CreditCard | BasicCard>(
+        `${type}Cards/${cardId}`
+      )
+      .valueChanges();
+  }
+
   getCodeCard(cardId: string): Observable<CodeCard> {
     return this.db.doc<CodeCard>(`codeCards/${cardId}`).valueChanges();
   }

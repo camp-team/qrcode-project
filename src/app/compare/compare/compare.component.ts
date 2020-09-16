@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CardService } from 'src/app/services/card.service';
-import { Observable, combineLatest } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BasicCard } from '@interfaces/card';
 import { CodeCard } from '@interfaces/code-card';
-import { Router, ActivatedRoute } from '@angular/router';
+import { CreditCard } from '@interfaces/credit-card';
 import { ElectronCard } from '@interfaces/electron-card';
+import { combineLatest, Observable } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
+import { CardService } from 'src/app/services/card.service';
 import { MobileService } from 'src/app/services/mobile.service';
-import { map, tap, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-compare',
@@ -13,56 +15,62 @@ import { map, tap, switchMap } from 'rxjs/operators';
   styleUrls: ['./compare.component.scss'],
 })
 export class CompareComponent implements OnInit {
-  cardsOption$: Observable<CodeCard[] | ElectronCard[]>;
-  selectedCard$: Observable<CodeCard>;
-  comparedCards$: Observable<CodeCard[] | ElectronCard[]>;
+  private cardType$: Observable<string> = this.route.paramMap.pipe(
+    map((params) => params.get('type'))
+  );
+  cardsOption$: Observable<
+    (CodeCard | ElectronCard | CreditCard | BasicCard)[]
+  > = this.cardType$.pipe(
+    switchMap((type) => {
+      return this.cardService.getCardsByType(type).pipe(take(1));
+    })
+  );
   selectedCardIds: string[] = [];
-  type: string;
+
+  genreList: { id: string; name: string };
+  selectedCards$: Observable<
+    Partial<CodeCard & ElectronCard & CreditCard & BasicCard>[]
+  >;
 
   constructor(
     private cardService: CardService,
     private router: Router,
     private route: ActivatedRoute,
     public mobileService: MobileService
-  ) {
-    this.route.paramMap.subscribe((param) => {
-      this.type = param.get('type');
+  ) {}
+
+  ngOnInit(): void {
+    this.getCardGenreList();
+    this.initCards();
+  }
+
+  private getCardGenreList() {
+    this.cardType$.subscribe((cardType) => {
+      this.genreList = this.cardService.genreLists.find(
+        (list) => list.id === cardType
+      );
     });
+  }
 
-    this.cardsOption$ = this.route.queryParamMap.pipe(
-      switchMap((param) => {
-        const cardIds = param.get('cardIds')?.split(',');
-        switch (this.type) {
-          case 'モバイル決済':
-            return this.cardService.getCodeCards();
-          case '電子マネー':
-            return this.cardService.getElectronCards();
-        }
-      })
-    );
-
+  private initCards() {
     this.route.queryParamMap.subscribe((param) => {
       const cardIds = param.get('cardIds')?.split(',');
+      if (this.mobileService.isMobile) {
+        cardIds.splice(2, 1);
+      }
       this.selectedCardIds = cardIds;
 
       if (cardIds) {
-        this.comparedCards$ = combineLatest(
-          cardIds.map((id) => {
-            switch (this.type) {
-              case 'モバイル決済':
-                return this.cardService.getCodeCard(id);
-              case '電子マネー':
-                return this.cardService.getElectronCard(id);
-            }
+        this.selectedCards$ = combineLatest(
+          cardIds.map((cardId) => {
+            return this.cardService.getCard(this.genreList.id, cardId);
           })
         );
       }
     });
   }
 
-  ngOnInit(): void {}
-
-  navigate(cardId: string, index: number) {
+  compareCards(cardId: string, index: number) {
     const sameIdsIndex = this.selectedCardIds.indexOf(cardId);
     if (sameIdsIndex > -1) {
       const oldCard = this.selectedCardIds[index];
