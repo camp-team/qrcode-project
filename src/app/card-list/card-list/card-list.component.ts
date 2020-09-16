@@ -49,7 +49,7 @@ export class CardListComponent implements OnInit {
         take(1)
       )
       .toPromise();
-    this.router.navigate(['/compare', this.genreList.name], {
+    this.router.navigate(['/compare', this.genreList.id], {
       queryParams: {
         cardIds: [cardId, otherCardIds[0], otherCardIds[1]].join(','),
       },
