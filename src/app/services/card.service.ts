@@ -12,6 +12,13 @@ import { CreditCard } from '@interfaces/credit-card';
   providedIn: 'root',
 })
 export class CardService {
+  genreLists = [
+    { id: 'code', name: 'モバイル決済' },
+    { id: 'electron', name: '電子マネー' },
+    { id: 'credit', name: 'クレジットカード' },
+    { id: 'point', name: 'ポイントカード' },
+  ];
+
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage
@@ -85,7 +92,9 @@ export class CardService {
     return this.db.collection<BasicCard>(`pointCards`).valueChanges();
   }
 
-  getCardsByType(type: string): Observable<any> {
+  getCardsByType(
+    type: string
+  ): Observable<(CodeCard | ElectronCard | CreditCard | BasicCard)[]> {
     return this.db
       .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
         `${type}Cards`
@@ -109,7 +118,9 @@ export class CardService {
     return this.db.doc<BasicCard>(`pointCards/${cardId}`).valueChanges();
   }
 
-  getPopularCards(type: string): Observable<any> {
+  getPopularCards(
+    type: string
+  ): Observable<(CodeCard | ElectronCard | CreditCard | BasicCard)[]> {
     return this.db
       .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
         `${type}Cards`,

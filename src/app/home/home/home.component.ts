@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
 import { take } from 'rxjs/operators';
+import { CodeCard } from '@interfaces/code-card';
+import { BasicCard } from '@interfaces/card';
+import { ElectronCard } from '@interfaces/electron-card';
+import { CreditCard } from '@interfaces/credit-card';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +12,8 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  genreLists = [
-    { id: 'code', name: 'モバイル決済' },
-    { id: 'electron', name: '電子マネー' },
-    { id: 'credit', name: 'クレジットカード' },
-    { id: 'point', name: 'ポイントカード' },
-  ];
-
-  cardsGroup;
+  genreLists: { id: string; name: string }[] = this.cardService.genreLists;
+  cardsGroup: (CodeCard | ElectronCard | CreditCard | BasicCard)[][];
 
   constructor(private cardService: CardService) {}
 
