@@ -3,32 +3,10 @@
     <span>{{ genreList.name }} 人気ランキング</span>
   </h2>
   <div class="grid">
-    <mat-card *ngFor="let card of cards$ | async">
-      <mat-card-content class="content">
-        <div
-          class="content__cover"
-          [style.background-image]="'url(' + card.imageURL + ')'"
-        ></div>
-        <div class="content__title">
-          <h3>{{ card.name }}</h3>
-        </div>
-      </mat-card-content>
-      <mat-card-actions class="actions">
-        <button
-          class="actions__detail"
-          mat-stroked-button
-          [routerLink]="'/' + genreList.id + '-detail/' + card.cardId"
-        >
-          詳細を見る
-        </button>
-        <button
-          class="actions__compare"
-          mat-stroked-button
-          (click)="navigate(card.cardId)"
-        >
-          比較する
-        </button>
-      </mat-card-actions>
-    </mat-card>
+    <app-item-card
+      *ngFor="let card of cards$ | async"
+      [card]="card"
+      [cardType]="genreList.id"
+    ></app-item-card>
   </div>
 </div>

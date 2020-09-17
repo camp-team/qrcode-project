@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CardService } from 'src/app/services/card.service';
-import { Observable, of } from 'rxjs';
-import { CodeCard } from '@interfaces/code-card';
-import { SearchService } from 'src/app/services/search.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, take, switchMap } from 'rxjs/operators';
-import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { CodeCard } from '@interfaces/code-card';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { CardService } from 'src/app/services/card.service';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-code-card',
@@ -38,10 +38,11 @@ export class CodeCardComponent implements OnInit, OnDestroy {
     private fb: FormBuilder
   ) {
     this.route.queryParamMap.subscribe((param) => {
+      console.log('check');
       this.searchQuery = param.get('searchQuery');
       this.searchService.index.store.search(this.searchQuery).then((result) => {
-        this.result = result.hits;
-        const paramHitsStore = this.result.find(
+        const hits: any = result.hits;
+        const paramHitsStore = hits.find(
           (hitsStore) => hitsStore.name === this.searchQuery
         );
         if (paramHitsStore) {
@@ -55,6 +56,7 @@ export class CodeCardComponent implements OnInit, OnDestroy {
         } else if (this.searchQuery && !paramHitsStore) {
           return (this.filteredCards$ = of([]));
         } else {
+          console.log('ababababababa');
           this.filteredCards$ = this.codeCards$;
           this.searchService.searchControl.setValue('');
         }

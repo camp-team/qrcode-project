@@ -7,6 +7,8 @@ import { ElectronCard } from '@interfaces/electron-card';
 import { BasicCard } from '@interfaces/card';
 import { firestore } from 'firebase/app';
 import { CreditCard } from '@interfaces/credit-card';
+import { map, take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +23,8 @@ export class CardService {
 
   constructor(
     private db: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private router: Router
   ) {}
 
   async createCodeCard(
@@ -273,8 +276,25 @@ export class CardService {
       });
   }
 
-  async getUploadImageURL(cardId: string, file: File): Promise<string> {
+  private async getUploadImageURL(cardId: string, file: File): Promise<string> {
     const result = await this.storage.ref(`codeCards/${cardId}`).put(file);
     return result.ref.getDownloadURL();
+  }
+
+  async navigateComparedCards(cardType: string, cardId: string) {
+    const otherCardIds = await this.getCardsByType(cardType)
+      .pipe(
+        map((cards) => {
+          const cardIds = cards.map((card) => card.cardId);
+          return cardIds.filter((id) => id !== cardId);
+        }),
+        take(1)
+      )
+      .toPromise();
+    this.router.navigate(['/compare', cardType], {
+      queryParams: {
+        cardIds: [cardId, otherCardIds[0], otherCardIds[1]].join(','),
+      },
+    });
   }
 }

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { SharedRoutingModule } from './shared-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -11,17 +12,20 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { IdToStorePipe } from '../pipes/id-to-store.pipe';
 import { RegisterCardDialogComponent } from './register-card-dialog/register-card-dialog.component';
+import { ItemCardComponent } from './item-card/item-card.component';
 
 @NgModule({
-  declarations: [IdToStorePipe, RegisterCardDialogComponent],
+  declarations: [IdToStorePipe, RegisterCardDialogComponent, ItemCardComponent],
   imports: [
     CommonModule,
+    SharedRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
+    MatCardModule,
   ],
   exports: [
     CommonModule,
@@ -36,6 +40,7 @@ import { RegisterCardDialogComponent } from './register-card-dialog/register-car
     IdToStorePipe,
     MatSelectModule,
     RegisterCardDialogComponent,
+    ItemCardComponent,
   ],
 })
 export class SharedModule {}

@@ -23,8 +23,7 @@ export class CardListComponent implements OnInit {
 
   constructor(
     private cardService: CardService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -36,23 +35,6 @@ export class CardListComponent implements OnInit {
       this.genreList = this.cardService.genreLists.find(
         (list) => list.id === cardType
       );
-    });
-  }
-
-  async navigate(cardId: string) {
-    const otherCardIds = await this.cards$
-      .pipe(
-        map((cards) => {
-          const cardIds = cards.map((card) => card.cardId);
-          return cardIds.filter((id) => id !== cardId);
-        }),
-        take(1)
-      )
-      .toPromise();
-    this.router.navigate(['/compare', this.genreList.id], {
-      queryParams: {
-        cardIds: [cardId, otherCardIds[0], otherCardIds[1]].join(','),
-      },
     });
   }
 }
