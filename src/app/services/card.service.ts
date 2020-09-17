@@ -97,7 +97,7 @@ export class CardService {
 
   getCardsByType(
     type: string
-  ): Observable<(CodeCard | ElectronCard | CreditCard | BasicCard)[]> {
+  ): Observable<Partial<CodeCard & ElectronCard & CreditCard & BasicCard>[]> {
     return this.db
       .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
         `${type}Cards`

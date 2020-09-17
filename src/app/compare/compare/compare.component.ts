@@ -19,7 +19,7 @@ export class CompareComponent implements OnInit {
     map((params) => params.get('type'))
   );
   cardsOption$: Observable<
-    (CodeCard | ElectronCard | CreditCard | BasicCard)[]
+    Partial<CodeCard & ElectronCard & CreditCard & BasicCard>[]
   > = this.cardType$.pipe(
     switchMap((type) => {
       return this.cardService.getCardsByType(type).pipe(take(1));

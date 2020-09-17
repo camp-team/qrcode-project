@@ -13,7 +13,7 @@ import { CreditCard } from '@interfaces/credit-card';
 })
 export class HomeComponent implements OnInit {
   genreLists: { id: string; name: string }[] = this.cardService.genreLists;
-  cardsGroup: (CodeCard | ElectronCard | CreditCard | BasicCard)[][];
+  cardsGroup: Partial<CodeCard & ElectronCard & CreditCard & BasicCard>[][];
 
   constructor(private cardService: CardService) {}
 
