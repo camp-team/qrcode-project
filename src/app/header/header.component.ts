@@ -23,10 +23,10 @@ export class HeaderComponent implements OnInit {
   index: SearchIndex = this.searchService.index.popularStore;
 
   constructor(
-    private drawerService: DrawerService,
+    public drawerService: DrawerService,
+    public searchService: SearchService,
     private authservice: AuthService,
     private snackBar: MatSnackBar,
-    public searchService: SearchService,
     private router: Router,
     private storeService: StoreService
   ) {
@@ -64,10 +64,6 @@ export class HeaderComponent implements OnInit {
         },
       });
     }
-  }
-
-  toggle() {
-    this.drawerService.toggle();
   }
 
   login() {
