@@ -22,7 +22,7 @@
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  &__list {
+  &__lists {
     display: grid;
     gap: 16px;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -53,10 +53,7 @@ mat-card {
   }
 }
 
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.ranking {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
   overflow: hidden;
@@ -67,6 +64,11 @@ mat-card {
     border-top: 3px solid #4db6ac;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     padding: 8px;
+    margin: 0;
+  }
+  &__list {
+    list-style: none;
+    padding: 0;
     margin: 0;
   }
   &__arrow {
@@ -129,14 +131,12 @@ li + li {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.rank {
-  &--0 {
-    color: #d3b134;
-  }
-  &--1 {
-    color: #adb2b9;
-  }
-  &--2 {
-    color: #b78d7a;
-  }
+li:first-child .rank {
+  color: #d3b134;
+}
+li:nth-child(2) .rank {
+  color: #adb2b9;
+}
+li:nth-child(3) .rank {
+  color: #b78d7a;
 }
