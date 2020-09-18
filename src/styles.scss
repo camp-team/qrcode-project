@@ -53,17 +53,6 @@ img {
   text-align: center;
 }
 
-.card {
-  &__trigger {
-    display: block;
-  }
-  &__cover {
-    background: center/cover;
-    padding-bottom: 52.5%;
-    box-sizing: border-box;
-  }
-}
-
 .detail {
   padding: 40px;
   white-space: pre-wrap;

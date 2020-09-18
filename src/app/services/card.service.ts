@@ -31,6 +31,27 @@ export class CardService {
     return this.cardCategories.find((list) => list.type === cardType);
   }
 
+  getPopularCards(
+    type: string
+  ): Observable<(CodeCard | ElectronCard | CreditCard | BasicCard)[]> {
+    return this.db
+      .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
+        `${type}Cards`,
+        (ref) => ref.orderBy('viewCount', 'desc').limit(5)
+      )
+      .valueChanges();
+  }
+
+  getCardsByType(
+    type: string
+  ): Observable<Partial<CodeCard & ElectronCard & CreditCard & BasicCard>[]> {
+    return this.db
+      .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
+        `${type}Cards`
+      )
+      .valueChanges();
+  }
+
   async createCodeCard(
     codeCard: Omit<CodeCard, 'cardId' | 'imageURL'>,
     file: File
@@ -83,32 +104,6 @@ export class CardService {
     });
   }
 
-  getCodeCards(): Observable<CodeCard[]> {
-    return this.db.collection<CodeCard>(`codeCards`).valueChanges();
-  }
-
-  getElectronCards(): Observable<ElectronCard[]> {
-    return this.db.collection<ElectronCard>(`electronCards`).valueChanges();
-  }
-
-  getCreditCards(): Observable<CreditCard[]> {
-    return this.db.collection<CreditCard>(`creditCards`).valueChanges();
-  }
-
-  getPointCards(): Observable<BasicCard[]> {
-    return this.db.collection<BasicCard>(`pointCards`).valueChanges();
-  }
-
-  getCardsByType(
-    type: string
-  ): Observable<Partial<CodeCard & ElectronCard & CreditCard & BasicCard>[]> {
-    return this.db
-      .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
-        `${type}Cards`
-      )
-      .valueChanges();
-  }
-
   getCard(
     type: string,
     cardId: string
@@ -134,17 +129,6 @@ export class CardService {
 
   getPointCard(cardId: string): Observable<BasicCard> {
     return this.db.doc<BasicCard>(`pointCards/${cardId}`).valueChanges();
-  }
-
-  getPopularCards(
-    type: string
-  ): Observable<(CodeCard | ElectronCard | CreditCard | BasicCard)[]> {
-    return this.db
-      .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
-        `${type}Cards`,
-        (ref) => ref.orderBy('viewCount', 'desc').limit(5)
-      )
-      .valueChanges();
   }
 
   async updateCodeCard(
