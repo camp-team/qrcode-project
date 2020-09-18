@@ -14,11 +14,11 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class CardService {
-  genreLists = [
-    { id: 'code', name: 'モバイル決済' },
-    { id: 'electron', name: '電子マネー' },
-    { id: 'credit', name: 'クレジットカード' },
-    { id: 'point', name: 'ポイントカード' },
+  cardCategories = [
+    { type: 'code', name: 'モバイル決済' },
+    { type: 'electron', name: '電子マネー' },
+    { type: 'credit', name: 'クレジットカード' },
+    { type: 'point', name: 'ポイントカード' },
   ];
 
   constructor(
@@ -26,6 +26,10 @@ export class CardService {
     private storage: AngularFireStorage,
     private router: Router
   ) {}
+
+  getCardCategory(cardType: string): { type: string; name: string } {
+    return this.cardCategories.find((list) => list.type === cardType);
+  }
 
   async createCodeCard(
     codeCard: Omit<CodeCard, 'cardId' | 'imageURL'>,

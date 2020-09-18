@@ -1,0 +1,21 @@
+<div class="container">
+  <ng-container *ngIf="hitCards.length; else blank">
+    <h2 class="result-title">
+      <span>"{{ searchQuery }}"で使える</span>
+      <span>{{ cardCategory.name }}</span>
+      <span>{{ hitCards.length }}件</span>
+    </h2>
+    <div class="grid">
+      <app-item-card
+        *ngFor="let card of hitCards"
+        [card]="card"
+        [cardType]="cardCategory.type"
+      ></app-item-card>
+    </div>
+  </ng-container>
+  <ng-template #blank>
+    <p>
+      "{{ searchQuery }}"で使える{{ cardCategory.name }}は見つかりませんでした。
+    </p>
+  </ng-template>
+</div>

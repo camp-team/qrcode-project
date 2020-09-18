@@ -29,6 +29,13 @@ const routes: Routes = [
           import('./card-list/card-list.module').then((m) => m.CardListModule),
       },
       {
+        path: 'search/:type',
+        loadChildren: () =>
+          import('./search-result/search-result.module').then(
+            (m) => m.SearchResultModule
+          ),
+      },
+      {
         path: 'code-card',
         loadChildren: () =>
           import('./code-card/code-card.module').then((m) => m.CodeCardModule),
