@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit {
           await this.storeService.incrementViewCount(hitStore);
         }
       });
-      this.router.navigate([], {
+      this.router.navigate(['/search', 'code'], {
         queryParamsHandling: 'merge',
         queryParams: {
           searchQuery,
