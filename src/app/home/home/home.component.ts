@@ -12,16 +12,17 @@ import { CreditCard } from '@interfaces/credit-card';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  genreLists: { id: string; name: string }[] = this.cardService.genreLists;
+  cardCategories: { type: string; name: string }[] = this.cardService
+    .cardCategories;
   cardsGroup: Partial<CodeCard & ElectronCard & CreditCard & BasicCard>[][];
 
   constructor(private cardService: CardService) {}
 
   ngOnInit(): void {
     Promise.all(
-      this.genreLists.map((list) => {
+      this.cardCategories.map((list) => {
         return this.cardService
-          .getCardsByType(list.id)
+          .getCardsByType(list.type)
           .pipe(take(1))
           .toPromise();
       })

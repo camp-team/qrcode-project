@@ -27,7 +27,7 @@ export class CompareComponent implements OnInit {
   );
   selectedCardIds: string[] = [];
 
-  genreList: { id: string; name: string };
+  cardCategory: { type: string; name: string };
   selectedCards$: Observable<
     Partial<CodeCard & ElectronCard & CreditCard & BasicCard>[]
   >;
@@ -40,15 +40,13 @@ export class CompareComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCardGenreList();
+    this.getCardCategory();
     this.initCards();
   }
 
-  private getCardGenreList() {
+  private getCardCategory() {
     this.cardType$.subscribe((cardType) => {
-      this.genreList = this.cardService.genreLists.find(
-        (list) => list.id === cardType
-      );
+      this.cardCategory = this.cardService.getCardCategory(cardType);
     });
   }
 
@@ -63,7 +61,7 @@ export class CompareComponent implements OnInit {
       if (cardIds) {
         this.selectedCards$ = combineLatest(
           cardIds.map((cardId) => {
-            return this.cardService.getCard(this.genreList.id, cardId);
+            return this.cardService.getCard(this.cardCategory.type, cardId);
           })
         );
       }

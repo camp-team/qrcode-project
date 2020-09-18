@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CardService } from 'src/app/services/card.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap, map, take } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
+import { CardService } from 'src/app/services/card.service';
 
 @Component({
   selector: 'app-card-list',
@@ -19,7 +19,7 @@ export class CardListComponent implements OnInit {
       return this.cardService.getCardsByType(type).pipe(take(1));
     })
   );
-  genreList: { id: string; name: string };
+  cardCategory: { type: string; name: string };
 
   constructor(
     private cardService: CardService,
@@ -27,14 +27,8 @@ export class CardListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCardGenreList();
-  }
-
-  private getCardGenreList() {
-    this.cardType$.subscribe((cardType) => {
-      this.genreList = this.cardService.genreLists.find(
-        (list) => list.id === cardType
-      );
+    this.route.paramMap.subscribe((params) => {
+      this.cardCategory = this.cardService.getCardCategory(params.get('type'));
     });
   }
 }

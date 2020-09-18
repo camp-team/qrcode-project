@@ -15,7 +15,6 @@ import { SearchService } from 'src/app/services/search.service';
 export class CodeCardComponent implements OnInit, OnDestroy {
   codeCards$: Observable<CodeCard[]> = this.cardService.getCodeCards();
   searchQuery: string;
-  result: any[];
   filteredCards$: Observable<CodeCard[]>;
 
   form: FormGroup = this.fb.group({

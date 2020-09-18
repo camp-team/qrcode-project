@@ -2,17 +2,19 @@
   <section class="section">
     <h2 class="section__heading">ジャンルから探す</h2>
     <div class="section__grid">
-      <ng-container *ngFor="let genreList of genreLists">
-        <a class="genre" [routerLink]="'card-list/' + genreList.id">
+      <ng-container *ngFor="let cardCategory of cardCategories">
+        <a class="genre" [routerLink]="'card-list/' + cardCategory.type">
           <mat-card>
             <div
               class="genre__cover"
               [style]="
-                'background-image: url(assets/pay/' + genreList.id + '.png);'
+                'background-image: url(assets/pay/' +
+                cardCategory.type +
+                '.png);'
               "
             ></div>
             <mat-card-content>
-              <p class="genre__content">{{ genreList.name }}</p>
+              <p class="genre__content">{{ cardCategory.name }}</p>
             </mat-card-content>
           </mat-card>
         </a>
@@ -27,13 +29,15 @@
       >
         <ul class="list">
           <h3 class="list__title">
-            <span>{{ genreLists[cardsGroupedIndex].name }}ランキング</span>
+            <span>{{ cardCategories[cardsGroupedIndex].name }}ランキング</span>
           </h3>
           <li *ngFor="let card of cards; index as i">
             <a
               class="list-item"
               [routerLink]="
-                genreLists[cardsGroupedIndex].id + '-detail/' + card.cardId
+                cardCategories[cardsGroupedIndex].type +
+                '-detail/' +
+                card.cardId
               "
             >
               <img
@@ -54,7 +58,10 @@
             </a>
           </li>
           <div class="list__arrow">
-            <a [routerLink]="'card-list/' + genreLists[cardsGroupedIndex].id"
+            <a
+              [routerLink]="
+                'card-list/' + cardCategories[cardsGroupedIndex].type
+              "
               ><span>ランキングをもっと見る</span></a
             >
           </div>
