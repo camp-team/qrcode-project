@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ElectronCardComponent } from './electron-card/electron-card.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ElectronCardComponent,
+    component: SearchResultComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ElectronCardRoutingModule {}
+export class SearchResultRoutingModule {}

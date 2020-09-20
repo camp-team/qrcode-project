@@ -23,10 +23,10 @@ export class HeaderComponent implements OnInit {
   index: SearchIndex = this.searchService.index.popularStore;
 
   constructor(
-    private drawerService: DrawerService,
+    public drawerService: DrawerService,
+    public searchService: SearchService,
     private authservice: AuthService,
     private snackBar: MatSnackBar,
-    public searchService: SearchService,
     private router: Router,
     private storeService: StoreService
   ) {
@@ -57,17 +57,13 @@ export class HeaderComponent implements OnInit {
           await this.storeService.incrementViewCount(hitStore);
         }
       });
-      this.router.navigate([], {
+      this.router.navigate(['/search', 'code'], {
         queryParamsHandling: 'merge',
         queryParams: {
           searchQuery,
         },
       });
     }
-  }
-
-  toggle() {
-    this.drawerService.toggle();
   }
 
   login() {

@@ -1,0 +1,9 @@
+@import 'mixins';
+
+.heading {
+  margin: 0 0 16px;
+  font-size: 22px;
+  @include sp {
+    font-size: 16px;
+  }
+}

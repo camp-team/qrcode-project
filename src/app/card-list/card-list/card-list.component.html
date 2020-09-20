@@ -1,0 +1,12 @@
+<div class="container">
+  <h2 class="heading">
+    <span>{{ cardCategory.name }} 人気ランキング</span>
+  </h2>
+  <div class="grid">
+    <app-item-card
+      *ngFor="let card of cards$ | async"
+      [card]="card"
+      [cardType]="cardCategory.type"
+    ></app-item-card>
+  </div>
+</div>

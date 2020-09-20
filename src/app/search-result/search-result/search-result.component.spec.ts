@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ElectronCardComponent } from './electron-card.component';
+import { SearchResultComponent } from './search-result.component';
 
-describe('ElectronCardComponent', () => {
-  let component: ElectronCardComponent;
-  let fixture: ComponentFixture<ElectronCardComponent>;
+describe('SearchResultComponent', () => {
+  let component: SearchResultComponent;
+  let fixture: ComponentFixture<SearchResultComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ElectronCardComponent],
+      declarations: [SearchResultComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ElectronCardComponent);
+    fixture = TestBed.createComponent(SearchResultComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

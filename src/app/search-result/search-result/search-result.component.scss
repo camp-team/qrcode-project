@@ -1,0 +1,16 @@
+@import 'mixins';
+
+.result-title {
+  margin: 0 0 24px;
+  font-size: 22px;
+  span {
+    &:first-child {
+      @include sp {
+        display: block;
+      }
+    }
+    &:last-child {
+      margin-left: 16px;
+    }
+  }
+}

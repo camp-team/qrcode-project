@@ -7,15 +7,50 @@ import { ElectronCard } from '@interfaces/electron-card';
 import { BasicCard } from '@interfaces/card';
 import { firestore } from 'firebase/app';
 import { CreditCard } from '@interfaces/credit-card';
+import { map, take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CardService {
+  cardCategories = [
+    { type: 'code', name: 'モバイル決済' },
+    { type: 'electron', name: '電子マネー' },
+    { type: 'credit', name: 'クレジットカード' },
+    { type: 'point', name: 'ポイントカード' },
+  ];
+
   constructor(
     private db: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private router: Router
   ) {}
+
+  getCardCategory(cardType: string): { type: string; name: string } {
+    return this.cardCategories.find((list) => list.type === cardType);
+  }
+
+  getPopularCards(
+    type: string
+  ): Observable<(CodeCard | ElectronCard | CreditCard | BasicCard)[]> {
+    return this.db
+      .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
+        `${type}Cards`,
+        (ref) => ref.orderBy('viewCount', 'desc').limit(5)
+      )
+      .valueChanges();
+  }
+
+  getCardsByType(
+    type: string
+  ): Observable<Partial<CodeCard & ElectronCard & CreditCard & BasicCard>[]> {
+    return this.db
+      .collection<CodeCard | ElectronCard | CreditCard | BasicCard>(
+        `${type}Cards`
+      )
+      .valueChanges();
+  }
 
   async createCodeCard(
     codeCard: Omit<CodeCard, 'cardId' | 'imageURL'>,
@@ -69,20 +104,15 @@ export class CardService {
     });
   }
 
-  getCodeCards(): Observable<CodeCard[]> {
-    return this.db.collection<CodeCard>(`codeCards`).valueChanges();
-  }
-
-  getElectronCards(): Observable<ElectronCard[]> {
-    return this.db.collection<ElectronCard>(`electronCards`).valueChanges();
-  }
-
-  getCreditCards(): Observable<CreditCard[]> {
-    return this.db.collection<CreditCard>(`creditCards`).valueChanges();
-  }
-
-  getPointCards(): Observable<BasicCard[]> {
-    return this.db.collection<BasicCard>(`pointCards`).valueChanges();
+  getCard(
+    type: string,
+    cardId: string
+  ): Observable<Partial<CodeCard & ElectronCard & CreditCard & BasicCard>> {
+    return this.db
+      .doc<CodeCard | ElectronCard | CreditCard | BasicCard>(
+        `${type}Cards/${cardId}`
+      )
+      .valueChanges();
   }
 
   getCodeCard(cardId: string): Observable<CodeCard> {
@@ -234,8 +264,25 @@ export class CardService {
       });
   }
 
-  async getUploadImageURL(cardId: string, file: File): Promise<string> {
+  private async getUploadImageURL(cardId: string, file: File): Promise<string> {
     const result = await this.storage.ref(`codeCards/${cardId}`).put(file);
     return result.ref.getDownloadURL();
+  }
+
+  async navigateComparedCards(cardType: string, cardId: string) {
+    const otherCardIds = await this.getCardsByType(cardType)
+      .pipe(
+        map((cards) => {
+          const cardIds = cards.map((card) => card.cardId);
+          return cardIds.filter((id) => id !== cardId);
+        }),
+        take(1)
+      )
+      .toPromise();
+    this.router.navigate(['/compare', cardType], {
+      queryParams: {
+        cardIds: [cardId, otherCardIds[0], otherCardIds[1]].join(','),
+      },
+    });
   }
 }

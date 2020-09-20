@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-content class="card">
+    <div
+      class="card__cover"
+      [style.background-image]="'url(' + card.imageURL + ')'"
+    ></div>
+    <div class="card__title">
+      <h3>{{ card.name }}</h3>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="actions">
+    <button
+      [routerLink]="'/' + cardType + '-detail/' + card.cardId"
+      class="actions__detail"
+      mat-stroked-button
+    >
+      詳細を見る
+    </button>
+    <button
+      class="actions__compare"
+      mat-stroked-button
+      (click)="cardService.navigateComparedCards(cardType, card.cardId)"
+    >
+      比較する
+    </button>
+  </mat-card-actions>
+</mat-card>

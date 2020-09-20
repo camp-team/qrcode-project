@@ -24,15 +24,15 @@ const routes: Routes = [
           import('./home/home.module').then((m) => m.HomeModule),
       },
       {
-        path: 'code-card',
+        path: 'card-list/:type',
         loadChildren: () =>
-          import('./code-card/code-card.module').then((m) => m.CodeCardModule),
+          import('./card-list/card-list.module').then((m) => m.CardListModule),
       },
       {
-        path: 'electron-card',
+        path: 'search/:type',
         loadChildren: () =>
-          import('./electron-card/electron-card.module').then(
-            (m) => m.ElectronCardModule
+          import('./search-result/search-result.module').then(
+            (m) => m.SearchResultModule
           ),
       },
       {
